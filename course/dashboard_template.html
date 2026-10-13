@@ -1,8 +1,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Decoding AI</title>
+<title>Decoding AI v__VERSION__</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='12' fill='%230f5b6b'/%3E%3Cg stroke='%23f4f8f8' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M24 24L13 13M24 24L36 12M24 24L39 30M24 24L26 39M24 24L9 31'/%3E%3C/g%3E%3Ccircle cx='24' cy='24' r='6.5' fill='%23f4f8f8'/%3E%3Ccircle cx='24' cy='24' r='2.6' fill='%23e07a2f'/%3E%3C/svg%3E">
-<meta name="description" content="Guided course viewer for ai-learning-automation: slides, guides, exercises, self-checks and personal progress.">
+<meta name="description" content="Guided course viewer for Decoding AI: slides, guides, exercises, self-checks and personal progress.">
 <!-- GENERATED from course/dashboard_template.html by course/build_dashboard.py. Edit the template or the course files, then rebuild. -->
 <script>/* marked v15.0.7 (MIT licence), bundled so the dashboard needs no internet */
 __MARKED__</script>
@@ -150,6 +150,7 @@ __MARKED__</script>
   /* Wordmark: light "Decoding", bold "AI" */
   .wordmark .wm-a { font-weight: 300; }
   .wordmark .wm-b { font-weight: 700; }
+  .wordmark .wm-v { font-size: .55em; font-weight: 400; letter-spacing: .02em; color: var(--muted); vertical-align: .35em; }
   /* Module tints (8) */
   .modtop.tint { background: radial-gradient(ellipse 55% 95% at 100% 0%, var(--mt), var(--surface) 100%); }
   .mods7 li:not(.team) a { background: linear-gradient(160deg, var(--mt) 0%, var(--surface) 70%); }
@@ -989,7 +990,7 @@ __MARKED__</script>
       <a class="brand brand-link" href="#start" aria-label="Go to the dashboard">
         <svg class="logo" viewBox="0 0 48 48" role="img" aria-label="Course logo: a dendritic cell drawn as a small network"><rect width="48" height="48" rx="12" fill="var(--teal)"/><g stroke="var(--logo-ink)" stroke-width="2.4" stroke-linecap="round" fill="none"><path d="M24 24 L13 13 M13 13 L8 15 M13 13 L12 8"/><path d="M24 24 L36 12 M36 12 L41 13"/><path d="M24 24 L39 30 M39 30 L42 36"/><path d="M24 24 L26 39"/><path d="M24 24 L9 31 M9 31 L7 37"/></g><g fill="var(--logo-ink)"><circle cx="24" cy="24" r="6.5"/><circle cx="8" cy="15" r="2.4"/><circle cx="12" cy="8" r="2.4"/><circle cx="41" cy="13" r="2.4"/><circle cx="42" cy="36" r="2.4"/><circle cx="26" cy="39" r="2.4"/><circle cx="7" cy="37" r="2.4"/></g><circle cx="24" cy="24" r="2.6" fill="var(--amber)"/></svg>
         <span class="brand-text"><span class="label">AI whisperer's guide</span>
-        <h1 class="wordmark"><span class="wm-a">Decoding</span> <span class="wm-b">AI</span></h1></span>
+        <h1 class="wordmark"><span class="wm-a">Decoding</span> <span class="wm-b">AI</span> <span class="wm-v">v__VERSION__</span></h1></span>
       </a>
       <button class="btn menu-btn" id="menu" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
     </div>
@@ -1011,7 +1012,7 @@ __MARKED__</script>
   var DATA = JSON.parse(document.getElementById("course-data").textContent);
   var MODULES = DATA.modules;
   var RESOURCES = DATA.resources;
-  var REPO = "https://github.com/HoltropAF/AI_course/blob/main/";
+  var REPO = "https://github.com/HoltropAF/Decoding_AI_course/blob/main/";
   var KEY = "ai-omics-course-v1";
   var PHASES = { learn: "Learn", practice: "Practice · optional", apply: "Apply", extra: "Extra", reflect: "Reflect" };
 
@@ -1629,7 +1630,7 @@ __MARKED__</script>
 
   function copySummary(status, host) {
     var s = stats();
-    var lines = ["Decoding AI: progress (" + new Date().toISOString().slice(0, 10) + ")",
+    var lines = ["Decoding AI v" + DATA.version + ": progress (" + new Date().toISOString().slice(0, 10) + ")",
       "Items done: " + s.done + "/" + s.total + " · Modules done: " + s.mods + "/" + MODULES.length];
     MODULES.forEach(function (m) {
       lines.push("", "Module " + m.num + " " + m.title + ": " + doneCount(m) + "/" + m.done.length);
@@ -1961,7 +1962,7 @@ __MARKED__</script>
   /* When opened from disk, offer an "Edit in VS Code" link to the source file. */
   function repoRoot() {
     if (location.protocol !== "file:") return null;
-    var path = decodeURIComponent(location.pathname);          // e.g. /C:/Werk/Projects/AI_course/course/dashboard.html
+    var path = decodeURIComponent(location.pathname);          // e.g. /C:/Werk/Projects/Decoding_AI_course/course/dashboard.html
     return path.replace(/\/course\/[^/]*$/, "").replace(/^\/(?=[A-Za-z]:)/, "");
   }
   function docHeader(d) {
@@ -2244,7 +2245,7 @@ __MARKED__</script>
 
   /* ---------------- my notes ---------------- */
   function notesAsText() {
-    var out = ["My notes · Decoding AI · " + new Date().toISOString().slice(0, 10), ""];
+    var out = ["My notes · Decoding AI v" + DATA.version + " · " + new Date().toISOString().slice(0, 10), ""];
     if ((state.notes._general || "").trim()) out.push("General", state.notes._general.trim(), "");
     MODULES.forEach(function (m) {
       var n = (state.notes[m.id] || "").trim();
@@ -3278,7 +3279,7 @@ __MARKED__</script>
     return (h ? h.textContent.trim() : "Dashboard") + " (" + (location.hash || "#start") + ")";
   }
   function bugsAsText(list) {
-    var lines = ["Decoding AI: problem reports (" + list.length + "), exported " + new Date().toISOString().slice(0, 10), "Content version: " + DATA.built, ""];
+    var lines = ["Decoding AI: problem reports (" + list.length + "), exported " + new Date().toISOString().slice(0, 10), "Content version: v" + DATA.version + " (built " + DATA.built + ")", ""];
     list.forEach(function (b, i) {
       lines.push((i + 1) + ". [" + b.type + "] " + b.when);
       lines.push("   Page: " + b.page);
@@ -3364,7 +3365,7 @@ __MARKED__</script>
     holder.innerHTML = networkSvg(300, 150, 16, 4242, 0, [6]);
     document.getElementById("side").appendChild(holder);
   })();
-  document.getElementById("built").textContent = "Content built " + DATA.built + ". Progress is stored in this browser only.";
+  document.getElementById("built").textContent = "Version " + DATA.version + ", content built " + DATA.built + ". Progress is stored in this browser only.";
 
   load();
   render();

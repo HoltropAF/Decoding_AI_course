@@ -174,7 +174,8 @@ then if you want to keep them. Keep unpublished results and patient
 information out of your notes.
 
 Found a mistake, a typo or something that doesn't work? Use **Report a
-problem** at the bottom of the menu; your reports are collected in this
+problem** at the bottom of the menu (it records the course version, shown
+next to the title, so we know which edition you read); your reports are collected in this
 browser, and when you have a few, you export them and send them to the
 course organiser. Wrote a prompt, skill or subagent that works well? Share
 it in the group or as a pull request on the course repository: that is how

@@ -1,4 +1,4 @@
-# Decoding AI
+# Decoding AI · v1.0
 *The AI whisperer's guide to intelligence.*
 
 Welcome to **Decoding AI**, a modular AI information source and practical workflow toolkit tailored for bioinformatics researchers working across lipidomics, metabolomics, RNA-seq, and systems immunology (focusing on practical examples such as dendritic cell dynamics in lymph nodes). 
@@ -11,7 +11,7 @@ This course is built to help colleagues **use AI effectively in daily research**
 
 ## Quickstart
 
-To begin, clone the repository using `git clone https://github.com/HoltropAF/AI_course.git ai-learning-automation` (or download and extract the ZIP archive from GitHub).
+To begin, clone the repository using `git clone https://github.com/HoltropAF/Decoding_AI_course.git` (or download and extract the ZIP archive from GitHub).
 
 Your central hub for the course is `course/dashboard.html`. Opening this file in your browser provides an interactive map tracking your progress through every module without requiring any servers or local installations. While files can be read in any editor, the dashboard offers the optimal visual experience.
 
@@ -31,8 +31,8 @@ Running local experiments requires **Python 3.10+**, **Git**, and [Ollama](https
 Run the following commands in your terminal to set up your virtual environment, download the local Llama model, and verify your installation:
 
 ```bash
-git clone [https://github.com/HoltropAF/AI_course.git](https://github.com/HoltropAF/AI_course.git) ai-learning-automation
-cd ai-learning-automation
+git clone https://github.com/HoltropAF/Decoding_AI_course.git
+cd Decoding_AI_course
 python -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install requests ollama pydantic

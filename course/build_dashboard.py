@@ -28,6 +28,7 @@ ROOT = Path(__file__).resolve().parent.parent
 TEMPLATE = ROOT / "course" / "dashboard_template.html"
 OUTPUT = ROOT / "course" / "dashboard.html"
 PLACEHOLDER = "__COURSE_DATA__"
+VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 
 # --------------------------------------------------------------------------- #
 # Introductions shown at the top of each module's Extra reading step.
@@ -474,7 +475,7 @@ def main() -> None:
     # dictionary figures: embedded once, shared by every word that uses them
     dict_figs = {e["fig"]: "data:image/svg+xml;base64," + base64.b64encode((ROOT / e["fig"]).read_bytes()).decode("ascii")
                  for e in dictionary if e.get("fig")}
-    data = {"built": date.today().isoformat(), "modules": modules, "resources": resources,
+    data = {"version": VERSION, "built": date.today().isoformat(), "modules": modules, "resources": resources,
             "dictionary": dictionary, "dictionary_path": "course/glossary.md", "dict_figs": dict_figs,
             "contact": CONTACT_EMAIL}
 
@@ -483,11 +484,11 @@ def main() -> None:
     if PLACEHOLDER not in template:
         raise SystemExit(f"Placeholder {PLACEHOLDER} not found in {TEMPLATE}")
     marked = (ROOT / "course" / "vendor" / "marked.min.js").read_text(encoding="utf-8").replace("</script", r"<\/script")
-    html = template.replace(PLACEHOLDER, payload).replace("__MARKED__", marked)
+    html = template.replace(PLACEHOLDER, payload).replace("__MARKED__", marked).replace("__VERSION__", VERSION)
     OUTPUT.write_text(html, encoding="utf-8")
 
     n_docs = sum(len(s.get("docs", [])) + ("doc" in s) + (s["kind"] == "slides") for m in modules for s in m["steps"])
-    print(f"Wrote {OUTPUT.relative_to(ROOT)}: {len(modules)} modules, {n_docs} module documents, "
+    print(f"Wrote {OUTPUT.relative_to(ROOT)} (v{VERSION}): {len(modules)} modules, {n_docs} module documents, "
           f"{len(resources)} resources, {len(dictionary)} dictionary terms, {OUTPUT.stat().st_size / 1024:.0f} KB")
     for m in modules:
         if m["id"] != "m0" and (not m["objectives"] or not m["done"]):

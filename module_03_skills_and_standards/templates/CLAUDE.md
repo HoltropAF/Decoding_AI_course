@@ -2,7 +2,7 @@
 
 <!--
 Template version: 1.0.0
-Source: ai-learning-automation/module_03_skills_and_standards/templates/CLAUDE.md
+Source: Decoding_AI_course/module_03_skills_and_standards/templates/CLAUDE.md
 Copy into the project root. Fill in the "Project-specific" section, delete
 rules that do not apply, keep the file under ~200 lines.
 Never put credentials, internal hostnames or real data values in this file.

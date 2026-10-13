@@ -796,7 +796,7 @@ See also: Virtual environment (venv)
 
 ### Repository (repo)
 More: A repository is a project folder tracked by Git, including its full history. It can live on your computer and on a site like GitHub. Keeping analyses, prompts and instruction files in a repository makes it possible to see what changed, review changes, and reproduce results later.
-Example: The `AI_course` folder with its full Git history is a repository.
+Example: The `Decoding_AI_course` folder with its full Git history is a repository.
 See also: Git; GitHub
 
 ### Terminal

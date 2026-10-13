@@ -88,6 +88,11 @@ items, the experiment question and the first critical question are read
 from each module's `self_check.md`. Keep the order of "done when" items
 stable, or participants' ticks will shift to different items.
 
+The version number lives in the `VERSION` file in the repository root.
+The build puts it in the dashboard title, the menu, the footer and every
+exported summary or problem report. When you release a new version, change
+it there, update the title line of the main `README.md`, and rebuild.
+
 The Dictionary is built from `glossary.md` (term, definition, module) and
 `glossary_details.md` (an example and "see also" links per term). The build
 warns when a "see also" name doesn't match a term.

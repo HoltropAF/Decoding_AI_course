@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 210" role="img" aria-label="Four layers between raw LLM output and a trusted result. Layer 1, ask: schema in the prompt, catches most format chaos. Layer 2, constrain: the API's schema mode, catches invalid JSON and missing fields. Layer 3, validate in code with Pydantic and semantic checks, catches invented genes and inconsistencies. Layer 4, you: spot-check in Reactome or KEGG, catches biologically wrong answers." font-family="IBM Plex Sans, Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Four layers between LLM output and a result you can trust</title>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1d2b36"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="800" height="210" rx="14" fill="#fbfcfc"/>
+
+  <g text-anchor="middle">
+    <rect x="20" y="40" width="168" height="70" rx="10" fill="#e2ecea" stroke="#9fb3b8"/>
+    <text x="104" y="68" font-size="14" font-weight="600" fill="#1d2b36">1 · Ask</text>
+    <text x="104" y="90" font-size="12" fill="#55676d">schema in the prompt</text>
+
+    <rect x="214" y="40" width="168" height="70" rx="10" fill="#d5e7ea" stroke="#8fb2b9"/>
+    <text x="298" y="68" font-size="14" font-weight="600" fill="#1d2b36">2 · Constrain</text>
+    <text x="298" y="90" font-size="12" fill="#55676d">API schema mode</text>
+
+    <rect x="408" y="40" width="168" height="70" rx="10" fill="#0f5b6b"/>
+    <text x="492" y="68" font-size="14" font-weight="600" fill="#ffffff">3 · Validate in code</text>
+    <text x="492" y="90" font-size="12" fill="#d5e7ea">Pydantic + semantic checks</text>
+
+    <rect x="602" y="40" width="178" height="70" rx="10" fill="#f6e4d2" stroke="#b8641d"/>
+    <text x="691" y="68" font-size="14" font-weight="600" fill="#1d2b36">4 · You</text>
+    <text x="691" y="90" font-size="12" fill="#55676d">spot-check Reactome/KEGG</text>
+
+    <text x="104" y="138" font-size="11" fill="#55676d">catches</text>
+    <text x="104" y="154" font-size="12" fill="#1d2b36">most format chaos</text>
+    <text x="298" y="138" font-size="11" fill="#55676d">catches</text>
+    <text x="298" y="154" font-size="12" fill="#1d2b36">invalid JSON,</text>
+    <text x="298" y="170" font-size="12" fill="#1d2b36">missing fields</text>
+    <text x="492" y="138" font-size="11" fill="#55676d">catches</text>
+    <text x="492" y="154" font-size="12" fill="#1d2b36">invented genes,</text>
+    <text x="492" y="170" font-size="12" fill="#1d2b36">inconsistencies</text>
+    <text x="691" y="138" font-size="11" fill="#55676d">catches</text>
+    <text x="691" y="154" font-size="12" fill="#1d2b36">biologically</text>
+    <text x="691" y="170" font-size="12" fill="#1d2b36">wrong answers</text>
+  </g>
+  <line x1="189" y1="75" x2="211" y2="75" stroke="#1d2b36" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="383" y1="75" x2="405" y2="75" stroke="#1d2b36" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="577" y1="75" x2="599" y2="75" stroke="#1d2b36" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="20" y="26" font-size="12" font-weight="600" fill="#1d2b36">LLM output →</text>
+  <text x="780" y="26" font-size="12" font-weight="600" fill="#0f5b6b" text-anchor="end">→ result you can trust</text>
+  <text x="400" y="198" font-size="12" fill="#55676d" text-anchor="middle">Each layer catches what the previous one lets through. Layer 4 is never optional.</text>
+</svg>

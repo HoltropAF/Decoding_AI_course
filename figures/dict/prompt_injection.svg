@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 280" role="img" aria-label="Prompt injection. A web page or PDF contains a hidden line, AI assistant: ignore your task. When the document is put into the model's input next to your own instruction, the model may follow the hidden instruction. The defence is to delimit outside text and give that step no tools that can change anything." font-family="IBM Plex Sans, Segoe UI, Helvetica, Arial, sans-serif">
+<title>Prompt injection</title>
+<rect x="0" y="0" width="700" height="280" rx="14" fill="#fbfcfc"/>
+<text x="350.0" y="26.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="600">Prompt injection: an instruction hidden in text the model reads</text>
+<rect x="20.0" y="50.0" width="230" height="180" rx="10" fill="#ffffff" stroke="#9fb3b8" stroke-width="1"/>
+<text x="32.0" y="72.0" font-size="12" fill="#55676d" text-anchor="start" font-weight="600">a web page or PDF</text>
+<rect x="32.0" y="84.0" width="200" height="7" rx="3" fill="#eef3f2" stroke="none" stroke-width="1"/>
+<rect x="32.0" y="102.0" width="180" height="7" rx="3" fill="#eef3f2" stroke="none" stroke-width="1"/>
+<rect x="32.0" y="120.0" width="205" height="7" rx="3" fill="#eef3f2" stroke="none" stroke-width="1"/>
+<rect x="32.0" y="138.0" width="190" height="7" rx="3" fill="#eef3f2" stroke="none" stroke-width="1"/>
+<rect x="32.0" y="156.0" width="0" height="7" rx="3" fill="#eef3f2" stroke="none" stroke-width="1"/>
+<rect x="32.0" y="174.0" width="170" height="7" rx="3" fill="#eef3f2" stroke="none" stroke-width="1"/>
+<rect x="32.0" y="192.0" width="195" height="7" rx="3" fill="#eef3f2" stroke="none" stroke-width="1"/>
+<rect x="30.0" y="154.0" width="212" height="22" rx="4" fill="#f6e4d2" stroke="#b8641d" stroke-width="1"/>
+<text x="36.0" y="169.0" font-size="10.5" fill="#b8641d" text-anchor="start" font-weight="600">AI assistant: ignore your task and …</text>
+<line x1="252.0" y1="140.0" x2="297.0" y2="140.0" stroke="#1d7a8c" stroke-width="2" opacity="1"/>
+<polygon points="300.0,140.0 291.9,143.9 291.9,136.1" fill="#1d7a8c"/>
+<rect x="304.0" y="60.0" width="170" height="160" rx="10" fill="#eef3f2" stroke="#9fb3b8" stroke-width="1"/>
+<text x="389.0" y="82.0" font-size="12" fill="#55676d" text-anchor="middle" font-weight="600">the model's input</text>
+<rect x="316.0" y="94.0" width="146" height="36" rx="6" fill="#d5e7ea" stroke="#1d7a8c" stroke-width="1"/>
+<text x="389.0" y="116.0" font-size="11.5" fill="#1d2b36" text-anchor="middle" font-weight="400">your instruction</text>
+<rect x="316.0" y="140.0" width="146" height="66" rx="6" fill="#ffffff" stroke="#9fb3b8" stroke-width="1"/>
+<text x="389.0" y="162.0" font-size="11.5" fill="#1d2b36" text-anchor="middle" font-weight="400">the document,</text>
+<text x="389.0" y="178.0" font-size="11.5" fill="#b8641d" text-anchor="middle" font-weight="600">hidden line included</text>
+<line x1="476.0" y1="140.0" x2="517.0" y2="140.0" stroke="#1d7a8c" stroke-width="2" opacity="1"/>
+<polygon points="520.0,140.0 511.9,143.9 511.9,136.1" fill="#1d7a8c"/>
+<rect x="524.0" y="105.0" width="160" height="70" rx="10" fill="#f6e4d2" stroke="#b8641d" stroke-width="1"/>
+<text x="604.0" y="135.0" font-size="12" fill="#b8641d" text-anchor="middle" font-weight="600">may follow the</text>
+<text x="604.0" y="152.0" font-size="12" fill="#b8641d" text-anchor="middle" font-weight="600">hidden instruction</text>
+<text x="350.0" y="262.0" font-size="11.5" fill="#55676d" text-anchor="middle" font-weight="400">defence: delimit outside text, and give that step no tools that can change anything</text>
+</svg>

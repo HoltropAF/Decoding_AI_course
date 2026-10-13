@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 268" role="img" aria-label="Jaccard similarity. Two runs of the same prompt return two gene sets: 3 genes only in run 1, 6 in both, 2 only in run 2. The Jaccard similarity is the number in both divided by the number in either: 6 divided by 11, or 0.55. 1 means identical, 0 means nothing shared." font-family="IBM Plex Sans, Segoe UI, Helvetica, Arial, sans-serif">
+<title>Jaccard similarity</title>
+<rect x="0" y="0" width="640" height="268" rx="14" fill="#fbfcfc"/>
+<text x="320.0" y="26.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="600">Jaccard similarity: how much do two sets overlap?</text>
+<circle cx="230" cy="140" r="85" fill="#1d7a8c" fill-opacity="0.16" stroke="#1d7a8c" stroke-width="2"/>
+<circle cx="330" cy="140" r="85" fill="#b8641d" fill-opacity="0.16" stroke="#b8641d" stroke-width="2"/>
+<text x="190.0" y="60.0" font-size="12.5" fill="#1d7a8c" text-anchor="middle" font-weight="600">run 1</text>
+<text x="370.0" y="60.0" font-size="12.5" fill="#b8641d" text-anchor="middle" font-weight="600">run 2</text>
+<text x="185.0" y="146.0" font-size="22" fill="#1d7a8c" text-anchor="middle" font-weight="700">3</text>
+<text x="280.0" y="146.0" font-size="22" fill="#1d2b36" text-anchor="middle" font-weight="700">6</text>
+<text x="375.0" y="146.0" font-size="22" fill="#b8641d" text-anchor="middle" font-weight="700">2</text>
+<text x="185.0" y="166.0" font-size="10.5" fill="#55676d" text-anchor="middle" font-weight="400">only here</text>
+<text x="280.0" y="166.0" font-size="10.5" fill="#55676d" text-anchor="middle" font-weight="400">in both</text>
+<text x="375.0" y="166.0" font-size="10.5" fill="#55676d" text-anchor="middle" font-weight="400">only here</text>
+<text x="460.0" y="120.0" font-size="12.5" fill="#1d2b36" text-anchor="start" font-weight="600">in both / in either</text>
+<text x="460.0" y="142.0" font-size="12.5" fill="#1d2b36" text-anchor="start" font-weight="400">= 6 / (3 + 6 + 2)</text>
+<text x="460.0" y="164.0" font-size="15" fill="#0f5b6b" text-anchor="start" font-weight="700">= 0.55</text>
+<text x="320.0" y="252.0" font-size="11.5" fill="#55676d" text-anchor="middle" font-weight="400">e.g. the pathway genes two runs of the same prompt returned; 1 = identical, 0 = nothing shared</text>
+</svg>

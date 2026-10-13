@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home page mock-ups</title>
+<style>
+  :root {
+    --bg: #f3f6f5; --surface: #ffffff; --surface-2: #e8eeec; --ink: #13252b; --muted: #5b6f74; --line: #d3dedc;
+    --teal: #0f5b6b; --teal-soft: #d5e7ea; --well-on: #1d7a8c; --amber: #b8641d; --amber-soft: #f6e4d2; --good: #2f7d4f;
+    --net: #1d7a8c; --net-faint: rgba(29, 122, 140, .16); --logo-ink: #f4f8f8;
+    --font-body: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  }
+  :root[data-theme="dark"] {
+    --bg: #0d181b; --surface: #142328; --surface-2: #1a2e34; --ink: #e2eced; --muted: #9db1b5; --line: #2a434a;
+    --teal: #7cc4d1; --teal-soft: #1d3c44; --well-on: #5fb3c2; --amber: #f0a464; --amber-soft: #3b2a1b; --good: #7cc79a;
+    --net: #7cc4d1; --net-faint: rgba(124, 196, 209, .18); --logo-ink: #0d181b;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.6; }
+  a { color: var(--teal); }
+  .label { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .btn { padding: 9px 16px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); text-decoration: none; display: inline-flex; gap: 6px; align-items: center; font-size: 14.5px; cursor: pointer; }
+  .btn.primary { background: var(--teal); border-color: var(--teal); color: var(--surface); }
+  .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  /* switcher */
+  .switcher { position: sticky; top: 0; z-index: 30; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 10px 16px; background: var(--ink); color: var(--bg); }
+  .switcher strong { margin-right: 8px; font-size: 14px; }
+  .switcher button { font: inherit; font-size: 13.5px; padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,.3); background: transparent; color: inherit; cursor: pointer; }
+  .switcher button[aria-pressed="true"] { background: var(--bg); color: var(--ink); }
+  .switcher .note { margin-left: auto; font-size: 12.5px; opacity: .8; }
+
+  /* fake app frame */
+  .app { display: grid; grid-template-columns: 250px minmax(0, 1fr); min-height: calc(100vh - 52px); }
+  .side { background: var(--surface-2); border-right: 1px solid var(--line); padding: 18px 14px; display: grid; gap: 14px; align-content: start; }
+  .brand { display: flex; gap: 10px; align-items: center; }
+  .brand svg { width: 40px; height: 40px; flex: none; }
+  .brand b { color: var(--teal); font-size: 17px; line-height: 1.2; }
+  .side nav { display: grid; gap: 2px; font-size: 14px; }
+  .side nav a { color: var(--ink); text-decoration: none; padding: 6px 8px; border-radius: 7px; }
+  .side nav a.on { background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); }
+  .side nav .label { margin: 10px 8px 2px; font-size: 10.5px; }
+  main { padding: 26px 32px 0; display: grid; gap: 20px; align-content: start; min-width: 0; }
+  .aibar { position: sticky; bottom: 0; margin: 20px -32px 0; padding: 8px 32px; text-align: center; font-size: 13px; background: var(--amber-soft); border-top: 1px solid var(--line); }
+  .aibar a { color: var(--amber); font-weight: 600; }
+  @media (max-width: 860px) { .app { grid-template-columns: 1fr; } .side { display: none; } main { padding-inline: 14px; } .aibar { margin-inline: -14px; } }
+
+  .option { display: none; }
+  .option.on { display: grid; gap: 20px; }
+  .why { font-size: 13.5px; color: var(--muted); border-left: 3px solid var(--line); padding-left: 12px; margin: 0; }
+
+  /* shared hero text */
+  .hello { margin: 0; font-size: clamp(30px, 4.4vw, 46px); line-height: 1.1; color: var(--teal); }
+  .lead { margin: 0; font-size: clamp(16px, 1.5vw, 18px); max-width: 60ch; }
+  .sub { margin: 0; max-width: 62ch; color: var(--ink); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chips a { padding: 4px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); text-decoration: none; font-size: 13.5px; }
+
+  /* module row (shared) */
+  .mods { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; list-style: none; margin: 0; padding: 0; }
+  @media (max-width: 1100px) { .mods { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); } }
+  .mods a { display: grid; gap: 5px; height: 100%; padding: 10px 11px; border: 1px solid var(--line); border-radius: 11px; background: var(--surface); color: inherit; text-decoration: none; }
+  .mods .top { display: flex; justify-content: space-between; align-items: center; }
+  .mods .n { font-family: var(--font-mono); font-size: 12px; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: var(--teal-soft); color: var(--teal); }
+  .mods .t { font-family: var(--font-mono); font-size: 10.5px; color: var(--muted); }
+  .mods strong { font-size: 13.5px; line-height: 1.25; }
+  .mods .bar { height: 4px; border-radius: 2px; background: var(--surface-2); margin-top: auto; overflow: hidden; }
+  .mods .bar i { display: block; height: 100%; background: var(--well-on); }
+  .mods .here a { border-color: var(--amber); }
+  .mods .here .t { color: var(--amber); text-transform: uppercase; }
+  .mods .team a { background: var(--amber-soft); }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; display: grid; gap: 10px; }
+  .card h3 { margin: 0; font-size: 18px; }
+
+  /* ---------- A: network backdrop ---------- */
+  .heroA { position: relative; overflow: hidden; border-radius: 18px; border: 1px solid var(--line); background: linear-gradient(110deg, var(--surface) 35%, var(--teal-soft)); padding: clamp(24px, 4vw, 44px); min-height: 330px; }
+  .heroA .txt { position: relative; z-index: 1; display: grid; gap: 14px; max-width: 640px; }
+  .heroA svg.net { position: absolute; right: -40px; top: 0; height: 100%; width: 62%; z-index: 0; }
+  .net line { stroke: var(--net); stroke-opacity: .35; stroke-width: 1.4; }
+  .net circle { fill: var(--net); }
+  .net circle.hot { fill: var(--amber); }
+  .net circle.pulse { transform-box: fill-box; transform-origin: center; animation: pulse 3.2s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { transform: scale(1); opacity: .9; } 50% { transform: scale(1.5); opacity: .5; } }
+  @media (prefers-reduced-motion: reduce) { .net circle.pulse { animation: none; } }
+
+  /* ---------- B: the route as a network ---------- */
+  .heroB { border-radius: 18px; border: 1px solid var(--line); background: var(--surface); padding: clamp(22px, 3.5vw, 38px); display: grid; gap: 22px; }
+  .heroB .txt { display: grid; gap: 12px; max-width: 700px; }
+  .routeB { width: 100%; height: auto; display: block; }
+  .routeB .edge { stroke: var(--net); stroke-width: 3; stroke-dasharray: 2 9; stroke-linecap: round; fill: none; opacity: .55; }
+  .routeB .node circle.ring { fill: var(--surface); stroke: var(--net); stroke-width: 3; }
+  .routeB .node circle.core { fill: var(--teal-soft); }
+  .routeB .node text.num { font-family: var(--font-mono); font-size: 15px; fill: var(--teal); text-anchor: middle; dominant-baseline: central; }
+  .routeB .node text.name { font-size: 13px; fill: var(--ink); text-anchor: middle; font-weight: 600; }
+  .routeB .node text.time { font-family: var(--font-mono); font-size: 10.5px; fill: var(--muted); text-anchor: middle; }
+  .routeB .node.here circle.ring { stroke: var(--amber); stroke-width: 4; }
+  .routeB .node.here circle.core { fill: var(--amber-soft); }
+  .routeB .node.done circle.core { fill: var(--well-on); }
+  .routeB .node.done text.num { fill: var(--surface); }
+  .routeB .node { cursor: pointer; }
+  .routeB .node:hover circle.ring { stroke-width: 5; }
+  .routeB .glow { fill: var(--amber); opacity: .18; transform-box: fill-box; transform-origin: center; animation: glow 2.6s ease-in-out infinite; }
+  @keyframes glow { 0%, 100% { transform: scale(1); opacity: .22; } 50% { transform: scale(1.18); opacity: .1; } }
+  @media (prefers-reduced-motion: reduce) { .routeB .glow { animation: none; } }
+  .twoB { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+
+  /* ---------- C: friendly cell mascot ---------- */
+  .heroC { position: relative; overflow: hidden; border-radius: 18px; border: 1px solid var(--line); background: radial-gradient(circle at 85% 45%, var(--teal-soft), var(--surface) 55%); padding: clamp(24px, 4vw, 44px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 34%); gap: 20px; align-items: center; }
+  .heroC .txt { display: grid; gap: 14px; }
+  .mascot { width: 100%; max-width: 320px; justify-self: center; }
+  .mascot .dend { stroke: var(--net); stroke-width: 7; stroke-linecap: round; fill: none; }
+  .mascot .tip { fill: var(--net); }
+  .mascot .body { fill: var(--net); }
+  .mascot .face { fill: var(--logo-ink); }
+  .mascot .cheek { fill: var(--amber); opacity: .55; }
+  .mascot .wave { transform-origin: 160px 150px; animation: wave 3.5s ease-in-out infinite; }
+  @keyframes wave { 0%, 70%, 100% { transform: rotate(0); } 78% { transform: rotate(-9deg); } 86% { transform: rotate(6deg); } 94% { transform: rotate(-4deg); } }
+  @media (prefers-reduced-motion: reduce) { .mascot .wave { animation: none; } }
+  .bubble { position: absolute; right: 26%; top: 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 6px 12px; font-size: 13px; box-shadow: 0 6px 18px rgba(0,0,0,.06); }
+  @media (max-width: 760px) { .heroC { grid-template-columns: 1fr; } .mascot { max-width: 200px; } .bubble { display: none; } }
+
+  /* ---------- D: continue + tip ---------- */
+  .heroD { position: relative; overflow: hidden; border-radius: 18px; border: 1px solid var(--line); background: var(--surface); padding: clamp(24px, 4vw, 40px); }
+  .heroD svg.net { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: .55; }
+  .heroD .txt { position: relative; z-index: 1; display: grid; gap: 12px; max-width: 680px; }
+  .gridD { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 16px; }
+  @media (max-width: 1000px) { .gridD { grid-template-columns: 1fr; } }
+  .continue { background: linear-gradient(135deg, var(--teal), var(--well-on)); color: var(--surface); border: 0; }
+  .continue .label { color: inherit; opacity: .8; }
+  .continue h3 { color: inherit; font-size: 21px; }
+  .continue p { margin: 0; opacity: .92; }
+  .continue .btn { background: var(--surface); color: var(--teal); border: 0; justify-self: start; }
+  .minibar { height: 6px; border-radius: 3px; background: rgba(255,255,255,.25); overflow: hidden; }
+  .minibar i { display: block; height: 100%; width: 35%; background: var(--surface); }
+  .tip { background: var(--amber-soft); border-color: transparent; }
+  .tip p, .word p { margin: 0; font-size: 14px; }
+  .word dfn { font-style: normal; font-weight: 700; color: var(--teal); font-size: 17px; }
+</style>
+</head>
+<body>
+
+<div class="switcher" role="toolbar" aria-label="Choose a mock-up">
+  <strong>Home page mock-ups</strong>
+  <button type="button" data-opt="A" aria-pressed="true">A · Network backdrop</button>
+  <button type="button" data-opt="B" aria-pressed="false">B · The route is the network</button>
+  <button type="button" data-opt="C" aria-pressed="false">C · Friendly cell</button>
+  <button type="button" data-opt="D" aria-pressed="false">D · Continue + tip of the day</button>
+  <button type="button" id="dark">Dark / light</button>
+  <span class="note">Mock-ups only: buttons don't go anywhere.</span>
+</div>
+
+<div class="app">
+  <aside class="side">
+    <div class="brand"><svg viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="12" fill="var(--teal)"/><g stroke="var(--logo-ink)" stroke-width="2.4" stroke-linecap="round" fill="none"><path d="M24 24 L13 13 M13 13 L8 15 M13 13 L12 8"/><path d="M24 24 L36 12 M36 12 L41 13"/><path d="M24 24 L39 30 M39 30 L42 36"/><path d="M24 24 L26 39"/><path d="M24 24 L9 31 M9 31 L7 37"/></g><g fill="var(--logo-ink)"><circle cx="24" cy="24" r="6.5"/><circle cx="8" cy="15" r="2.4"/><circle cx="12" cy="8" r="2.4"/><circle cx="41" cy="13" r="2.4"/><circle cx="42" cy="36" r="2.4"/><circle cx="26" cy="39" r="2.4"/><circle cx="7" cy="37" r="2.4"/></g><circle cx="24" cy="24" r="2.6" fill="var(--amber)"/></svg><b>AI for Omics Research</b></div>
+    <nav>
+      <a class="on" href="#">Dashboard</a><a href="#">How to use this course</a><a href="#">Dictionary</a><a href="#">References</a>
+      <span class="label">Course</span>
+      <a href="#">00 · Orientation</a><a href="#">01 · Foundations &amp; Privacy</a><a href="#">02 · Prompting &amp; Context</a><a href="#">03 · Skills &amp; Standards</a><a href="#">04 · MCP &amp; Data</a><a href="#">05 · Agents &amp; Subagents</a><a href="#">06 · Hackathon</a>
+      <span class="label">About</span>
+      <a href="#">About this course</a><a href="#">Limitations</a>
+    </nav>
+  </aside>
+
+  <main>
+    <!-- ================= A ================= -->
+    <section class="option on" id="opt-A">
+      <p class="why"><b>A · Network backdrop.</b> The logo idea becomes the background: a soft web of connected nodes fills the right side of the welcome, a few amber nodes gently pulse. Calm, recognisable, and the text gets all the attention. Below: the modules row and a "where to start" card.</p>
+      <div class="heroA">
+        <svg class="net" id="netA" viewBox="0 0 600 340" preserveAspectRatio="xMaxYMid slice" aria-hidden="true"></svg>
+        <div class="txt">
+          <span class="label">Welcome back</span>
+          <h2 class="hello">Good to see you again.</h2>
+          <p class="lead">Welcome! This is <strong>AI for Omics Research</strong>: a course we do together, as colleagues and friends, about using AI tools well in our lipidomics, metabolomics, RNA-seq and immunology work.</p>
+          <p class="sub">It starts at zero (what is AI, what is a token?) and ends with a team hackathon. Take your time, grab a coffee, and skip what you already know. No exams, no grades, no stupid questions.</p>
+          <div class="actions"><a class="btn primary" href="#">Continue: Module 2 · Chapter →</a><a class="btn" href="#">New to AI? Start with the basics</a></div>
+          <div class="chips"><a href="#">🧭 How to use this course</a><a href="#">📖 Dictionary</a><a href="#">🔎 References</a></div>
+        </div>
+      </div>
+      <div class="card"><h3>The modules</h3><ol class="mods" data-mods></ol></div>
+    </section>
+
+    <!-- ================= B ================= -->
+    <section class="option" id="opt-B">
+      <p class="why"><b>B · The route is the network.</b> The modules themselves are the nodes, connected like the logo: a winding path from Orientation to the Hackathon. Your current module glows amber, finished ones fill in. It replaces both the logo and the module cards, and shows progress without a separate block.</p>
+      <div class="heroB">
+        <div class="txt">
+          <span class="label">Welcome back</span>
+          <h2 class="hello">Good to see you again.</h2>
+          <p class="lead">Welcome! This is <strong>AI for Omics Research</strong>: a course we do together, as colleagues and friends, about using AI tools well in our omics and immunology work.</p>
+          <div class="actions"><a class="btn primary" href="#">Continue: Module 2 · Chapter →</a><a class="btn" href="#">New to AI? Start with the basics</a></div>
+        </div>
+        <svg class="routeB" id="routeB" viewBox="0 0 1000 230" role="img" aria-label="The course route: seven modules connected as a network"></svg>
+      </div>
+      <div class="twoB">
+        <div class="card"><span class="label">New here?</span><h3>How this course works</h3><p style="margin:0">Each module reads like a chapter: a story, little questions, a summary. Then an optional exercise and self-check.</p><a href="#">How to use this course →</a></div>
+        <div class="card"><span class="label">Look it up</span><h3>Dictionary &amp; references</h3><p style="margin:0">129 terms in plain language, and every paper behind the course, searchable.</p><a href="#">Open the Dictionary →</a></div>
+      </div>
+    </section>
+
+    <!-- ================= C ================= -->
+    <section class="option" id="opt-C">
+      <p class="why"><b>C · Friendly cell.</b> A cute version of the logo: a little dendritic cell with network-node dendrites, a face, and one dendrite that waves now and then. Makes the course feel personal and light, very much "among colleagues". Could also pop up small elsewhere (empty states, the 404 of a missing page, the problem-report window).</p>
+      <div class="heroC">
+        <div class="txt">
+          <span class="label">Welcome back</span>
+          <h2 class="hello">Good to see you again.</h2>
+          <p class="lead">Welcome! This is <strong>AI for Omics Research</strong>: a course we do together, as colleagues and friends, about using AI tools well in our lipidomics, metabolomics, RNA-seq and immunology work.</p>
+          <p class="sub">It starts at zero and ends with a team hackathon. No exams, no grades, no stupid questions.</p>
+          <div class="actions"><a class="btn primary" href="#">Continue: Module 2 · Chapter →</a><a class="btn" href="#">New to AI? Start with the basics</a></div>
+        </div>
+        <span class="bubble">Hi! Ready for Module 2? ☕</span>
+        <svg class="mascot" viewBox="0 0 320 300" aria-hidden="true">
+          <path class="dend" d="M160 150 C 120 120, 90 110, 60 70"/><path class="dend" d="M95 103 C 80 100, 60 105, 42 118"/>
+          <g class="wave"><path class="dend" d="M160 150 C 200 110, 230 90, 262 52"/><path class="dend" d="M228 92 C 245 92, 262 100, 282 96"/><circle class="tip" cx="262" cy="52" r="11"/><circle class="tip" cx="282" cy="96" r="9"/></g>
+          <path class="dend" d="M160 150 C 210 165, 250 185, 288 210"/>
+          <path class="dend" d="M160 150 C 165 200, 160 230, 150 268"/><path class="dend" d="M162 222 C 180 235, 195 248, 205 266"/>
+          <path class="dend" d="M160 150 C 115 175, 80 195, 40 205"/>
+          <circle class="tip" cx="60" cy="70" r="11"/><circle class="tip" cx="42" cy="118" r="9"/><circle class="tip" cx="288" cy="210" r="11"/><circle class="tip" cx="150" cy="268" r="11"/><circle class="tip" cx="205" cy="266" r="9"/><circle class="tip" cx="40" cy="205" r="11"/>
+          <circle class="body" cx="160" cy="150" r="62"/>
+          <circle class="face" cx="140" cy="140" r="8"/><circle class="face" cx="180" cy="140" r="8"/>
+          <circle cx="142.5" cy="137.5" r="2.6" fill="var(--net)"/><circle cx="182.5" cy="137.5" r="2.6" fill="var(--net)"/>
+          <path d="M143 166 Q 160 180 177 166" stroke="var(--logo-ink)" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <ellipse class="cheek" cx="124" cy="160" rx="9" ry="6"/><ellipse class="cheek" cx="196" cy="160" rx="9" ry="6"/>
+        </svg>
+      </div>
+      <div class="card"><h3>The modules</h3><ol class="mods" data-mods></ol></div>
+    </section>
+
+    <!-- ================= D ================= -->
+    <section class="option" id="opt-D">
+      <p class="why"><b>D · Continue + tip of the day.</b> A faint full-width network behind the welcome, then three useful cards: a big "continue where you left off" card (with the chapter you were reading), a rotating tip of the day from the chapters, and a word of the day from the Dictionary. Gives people a reason to come back to the home page.</p>
+      <div class="heroD">
+        <svg class="net" id="netD" viewBox="0 0 1000 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+        <div class="txt">
+          <span class="label">Welcome back</span>
+          <h2 class="hello">Good to see you again.</h2>
+          <p class="lead">Welcome! This is <strong>AI for Omics Research</strong>: a course we do together, as colleagues and friends, about using AI tools well in our omics and immunology work. No exams, no grades, no stupid questions.</p>
+        </div>
+      </div>
+      <div class="gridD">
+        <div class="card continue"><span class="label">Continue where you left off</span><h3>Module 2 · Prompting &amp; Context</h3><p>Chapter, section 4: The prompt engineer's toolkit</p><div class="minibar"><i></i></div><a class="btn" href="#">Continue reading →</a></div>
+        <div class="card tip"><span class="label">☕ Tip of the day</span><p>Write the <strong>constraints</strong> of a prompt first. If you can't say what a wrong answer looks like, you're not ready to write the instruction yet.</p><a href="#">From Module 2 →</a></div>
+        <div class="card word"><span class="label">📖 Word of the day</span><p><dfn>Context window</dfn></p><p>The maximum number of tokens a model can look at at once. Anything outside it simply doesn't exist for the model.</p><a href="#">Open the Dictionary →</a></div>
+      </div>
+      <div class="card"><h3>The modules</h3><ol class="mods" data-mods></ol></div>
+    </section>
+
+    <div class="aibar">✨ Made with help from <strong>Ollama</strong>, <strong>ChatGPT</strong>, <strong>Gemini</strong> and <strong>Claude</strong>, and reviewed by the organisers. It can still contain mistakes: check what matters. <a href="#">About</a></div>
+  </main>
+</div>
+
+<script>
+  var MODS = [["0", "Orientation", "30 min", 1], ["1", "Foundations & Privacy", "~2 h", .5], ["2", "Prompting & Context", "~2 h", .25], ["3", "Skills & Standards", "~2 h", 0], ["4", "MCP & Data", "~2 h", 0], ["5", "Agents & Subagents", "~2.5 h", 0], ["6", "Hackathon", "2 days", 0]];
+  var HERE = 2;
+  document.querySelectorAll("[data-mods]").forEach(function (ol) {
+    MODS.forEach(function (m, i) {
+      var li = document.createElement("li");
+      if (i === HERE) li.className = "here"; if (i === 6) li.className = "team";
+      li.innerHTML = '<a href="#"><div class="top"><span class="n">' + (m[3] === 1 ? "✓" : m[0]) + '</span><span class="t">' + (i === HERE ? "you are here" : m[2]) + '</span></div><strong>' + m[1].replace("&", "&amp;") + '</strong><div class="bar"><i style="width:' + Math.round(m[3] * 100) + '%"></i></div></a>';
+      ol.appendChild(li);
+    });
+  });
+
+  /* small seeded random so the network looks the same every time */
+  function rng(seed) { return function () { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }; }
+  function network(svg, w, h, n, seed, xmin, hot) {
+    var r = rng(seed), pts = [], ns = "http://www.w3.org/2000/svg", out = "";
+    for (var i = 0; i < n; i++) pts.push([xmin + r() * (w - xmin), 12 + r() * (h - 24), 2 + r() * 4]);
+    pts.forEach(function (p, i) {
+      var near = pts.map(function (q, j) { return [Math.hypot(p[0] - q[0], p[1] - q[1]), j]; }).sort(function (a, b) { return a[0] - b[0]; }).slice(1, 3);
+      near.forEach(function (d) { if (d[1] > i && d[0] < w / 4) out += '<line x1="' + p[0].toFixed(1) + '" y1="' + p[1].toFixed(1) + '" x2="' + pts[d[1]][0].toFixed(1) + '" y2="' + pts[d[1]][1].toFixed(1) + '"/>'; });
+    });
+    pts.forEach(function (p, i) {
+      var isHot = hot.indexOf(i) >= 0;
+      out += '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="' + (isHot ? p[2] + 2.5 : p[2]).toFixed(1) + '" class="' + (isHot ? "hot pulse" : "") + '" style="animation-delay:' + (i % 5) * .6 + 's" opacity="' + (isHot ? 1 : (.35 + p[2] / 10)).toFixed(2) + '"/>';
+    });
+    svg.innerHTML = out;
+  }
+  network(document.getElementById("netA"), 600, 340, 46, 11, 230, [5, 17, 30]);
+  network(document.getElementById("netD"), 1000, 260, 70, 7, 0, [8, 33, 51]);
+
+  /* B: modules as nodes on a winding path */
+  (function () {
+    var svg = document.getElementById("routeB");
+    var xs = [70, 210, 350, 500, 650, 790, 930], ys = [120, 70, 150, 80, 150, 70, 120];
+    var d = "M" + xs[0] + " " + ys[0];
+    for (var i = 1; i < xs.length; i++) { var mx = (xs[i - 1] + xs[i]) / 2; d += " C " + mx + " " + ys[i - 1] + ", " + mx + " " + ys[i] + ", " + xs[i] + " " + ys[i]; }
+    var out = '<path class="edge" d="' + d + '"/>';
+    /* a few decorative side branches, like dendrites */
+    [[210, 70, 180, 22], [500, 80, 530, 28], [790, 70, 830, 24]].forEach(function (b) {
+      out += '<path class="edge" d="M' + b[0] + ' ' + b[1] + ' L ' + b[2] + ' ' + b[3] + '"/><circle cx="' + b[2] + '" cy="' + b[3] + '" r="5" fill="var(--net)" opacity=".5"/>';
+    });
+    MODS.forEach(function (m, i) {
+      var cls = "node" + (i === HERE ? " here" : "") + (m[3] === 1 ? " done" : "");
+      out += '<g class="' + cls + '" tabindex="0">' + (i === HERE ? '<circle class="glow" cx="' + xs[i] + '" cy="' + ys[i] + '" r="34"/>' : "") +
+        '<circle class="ring" cx="' + xs[i] + '" cy="' + ys[i] + '" r="27"/><circle class="core" cx="' + xs[i] + '" cy="' + ys[i] + '" r="20"/>' +
+        '<text class="num" x="' + xs[i] + '" y="' + ys[i] + '">' + (m[3] === 1 ? "✓" : m[0]) + '</text>' +
+        '<text class="name" x="' + xs[i] + '" y="' + (ys[i] + 48) + '">' + m[1].replace("&", "&amp;") + '</text>' +
+        '<text class="time" x="' + xs[i] + '" y="' + (ys[i] + 64) + '">' + (i === HERE ? "YOU ARE HERE" : m[2]) + '</text></g>';
+    });
+    svg.innerHTML = out;
+  })();
+
+  document.querySelectorAll("[data-opt]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      document.querySelectorAll("[data-opt]").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+      document.querySelectorAll(".option").forEach(function (o) { o.classList.toggle("on", o.id === "opt-" + b.dataset.opt); });
+      window.scrollTo(0, 0);
+    });
+  });
+  document.getElementById("dark").addEventListener("click", function () {
+    var r = document.documentElement; r.setAttribute("data-theme", r.getAttribute("data-theme") === "dark" ? "light" : "dark");
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 290" role="img" aria-label="Precision and recall. Two overlapping circles among 200 samples: the samples that are really unusual, and the samples a tool flagged. The overlap is what was found correctly. Precision asks how much of what was flagged was really unusual; recall asks how much of what was really unusual was found." font-family="IBM Plex Sans, Segoe UI, Helvetica, Arial, sans-serif">
+<title>Precision and recall</title>
+<rect x="0" y="0" width="700" height="290" rx="14" fill="#fbfcfc"/>
+<rect x="30.0" y="50.0" width="380" height="220" rx="12" fill="#eef3f2" stroke="#9fb3b8" stroke-width="1"/>
+<text x="42.0" y="70.0" font-size="12" fill="#55676d" text-anchor="start" font-weight="400">all 200 samples</text>
+<circle cx="170" cy="165" r="78" fill="#1d7a8c" fill-opacity="0.18" stroke="#1d7a8c" stroke-width="2"/>
+<circle cx="270" cy="165" r="78" fill="#b8641d" fill-opacity="0.18" stroke="#b8641d" stroke-width="2"/>
+<text x="130.0" y="160.0" font-size="12" fill="#1d7a8c" text-anchor="middle" font-weight="600">really</text>
+<text x="130.0" y="176.0" font-size="12" fill="#1d7a8c" text-anchor="middle" font-weight="600">unusual</text>
+<text x="310.0" y="160.0" font-size="12" fill="#b8641d" text-anchor="middle" font-weight="600">flagged by</text>
+<text x="310.0" y="176.0" font-size="12" fill="#b8641d" text-anchor="middle" font-weight="600">the tool</text>
+<text x="220.0" y="163.0" font-size="12" fill="#1d2b36" text-anchor="middle" font-weight="700">found</text>
+<text x="220.0" y="179.0" font-size="11" fill="#1d2b36" text-anchor="middle" font-weight="400">correctly</text>
+<text x="440.0" y="112.0" font-size="14" fill="#1d2b36" text-anchor="start" font-weight="700">Precision</text>
+<text x="440.0" y="132.0" font-size="12" fill="#55676d" text-anchor="start" font-weight="400">of what the tool flagged,</text>
+<text x="440.0" y="149.0" font-size="12" fill="#55676d" text-anchor="start" font-weight="400">how much was really unusual?</text>
+<text x="440.0" y="192.0" font-size="14" fill="#1d2b36" text-anchor="start" font-weight="700">Recall</text>
+<text x="440.0" y="212.0" font-size="12" fill="#55676d" text-anchor="start" font-weight="400">of what was really unusual,</text>
+<text x="440.0" y="229.0" font-size="12" fill="#55676d" text-anchor="start" font-weight="400">how much did the tool find?</text>
+<text x="350.0" y="30.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="600">Precision and recall: two different ways to be right</text>
+</svg>

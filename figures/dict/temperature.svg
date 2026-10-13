@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 285" role="img" aria-label="Temperature changes how the next word is chosen. At low temperature, 0.2, the most likely word, lymph, gets almost all the probability, so the answer is nearly always the same. At high temperature, 1.5, the probabilities are flatter: draining, nearest, local and spleen also get a real chance." font-family="IBM Plex Sans, Segoe UI, Helvetica, Arial, sans-serif">
+<title>Temperature</title>
+<rect x="0" y="0" width="700" height="285" rx="14" fill="#fbfcfc"/>
+<text x="160.0" y="50.0" font-size="13" fill="#1d2b36" text-anchor="middle" font-weight="600">Low temperature (0.2)</text>
+<text x="90.0" y="85.0" font-size="12.5" fill="#1d2b36" text-anchor="end" font-weight="400">lymph</text>
+<rect x="100.0" y="70.0" width="200" height="20" rx="4" fill="#eef3f2" stroke="none" stroke-width="1"/>
+<rect x="100.0" y="70.0" width="194.0" height="20" rx="4" fill="#0f5b6b" stroke="none" stroke-width="1"/>
+<text x="308.0" y="85.0" font-size="11.5" fill="#55676d" text-anchor="start" font-weight="400">0.97</text>
+<text x="90.0" y="119.0" font-size="12.5" fill="#1d2b36" text-anchor="end" font-weight="400">draining</text>
+<rect x="100.0" y="104.0" width="200" height="20" rx="4" fill="#eef3f2" stroke="none" stroke-width="1"/>
+<rect x="100.0" y="104.0" width="4.0" height="20" rx="4" fill="#1d7a8c" stroke="none" stroke-width="1"/>
+<text x="308.0" y="119.0" font-size="11.5" fill="#55676d" text-anchor="start" font-weight="400">0.02</text>
+<text x="90.0" y="153.0" font-size="12.5" fill="#1d2b36" text-anchor="end" font-weight="400">nearest</text>
+<rect x="100.0" y="138.0" width="200" height="20" rx="4" fill="#eef3f2" stroke="none" stroke-width="1"/>
+<rect x="100.0" y="138.0" width="2" height="20" rx="4" fill="#1d7a8c" stroke="none" stroke-width="1"/>
+<text x="308.0" y="153.0" font-size="11.5" fill="#55676d" text-anchor="start" font-weight="400">0.01</text>
+<text x="90.0" y="187.0" font-size="12.5" fill="#1d2b36" text-anchor="end" font-weight="400">local</text>
+<rect x="100.0" y="172.0" width="200" height="20" rx="4" fill="#eef3f2" stroke="none" stroke-width="1"/>
+<rect x="100.0" y="172.0" width="2" height="20" rx="4" fill="#1d7a8c" stroke="none" stroke-width="1"/>
+<text x="308.0" y="187.0" font-size="11.5" fill="#55676d" text-anchor="start" font-weight="400">0.00</text>
+<text x="90.0" y="221.0" font-size="12.5" fill="#1d2b36" text-anchor="end" font-weight="400">spleen</text>
+<rect x="100.0" y="206.0" width="200" height="20" rx="4" fill="#eef3f2" stroke="none" stroke-width="1"/>
+<rect x="100.0" y="206.0" width="2" height="20" rx="4" fill="#1d7a8c" stroke="none" stroke-width="1"/>
+<text x="308.0" y="221.0" font-size="11.5" fill="#55676d" text-anchor="start" font-weight="400">0.00</text>
+<text x="500.0" y="50.0" font-size="13" fill="#1d2b36" text-anchor="middle" font-weight="600">High temperature (1.5)</text>
+<text x="430.0" y="85.0" font-size="12.5" fill="#1d2b36" text-anchor="end" font-weight="400">lymph</text>
+<rect x="440.0" y="70.0" width="200" height="20" rx="4" fill="#eef3f2" stroke="none" stroke-width="1"/>
+<rect x="440.0" y="70.0" width="76.0" height="20" rx="4" fill="#0f5b6b" stroke="none" stroke-width="1"/>
+<text x="648.0" y="85.0" font-size="11.5" fill="#55676d" text-anchor="start" font-weight="400">0.38</text>
+<text x="430.0" y="119.0" font-size="12.5" fill="#1d2b36" text-anchor="end" font-weight="400">draining</text>
+<rect x="440.0" y="104.0" width="200" height="20" rx="4" fill="#eef3f2" stroke="none" stroke-width="1"/>
+<rect x="440.0" y="104.0" width="42.0" height="20" rx="4" fill="#1d7a8c" stroke="none" stroke-width="1"/>
+<text x="648.0" y="119.0" font-size="11.5" fill="#55676d" text-anchor="start" font-weight="400">0.21</text>
+<text x="430.0" y="153.0" font-size="12.5" fill="#1d2b36" text-anchor="end" font-weight="400">nearest</text>
+<rect x="440.0" y="138.0" width="200" height="20" rx="4" fill="#eef3f2" stroke="none" stroke-width="1"/>
+<rect x="440.0" y="138.0" width="34.0" height="20" rx="4" fill="#1d7a8c" stroke="none" stroke-width="1"/>
+<text x="648.0" y="153.0" font-size="11.5" fill="#55676d" text-anchor="start" font-weight="400">0.17</text>
+<text x="430.0" y="187.0" font-size="12.5" fill="#1d2b36" text-anchor="end" font-weight="400">local</text>
+<rect x="440.0" y="172.0" width="200" height="20" rx="4" fill="#eef3f2" stroke="none" stroke-width="1"/>
+<rect x="440.0" y="172.0" width="26.0" height="20" rx="4" fill="#1d7a8c" stroke="none" stroke-width="1"/>
+<text x="648.0" y="187.0" font-size="11.5" fill="#55676d" text-anchor="start" font-weight="400">0.13</text>
+<text x="430.0" y="221.0" font-size="12.5" fill="#1d2b36" text-anchor="end" font-weight="400">spleen</text>
+<rect x="440.0" y="206.0" width="200" height="20" rx="4" fill="#eef3f2" stroke="none" stroke-width="1"/>
+<rect x="440.0" y="206.0" width="22.0" height="20" rx="4" fill="#1d7a8c" stroke="none" stroke-width="1"/>
+<text x="648.0" y="221.0" font-size="11.5" fill="#55676d" text-anchor="start" font-weight="400">0.11</text>
+<text x="350.0" y="270.0" font-size="12" fill="#55676d" text-anchor="middle" font-weight="400">Next word after “Dendritic cells migrate to the …”</text>
+<text x="170.0" y="248.0" font-size="11.5" fill="#55676d" text-anchor="middle" font-weight="400">almost always the same word: focused, repetitive</text>
+<text x="510.0" y="248.0" font-size="11.5" fill="#55676d" text-anchor="middle" font-weight="400">other words get a real chance: varied, more errors</text>
+</svg>

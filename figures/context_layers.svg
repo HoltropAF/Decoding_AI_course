@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 506" role="img" aria-label="What fills the context window in Claude Code, from top to bottom. Loaded every session before you type anything: the app's system prompt and tool definitions, your personal CLAUDE.md, the project CLAUDE.md, and short lists of skills with their descriptions, MCP tools and memory notes. A skill's full text is read into the window only when the task matches its description. Below that, the conversation grows with every message, answer, file read and command output, until the free space runs out. Then the conversation is summarised and the CLAUDE.md files are read in again. Chat apps such as Claude, ChatGPT and Copilot have the same layers: the app's system prompt, custom instructions, project instructions, saved memories and the chat with its uploads." font-family="IBM Plex Sans, Segoe UI, Helvetica, Arial, sans-serif">
+  <title>What fills the context window</title>
+  <rect x="0" y="0" width="760" height="506" rx="14" fill="#fbfcfc"/>
+
+  <!-- column headers -->
+  <text x="185" y="24" font-size="12.5" font-weight="600" fill="#0f5b6b" text-anchor="middle">Context window in Claude Code</text>
+  <text x="352" y="24" font-size="11.5" font-weight="600" fill="#1d2b36">Loaded</text>
+  <text x="528" y="24" font-size="11.5" font-weight="600" fill="#1d2b36">Same idea in Claude, ChatGPT, Copilot</text>
+  <line x1="344" y1="32" x2="744" y2="32" stroke="#cfdcdc"/>
+
+  <!-- window frame -->
+  <rect x="36" y="36" width="298" height="386" rx="8" fill="none" stroke="#0f5b6b" stroke-width="1.6"/>
+
+  <g font-size="11.5" fill="#1d2b36">
+    <rect x="44" y="44" width="282" height="30" rx="5" fill="#d5e7ea" stroke="#8fb2b9"/>
+    <text x="56" y="63">System prompt + tool definitions</text>
+    <rect x="44" y="78" width="282" height="30" rx="5" fill="#cfe3d6" stroke="#8bb89a"/>
+    <text x="56" y="97"><tspan font-family="IBM Plex Mono, Consolas, monospace" font-size="11">~/.claude/CLAUDE.md</tspan>  your own rules</text>
+    <rect x="44" y="112" width="282" height="30" rx="5" fill="#cfe3d6" stroke="#8bb89a"/>
+    <text x="56" y="131"><tspan font-family="IBM Plex Mono, Consolas, monospace" font-size="11">CLAUDE.md</tspan>  the project's rules</text>
+    <rect x="44" y="146" width="282" height="30" rx="5" fill="#cfe3d6" stroke="#8bb89a" stroke-dasharray="4 3"/>
+    <text x="56" y="165">Skill descriptions · MCP tools · memory</text>
+
+    <line x1="44" y1="187" x2="326" y2="187" stroke="#8fb2b9" stroke-dasharray="3 3"/>
+
+    <rect x="44" y="196" width="282" height="22" rx="4" fill="#f6e4d2" stroke="#d9a576"/><text x="56" y="211">you: "make the DE report for batch 3"</text>
+    <rect x="44" y="221" width="282" height="26" rx="4" fill="#cfe3d6" stroke="#8bb89a" stroke-dasharray="4 3"/><text x="56" y="238">full skill text: <tspan font-family="IBM Plex Mono, Consolas, monospace" font-size="10.5">deg-report/SKILL.md</tspan></text>
+    <rect x="44" y="250" width="282" height="22" rx="4" fill="#e2ecea" stroke="#9fb3b8"/><text x="56" y="265">AI: plan, tool call</text>
+    <rect x="44" y="275" width="282" height="40" rx="4" fill="#efe9f4" stroke="#b9a7cc"/><text x="56" y="292">file it read: results_batch3.csv</text><text x="56" y="307" font-size="10.5" fill="#5b6b75">(often the biggest part)</text>
+    <rect x="44" y="318" width="282" height="26" rx="4" fill="#efe9f4" stroke="#b9a7cc"/><text x="56" y="335">command output, errors</text>
+    <rect x="44" y="347" width="282" height="22" rx="4" fill="#e2ecea" stroke="#9fb3b8"/><text x="56" y="362">AI: the answer</text>
+
+    <rect x="44" y="373" width="282" height="42" rx="5" fill="#ffffff" stroke="#9fb3b8" stroke-dasharray="5 4"/>
+    <text x="185" y="398" fill="#5b6b75" text-anchor="middle">free space</text>
+  </g>
+
+  <!-- skill: description first, full text when it matches -->
+  <path d="M 44 161 C 14 161, 14 234, 40 234" fill="none" stroke="#5f9a72" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <polygon points="35,229 44,234 35,239" fill="#5f9a72"/>
+
+  <g font-size="11" fill="#1d2b36">
+    <text x="352" y="63">always, set by the app</text>
+    <text x="352" y="97">every session</text>
+    <text x="352" y="131">every session</text>
+    <text x="352" y="160">short list: every session</text>
+    <text x="352" y="173" fill="#5b6b75">(name + one-line description)</text>
+    <text x="352" y="231" fill="#3f7a52">full skill: only when the</text>
+    <text x="352" y="244" fill="#3f7a52">task matches its description</text>
+    <path d="M 342 252 q 6 0 6 8 v 42 q 0 7 6 7 q -6 0 -6 7 v 42 q 0 8 -6 8" fill="none" stroke="#d9a576" stroke-width="1.6"/>
+    <text x="362" y="296">grows with every</text>
+    <text x="362" y="310">message, file and</text>
+    <text x="362" y="324">command</text>
+    <text x="352" y="398" fill="#5b6b75">what's left</text>
+  </g>
+
+  <g font-size="11" fill="#33434e">
+    <text x="528" y="63">the app's own system prompt</text>
+    <text x="528" y="97">custom instructions, personalisation</text>
+    <text x="528" y="131">Project instructions and files</text>
+    <text x="528" y="165">saved memories, connected apps</text>
+    <text x="528" y="231">Claude has skills too; ChatGPT</text>
+    <text x="528" y="244">has GPTs, Copilot has agents</text>
+    <text x="528" y="296">the chat itself, plus</text>
+    <text x="528" y="310">pasted text and uploads</text>
+    <text x="528" y="398">(the app doesn't show it)</text>
+  </g>
+  <g stroke="#e1e9e9"><line x1="344" y1="80" x2="744" y2="80"/><line x1="344" y1="114" x2="744" y2="114"/><line x1="344" y1="148" x2="744" y2="148"/><line x1="344" y1="190" x2="744" y2="190"/><line x1="344" y1="250" x2="744" y2="250"/><line x1="344" y1="370" x2="744" y2="370"/></g>
+
+  <path d="M 185 422 V 438" stroke="#0f5b6b" stroke-width="1.6"/>
+  <polygon points="179,434 185,444 191,434" fill="#0f5b6b"/>
+  <rect x="36" y="446" width="708" height="50" rx="8" fill="#fff6ea" stroke="#d9a576"/>
+  <g font-size="11.5" fill="#1d2b36">
+    <text x="50" y="466"><tspan font-weight="600">Full?</tspan> The conversation is summarised (in Claude Code: <tspan font-family="IBM Plex Mono, Consolas, monospace" font-size="11">/compact</tspan>, or automatically). The <tspan font-family="IBM Plex Mono, Consolas, monospace" font-size="11">CLAUDE.md</tspan> files are read in again,</text>
+    <text x="50" y="484">so rules in files survive; rules you only typed in the chat may not. <tspan font-family="IBM Plex Mono, Consolas, monospace" font-size="11">/context</tspan> shows this bar for your own session.</text>
+  </g>
+</svg>

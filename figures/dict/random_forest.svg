@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 300" role="img" aria-label="A random forest with three small decision trees. Each tree asks questions such as whether the internal standard is below 50 percent, and votes fine or problem. Two trees vote problem and one votes fine, so the majority vote is problem." font-family="IBM Plex Sans, Segoe UI, Helvetica, Arial, sans-serif">
+<title>Random forest</title>
+<rect x="0" y="0" width="700" height="300" rx="14" fill="#fbfcfc"/>
+<rect x="38.0" y="60.0" width="104" height="30" rx="8" fill="#d5e7ea" stroke="#1d7a8c" stroke-width="1"/>
+<text x="90.0" y="80.0" font-size="11.5" fill="#1d2b36" text-anchor="middle" font-weight="600">IS &lt; 50%?</text>
+<line x1="90.0" y1="90.0" x2="50.0" y2="130.0" stroke="#9fb3b8" stroke-width="1.4" opacity="1"/>
+<line x1="90.0" y1="90.0" x2="130.0" y2="130.0" stroke="#9fb3b8" stroke-width="1.4" opacity="1"/>
+<rect x="8.0" y="130.0" width="84" height="28" rx="8" fill="#eef3f2" stroke="#9fb3b8" stroke-width="1"/>
+<text x="50.0" y="149.0" font-size="10.5" fill="#1d2b36" text-anchor="middle" font-weight="400">missing > 20%?</text>
+<rect x="92.0" y="130.0" width="76" height="28" rx="8" fill="#f6e4d2" stroke="#b8641d" stroke-width="1"/>
+<text x="130.0" y="149.0" font-size="11" fill="#b8641d" text-anchor="middle" font-weight="600">problem</text>
+<line x1="50.0" y1="158.0" x2="30.0" y2="190.0" stroke="#9fb3b8" stroke-width="1.2" opacity="1"/>
+<line x1="50.0" y1="158.0" x2="70.0" y2="190.0" stroke="#9fb3b8" stroke-width="1.2" opacity="1"/>
+<text x="30.0" y="205.0" font-size="10.5" fill="#1d7a8c" text-anchor="middle" font-weight="400">fine</text>
+<text x="70.0" y="205.0" font-size="10.5" fill="#b8641d" text-anchor="middle" font-weight="400">problem</text>
+<rect x="38.0" y="222.0" width="104" height="30" rx="8" fill="#0f5b6b" stroke="none" stroke-width="1"/>
+<text x="90.0" y="242.0" font-size="12" fill="#ffffff" text-anchor="middle" font-weight="600">vote: problem</text>
+<rect x="188.0" y="60.0" width="104" height="30" rx="8" fill="#d5e7ea" stroke="#1d7a8c" stroke-width="1"/>
+<text x="240.0" y="80.0" font-size="11.5" fill="#1d2b36" text-anchor="middle" font-weight="600">IS &lt; 50%?</text>
+<line x1="240.0" y1="90.0" x2="200.0" y2="130.0" stroke="#9fb3b8" stroke-width="1.4" opacity="1"/>
+<line x1="240.0" y1="90.0" x2="280.0" y2="130.0" stroke="#9fb3b8" stroke-width="1.4" opacity="1"/>
+<rect x="158.0" y="130.0" width="84" height="28" rx="8" fill="#eef3f2" stroke="#9fb3b8" stroke-width="1"/>
+<text x="200.0" y="149.0" font-size="10.5" fill="#1d2b36" text-anchor="middle" font-weight="400">missing > 20%?</text>
+<rect x="242.0" y="130.0" width="76" height="28" rx="8" fill="#f6e4d2" stroke="#b8641d" stroke-width="1"/>
+<text x="280.0" y="149.0" font-size="11" fill="#b8641d" text-anchor="middle" font-weight="600">problem</text>
+<line x1="200.0" y1="158.0" x2="180.0" y2="190.0" stroke="#9fb3b8" stroke-width="1.2" opacity="1"/>
+<line x1="200.0" y1="158.0" x2="220.0" y2="190.0" stroke="#9fb3b8" stroke-width="1.2" opacity="1"/>
+<text x="180.0" y="205.0" font-size="10.5" fill="#1d7a8c" text-anchor="middle" font-weight="400">fine</text>
+<text x="220.0" y="205.0" font-size="10.5" fill="#b8641d" text-anchor="middle" font-weight="400">problem</text>
+<rect x="188.0" y="222.0" width="104" height="30" rx="8" fill="#1d7a8c" stroke="none" stroke-width="1"/>
+<text x="240.0" y="242.0" font-size="12" fill="#ffffff" text-anchor="middle" font-weight="600">vote: fine</text>
+<rect x="338.0" y="60.0" width="104" height="30" rx="8" fill="#d5e7ea" stroke="#1d7a8c" stroke-width="1"/>
+<text x="390.0" y="80.0" font-size="11.5" fill="#1d2b36" text-anchor="middle" font-weight="600">IS &lt; 50%?</text>
+<line x1="390.0" y1="90.0" x2="350.0" y2="130.0" stroke="#9fb3b8" stroke-width="1.4" opacity="1"/>
+<line x1="390.0" y1="90.0" x2="430.0" y2="130.0" stroke="#9fb3b8" stroke-width="1.4" opacity="1"/>
+<rect x="308.0" y="130.0" width="84" height="28" rx="8" fill="#eef3f2" stroke="#9fb3b8" stroke-width="1"/>
+<text x="350.0" y="149.0" font-size="10.5" fill="#1d2b36" text-anchor="middle" font-weight="400">missing > 20%?</text>
+<rect x="392.0" y="130.0" width="76" height="28" rx="8" fill="#f6e4d2" stroke="#b8641d" stroke-width="1"/>
+<text x="430.0" y="149.0" font-size="11" fill="#b8641d" text-anchor="middle" font-weight="600">problem</text>
+<line x1="350.0" y1="158.0" x2="330.0" y2="190.0" stroke="#9fb3b8" stroke-width="1.2" opacity="1"/>
+<line x1="350.0" y1="158.0" x2="370.0" y2="190.0" stroke="#9fb3b8" stroke-width="1.2" opacity="1"/>
+<text x="330.0" y="205.0" font-size="10.5" fill="#1d7a8c" text-anchor="middle" font-weight="400">fine</text>
+<text x="370.0" y="205.0" font-size="10.5" fill="#b8641d" text-anchor="middle" font-weight="400">problem</text>
+<rect x="338.0" y="222.0" width="104" height="30" rx="8" fill="#0f5b6b" stroke="none" stroke-width="1"/>
+<text x="390.0" y="242.0" font-size="12" fill="#ffffff" text-anchor="middle" font-weight="600">vote: problem</text>
+<line x1="450.0" y1="237.0" x2="497.0" y2="237.0" stroke="#1d7a8c" stroke-width="2" opacity="1"/>
+<polygon points="500.0,237.0 491.9,240.9 491.9,233.1" fill="#1d7a8c"/>
+<rect x="505.0" y="205.0" width="175" height="64" rx="10" fill="#0f5b6b" stroke="none" stroke-width="1"/>
+<text x="592.0" y="231.0" font-size="12" fill="#d5e7ea" text-anchor="middle" font-weight="400">majority vote:</text>
+<text x="592.0" y="253.0" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="700">problem</text>
+<text x="340.0" y="32.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="600">A random forest: many small decision trees, each trained on part of the data, then a vote</text>
+<text x="240.0" y="285.0" font-size="11.5" fill="#55676d" text-anchor="middle" font-weight="400">each tree asks slightly different questions (IS = internal standard)</text>
+</svg>

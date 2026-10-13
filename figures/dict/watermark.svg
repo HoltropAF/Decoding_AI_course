@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 262" role="img" aria-label="A text watermark. In a sentence about dendritic cells, more of the words than you would expect by chance are ones preferred by a secret key, shown in green. In ordinary human text about half the words are preferred; in watermarked AI text clearly more, which someone with the key can detect. Readers can't see it." font-family="IBM Plex Sans, Segoe UI, Helvetica, Arial, sans-serif">
+<title>AI text watermark</title>
+<rect x="0" y="0" width="700" height="262" rx="14" fill="#fbfcfc"/>
+<text x="350.0" y="26.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="600">A text watermark: the model quietly prefers words picked by a secret key</text>
+<rect x="24.0" y="70.0" width="76.8" height="30" rx="6" fill="#ffffff" stroke="#9fb3b8" stroke-width="1"/>
+<text x="62.4" y="90.0" font-size="12" fill="#1d2b36" text-anchor="middle" font-weight="400">Dendritic</text>
+<rect x="106.8" y="70.0" width="48.0" height="30" rx="6" fill="#dff0e4" stroke="#3f8f5f" stroke-width="1"/>
+<text x="130.8" y="90.0" font-size="12" fill="#1d2b36" text-anchor="middle" font-weight="400">cells</text>
+<rect x="160.8" y="70.0" width="62.4" height="30" rx="6" fill="#ffffff" stroke="#9fb3b8" stroke-width="1"/>
+<text x="192.0" y="90.0" font-size="12" fill="#1d2b36" text-anchor="middle" font-weight="400">migrate</text>
+<rect x="229.2" y="70.0" width="62.4" height="30" rx="6" fill="#dff0e4" stroke="#3f8f5f" stroke-width="1"/>
+<text x="260.4" y="90.0" font-size="12" fill="#1d2b36" text-anchor="middle" font-weight="400">towards</text>
+<rect x="297.6" y="70.0" width="33.6" height="30" rx="6" fill="#ffffff" stroke="#9fb3b8" stroke-width="1"/>
+<text x="314.4" y="90.0" font-size="12" fill="#1d2b36" text-anchor="middle" font-weight="400">the</text>
+<rect x="337.2" y="70.0" width="69.6" height="30" rx="6" fill="#dff0e4" stroke="#3f8f5f" stroke-width="1"/>
+<text x="372.0" y="90.0" font-size="12" fill="#1d2b36" text-anchor="middle" font-weight="400">draining</text>
+<rect x="412.8" y="70.0" width="48.0" height="30" rx="6" fill="#dff0e4" stroke="#3f8f5f" stroke-width="1"/>
+<text x="436.8" y="90.0" font-size="12" fill="#1d2b36" text-anchor="middle" font-weight="400">lymph</text>
+<rect x="466.8" y="70.0" width="40.8" height="30" rx="6" fill="#ffffff" stroke="#9fb3b8" stroke-width="1"/>
+<text x="487.2" y="90.0" font-size="12" fill="#1d2b36" text-anchor="middle" font-weight="400">node</text>
+<rect x="513.6" y="70.0" width="48.0" height="30" rx="6" fill="#ffffff" stroke="#9fb3b8" stroke-width="1"/>
+<text x="537.6" y="90.0" font-size="12" fill="#1d2b36" text-anchor="middle" font-weight="400">after</text>
+<rect x="567.6" y="70.0" width="55.2" height="30" rx="6" fill="#dff0e4" stroke="#3f8f5f" stroke-width="1"/>
+<text x="595.2" y="90.0" font-size="12" fill="#1d2b36" text-anchor="middle" font-weight="400">taking</text>
+<rect x="628.8" y="70.0" width="26.4" height="30" rx="6" fill="#dff0e4" stroke="#3f8f5f" stroke-width="1"/>
+<text x="642.0" y="90.0" font-size="12" fill="#1d2b36" text-anchor="middle" font-weight="400">up</text>
+<rect x="24.0" y="114.0" width="62.4" height="30" rx="6" fill="#ffffff" stroke="#9fb3b8" stroke-width="1"/>
+<text x="55.2" y="134.0" font-size="12" fill="#1d2b36" text-anchor="middle" font-weight="400">antigen</text>
+<rect x="92.4" y="114.0" width="26.4" height="30" rx="6" fill="#dff0e4" stroke="#3f8f5f" stroke-width="1"/>
+<text x="105.6" y="134.0" font-size="12" fill="#1d2b36" text-anchor="middle" font-weight="400">in</text>
+<rect x="124.8" y="114.0" width="33.6" height="30" rx="6" fill="#ffffff" stroke="#9fb3b8" stroke-width="1"/>
+<text x="141.6" y="134.0" font-size="12" fill="#1d2b36" text-anchor="middle" font-weight="400">the</text>
+<rect x="164.4" y="114.0" width="40.8" height="30" rx="6" fill="#dff0e4" stroke="#3f8f5f" stroke-width="1"/>
+<text x="184.8" y="134.0" font-size="12" fill="#1d2b36" text-anchor="middle" font-weight="400">skin</text>
+<rect x="30.0" y="170.0" width="300" height="50" rx="8" fill="#eef3f2" stroke="none" stroke-width="1"/>
+<text x="180.0" y="192.0" font-size="12" fill="#1d2b36" text-anchor="middle" font-weight="600">ordinary human text</text>
+<text x="180.0" y="210.0" font-size="11.5" fill="#55676d" text-anchor="middle" font-weight="400">about half the words are 'preferred'</text>
+<rect x="370.0" y="170.0" width="300" height="50" rx="8" fill="#dff0e4" stroke="#3f8f5f" stroke-width="1"/>
+<text x="520.0" y="192.0" font-size="12" fill="#1d2b36" text-anchor="middle" font-weight="600">watermarked AI text</text>
+<text x="520.0" y="210.0" font-size="11.5" fill="#3f8f5f" text-anchor="middle" font-weight="400">clearly more than half: detectable with the key</text>
+<text x="350.0" y="248.0" font-size="11.5" fill="#55676d" text-anchor="middle" font-weight="400">invisible to readers; works best on long, unedited prose</text>
+</svg>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 290" role="img" aria-label="A small neural network. Four lipid intensities go in on the left, pass through a hidden layer of five neurons, and come out as one probability: LPS-treated or not, 0.87. Every connecting line is a weight that training adjusts." font-family="IBM Plex Sans, Segoe UI, Helvetica, Arial, sans-serif">
+<title>A small neural network</title>
+<rect x="0" y="0" width="640" height="290" rx="14" fill="#fbfcfc"/>
+<line x1="150.0" y1="70.0" x2="330.0" y2="55.0" stroke="#b8641d" stroke-width="1.9625839391221649" opacity="0.6120353729081086"/>
+<line x1="150.0" y1="70.0" x2="330.0" y2="100.0" stroke="#1d7a8c" stroke-width="0.8299919715389497" opacity="0.39422922529595184"/>
+<line x1="150.0" y1="70.0" x2="330.0" y2="145.0" stroke="#b8641d" stroke-width="1.276233133949988" opacity="0.4800448334519207"/>
+<line x1="150.0" y1="70.0" x2="330.0" y2="190.0" stroke="#1d7a8c" stroke-width="1.1403842007002112" opacity="0.45392003859619445"/>
+<line x1="150.0" y1="70.0" x2="330.0" y2="235.0" stroke="#1d7a8c" stroke-width="1.2537455813618807" opacity="0.475720304108054"/>
+<line x1="150.0" y1="120.0" x2="330.0" y2="55.0" stroke="#b8641d" stroke-width="2.859249931952972" opacity="0.7844711407601869"/>
+<line x1="150.0" y1="120.0" x2="330.0" y2="100.0" stroke="#b8641d" stroke-width="3.131526443914655" opacity="0.8368320084451258"/>
+<line x1="150.0" y1="120.0" x2="330.0" y2="145.0" stroke="#1d7a8c" stroke-width="2.354839226901592" opacity="0.68746908209646"/>
+<line x1="150.0" y1="120.0" x2="330.0" y2="190.0" stroke="#b8641d" stroke-width="1.8513591254943602" opacity="0.5906459856719923"/>
+<line x1="150.0" y1="120.0" x2="330.0" y2="235.0" stroke="#b8641d" stroke-width="1.9814790025571787" opacity="0.6156690389533036"/>
+<line x1="150.0" y1="170.0" x2="330.0" y2="55.0" stroke="#1d7a8c" stroke-width="3.1773531446544068" opacity="0.8456448355104628"/>
+<line x1="150.0" y1="170.0" x2="330.0" y2="100.0" stroke="#b8641d" stroke-width="0.7546297608832707" opacity="0.37973649247755203"/>
+<line x1="150.0" y1="170.0" x2="330.0" y2="145.0" stroke="#1d7a8c" stroke-width="2.3495995466268216" opacity="0.6864614512743887"/>
+<line x1="150.0" y1="170.0" x2="330.0" y2="190.0" stroke="#b8641d" stroke-width="0.7229633147634582" opacity="0.373646791300665"/>
+<line x1="150.0" y1="170.0" x2="330.0" y2="235.0" stroke="#1d7a8c" stroke-width="1.323154330829642" opacity="0.4890681405441619"/>
+<line x1="150.0" y1="220.0" x2="330.0" y2="55.0" stroke="#b8641d" stroke-width="2.4167945950776755" opacity="0.699383575976476"/>
+<line x1="150.0" y1="220.0" x2="330.0" y2="100.0" stroke="#1d7a8c" stroke-width="1.30127542308298" opacity="0.48486065828518843"/>
+<line x1="150.0" y1="220.0" x2="330.0" y2="145.0" stroke="#1d7a8c" stroke-width="2.513835597145143" opacity="0.7180453071432967"/>
+<line x1="150.0" y1="220.0" x2="330.0" y2="190.0" stroke="#1d7a8c" stroke-width="0.7205422939931669" opacity="0.3731812103833013"/>
+<line x1="150.0" y1="220.0" x2="330.0" y2="235.0" stroke="#1d7a8c" stroke-width="1.8545096522477493" opacity="0.5912518562014902"/>
+<line x1="330.0" y1="55.0" x2="500.0" y2="145.0" stroke="#1d7a8c" stroke-width="2.4113875408870222" opacity="0.7357057376847963"/>
+<line x1="330.0" y1="100.0" x2="500.0" y2="145.0" stroke="#1d7a8c" stroke-width="0.9536754517447936" opacity="0.4320157191134987"/>
+<line x1="330.0" y1="145.0" x2="500.0" y2="145.0" stroke="#1d7a8c" stroke-width="2.6197525910883614" opacity="0.7791151231434087"/>
+<line x1="330.0" y1="190.0" x2="500.0" y2="145.0" stroke="#1d7a8c" stroke-width="2.2186389990351625" opacity="0.6955497914656588"/>
+<line x1="330.0" y1="235.0" x2="500.0" y2="145.0" stroke="#1d7a8c" stroke-width="1.5230423828377098" opacity="0.5506338297578561"/>
+<text x="128.0" y="74.0" font-size="12" fill="#1d2b36" text-anchor="end" font-weight="400">Lipid A</text>
+<circle cx="150.0" cy="70.0" r="11" fill="#d5e7ea" stroke="#1d7a8c" stroke-width="1.5" opacity="1"/>
+<text x="128.0" y="124.0" font-size="12" fill="#1d2b36" text-anchor="end" font-weight="400">Lipid B</text>
+<circle cx="150.0" cy="120.0" r="11" fill="#d5e7ea" stroke="#1d7a8c" stroke-width="1.5" opacity="1"/>
+<text x="128.0" y="174.0" font-size="12" fill="#1d2b36" text-anchor="end" font-weight="400">Lipid C</text>
+<circle cx="150.0" cy="170.0" r="11" fill="#d5e7ea" stroke="#1d7a8c" stroke-width="1.5" opacity="1"/>
+<text x="128.0" y="224.0" font-size="12" fill="#1d2b36" text-anchor="end" font-weight="400">Lipid D</text>
+<circle cx="150.0" cy="220.0" r="11" fill="#d5e7ea" stroke="#1d7a8c" stroke-width="1.5" opacity="1"/>
+<circle cx="330.0" cy="55.0" r="11" fill="#d5e7ea" stroke="#1d7a8c" stroke-width="1.5" opacity="1"/>
+<circle cx="330.0" cy="100.0" r="11" fill="#d5e7ea" stroke="#1d7a8c" stroke-width="1.5" opacity="1"/>
+<circle cx="330.0" cy="145.0" r="11" fill="#d5e7ea" stroke="#1d7a8c" stroke-width="1.5" opacity="1"/>
+<circle cx="330.0" cy="190.0" r="11" fill="#d5e7ea" stroke="#1d7a8c" stroke-width="1.5" opacity="1"/>
+<circle cx="330.0" cy="235.0" r="11" fill="#d5e7ea" stroke="#1d7a8c" stroke-width="1.5" opacity="1"/>
+<circle cx="500.0" cy="145.0" r="15" fill="#0f5b6b" stroke="none" stroke-width="1" opacity="1"/>
+<text x="524.0" y="141.0" font-size="12.5" fill="#1d2b36" text-anchor="start" font-weight="600">LPS-treated?</text>
+<text x="524.0" y="159.0" font-size="12" fill="#55676d" text-anchor="start" font-weight="400">probability 0.87</text>
+<text x="150.0" y="270.0" font-size="12" fill="#55676d" text-anchor="middle" font-weight="400">inputs</text>
+<text x="330.0" y="270.0" font-size="12" fill="#55676d" text-anchor="middle" font-weight="400">hidden layer</text>
+<text x="500.0" y="270.0" font-size="12" fill="#55676d" text-anchor="middle" font-weight="400">output</text>
+<text x="330.0" y="30.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="600">Every line is a weight; training adjusts them all, a little at a time</text>
+</svg>

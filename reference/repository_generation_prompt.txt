@@ -1,0 +1,93 @@
+You are an expert AI software architect and computational biology engineer. Your task is to generate a complete, production-ready directory structure and all associated files for a repository named `ai-learning-automation`.
+
+This repository serves as a modular AI curriculum and practical workflow toolkit tailored for a bioinformatics research lab specializing in lipidomics, metabolomics, RNA-seq, and systems immunology (such as dendritic cell dynamics in lymph nodes).
+
+Please create the following folder structure and write the complete, un-truncated contents for every file listed below
+
+ai-learning-automation
+├── README.md
+├── module_01_foundations_and_privacy
+│   ├── README.md
+│   ├── docs
+│   │   └── llm_mechanics_and_privacy.md
+│   └── exercises
+│       └── test_ollama_local.py
+├── module_02_prompting_and_context
+│   ├── README.md
+│   ├── templates
+│   │   └── structured_bio_prompt.json
+│   └── exercises
+│       └── extract_deg_pathways.py
+├── module_03_skills_and_standards
+│   ├── README.md
+│   └── templates
+│       └── CLAUDE.md
+├── module_04_mcp_and_data
+│   ├── README.md
+│   └── mcp_servers
+│       └── sample_mcp_config.json
+├── module_05_agents_and_subagents
+│   ├── README.md
+│   ├── agents
+│   │   └── themis.md
+│   ├── docs
+│   │   ├── 1_ai-coding-agents-general-concepts.md
+│   │   ├── 2_claude-agent-themis.md
+│   │   ├── 3_privacy-and-security-concerns.md
+│   │   └── 4_tldr-setup.md
+│   └── exercises
+│       └── build_custom_subagent.md
+└── module_06_hackathon_and_projects
+    ├── README.md
+    ├── track_a_multiomics_synthesis
+    │   └── README.md
+    ├── track_b_local_immunology_rag
+    │   └── README.md
+    ├── track_c_pipeline_debugger
+    │   └── README.md
+    └── track_d_dendritic_cell_hypothesis
+        └── README.md
+
+---
+
+FILE SPECIFICATIONS & CONTENT REQUIREMENTS
+
+1. `ai-learning-automationREADME.md`
+   - High-level overview of the 6-module curriculum.
+   - Core focus LLM mechanics, prompt engineering, persistent skills, MCP, autonomous subagents, and applied multi-omics hackathon tracks.
+
+2. `module_01_foundations_and_privacy`
+   - `README.md` Guide covering LLM basics (next-token prediction, context windows), cloud (Claude, GPT, Gemini) vs local (Ollama) trade-offs, and data security.
+   - `docsllm_mechanics_and_privacy.md` Deep dive on data sanitization, zero data retention (ZDR), and privacy rules for pre-publication omics data.
+   - `exercisestest_ollama_local.py` Working Python script using `requests` or `ollama` python SDK to test local model inference.
+
+3. `module_02_prompting_and_context`
+   - `README.md` Prompt engineering guide (Role, Context, Instruction, Inputs, Constraints) and JSON schema enforcement.
+   - `templatesstructured_bio_prompt.json` JSON template framing biological requests.
+   - `exercisesextract_deg_pathways.py` Python script demonstrating how to force structured JSON output from an LLM for RNA-seq differentially expressed gene lists.
+
+4. `module_03_skills_and_standards`
+   - `README.md` Explaining AI skills, `CLAUDE.md`, system prompts, and shared team operational standards.
+   - `templatesCLAUDE.md` Production-ready style guide template for bioinformatics code (PythonR, testing, reproducibility).
+
+5. `module_04_mcp_and_data`
+   - `README.md` Guide on Model Context Protocol (MCP), tool integration, and secure read-only sandboxing.
+   - `mcp_serverssample_mcp_config.json` Example MCP configuration file connecting to local file systems or REST endpoints.
+
+6. `module_05_agents_and_subagents`
+   - `README.md` Overview of subagent architecture—scoped tasks, isolated memory, fixed instructions, and noise reduction.
+   - `agentsthemis.md` The active Claude Code subagent file for auditing ENCORE project structures (`Data`, `Manuscript`, `Processing`, `ProjectDocumentation`, `Sharing`, `.navigate`, `0_PROJECT.md`). It must be strictly read-only and generate structured findings.
+   - `docs1_ai-coding-agents-general-concepts.md` General explanation of subagents, isolated working memory, cloud vs local models, and tool permissions.
+   - `docs2_claude-agent-themis.md` Plain-language guide explaining what Themis checks (top-level folders, empty placeholders, broken references, relative paths).
+   - `docs3_privacy-and-security-concerns.md` Comprehensive security guide detailing cloud transmission risks, setting account privacy controls, and handling unpublished lab data.
+   - `docs4_tldr-setup.md` Step-by-step setup guide for configuring subagents in Claude Code or custom LLM frameworks.
+   - `exercisesbuild_custom_subagent.md` Exercise instructions for building a new custom subagent (e.g., a read-only script reviewer).
+
+7. `module_06_hackathon_and_projects`
+   - `README.md` Master Hackathon Guide with rules, timing, and biological domain targets (RNA-seq, metabolomicslipidomics integration, dendritic cell dynamics in lymph nodes).
+   - `track_a_multiomics_synthesisREADME.md` Project spec for integrating DE gene lists and lipid change matrices to query pathway databases via MCP and generate an HTML summary.
+   - `track_b_local_immunology_ragREADME.md` Project spec for building a fully local RAG engine over PDF literature using Ollama, ChromaDBFAISS, and Streamlit.
+   - `track_c_pipeline_debuggerREADME.md` Project spec for an automated log parser and code fixer for Nextflow, Snakemake, and Python pipelines.
+   - `track_d_dendritic_cell_hypothesisREADME.md` Project spec for an experimental prediction engine predicting lipid shifts and gene expression under specific immune treatments.
+
+Generate all folders and files with complete, unabbreviated text now.

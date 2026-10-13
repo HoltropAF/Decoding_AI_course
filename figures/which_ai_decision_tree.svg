@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 510" role="img" aria-label="Decision tree for choosing an AI tool. First ask what data is involved. Restricted data, such as patient or donor data: no cloud AI; a local model only if the data agreement allows, otherwise no AI. Confidential, unpublished data: a local model such as Ollama, or a tool the institution has approved, such as Copilot with a work account. Public or internal material: ask what you want to do. Writing, explaining or brainstorming: ChatGPT, Claude, Gemini or Copilot. Code: GitHub Copilot or Claude Code. Questions about a pile of papers: NotebookLM with the PDFs. Long documents, audio or video: Gemini. An image for slides or a poster: an image generator. A figure for a paper: BioRender, or draw it yourself." font-family="IBM Plex Sans, Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Which AI tool? First the data, then the task</title>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#55676d"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1000" height="510" rx="14" fill="#fbfcfc"/>
+
+  <!-- start -->
+  <rect x="380" y="16" width="240" height="50" rx="10" fill="#0f5b6b"/>
+  <text x="500" y="46" font-size="14" font-weight="600" fill="#ffffff" text-anchor="middle">What data does it involve?</text>
+
+  <!-- connectors to the data classes -->
+  <path d="M 500 66 L 500 86 M 145 86 L 785 86" fill="none" stroke="#55676d" stroke-width="1.5"/>
+  <line x1="145" y1="86" x2="145" y2="107" stroke="#55676d" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="405" y1="86" x2="405" y2="107" stroke="#55676d" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="785" y1="86" x2="785" y2="107" stroke="#55676d" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- data classes -->
+  <g text-anchor="middle">
+    <rect x="30" y="110" width="230" height="64" rx="10" fill="#f8e1dc" stroke="#b5462f"/>
+    <text x="145" y="137" font-size="13.5" font-weight="600" fill="#1d2b36">Restricted</text>
+    <text x="145" y="157" font-size="11.5" fill="#55676d">patient or donor data, DUA data</text>
+
+    <rect x="290" y="110" width="230" height="64" rx="10" fill="#f6e4d2" stroke="#b8641d"/>
+    <text x="405" y="137" font-size="13.5" font-weight="600" fill="#1d2b36">Confidential</text>
+    <text x="405" y="157" font-size="11.5" fill="#55676d">unpublished results, drafts</text>
+
+    <rect x="620" y="110" width="330" height="64" rx="10" fill="#d5e7ea" stroke="#0f5b6b"/>
+    <text x="785" y="137" font-size="13.5" font-weight="600" fill="#1d2b36">Public or internal</text>
+    <text x="785" y="157" font-size="11.5" fill="#55676d">published data, papers, code, protocols</text>
+  </g>
+
+  <line x1="145" y1="174" x2="145" y2="197" stroke="#55676d" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="405" y1="174" x2="405" y2="197" stroke="#55676d" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="785" y1="174" x2="785" y2="207" stroke="#55676d" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- outcomes for restricted and confidential -->
+  <g text-anchor="middle" font-size="12">
+    <rect x="30" y="200" width="230" height="92" rx="10" fill="#ffffff" stroke="#b5462f" stroke-width="1.5"/>
+    <text x="145" y="223" font-weight="600" fill="#b5462f">No cloud AI</text>
+    <text x="145" y="243" fill="#1d2b36">a local model only if the</text>
+    <text x="145" y="260" fill="#1d2b36">data agreement allows it;</text>
+    <text x="145" y="277" fill="#1d2b36">otherwise no AI at all</text>
+
+    <rect x="290" y="200" width="230" height="92" rx="10" fill="#ffffff" stroke="#b8641d" stroke-width="1.5"/>
+    <text x="405" y="223" font-weight="600" fill="#b8641d">Local model (Ollama)</text>
+    <text x="405" y="243" fill="#1d2b36">or a tool the institution has</text>
+    <text x="405" y="260" fill="#1d2b36">approved for this data, e.g.</text>
+    <text x="405" y="277" fill="#1d2b36">Copilot with a work account*</text>
+  </g>
+
+  <!-- task question -->
+  <rect x="620" y="210" width="330" height="50" rx="10" fill="#0f5b6b"/>
+  <text x="785" y="240" font-size="13.5" font-weight="600" fill="#ffffff" text-anchor="middle">What do you want to do?</text>
+
+  <path d="M 785 260 L 785 315 M 95 315 L 910 315" fill="none" stroke="#55676d" stroke-width="1.5"/>
+  <g stroke="#55676d" stroke-width="1.5">
+    <line x1="95" y1="315" x2="95" y2="337" marker-end="url(#arrow)"/>
+    <line x1="258" y1="315" x2="258" y2="337" marker-end="url(#arrow)"/>
+    <line x1="421" y1="315" x2="421" y2="337" marker-end="url(#arrow)"/>
+    <line x1="584" y1="315" x2="584" y2="337" marker-end="url(#arrow)"/>
+    <line x1="747" y1="315" x2="747" y2="337" marker-end="url(#arrow)"/>
+    <line x1="910" y1="315" x2="910" y2="337" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- task outcomes -->
+  <g text-anchor="middle" font-size="12">
+    <rect x="20" y="340" width="150" height="100" rx="10" fill="#ffffff" stroke="#8fb2b9"/>
+    <text x="95" y="363" font-weight="600" fill="#1d2b36">Write, explain,</text>
+    <text x="95" y="379" font-weight="600" fill="#1d2b36">brainstorm</text>
+    <text x="95" y="406" fill="#0f5b6b">ChatGPT, Claude,</text>
+    <text x="95" y="422" fill="#0f5b6b">Gemini, Copilot</text>
+
+    <rect x="183" y="340" width="150" height="100" rx="10" fill="#ffffff" stroke="#8fb2b9"/>
+    <text x="258" y="363" font-weight="600" fill="#1d2b36">Code</text>
+    <text x="258" y="379" font-weight="600" fill="#1d2b36">(R, Python, …)</text>
+    <text x="258" y="406" fill="#0f5b6b">GitHub Copilot,</text>
+    <text x="258" y="422" fill="#0f5b6b">Claude Code</text>
+
+    <rect x="346" y="340" width="150" height="100" rx="10" fill="#ffffff" stroke="#8fb2b9"/>
+    <text x="421" y="363" font-weight="600" fill="#1d2b36">Questions about</text>
+    <text x="421" y="379" font-weight="600" fill="#1d2b36">a pile of papers</text>
+    <text x="421" y="406" fill="#0f5b6b">NotebookLM</text>
+    <text x="421" y="422" fill="#0f5b6b">with the PDFs</text>
+
+    <rect x="509" y="340" width="150" height="100" rx="10" fill="#ffffff" stroke="#8fb2b9"/>
+    <text x="584" y="363" font-weight="600" fill="#1d2b36">Long documents,</text>
+    <text x="584" y="379" font-weight="600" fill="#1d2b36">audio or video</text>
+    <text x="584" y="406" fill="#0f5b6b">Gemini</text>
+
+    <rect x="672" y="340" width="150" height="100" rx="10" fill="#ffffff" stroke="#8fb2b9"/>
+    <text x="747" y="363" font-weight="600" fill="#1d2b36">Image for slides</text>
+    <text x="747" y="379" font-weight="600" fill="#1d2b36">or a poster</text>
+    <text x="747" y="406" fill="#0f5b6b">an image</text>
+    <text x="747" y="422" fill="#0f5b6b">generator</text>
+
+    <rect x="835" y="340" width="150" height="100" rx="10" fill="#ffffff" stroke="#b8641d" stroke-width="1.5"/>
+    <text x="910" y="363" font-weight="600" fill="#1d2b36">Figure for</text>
+    <text x="910" y="379" font-weight="600" fill="#1d2b36">a paper</text>
+    <text x="910" y="406" fill="#b8641d">BioRender, or</text>
+    <text x="910" y="422" fill="#b8641d">draw it yourself</text>
+  </g>
+
+  <text x="500" y="470" font-size="12.5" fill="#1d2b36" text-anchor="middle">Whatever you choose: check the output, know where your data goes, and say how you used AI.</text>
+  <text x="500" y="492" font-size="11" fill="#55676d" text-anchor="middle">* only if our institution has approved it for this kind of data: check with IT or the data steward first</text>
+</svg>

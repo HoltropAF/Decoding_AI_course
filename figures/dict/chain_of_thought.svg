@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 270" role="img" aria-label="Chain-of-thought. Answering straight away gives a guess that is often wrong on multi-step problems. Writing the steps out first, enzymes up, ceramides up, fits synthesis, gives the model more tokens and more computation before it commits to the answer." font-family="IBM Plex Sans, Segoe UI, Helvetica, Arial, sans-serif">
+<title>Chain-of-thought</title>
+<rect x="0" y="0" width="700" height="270" rx="14" fill="#fbfcfc"/>
+<text x="350.0" y="26.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="600">Chain-of-thought: write the steps out before the answer</text>
+<text x="30.0" y="70.0" font-size="13" fill="#1d2b36" text-anchor="start" font-weight="600">Straight to the answer</text>
+<rect x="30.0" y="82.0" width="250" height="40" rx="7" fill="#ffffff" stroke="#9fb3b8" stroke-width="1"/>
+<text x="42.0" y="106.0" font-size="11.5" fill="#1d2b36" text-anchor="start" font-weight="400">Is this shift consistent with …?</text>
+<line x1="282.0" y1="102.0" x2="319.0" y2="102.0" stroke="#1d7a8c" stroke-width="2" opacity="1"/>
+<polygon points="322.0,102.0 313.9,105.9 313.9,98.1" fill="#1d7a8c"/>
+<rect x="326.0" y="82.0" width="70" height="40" rx="7" fill="#f6e4d2" stroke="#b8641d" stroke-width="1"/>
+<text x="361.0" y="106.0" font-size="13" fill="#b8641d" text-anchor="middle" font-weight="600">yes?</text>
+<text x="410.0" y="106.0" font-size="11.5" fill="#55676d" text-anchor="start" font-weight="400">a guess, often wrong on multi-step problems</text>
+<text x="30.0" y="165.0" font-size="13" fill="#1d2b36" text-anchor="start" font-weight="600">Step by step</text>
+<rect x="30.0" y="177.0" width="250" height="40" rx="7" fill="#ffffff" stroke="#9fb3b8" stroke-width="1"/>
+<text x="42.0" y="201.0" font-size="11.5" fill="#1d2b36" text-anchor="start" font-weight="400">Is this shift consistent with …?</text>
+<line x1="290.0" y1="197.0" x2="301.0" y2="197.0" stroke="#1d7a8c" stroke-width="1.6" opacity="1"/>
+<polygon points="304.0,197.0 295.9,200.9 295.9,193.1" fill="#1d7a8c"/>
+<rect x="306.0" y="180.0" width="96" height="34" rx="7" fill="#d5e7ea" stroke="#1d7a8c" stroke-width="1"/>
+<text x="354.0" y="201.0" font-size="10.5" fill="#1d2b36" text-anchor="middle" font-weight="400">1. enzymes up</text>
+<line x1="404.0" y1="197.0" x2="415.0" y2="197.0" stroke="#1d7a8c" stroke-width="1.6" opacity="1"/>
+<polygon points="418.0,197.0 409.9,200.9 409.9,193.1" fill="#1d7a8c"/>
+<rect x="420.0" y="180.0" width="96" height="34" rx="7" fill="#d5e7ea" stroke="#1d7a8c" stroke-width="1"/>
+<text x="468.0" y="201.0" font-size="10.5" fill="#1d2b36" text-anchor="middle" font-weight="400">2. ceramides up</text>
+<line x1="518.0" y1="197.0" x2="529.0" y2="197.0" stroke="#1d7a8c" stroke-width="1.6" opacity="1"/>
+<polygon points="532.0,197.0 523.9,200.9 523.9,193.1" fill="#1d7a8c"/>
+<rect x="534.0" y="180.0" width="96" height="34" rx="7" fill="#d5e7ea" stroke="#1d7a8c" stroke-width="1"/>
+<text x="582.0" y="201.0" font-size="10.5" fill="#1d2b36" text-anchor="middle" font-weight="400">3. fits synthesis</text>
+<line x1="632.0" y1="197.0" x2="645.0" y2="197.0" stroke="#1d7a8c" stroke-width="1.6" opacity="1"/>
+<polygon points="648.0,197.0 639.9,200.9 639.9,193.1" fill="#1d7a8c"/>
+<rect x="650.0" y="180.0" width="44" height="34" rx="7" fill="#0f5b6b" stroke="none" stroke-width="1"/>
+<text x="672.0" y="202.0" font-size="12.5" fill="#ffffff" text-anchor="middle" font-weight="600">yes</text>
+<text x="350.0" y="252.0" font-size="11.5" fill="#55676d" text-anchor="middle" font-weight="400">more tokens = more computation before the model commits to an answer</text>
+</svg>

@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 305" role="img" aria-label="Two panels. Supervised learning: samples are labelled fine or problem, and the method learns a line that separates them. Unsupervised learning: the samples have no labels, and the method finds groups of similar samples by itself." font-family="IBM Plex Sans, Segoe UI, Helvetica, Arial, sans-serif">
+<title>Supervised and unsupervised learning</title>
+<rect x="0" y="0" width="700" height="305" rx="14" fill="#fbfcfc"/>
+<rect x="20.0" y="40.0" width="320" height="230" rx="12" fill="#eef3f2" stroke="none" stroke-width="1"/>
+<rect x="360.0" y="40.0" width="320" height="230" rx="12" fill="#eef3f2" stroke="none" stroke-width="1"/>
+<text x="180.0" y="66.0" font-size="13" fill="#1d2b36" text-anchor="middle" font-weight="600">Supervised: learns from labels</text>
+<text x="520.0" y="66.0" font-size="13" fill="#1d2b36" text-anchor="middle" font-weight="600">Unsupervised: finds structure itself</text>
+<circle cx="77.0" cy="135.6" r="6" fill="#1d7a8c" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="128.7" cy="101.2" r="6" fill="#1d7a8c" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="106.0" cy="102.3" r="6" fill="#1d7a8c" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="140.8" cy="176.1" r="6" fill="#1d7a8c" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="148.0" cy="154.9" r="6" fill="#1d7a8c" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="121.1" cy="161.4" r="6" fill="#1d7a8c" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="89.3" cy="174.4" r="6" fill="#1d7a8c" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="74.8" cy="159.4" r="6" fill="#1d7a8c" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="129.5" cy="171.7" r="6" fill="#1d7a8c" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="98.5" cy="235.7" r="6" fill="#1d7a8c" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="251.6" cy="132.4" r="6" fill="#b8641d" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="254.5" cy="134.3" r="6" fill="#b8641d" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="239.2" cy="139.5" r="6" fill="#b8641d" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="306.7" cy="150.7" r="6" fill="#b8641d" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="254.9" cy="170.2" r="6" fill="#b8641d" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="306.5" cy="143.3" r="6" fill="#b8641d" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="232.5" cy="224.2" r="6" fill="#b8641d" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="209.1" cy="139.0" r="6" fill="#b8641d" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="268.7" cy="218.5" r="6" fill="#b8641d" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="223.4" cy="77.2" r="6" fill="#b8641d" stroke="none" stroke-width="1" opacity="1"/>
+<line x1="180.0" y1="90.0" x2="180.0" y2="255.0" stroke="#0f5b6b" stroke-width="2" opacity="1" stroke-dasharray="6 4"/>
+<text x="60.0" y="255.0" font-size="12" fill="#1d7a8c" text-anchor="start" font-weight="600">● fine</text>
+<text x="222.0" y="255.0" font-size="12" fill="#b8641d" text-anchor="start" font-weight="600">● problem</text>
+<circle cx="464.6" cy="130.6" r="6" fill="#9fb3b8" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="441.5" cy="148.3" r="6" fill="#9fb3b8" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="454.9" cy="145.2" r="6" fill="#9fb3b8" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="440.5" cy="163.2" r="6" fill="#9fb3b8" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="483.1" cy="140.6" r="6" fill="#9fb3b8" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="440.1" cy="153.2" r="6" fill="#9fb3b8" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="460.5" cy="121.3" r="6" fill="#9fb3b8" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="439.9" cy="158.9" r="6" fill="#9fb3b8" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="447.9" cy="134.1" r="6" fill="#9fb3b8" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="454.7" cy="139.4" r="6" fill="#9fb3b8" stroke="none" stroke-width="1" opacity="1"/>
+<ellipse cx="450" cy="140" rx="55" ry="42" fill="none" stroke="#0f5b6b" stroke-dasharray="5 4" stroke-width="1.6"/>
+<circle cx="589.9" cy="165.2" r="6" fill="#9fb3b8" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="628.5" cy="203.6" r="6" fill="#9fb3b8" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="570.7" cy="217.6" r="6" fill="#9fb3b8" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="596.8" cy="200.3" r="6" fill="#9fb3b8" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="613.1" cy="240.7" r="6" fill="#9fb3b8" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="602.2" cy="228.5" r="6" fill="#9fb3b8" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="637.5" cy="181.6" r="6" fill="#9fb3b8" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="578.5" cy="214.0" r="6" fill="#9fb3b8" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="552.4" cy="195.2" r="6" fill="#9fb3b8" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="618.4" cy="218.8" r="6" fill="#9fb3b8" stroke="none" stroke-width="1" opacity="1"/>
+<ellipse cx="590" cy="200" rx="55" ry="42" fill="none" stroke="#0f5b6b" stroke-dasharray="5 4" stroke-width="1.6"/>
+<text x="180.0" y="290.0" font-size="11.5" fill="#55676d" text-anchor="middle" font-weight="400">we told it which samples were fine or problematic</text>
+<text x="520.0" y="290.0" font-size="11.5" fill="#55676d" text-anchor="middle" font-weight="400">no labels: it groups what looks alike</text>
+</svg>

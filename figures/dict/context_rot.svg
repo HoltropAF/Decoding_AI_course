@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 312" role="img" aria-label="Context rot, or lost in the middle. A curve shows how often a model uses a key fact correctly, depending on where it sits in a long text: high at the start, low in the middle, high again at the end. So put key instructions at the start, repeat the crucial one at the end, and start fresh chats." font-family="IBM Plex Sans, Segoe UI, Helvetica, Arial, sans-serif">
+<title>Context rot</title>
+<rect x="0" y="0" width="640" height="312" rx="14" fill="#fbfcfc"/>
+<line x1="80.0" y1="250.0" x2="580.0" y2="250.0" stroke="#55676d" stroke-width="1.2" opacity="1"/>
+<line x1="80.0" y1="250.0" x2="80.0" y2="60.0" stroke="#55676d" stroke-width="1.2" opacity="1"/>
+<text x="580.0" y="270.0" font-size="11.5" fill="#55676d" text-anchor="end" font-weight="400">where the key fact sits in a long text</text>
+<text x="68.0" y="60.0" font-size="11.5" fill="#55676d" text-anchor="end" transform="rotate(-90 68.0 60.0)">used correctly</text>
+<polyline points="80.0,80.0 85.0,80.9 90.0,82.5 95.0,84.4 100.0,86.6 105.0,88.9 110.0,91.5 115.0,94.2 120.0,97.1 125.0,100.1 130.0,103.2 135.0,106.4 140.0,109.6 145.0,112.9 150.0,116.3 155.0,119.7 160.0,123.2 165.0,126.6 170.0,130.1 175.0,133.6 180.0,137.0 185.0,140.5 190.0,143.9 195.0,147.3 200.0,150.6 205.0,153.9 210.0,157.1 215.0,160.2 220.0,163.3 225.0,166.3 230.0,169.2 235.0,172.0 240.0,174.7 245.0,177.3 250.0,179.7 255.0,182.1 260.0,184.3 265.0,186.4 270.0,188.4 275.0,190.2 280.0,191.9 285.0,193.4 290.0,194.8 295.0,196.0 300.0,197.0 305.0,197.9 310.0,198.7 315.0,199.3 320.0,199.7 325.0,199.9 330.0,200.0 335.0,199.9 340.0,199.7 345.0,199.3 350.0,198.7 355.0,197.9 360.0,197.0 365.0,196.0 370.0,194.8 375.0,193.4 380.0,191.9 385.0,190.2 390.0,188.4 395.0,186.4 400.0,184.3 405.0,182.1 410.0,179.7 415.0,177.3 420.0,174.7 425.0,172.0 430.0,169.2 435.0,166.3 440.0,163.3 445.0,160.2 450.0,157.1 455.0,153.9 460.0,150.6 465.0,147.3 470.0,143.9 475.0,140.5 480.0,137.0 485.0,133.6 490.0,130.1 495.0,126.6 500.0,123.2 505.0,119.7 510.0,116.3 515.0,112.9 520.0,109.6 525.0,106.4 530.0,103.2 535.0,100.1 540.0,97.1 545.0,94.2 550.0,91.5 555.0,88.9 560.0,86.6 565.0,84.4 570.0,82.5 575.0,80.9 580.0,80.0" fill="none" stroke="#1d7a8c" stroke-width="2.6"/>
+<text x="85.0" y="264.0" font-size="11.5" fill="#55676d" text-anchor="start" font-weight="400">start</text>
+<text x="330.0" y="264.0" font-size="11.5" fill="#55676d" text-anchor="middle" font-weight="400">middle</text>
+<text x="578.0" y="244.0" font-size="11.5" fill="#55676d" text-anchor="end" font-weight="400">end</text>
+<text x="330.0" y="236.0" font-size="13" fill="#b8641d" text-anchor="middle" font-weight="600">lost in the middle</text>
+<text x="330.0" y="30.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="600">Long contexts have a weak middle: start and end are used best</text>
+<text x="330.0" y="298.0" font-size="11.5" fill="#55676d" text-anchor="middle" font-weight="400">so: put key instructions at the start, repeat the crucial one at the end, and start fresh chats</text>
+</svg>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 220" role="img" aria-label="Prompt chaining. A DEG table goes through three small prompts in turn: extract the genes, annotate pathways, summarise. Between the steps a check runs, such as whether the gene list is valid and whether all genes come from the input. The result is a report." font-family="IBM Plex Sans, Segoe UI, Helvetica, Arial, sans-serif">
+<title>Prompt chaining</title>
+<rect x="0" y="0" width="700" height="220" rx="14" fill="#fbfcfc"/>
+<text x="350.0" y="26.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="600">Prompt chaining: one small job at a time, with a check in between</text>
+<rect x="20.0" y="80.0" width="90" height="60" rx="8" fill="#ffffff" stroke="#9fb3b8" stroke-width="1"/>
+<text x="65.0" y="106.0" font-size="12" fill="#1d2b36" text-anchor="middle" font-weight="600">DEG</text>
+<text x="65.0" y="122.0" font-size="12" fill="#1d2b36" text-anchor="middle" font-weight="600">table</text>
+<line x1="115.0" y1="110.0" x2="134.0" y2="110.0" stroke="#1d7a8c" stroke-width="2" opacity="1"/>
+<polygon points="137.0,110.0 128.9,113.9 128.9,106.1" fill="#1d7a8c"/>
+<rect x="141.0" y="84.0" width="120" height="52" rx="8" fill="#d5e7ea" stroke="#1d7a8c" stroke-width="1"/>
+<text x="201.0" y="115.0" font-size="11.5" fill="#1d2b36" text-anchor="middle" font-weight="600">1. extract genes</text>
+<circle cx="287.0" cy="110.0" r="11" fill="#3f8f5f" stroke="none" stroke-width="1" opacity="1"/>
+<text x="287.0" y="115.0" font-size="13" fill="#ffffff" text-anchor="middle" font-weight="700">✓</text>
+<text x="287.0" y="150.0" font-size="10.5" fill="#3f8f5f" text-anchor="middle" font-weight="400">valid list?</text>
+<line x1="285.0" y1="110.0" x2="304.0" y2="110.0" stroke="#1d7a8c" stroke-width="2" opacity="1"/>
+<polygon points="307.0,110.0 298.9,113.9 298.9,106.1" fill="#1d7a8c"/>
+<rect x="311.0" y="84.0" width="120" height="52" rx="8" fill="#d5e7ea" stroke="#1d7a8c" stroke-width="1"/>
+<text x="371.0" y="115.0" font-size="11.5" fill="#1d2b36" text-anchor="middle" font-weight="600">2. annotate pathways</text>
+<circle cx="457.0" cy="110.0" r="11" fill="#3f8f5f" stroke="none" stroke-width="1" opacity="1"/>
+<text x="457.0" y="115.0" font-size="13" fill="#ffffff" text-anchor="middle" font-weight="700">✓</text>
+<text x="457.0" y="150.0" font-size="10.5" fill="#3f8f5f" text-anchor="middle" font-weight="400">genes all in input?</text>
+<line x1="455.0" y1="110.0" x2="474.0" y2="110.0" stroke="#1d7a8c" stroke-width="2" opacity="1"/>
+<polygon points="477.0,110.0 468.9,113.9 468.9,106.1" fill="#1d7a8c"/>
+<rect x="481.0" y="84.0" width="120" height="52" rx="8" fill="#d5e7ea" stroke="#1d7a8c" stroke-width="1"/>
+<text x="541.0" y="115.0" font-size="11.5" fill="#1d2b36" text-anchor="middle" font-weight="600">3. summarise</text>
+<line x1="601.0" y1="110.0" x2="616.0" y2="110.0" stroke="#1d7a8c" stroke-width="2" opacity="1"/>
+<polygon points="619.0,110.0 610.9,113.9 610.9,106.1" fill="#1d7a8c"/>
+<rect x="621.0" y="84.0" width="70" height="52" rx="8" fill="#0f5b6b" stroke="none" stroke-width="1"/>
+<text x="656.0" y="115.0" font-size="12" fill="#ffffff" text-anchor="middle" font-weight="600">report</text>
+<text x="350.0" y="200.0" font-size="11.5" fill="#55676d" text-anchor="middle" font-weight="400">each step is small enough to test on its own; an error in step 1 can't silently spoil the rest</text>
+</svg>

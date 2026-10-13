@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 322" role="img" aria-label="A support vector machine. Two groups of samples are separated by a line placed so that the gap between the groups is as wide as possible. The few samples closest to the line, the support vectors, decide where it goes." font-family="IBM Plex Sans, Segoe UI, Helvetica, Arial, sans-serif">
+<title>Support vector machine</title>
+<rect x="0" y="0" width="640" height="322" rx="14" fill="#fbfcfc"/>
+<line x1="60.0" y1="270.0" x2="580.0" y2="270.0" stroke="#55676d" stroke-width="1.2" opacity="1"/>
+<line x1="60.0" y1="270.0" x2="60.0" y2="50.0" stroke="#55676d" stroke-width="1.2" opacity="1"/>
+<text x="580.0" y="290.0" font-size="11.5" fill="#55676d" text-anchor="end" font-weight="400">measurement 1</text>
+<text x="48.0" y="50.0" font-size="11.5" fill="#55676d" text-anchor="end" transform="rotate(-90 48.0 50.0)">measurement 2</text>
+<circle cx="141.8" cy="201.2" r="6" fill="#1d7a8c" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="208.8" cy="238.0" r="6" fill="#1d7a8c" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="205.4" cy="196.3" r="6" fill="#1d7a8c" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="179.9" cy="188.1" r="6" fill="#1d7a8c" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="130.8" cy="182.0" r="6" fill="#1d7a8c" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="198.3" cy="201.9" r="6" fill="#1d7a8c" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="160.5" cy="165.6" r="6" fill="#1d7a8c" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="167.3" cy="178.8" r="6" fill="#1d7a8c" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="171.1" cy="208.5" r="6" fill="#1d7a8c" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="102.0" cy="192.5" r="6" fill="#1d7a8c" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="126.4" cy="169.0" r="6" fill="#1d7a8c" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="393.0" cy="138.7" r="6" fill="#b8641d" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="450.0" cy="122.9" r="6" fill="#b8641d" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="407.9" cy="72.8" r="6" fill="#b8641d" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="418.7" cy="115.3" r="6" fill="#b8641d" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="427.8" cy="127.7" r="6" fill="#b8641d" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="419.4" cy="156.4" r="6" fill="#b8641d" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="449.5" cy="161.5" r="6" fill="#b8641d" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="437.3" cy="104.0" r="6" fill="#b8641d" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="404.7" cy="130.9" r="6" fill="#b8641d" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="461.2" cy="114.0" r="6" fill="#b8641d" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="442.2" cy="103.0" r="6" fill="#b8641d" stroke="none" stroke-width="1" opacity="1"/>
+<line x1="150.0" y1="60.0" x2="470.0" y2="270.0" stroke="#0f5b6b" stroke-width="2.2" opacity="1"/>
+<line x1="110.0" y1="85.0" x2="400.0" y2="275.0" stroke="#0f5b6b" stroke-width="1" opacity="0.6" stroke-dasharray="5 4"/>
+<line x1="205.0" y1="52.0" x2="520.0" y2="262.0" stroke="#0f5b6b" stroke-width="1" opacity="0.6" stroke-dasharray="5 4"/>
+<circle cx="262.0" cy="205.0" r="9" fill="none" stroke="#1d2b36" stroke-width="1.6" opacity="1"/>
+<circle cx="338.0" cy="128.0" r="9" fill="none" stroke="#1d2b36" stroke-width="1.6" opacity="1"/>
+<circle cx="262.0" cy="205.0" r="6" fill="#1d7a8c" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="338.0" cy="128.0" r="6" fill="#b8641d" stroke="none" stroke-width="1" opacity="1"/>
+<text x="555.0" y="74.0" font-size="12" fill="#1d2b36" text-anchor="end" font-weight="600">the widest possible gap</text>
+<text x="555.0" y="92.0" font-size="12" fill="#1d2b36" text-anchor="end" font-weight="400">between the two groups</text>
+<text x="330.0" y="308.0" font-size="11.5" fill="#55676d" text-anchor="middle" font-weight="400">circled: the samples closest to the line (the 'support vectors') decide where it goes</text>
+<text x="320.0" y="30.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="600">A support vector machine draws the line that keeps two groups furthest apart</text>
+</svg>

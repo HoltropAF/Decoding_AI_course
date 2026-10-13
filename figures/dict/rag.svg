@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 240" role="img" aria-label="Retrieval-augmented generation. Your question first goes to a trusted collection of documents; the most relevant passages are retrieved. The model then generates an answer from those passages only, with references you can check." font-family="IBM Plex Sans, Segoe UI, Helvetica, Arial, sans-serif">
+<title>RAG</title>
+<rect x="0" y="0" width="700" height="240" rx="14" fill="#fbfcfc"/>
+<rect x="20.0" y="95.0" width="120" height="60" rx="8" fill="#d5e7ea" stroke="#1d7a8c" stroke-width="1"/>
+<text x="80.0" y="120.0" font-size="12" fill="#1d2b36" text-anchor="middle" font-weight="600">your question</text>
+<text x="80.0" y="138.0" font-size="10.5" fill="#55676d" text-anchor="middle" font-weight="400">“What does CCR7 do?”</text>
+<line x1="142.0" y1="125.0" x2="179.0" y2="125.0" stroke="#1d7a8c" stroke-width="2" opacity="1"/>
+<polygon points="182.0,125.0 173.9,128.9 173.9,121.1" fill="#1d7a8c"/>
+<rect x="190.0" y="70.0" width="100" height="74" rx="6" fill="#ffffff" stroke="#9fb3b8" stroke-width="1"/>
+<rect x="196.0" y="76.0" width="100" height="74" rx="6" fill="#ffffff" stroke="#9fb3b8" stroke-width="1"/>
+<rect x="202.0" y="82.0" width="100" height="74" rx="6" fill="#ffffff" stroke="#9fb3b8" stroke-width="1"/>
+<rect x="208.0" y="88.0" width="100" height="74" rx="6" fill="#ffffff" stroke="#9fb3b8" stroke-width="1"/>
+<text x="258.0" y="108.0" font-size="12" fill="#1d2b36" text-anchor="middle" font-weight="600">trusted</text>
+<text x="258.0" y="124.0" font-size="12" fill="#1d2b36" text-anchor="middle" font-weight="600">collection</text>
+<text x="258.0" y="175.0" font-size="12" fill="#1d7a8c" text-anchor="middle" font-weight="600">1. retrieve</text>
+<line x1="320.0" y1="125.0" x2="357.0" y2="125.0" stroke="#1d7a8c" stroke-width="2" opacity="1"/>
+<polygon points="360.0,125.0 351.9,128.9 351.9,121.1" fill="#1d7a8c"/>
+<rect x="368.0" y="88.0" width="92" height="20" rx="5" fill="#f6e4d2" stroke="#b8641d" stroke-width="1"/>
+<text x="414.0" y="102.0" font-size="11" fill="#1d2b36" text-anchor="middle" font-weight="400">passage 1</text>
+<rect x="368.0" y="114.0" width="92" height="20" rx="5" fill="#f6e4d2" stroke="#b8641d" stroke-width="1"/>
+<text x="414.0" y="128.0" font-size="11" fill="#1d2b36" text-anchor="middle" font-weight="400">passage 2</text>
+<rect x="368.0" y="140.0" width="92" height="20" rx="5" fill="#f6e4d2" stroke="#b8641d" stroke-width="1"/>
+<text x="414.0" y="154.0" font-size="11" fill="#1d2b36" text-anchor="middle" font-weight="400">passage 3</text>
+<line x1="462.0" y1="125.0" x2="499.0" y2="125.0" stroke="#1d7a8c" stroke-width="2" opacity="1"/>
+<polygon points="502.0,125.0 493.9,128.9 493.9,121.1" fill="#1d7a8c"/>
+<rect x="508.0" y="95.0" width="90" height="60" rx="10" fill="#0f5b6b" stroke="none" stroke-width="1"/>
+<text x="553.0" y="130.0" font-size="13" fill="#ffffff" text-anchor="middle" font-weight="600">model</text>
+<text x="553.0" y="175.0" font-size="12" fill="#1d7a8c" text-anchor="middle" font-weight="600">2. generate</text>
+<line x1="600.0" y1="125.0" x2="625.0" y2="125.0" stroke="#1d7a8c" stroke-width="2" opacity="1"/>
+<polygon points="628.0,125.0 619.9,128.9 619.9,121.1" fill="#1d7a8c"/>
+<rect x="632.0" y="85.0" width="60" height="80" rx="8" fill="#ffffff" stroke="#3f8f5f" stroke-width="1"/>
+<text x="662.0" y="115.0" font-size="11" fill="#1d2b36" text-anchor="middle" font-weight="600">answer</text>
+<text x="662.0" y="133.0" font-size="11" fill="#1d2b36" text-anchor="middle" font-weight="400">with</text>
+<text x="662.0" y="150.0" font-size="11" fill="#3f8f5f" text-anchor="middle" font-weight="600">[1] [2]</text>
+<text x="350.0" y="36.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="600">RAG: first find the relevant passages, then answer only from them, with references</text>
+<text x="350.0" y="222.0" font-size="11.5" fill="#55676d" text-anchor="middle" font-weight="400">the answer is only as good as the collection, but every claim can be checked</text>
+</svg>

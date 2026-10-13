@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 262" role="img" aria-label="Provenance labels. An image carries a signed Content Credentials label saying it was made with an AI image tool on 1 October 2026. After a screenshot, the copy has no label left and its origin is unknown. A label is strong evidence when present, but a missing label proves nothing." font-family="IBM Plex Sans, Segoe UI, Helvetica, Arial, sans-serif">
+<title>C2PA / Content Credentials</title>
+<rect x="0" y="0" width="700" height="262" rx="14" fill="#fbfcfc"/>
+<text x="350.0" y="26.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="600">Provenance labels (C2PA) travel with the file, until someone takes a screenshot</text>
+<rect x="40.0" y="60.0" width="150" height="110" rx="8" fill="#ffffff" stroke="#9fb3b8" stroke-width="1"/>
+<ellipse cx="115" cy="118" rx="36" ry="28" fill="#d5e7ea" stroke="#1d7a8c" stroke-width="2"/>
+<circle cx="120.0" cy="115.0" r="10" fill="#0f5b6b" stroke="none" stroke-width="1" opacity="1"/>
+<rect x="200.0" y="64.0" width="180" height="96" rx="8" fill="#f6e4d2" stroke="#b8641d" stroke-width="1"/>
+<text x="212.0" y="86.0" font-size="12" fill="#b8641d" text-anchor="start" font-weight="600">Content Credentials</text>
+<text x="212.0" y="106.0" font-size="11" fill="#1d2b36" text-anchor="start" font-weight="400">made with: an AI image tool</text>
+<text x="212.0" y="122.0" font-size="11" fill="#1d2b36" text-anchor="start" font-weight="400">date: 1 October 2026</text>
+<text x="212.0" y="140.0" font-size="11" fill="#3f8f5f" text-anchor="start" font-weight="600">✓ signed, can't be faked</text>
+<line x1="390.0" y1="115.0" x2="467.0" y2="115.0" stroke="#1d7a8c" stroke-width="2" opacity="1"/>
+<polygon points="470.0,115.0 461.9,118.9 461.9,111.1" fill="#1d7a8c"/>
+<text x="430.0" y="105.0" font-size="11.5" fill="#55676d" text-anchor="middle" font-weight="400">screenshot</text>
+<rect x="490.0" y="60.0" width="150" height="110" rx="8" fill="#ffffff" stroke="#9fb3b8" stroke-width="1"/>
+<ellipse cx="565" cy="118" rx="36" ry="28" fill="#d5e7ea" stroke="#1d7a8c" stroke-width="2"/>
+<circle cx="570.0" cy="115.0" r="10" fill="#0f5b6b" stroke="none" stroke-width="1" opacity="1"/>
+<text x="565.0" y="196.0" font-size="12" fill="#1d2b36" text-anchor="middle" font-weight="600">no label left:</text>
+<text x="565.0" y="212.0" font-size="12" fill="#55676d" text-anchor="middle" font-weight="400">origin unknown</text>
+<text x="350.0" y="248.0" font-size="11.5" fill="#55676d" text-anchor="middle" font-weight="400">strong when present, but a missing label proves nothing</text>
+</svg>

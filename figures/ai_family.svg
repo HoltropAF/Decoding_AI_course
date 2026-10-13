@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 480" role="img" aria-label="The AI family, with siblings at every level. Artificial intelligence splits into rule-based AI, where people write the rules, such as QC thresholds, expert systems, chess computers and route planners, and machine learning, which learns from examples. Machine learning splits into classic machine learning, such as random forests, support vector machines, PCA, clustering and logistic regression, and deep learning, large neural networks that learn their own features. Deep learning splits into predictive models, such as image classifiers, cell-type annotation and peak picking in mass spectrometry, and generative models, such as image generators and protein design tools. Large language models like ChatGPT, Claude and Gemini are generative models, and are what this course is about." font-family="IBM Plex Sans, Segoe UI, Helvetica, Arial, sans-serif">
+  <title>The AI family: every level with its siblings</title>
+  <rect x="0" y="0" width="1000" height="480" rx="14" fill="#fbfcfc"/>
+
+  <!-- Artificial intelligence -->
+  <rect x="10" y="10" width="980" height="460" rx="14" fill="#eef3f2" stroke="#9fb3b8"/>
+  <text x="28" y="40" font-size="16" font-weight="600" fill="#1d2b36">Artificial intelligence</text>
+  <text x="28" y="58" font-size="12" fill="#55676d">any computer behaviour that looks "smart"</text>
+
+  <!-- AI, sibling 1: rule-based -->
+  <rect x="30" y="72" width="220" height="378" rx="12" fill="#e2ecea" stroke="#9fb3b8"/>
+  <text x="48" y="100" font-size="15" font-weight="600" fill="#1d2b36">Rule-based AI</text>
+  <text x="48" y="118" font-size="12" fill="#55676d">people write the rules</text>
+  <text x="48" y="150" font-size="12" fill="#1d2b36">· QC thresholds</text>
+  <text x="48" y="170" font-size="12" fill="#1d2b36">· if-then expert systems</text>
+  <text x="48" y="190" font-size="12" fill="#1d2b36">· chess computers</text>
+  <text x="48" y="210" font-size="12" fill="#1d2b36">· route planners</text>
+  <text x="48" y="420" font-size="11.5" fill="#55676d">transparent, but only as good</text>
+  <text x="48" y="436" font-size="11.5" fill="#55676d">as the person who wrote it</text>
+
+  <!-- AI, sibling 2: machine learning -->
+  <rect x="266" y="72" width="704" height="378" rx="12" fill="#e2ecea" stroke="#9fb3b8"/>
+  <text x="284" y="100" font-size="15" font-weight="600" fill="#1d2b36">Machine learning</text>
+  <text x="284" y="118" font-size="12" fill="#55676d">learns patterns from examples instead of rules</text>
+
+  <!-- ML, sibling 1: classic -->
+  <rect x="284" y="134" width="210" height="300" rx="12" fill="#d5e7ea" stroke="#8fb2b9"/>
+  <text x="302" y="162" font-size="14.5" font-weight="600" fill="#1d2b36">Classic machine learning</text>
+  <text x="302" y="180" font-size="12" fill="#55676d">learns from examples;</text>
+  <text x="302" y="196" font-size="12" fill="#55676d">people choose the features</text>
+  <text x="302" y="226" font-size="12" fill="#1d2b36">· random forest</text>
+  <text x="302" y="246" font-size="12" fill="#1d2b36">· support vector machines</text>
+  <text x="302" y="266" font-size="12" fill="#1d2b36">· logistic regression</text>
+  <text x="302" y="286" font-size="12" fill="#1d2b36">· PCA</text>
+  <text x="302" y="306" font-size="12" fill="#1d2b36">· clustering</text>
+
+  <!-- ML, sibling 2: deep learning -->
+  <rect x="510" y="134" width="444" height="300" rx="12" fill="#d5e7ea" stroke="#8fb2b9"/>
+  <text x="528" y="162" font-size="14.5" font-weight="600" fill="#1d2b36">Deep learning</text>
+  <text x="528" y="180" font-size="12" fill="#55676d">large neural networks that learn their own features</text>
+
+  <!-- DL, sibling 1: predictive -->
+  <rect x="526" y="196" width="200" height="222" rx="11" fill="#c3dde2" stroke="#1d7a8c"/>
+  <text x="542" y="222" font-size="14" font-weight="600" fill="#1d2b36">Predictive</text>
+  <text x="542" y="240" font-size="12" fill="#3f5a62">puts a label or number</text>
+  <text x="542" y="256" font-size="12" fill="#3f5a62">on its input</text>
+  <text x="542" y="284" font-size="12" fill="#1d2b36">· image classifiers</text>
+  <text x="542" y="304" font-size="12" fill="#1d2b36">· cell-type annotation</text>
+  <text x="542" y="324" font-size="12" fill="#1d2b36">· MS peak picking</text>
+
+  <!-- DL, sibling 2: generative -->
+  <rect x="738" y="196" width="200" height="222" rx="11" fill="#c3dde2" stroke="#0f5b6b"/>
+  <text x="754" y="222" font-size="14" font-weight="600" fill="#1d2b36">Generative</text>
+  <text x="754" y="240" font-size="12" fill="#3f5a62">creates new content</text>
+  <text x="754" y="262" font-size="12" fill="#1d2b36">· image generators</text>
+  <text x="754" y="282" font-size="12" fill="#1d2b36">· protein design</text>
+  <rect x="750" y="298" width="176" height="106" rx="9" fill="#0f5b6b"/>
+  <text x="764" y="324" font-size="13" font-weight="600" fill="#ffffff">Large language</text>
+  <text x="764" y="341" font-size="13" font-weight="600" fill="#ffffff">models (LLMs)</text>
+  <text x="764" y="363" font-size="12" fill="#d5e7ea">ChatGPT, Claude, Gemini…</text>
+  <text x="764" y="388" font-size="12" font-weight="600" fill="#f6c99a">← this course</text>
+</svg>

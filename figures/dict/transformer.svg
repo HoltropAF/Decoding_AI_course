@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 305" role="img" aria-label="A transformer. The tokens Dendritic cells migrate to the go in at the bottom and pass up through a stack of identical layers, 32 in Llama 3.1 8B. Each layer has an attention step and a processing step. At the top come the probabilities for the next token: lymph 0.71, draining 0.12, nearest 0.06." font-family="IBM Plex Sans, Segoe UI, Helvetica, Arial, sans-serif">
+<title>Transformer</title>
+<rect x="0" y="0" width="700" height="305" rx="14" fill="#fbfcfc"/>
+<text x="350.0" y="26.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="600">A transformer: tokens go up through a stack of identical layers</text>
+<rect x="150.0" y="262.0" width="81.5" height="28" rx="6" fill="#eef3f2" stroke="#9fb3b8" stroke-width="1"/>
+<text x="190.8" y="281.0" font-size="12" fill="#1d2b36" text-anchor="middle" font-weight="400">Dendritic</text>
+<rect x="239.5" y="262.0" width="51.5" height="28" rx="6" fill="#eef3f2" stroke="#9fb3b8" stroke-width="1"/>
+<text x="265.2" y="281.0" font-size="12" fill="#1d2b36" text-anchor="middle" font-weight="400">cells</text>
+<rect x="299.0" y="262.0" width="66.5" height="28" rx="6" fill="#eef3f2" stroke="#9fb3b8" stroke-width="1"/>
+<text x="332.2" y="281.0" font-size="12" fill="#1d2b36" text-anchor="middle" font-weight="400">migrate</text>
+<rect x="373.5" y="262.0" width="29.0" height="28" rx="6" fill="#eef3f2" stroke="#9fb3b8" stroke-width="1"/>
+<text x="388.0" y="281.0" font-size="12" fill="#1d2b36" text-anchor="middle" font-weight="400">to</text>
+<rect x="410.5" y="262.0" width="36.5" height="28" rx="6" fill="#eef3f2" stroke="#9fb3b8" stroke-width="1"/>
+<text x="428.8" y="281.0" font-size="12" fill="#1d2b36" text-anchor="middle" font-weight="400">the</text>
+<line x1="350.0" y1="258.0" x2="350.0" y2="241.0" stroke="#1d7a8c" stroke-width="2" opacity="1"/>
+<polygon points="350.0,238.0 353.9,246.1 346.1,246.1" fill="#1d7a8c"/>
+<rect x="170.0" y="178.0" width="360" height="50" rx="10" fill="#d5e7ea" stroke="#1d7a8c" stroke-width="1"/>
+<rect x="184.0" y="187.0" width="160" height="32" rx="7" fill="#ffffff" stroke="#1d7a8c" stroke-width="1"/>
+<text x="264.0" y="208.0" font-size="12.5" fill="#1d7a8c" text-anchor="middle" font-weight="600">attention</text>
+<rect x="356.0" y="187.0" width="160" height="32" rx="7" fill="#ffffff" stroke="#1d7a8c" stroke-width="1"/>
+<text x="436.0" y="208.0" font-size="12.5" fill="#1d7a8c" text-anchor="middle" font-weight="600">processing</text>
+<rect x="170.0" y="120.0" width="360" height="50" rx="10" fill="#d5e7ea" stroke="#1d7a8c" stroke-width="1"/>
+<rect x="184.0" y="129.0" width="160" height="32" rx="7" fill="#ffffff" stroke="#1d7a8c" stroke-width="1"/>
+<text x="264.0" y="150.0" font-size="12.5" fill="#1d7a8c" text-anchor="middle" font-weight="600">attention</text>
+<rect x="356.0" y="129.0" width="160" height="32" rx="7" fill="#ffffff" stroke="#1d7a8c" stroke-width="1"/>
+<text x="436.0" y="150.0" font-size="12.5" fill="#1d7a8c" text-anchor="middle" font-weight="600">processing</text>
+<text x="350.0" y="106.0" font-size="16" fill="#55676d" text-anchor="middle" font-weight="400">⋮</text>
+<text x="545.0" y="160.0" font-size="12.5" fill="#1d2b36" text-anchor="start" font-weight="600">× 32 layers</text>
+<text x="545.0" y="177.0" font-size="11.5" fill="#55676d" text-anchor="start" font-weight="400">in Llama 3.1 8B</text>
+<line x1="350.0" y1="118.0" x2="350.0" y2="95.0" stroke="#1d7a8c" stroke-width="2" opacity="1"/>
+<polygon points="350.0,92.0 353.9,100.1 346.1,100.1" fill="#1d7a8c"/>
+<rect x="200.0" y="50.0" width="95" height="34" rx="7" fill="#f6e4d2" stroke="#b8641d" stroke-width="1"/>
+<text x="247.0" y="66.0" font-size="11.5" fill="#1d2b36" text-anchor="middle" font-weight="600">lymph</text>
+<text x="247.0" y="79.0" font-size="10.5" fill="#55676d" text-anchor="middle" font-weight="400">0.71</text>
+<rect x="305.0" y="50.0" width="95" height="34" rx="7" fill="#ffffff" stroke="#9fb3b8" stroke-width="1"/>
+<text x="352.0" y="66.0" font-size="11.5" fill="#1d2b36" text-anchor="middle" font-weight="400">draining</text>
+<text x="352.0" y="79.0" font-size="10.5" fill="#55676d" text-anchor="middle" font-weight="400">0.12</text>
+<rect x="410.0" y="50.0" width="95" height="34" rx="7" fill="#ffffff" stroke="#9fb3b8" stroke-width="1"/>
+<text x="457.0" y="66.0" font-size="11.5" fill="#1d2b36" text-anchor="middle" font-weight="400">nearest</text>
+<text x="457.0" y="79.0" font-size="10.5" fill="#55676d" text-anchor="middle" font-weight="400">0.06</text>
+<text x="40.0" y="72.0" font-size="11.5" fill="#55676d" text-anchor="start" font-weight="400">next-token</text>
+<text x="40.0" y="86.0" font-size="11.5" fill="#55676d" text-anchor="start" font-weight="400">probabilities</text>
+<text x="40.0" y="280.0" font-size="11.5" fill="#55676d" text-anchor="start" font-weight="400">tokens in</text>
+</svg>

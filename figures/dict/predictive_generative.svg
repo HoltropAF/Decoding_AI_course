@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 275" role="img" aria-label="Two panels. Predictive AI: flow data of one cell goes into a model, which outputs a label, dendritic cell, with probability 0.92; you check it by its accuracy on labelled data. Generative AI: a request to write a normalisation function goes into a model, which outputs new text or code; you check it by reading, running, testing and verifying." font-family="IBM Plex Sans, Segoe UI, Helvetica, Arial, sans-serif">
+<title>Predictive and generative AI</title>
+<rect x="0" y="0" width="720" height="275" rx="14" fill="#fbfcfc"/>
+<rect x="20.0" y="45.0" width="330" height="215" rx="12" fill="#eef3f2" stroke="none" stroke-width="1"/>
+<rect x="370.0" y="45.0" width="330" height="215" rx="12" fill="#eef3f2" stroke="none" stroke-width="1"/>
+<text x="185.0" y="72.0" font-size="13" fill="#1d2b36" text-anchor="middle" font-weight="600">Predictive AI: puts a label on it</text>
+<text x="535.0" y="72.0" font-size="13" fill="#1d2b36" text-anchor="middle" font-weight="600">Generative AI: makes something new</text>
+<rect x="40.0" y="110.0" width="92" height="70" rx="8" fill="#ffffff" stroke="#9fb3b8" stroke-width="1"/>
+<text x="86.0" y="140.0" font-size="11.5" fill="#1d2b36" text-anchor="middle" font-weight="600">flow data</text>
+<text x="86.0" y="157.0" font-size="11" fill="#55676d" text-anchor="middle" font-weight="400">of one cell</text>
+<line x1="134.0" y1="145.0" x2="155.0" y2="145.0" stroke="#1d7a8c" stroke-width="2" opacity="1"/>
+<polygon points="158.0,145.0 149.9,148.9 149.9,141.1" fill="#1d7a8c"/>
+<rect x="162.0" y="120.0" width="64" height="50" rx="9" fill="#0f5b6b" stroke="none" stroke-width="1"/>
+<text x="194.0" y="150.0" font-size="11.5" fill="#ffffff" text-anchor="middle" font-weight="600">model</text>
+<line x1="228.0" y1="145.0" x2="249.0" y2="145.0" stroke="#1d7a8c" stroke-width="2" opacity="1"/>
+<polygon points="252.0,145.0 243.9,148.9 243.9,141.1" fill="#1d7a8c"/>
+<rect x="256.0" y="112.0" width="82" height="66" rx="8" fill="#d5e7ea" stroke="#1d7a8c" stroke-width="1"/>
+<text x="297.0" y="138.0" font-size="11.5" fill="#1d2b36" text-anchor="middle" font-weight="600">dendritic</text>
+<text x="297.0" y="154.0" font-size="11.5" fill="#1d2b36" text-anchor="middle" font-weight="600">cell</text>
+<text x="297.0" y="170.0" font-size="11" fill="#1d7a8c" text-anchor="middle" font-weight="400">p = 0.92</text>
+<rect x="390.0" y="110.0" width="92" height="70" rx="8" fill="#ffffff" stroke="#9fb3b8" stroke-width="1"/>
+<text x="436.0" y="134.0" font-size="11" fill="#1d2b36" text-anchor="middle" font-weight="400">“write a</text>
+<text x="436.0" y="150.0" font-size="11" fill="#1d2b36" text-anchor="middle" font-weight="400">normalisation</text>
+<text x="436.0" y="166.0" font-size="11" fill="#1d2b36" text-anchor="middle" font-weight="400">function”</text>
+<line x1="484.0" y1="145.0" x2="505.0" y2="145.0" stroke="#1d7a8c" stroke-width="2" opacity="1"/>
+<polygon points="508.0,145.0 499.9,148.9 499.9,141.1" fill="#1d7a8c"/>
+<rect x="512.0" y="120.0" width="64" height="50" rx="9" fill="#0f5b6b" stroke="none" stroke-width="1"/>
+<text x="544.0" y="150.0" font-size="11.5" fill="#ffffff" text-anchor="middle" font-weight="600">model</text>
+<line x1="578.0" y1="145.0" x2="599.0" y2="145.0" stroke="#1d7a8c" stroke-width="2" opacity="1"/>
+<polygon points="602.0,145.0 593.9,148.9 593.9,141.1" fill="#1d7a8c"/>
+<rect x="606.0" y="100.0" width="84" height="90" rx="8" fill="#ffffff" stroke="#3f8f5f" stroke-width="1"/>
+<rect x="616.0" y="112.0" width="60" height="6" rx="3" fill="#cfe3d6" stroke="none" stroke-width="1"/>
+<rect x="616.0" y="124.0" width="48" height="6" rx="3" fill="#cfe3d6" stroke="none" stroke-width="1"/>
+<rect x="616.0" y="136.0" width="66" height="6" rx="3" fill="#cfe3d6" stroke="none" stroke-width="1"/>
+<rect x="616.0" y="148.0" width="40" height="6" rx="3" fill="#cfe3d6" stroke="none" stroke-width="1"/>
+<rect x="616.0" y="160.0" width="56" height="6" rx="3" fill="#cfe3d6" stroke="none" stroke-width="1"/>
+<rect x="616.0" y="172.0" width="30" height="6" rx="3" fill="#cfe3d6" stroke="none" stroke-width="1"/>
+<text x="185.0" y="214.0" font-size="11.5" fill="#55676d" text-anchor="middle" font-weight="400">output: a class, a score, a probability</text>
+<text x="185.0" y="232.0" font-size="11.5" fill="#1d7a8c" text-anchor="middle" font-weight="600">check it: accuracy on labelled data</text>
+<text x="535.0" y="214.0" font-size="11.5" fill="#55676d" text-anchor="middle" font-weight="400">output: text, code, images, structures</text>
+<text x="535.0" y="232.0" font-size="11.5" fill="#1d7a8c" text-anchor="middle" font-weight="600">check it: read, run, test, verify</text>
+<text x="360.0" y="28.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="600">Two things AI can do with your input</text>
+</svg>

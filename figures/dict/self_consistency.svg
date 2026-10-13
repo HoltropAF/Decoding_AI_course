@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 260" role="img" aria-label="Self-consistency. The same question is run five times. Four runs give answer A and one gives answer B. The majority answer is A, and four out of five agreeing also tells you how sure you can be." font-family="IBM Plex Sans, Segoe UI, Helvetica, Arial, sans-serif">
+<title>Self-consistency</title>
+<rect x="0" y="0" width="700" height="260" rx="14" fill="#fbfcfc"/>
+<text x="350.0" y="26.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="600">Self-consistency: ask several times, take the answer that comes up most</text>
+<rect x="20.0" y="110.0" width="120" height="50" rx="8" fill="#d5e7ea" stroke="#1d7a8c" stroke-width="1"/>
+<text x="80.0" y="133.0" font-size="11.5" fill="#1d2b36" text-anchor="middle" font-weight="400">same question,</text>
+<text x="80.0" y="149.0" font-size="11.5" fill="#1d2b36" text-anchor="middle" font-weight="600">5 runs</text>
+<line x1="140.0" y1="135.0" x2="228.0" y2="66.0" stroke="#9fb3b8" stroke-width="1.2" opacity="1"/>
+<rect x="230.0" y="52.0" width="120" height="28" rx="7" fill="#ffffff" stroke="#1d7a8c" stroke-width="1"/>
+<text x="290.0" y="71.0" font-size="12" fill="#1d7a8c" text-anchor="middle" font-weight="600">answer A</text>
+<line x1="350.0" y1="66.0" x2="438.0" y2="135.0" stroke="#9fb3b8" stroke-width="1.2" opacity="1"/>
+<line x1="140.0" y1="135.0" x2="228.0" y2="106.0" stroke="#9fb3b8" stroke-width="1.2" opacity="1"/>
+<rect x="230.0" y="92.0" width="120" height="28" rx="7" fill="#ffffff" stroke="#1d7a8c" stroke-width="1"/>
+<text x="290.0" y="111.0" font-size="12" fill="#1d7a8c" text-anchor="middle" font-weight="600">answer A</text>
+<line x1="350.0" y1="106.0" x2="438.0" y2="135.0" stroke="#9fb3b8" stroke-width="1.2" opacity="1"/>
+<line x1="140.0" y1="135.0" x2="228.0" y2="146.0" stroke="#9fb3b8" stroke-width="1.2" opacity="1"/>
+<rect x="230.0" y="132.0" width="120" height="28" rx="7" fill="#ffffff" stroke="#b8641d" stroke-width="1"/>
+<text x="290.0" y="151.0" font-size="12" fill="#b8641d" text-anchor="middle" font-weight="600">answer B</text>
+<line x1="350.0" y1="146.0" x2="438.0" y2="135.0" stroke="#9fb3b8" stroke-width="1.2" opacity="1"/>
+<line x1="140.0" y1="135.0" x2="228.0" y2="186.0" stroke="#9fb3b8" stroke-width="1.2" opacity="1"/>
+<rect x="230.0" y="172.0" width="120" height="28" rx="7" fill="#ffffff" stroke="#1d7a8c" stroke-width="1"/>
+<text x="290.0" y="191.0" font-size="12" fill="#1d7a8c" text-anchor="middle" font-weight="600">answer A</text>
+<line x1="350.0" y1="186.0" x2="438.0" y2="135.0" stroke="#9fb3b8" stroke-width="1.2" opacity="1"/>
+<line x1="140.0" y1="135.0" x2="228.0" y2="226.0" stroke="#9fb3b8" stroke-width="1.2" opacity="1"/>
+<rect x="230.0" y="212.0" width="120" height="28" rx="7" fill="#ffffff" stroke="#1d7a8c" stroke-width="1"/>
+<text x="290.0" y="231.0" font-size="12" fill="#1d7a8c" text-anchor="middle" font-weight="600">answer A</text>
+<line x1="350.0" y1="226.0" x2="438.0" y2="135.0" stroke="#9fb3b8" stroke-width="1.2" opacity="1"/>
+<rect x="440.0" y="105.0" width="230" height="60" rx="10" fill="#0f5b6b" stroke="none" stroke-width="1"/>
+<text x="555.0" y="130.0" font-size="13" fill="#ffffff" text-anchor="middle" font-weight="600">majority: answer A</text>
+<text x="555.0" y="150.0" font-size="12" fill="#d5e7ea" text-anchor="middle" font-weight="400">4 of 5 agree</text>
+<text x="555.0" y="195.0" font-size="11.5" fill="#55676d" text-anchor="middle" font-weight="400">the agreement itself tells you</text>
+<text x="555.0" y="211.0" font-size="11.5" fill="#55676d" text-anchor="middle" font-weight="400">how sure you can be</text>
+</svg>

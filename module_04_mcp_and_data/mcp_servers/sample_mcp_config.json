@@ -1,0 +1,58 @@
+{
+  "_comment": [
+    "Sample MCP configuration for an ENCORE project (Module 4).",
+    "Copy to <project>/.mcp.json for Claude Code, or merge the mcpServers block into claude_desktop_config.json / your client's MCP config.",
+    "Remove this _comment key if your client rejects unknown keys.",
+    "Paths are relative to the project root. Secrets come from environment variables via ${VAR}; never put literal keys here.",
+    "encore-docs-readonly: the reference filesystem server also has write tools, so read-only is enforced by a Docker ':ro' mount and no network.",
+    "pathway-lookup: the custom FastMCP server from the Module 4 README (GET requests to the public Reactome API only).",
+    "lab-metadata-api: a lab-internal REST service exposed over Streamable HTTP on localhost; use a token with read-only scope.",
+    "web-fetch: fetches public web pages as markdown. Fetched content is untrusted input (prompt-injection risk).",
+    "Pin versions in real use (e.g. mcp-server-fetch==<version>, mcp/filesystem:<tag>).",
+    "Windows: ${PWD} is usually not defined there; replace it with the absolute project path (e.g. C:/Projects/my-encore-project)."
+  ],
+  "mcpServers": {
+    "encore-docs-readonly": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "--network",
+        "none",
+        "--mount",
+        "type=bind,src=${PWD}/ProjectDocumentation,dst=/projects/ProjectDocumentation,readonly",
+        "--mount",
+        "type=bind,src=${PWD}/Processing,dst=/projects/Processing,readonly",
+        "--mount",
+        "type=bind,src=${PWD}/0_PROJECT.md,dst=/projects/0_PROJECT.md,readonly",
+        "mcp/filesystem",
+        "/projects"
+      ]
+    },
+    "pathway-lookup": {
+      "command": "python",
+      "args": [
+        "tools/mcp/pathway_server.py"
+      ],
+      "env": {
+        "REACTOME_BASE_URL": "https://reactome.org/ContentService",
+        "ENSEMBL_BASE_URL": "https://rest.ensembl.org",
+        "REQUEST_TIMEOUT_SECONDS": "30"
+      }
+    },
+    "lab-metadata-api": {
+      "type": "http",
+      "url": "http://127.0.0.1:8765/mcp",
+      "headers": {
+        "Authorization": "Bearer ${LAB_METADATA_READONLY_TOKEN}"
+      }
+    },
+    "web-fetch": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-fetch"
+      ]
+    }
+  }
+}

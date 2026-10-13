@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 262" role="img" aria-label="Attention in the sentence: the receptor on the dendritic cell was upregulated because it was activated by LPS. From the word it, a thick line goes to receptor, a medium line to cell and a thin line to LPS: the model pays most attention to receptor when working out what it refers to." font-family="IBM Plex Sans, Segoe UI, Helvetica, Arial, sans-serif">
+<title>Attention</title>
+<rect x="0" y="0" width="860" height="262" rx="14" fill="#fbfcfc"/>
+<rect x="30.0" y="150.0" width="30.6" height="30" rx="7" fill="#eef3f2" stroke="#9fb3b8" stroke-width="1"/>
+<text x="45.3" y="170.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="400">The</text>
+<rect x="66.6" y="150.0" width="66.6" height="30" rx="7" fill="#eef3f2" stroke="#9fb3b8" stroke-width="1"/>
+<text x="99.9" y="170.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="400">receptor</text>
+<rect x="139.2" y="150.0" width="23.4" height="30" rx="7" fill="#eef3f2" stroke="#9fb3b8" stroke-width="1"/>
+<text x="150.9" y="170.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="400">on</text>
+<rect x="168.6" y="150.0" width="30.6" height="30" rx="7" fill="#eef3f2" stroke="#9fb3b8" stroke-width="1"/>
+<text x="183.9" y="170.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="400">the</text>
+<rect x="205.2" y="150.0" width="73.8" height="30" rx="7" fill="#eef3f2" stroke="#9fb3b8" stroke-width="1"/>
+<text x="242.1" y="170.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="400">dendritic</text>
+<rect x="285.0" y="150.0" width="37.8" height="30" rx="7" fill="#eef3f2" stroke="#9fb3b8" stroke-width="1"/>
+<text x="303.9" y="170.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="400">cell</text>
+<rect x="328.8" y="150.0" width="30.6" height="30" rx="7" fill="#eef3f2" stroke="#9fb3b8" stroke-width="1"/>
+<text x="344.1" y="170.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="400">was</text>
+<rect x="365.4" y="150.0" width="88.2" height="30" rx="7" fill="#eef3f2" stroke="#9fb3b8" stroke-width="1"/>
+<text x="409.5" y="170.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="400">upregulated</text>
+<rect x="459.6" y="150.0" width="59.4" height="30" rx="7" fill="#eef3f2" stroke="#9fb3b8" stroke-width="1"/>
+<text x="489.3" y="170.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="400">because</text>
+<rect x="525.0" y="150.0" width="23.4" height="30" rx="7" fill="#f6e4d2" stroke="#b8641d" stroke-width="1"/>
+<text x="536.7" y="170.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="600">it</text>
+<rect x="554.4" y="150.0" width="30.6" height="30" rx="7" fill="#eef3f2" stroke="#9fb3b8" stroke-width="1"/>
+<text x="569.7" y="170.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="400">was</text>
+<rect x="591.0" y="150.0" width="73.8" height="30" rx="7" fill="#eef3f2" stroke="#9fb3b8" stroke-width="1"/>
+<text x="627.9" y="170.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="400">activated</text>
+<rect x="670.8" y="150.0" width="23.4" height="30" rx="7" fill="#eef3f2" stroke="#9fb3b8" stroke-width="1"/>
+<text x="682.5" y="170.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="400">by</text>
+<rect x="700.2" y="150.0" width="30.6" height="30" rx="7" fill="#eef3f2" stroke="#9fb3b8" stroke-width="1"/>
+<text x="715.5" y="170.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="400">LPS</text>
+<path d="M 536.7 148 Q 318.3 11.9 99.9 148" fill="none" stroke="#1d7a8c" stroke-width="5" opacity="0.85"/>
+<path d="M 536.7 148 Q 420.3 56.8 303.9 148" fill="none" stroke="#1d7a8c" stroke-width="3" opacity="0.85"/>
+<path d="M 536.7 148 Q 626.1 68.7 715.5 148" fill="none" stroke="#1d7a8c" stroke-width="1.2" opacity="0.85"/>
+<text x="99.9" y="214.0" font-size="11.5" fill="#1d7a8c" text-anchor="middle" font-weight="600">strong</text>
+<text x="303.9" y="214.0" font-size="11.5" fill="#1d7a8c" text-anchor="middle" font-weight="400">medium</text>
+<text x="715.5" y="214.0" font-size="11.5" fill="#55676d" text-anchor="middle" font-weight="400">weak</text>
+<text x="430.0" y="34.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="600">Attention: while reading “it”, the model looks back at every other word, some much more than others</text>
+<text x="430.0" y="246.0" font-size="11.5" fill="#55676d" text-anchor="middle" font-weight="400">thicker line = more attention; this is how “it” gets linked to “receptor”</text>
+</svg>

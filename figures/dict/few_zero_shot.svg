@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 290" role="img" aria-label="Two panels. Zero-shot: the prompt only gives the task, give the pathway for Ccr7, and the answer is a chatty paragraph whose format varies. Few-shot: the prompt first shows two examples with a fixed JSON format, and the answer for Ccr7 follows exactly the same format." font-family="IBM Plex Sans, Segoe UI, Helvetica, Arial, sans-serif">
+<title>Zero-shot and few-shot prompting</title>
+<rect x="0" y="0" width="720" height="290" rx="14" fill="#fbfcfc"/>
+<rect x="20.0" y="45.0" width="330" height="230" rx="12" fill="#eef3f2" stroke="none" stroke-width="1"/>
+<rect x="370.0" y="45.0" width="330" height="230" rx="12" fill="#eef3f2" stroke="none" stroke-width="1"/>
+<text x="185.0" y="72.0" font-size="13" fill="#1d2b36" text-anchor="middle" font-weight="600">Zero-shot: just the task</text>
+<text x="535.0" y="72.0" font-size="13" fill="#1d2b36" text-anchor="middle" font-weight="600">Few-shot: two examples first</text>
+<rect x="40.0" y="88.0" width="290" height="40" rx="7" fill="#ffffff" stroke="#9fb3b8" stroke-width="1"/>
+<text x="52.0" y="112.0" font-size="12" fill="#1d2b36" text-anchor="start" font-weight="400">Give the pathway for: Ccr7</text>
+<rect x="390.0" y="88.0" width="290" height="70" rx="7" fill="#ffffff" stroke="#9fb3b8" stroke-width="1"/>
+<text x="402.0" y="106.0" font-size="11" fill="#55676d" text-anchor="start" font-weight="400">Cxcl9 → {"pathway": "IFN-γ signalling"}</text>
+<text x="402.0" y="124.0" font-size="11" fill="#55676d" text-anchor="start" font-weight="400">Il12b → {"pathway": "IL-12 signalling"}</text>
+<text x="402.0" y="145.0" font-size="12" fill="#1d2b36" text-anchor="start" font-weight="600">Ccr7 →</text>
+<line x1="185.0" y1="132.0" x2="185.0" y2="149.0" stroke="#1d7a8c" stroke-width="2" opacity="1"/>
+<polygon points="185.0,152.0 181.1,143.9 188.9,143.9" fill="#1d7a8c"/>
+<line x1="535.0" y1="162.0" x2="535.0" y2="177.0" stroke="#1d7a8c" stroke-width="2" opacity="1"/>
+<polygon points="535.0,180.0 531.1,171.9 538.9,171.9" fill="#1d7a8c"/>
+<rect x="40.0" y="156.0" width="290" height="92" rx="7" fill="#ffffff" stroke="#b8641d" stroke-width="1"/>
+<rect x="54.0" y="170.0" width="250" height="7" rx="3" fill="#f6e4d2" stroke="none" stroke-width="1"/>
+<rect x="54.0" y="186.0" width="230" height="7" rx="3" fill="#f6e4d2" stroke="none" stroke-width="1"/>
+<rect x="54.0" y="202.0" width="260" height="7" rx="3" fill="#f6e4d2" stroke="none" stroke-width="1"/>
+<rect x="54.0" y="218.0" width="180" height="7" rx="3" fill="#f6e4d2" stroke="none" stroke-width="1"/>
+<text x="185.0" y="266.0" font-size="11.5" fill="#b8641d" text-anchor="middle" font-weight="600">a chatty paragraph, format varies</text>
+<rect x="390.0" y="184.0" width="290" height="40" rx="7" fill="#ffffff" stroke="#3f8f5f" stroke-width="1"/>
+<text x="402.0" y="209.0" font-size="12" fill="#3f8f5f" text-anchor="start" font-weight="600">{"pathway": "Chemokine signalling"}</text>
+<text x="535.0" y="248.0" font-size="11.5" fill="#3f8f5f" text-anchor="middle" font-weight="600">same format as the examples</text>
+<text x="360.0" y="28.0" font-size="12.5" fill="#1d2b36" text-anchor="middle" font-weight="600">Examples in the prompt are the most reliable way to control the format</text>
+</svg>

@@ -90,8 +90,8 @@ stable, or participants' ticks will shift to different items.
 
 The version number lives in the `VERSION` file in the repository root.
 The build puts it in the dashboard title, the menu, the footer and every
-exported summary or problem report. When you release a new version, change
-it there, update the title line of the main `README.md`, and rebuild.
+exported summary or problem report. To release a new version, follow the
+steps in [CONTRIBUTING.md](../CONTRIBUTING.md#releasing).
 
 The Dictionary is built from `glossary.md` (term, definition, module) and
 `glossary_details.md` (an example and "see also" links per term). The build

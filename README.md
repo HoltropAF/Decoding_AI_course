@@ -1,4 +1,4 @@
-# Decoding AI · v1.0
+# Decoding AI · v1.0.0
 *The AI whisperer's guide to intelligence.*
 
 Welcome to **Decoding AI**, a modular AI information source and practical workflow toolkit tailored for bioinformatics researchers working across lipidomics, metabolomics, RNA-seq, and systems immunology (focusing on practical examples such as dendritic cell dynamics in lymph nodes). 

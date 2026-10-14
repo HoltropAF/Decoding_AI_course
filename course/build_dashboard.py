@@ -36,7 +36,7 @@ M2_INTRO = """This page holds the prompt template from part 2, *What goes into a
 
 While you read, think about why some lines are there. Why is there an `untrusted_content_warning` (part 3, *Prompt injection: it's not a bug, it's a feature*)? Why is there a place for `unassigned_genes` (the honest exit)? And what would you write in the changelog if you changed it and made it version 1.1.0?"""
 
-M3_INTRO = r"""These are four skills to copy and adapt. A skill is a recipe the assistant only pulls out when a task calls for it, so you can keep several without cluttering every conversation. Omics analysis makes the assistant work like an experienced computational bioinformatician: design first, quality control second, statistics that fit the experiment. Research review does the opposite of agreeing with you: it questions your plan before you build it. Clean commits keeps your git history readable, which matters even more once an agent edits your code. And the prompt builder turns a rambling brief or voice note into a clean prompt for another AI.
+M3_INTRO = r"""These are five skills to copy and adapt. A skill is a recipe the assistant only pulls out when a task calls for it, so you can keep several without cluttering every conversation. Omics analysis makes the assistant work like an experienced computational bioinformatician: design first, quality control second, statistics that fit the experiment. Research review does the opposite of agreeing with you: it questions your plan before you build it. Clean commits keeps your git history readable, which matters even more once an agent edits your code. The prompt builder turns a rambling brief or voice note into a clean prompt for another AI. And wrap-up ends a work session by updating the project's roadmap, decisions and changelog, so the next session doesn't start from zero.
 
 Each part below explains what the skill makes the assistant do, and ends with the complete skill file. Starting one takes a minute. Make a folder with the skill's name, save the file in it as `SKILL.md` (for example `omics-analysis/SKILL.md`), and put that folder in `~/.claude/skills/` (on Windows `C:\Users\<you>\.claude\skills\`) for all your projects, or in `.claude/skills/` inside a project. Claude Code then uses it by itself when a task matches; type `/omics-analysis` to be sure. No Claude Code? Paste the text below the `---` header into a Project in Claude, ChatGPT or Copilot.
 
@@ -103,6 +103,7 @@ MODULES = [
             ("Research review", "docs/skill-research-review.md", {"append": "skills/research-review/SKILL.md", "as": "The skill file"}),
             ("Clean commits", "docs/skill-clean-commits.md", {"append": "skills/clean-commits/SKILL.md", "as": "The skill file"}),
             ("Prompt builder", "docs/skill-prompt-builder.md", {"append": "skills/prompt-builder/SKILL.md", "as": "The skill file"}),
+            ("Wrap-up", "docs/skill-wrap-up.md", {"append": "skills/wrap-up/SKILL.md", "as": "The skill file"}),
         ],
         "materials_label": "Examples",
         "materials_toggles": True,

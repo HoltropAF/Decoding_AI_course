@@ -309,11 +309,9 @@ misbehaving server cannot be used for writes without approval:
 
 > **Tip:** start every new connection by exploring, not doing. Ask the AI
 > to look around and report first: what's in the folder or database, and
-> what it would do with it. Many coding tools have a mode built for exactly
-> this. In Claude Code it's *plan mode* (press Shift+Tab until it says "plan
-> mode"), where the AI can read and propose but not change anything; other
-> tools have similar "ask" or "plan" modes. Read its plan, and only then let
-> it act.
+> what it would do with it. This is the plan mode from Module 2's "plan
+> before you build": the AI can read and propose but not change anything.
+> Read its plan, and only then let it act.
 
 #### Isolation
 

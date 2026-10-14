@@ -145,6 +145,26 @@ Often the best design is a script that *calls* an LLM at one well-defined
 step, as the Module 2 exercise does, rather than an agent that does
 everything.
 
+> **In practice: one AI to plan, another to code.** Say you want a script
+> that makes the standard QC figures for a new RNA-seq dataset: library
+> sizes, a PCA and a sample correlation heatmap. Do the thinking in a chat
+> AI, for example the Copilot your organisation provides or a reasoning
+> model in Claude or ChatGPT. Describe the data (columns, groups, number of
+> samples) instead of pasting it, let it ask its questions, and weigh the
+> options together. When you agree, ask it for the plan as a Markdown file
+> and save it as `PLAN.md` in the project. Now switch to the coding agent,
+> such as Claude Code in the project folder, and start with a review
+> instead of a build: *"Read PLAN.md. Before you write any code, list
+> anything that's unclear, risky or missing."* A second model doesn't share
+> the first one's blind spots, the same reason a debate between AIs helps
+> (Module 2). Settle what it finds, update the plan, and only then let it
+> build, one step at a time. If you like, close the loop by pasting the
+> finished diff back into the planning chat: *"Does this match the plan?"*
+> Before you accept the result, check three things. Did the planning chat
+> only ever see descriptions of the data, never the data itself? Where the
+> two AIs disagreed, did *you* decide, rather than the last one to speak?
+> And does every step in the plan have a check that passed?
+
 > **Coffee note:** there's a lot of excitement about "fully autonomous AI
 > scientists". Maybe one day. For now, the most useful agents in a lab are
 > boring ones: they do one tedious job, they can't break anything, and they
@@ -321,6 +341,22 @@ Subagents earn their place for big, separate jobs, not for rules.
 
 </details>
 
+The repository of this course is a small worked example, and you can open
+every file on GitHub. We write it over many sessions, so each new chat
+needs to know where things stand. That applies to every session, so the
+briefing lives in `CLAUDE.md`: what the course is, which branch to work
+on, and which style the chapters follow. It also pulls in the roadmap and
+the changelog with an `@`, the *running start* from Module 3. Updating
+those files at the end of a session takes judgment (was that task
+finished, or only started?) and happens when we decide to stop, so it's a
+skill: the *wrap-up* skill from Module 3's Examples. One rule must never
+fail: nobody commits straight to `main`, the branch participants download.
+An instruction would be followed most of the time, so it's a hook, a small
+script that Claude Code runs before every command and that blocks a
+commit on `main`, whatever the model decides. And there's no subagent,
+because nothing in this project is a big, separate job yet. Choosing *not*
+to use a building block is part of the decision guide too.
+
 > **In short**
 > - A subagent has a scoped task, its own fresh memory, fixed instructions and limited tools; it keeps noisy work out of your conversation.
 > - To choose a building block, ask in order: known steps → script; every task → `CLAUDE.md`; must never fail → hook; outside data → MCP; recurring recipe → skill; big separate job → subagent.
@@ -388,7 +424,7 @@ three identical failures before stopping and reporting is cheap insurance.
 > before you let an agent loose on your project. Skip the praying, keep the
 > commit: with your work saved in git, `git diff` shows exactly what the
 > agent changed, and undoing it is a single step. For anything bigger than a small fix, say a change that
-> touches more than a couple of files, start in plan mode (Module 4): let
+> touches more than a couple of files, start in plan mode (Module 2): let
 > the agent explore and write a plan, correct the plan, and only then let it
 > implement.
 

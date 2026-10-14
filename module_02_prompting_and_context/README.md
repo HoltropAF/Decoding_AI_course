@@ -319,6 +319,37 @@ instructions (custom instructions or a Project in Claude, ChatGPT or
 Copilot, or a `CLAUDE.md` file) or in a skill. Module 3 is about exactly
 that.
 
+However carefully you fill in the five parts, a prompt never holds
+everything that's in your head. Back to our new student: a good one doesn't
+just start, they first ask a few questions. Which samples? Should the
+outlier stay in? Do you want a figure or a table? A model won't do that
+unless you invite it, because it's trained to be helpful *now*, so it
+quietly fills every gap with a reasonable-sounding guess. For anything
+beyond a quick question, end your prompt with one extra sentence: *"Before
+you start, ask me any questions you need to do this well. Don't assume."*
+The questions that come back are often the most useful part of the
+exchange, because each one points at a decision you hadn't realised you
+were making. Answer them, and the answer you get afterwards is built on
+your choices instead of on its guesses.
+
+You can take this one step further and let the model run the whole
+conversation. Some of what you know is hard to put into a prompt because
+it isn't written down anywhere: how you actually do the lipid extraction,
+why the outlier was removed in the 2024 batch, what a new student needs to
+know before touching the pipeline. Instead of trying to write it all out,
+ask to be interviewed: *"Interview me so you can write our SOP for the
+lipid extraction. Ask one question at a time and wait for my answer. When
+you have enough, show me the draft."* Software researchers who catalogued
+prompting habits call this the **flipped interaction**: the model asks,
+you answer, and it decides what it still needs to know
+([White et al. 2023](https://arxiv.org/abs/2302.11382)). It works because
+answering a concrete question is much easier than remembering everything
+unprompted, and because the model is good at spotting what's missing
+from a description. One question at a time matters: a list of twelve
+questions at once gets you twelve rushed answers. And when the draft
+comes, read it for anything you never said, because a model that's
+writing fluently will happily fill a gap you left.
+
 #### Bad versus good
 
 Here's the same request written two ways. The difference isn't politeness;
@@ -362,6 +393,21 @@ going down rather than up. The second gets you a structured answer,
 restricted to your genes, with the model's uncertainty made explicit, in a
 format your script can read. Nothing about the model changed; only the
 briefing did.
+
+> **Coffee note:** so does politeness matter at all? Researchers have
+> tested it, and the answer is a shrug. A 2024 study in English, Chinese
+> and Japanese found that rude prompts made answers worse, but that extra
+> politeness didn't make them better
+> ([Yin et al. 2024](https://arxiv.org/abs/2402.14531)). Then a 2025 study
+> of ChatGPT-4o found the opposite: on 50 multiple-choice questions, "very
+> rude" prompts scored 84.8% and "very polite" ones 80.8%
+> ([Dobariya & Kumar 2025](https://arxiv.org/abs/2510.04950)). One model,
+> fifty questions, a four-point difference: not a reason to start
+> insulting your chatbot. What both studies agree on is that the content
+> of the briefing matters far more than its manners. So be clear first.
+> And if "please" and "thanks" come naturally, keep them: they cost
+> nothing, and it's a good habit for the colleagues you talk to after
+> lunch.
 
 The template in `templates/structured_bio_prompt.json` encodes this
 structure so a script can fill it in. You'll use it in the exercise.
@@ -467,6 +513,25 @@ its final structured output.
 > actually reasoned that way. The written reasoning can be a plausible story
 > that doesn't reflect what drove the answer. Treat it as something to
 > check, not as evidence.
+
+> **In practice: plan before you build.** Say you want to set up
+> something you haven't done before, like a script that reads a data
+> format that's new to you. The tempting prompt is "make it" or "fix it",
+> but then the AI makes a dozen decisions for you, silently. Split the work
+> instead. First let it ask its questions, with the sentence from "What goes
+> into a good prompt?" earlier in this chapter. Then ask for a plan, and
+> only after that for the result. In a chat tool, one line does it:
+> *"Before you write anything, ask me what you need to know, then give me a
+> step-by-step plan and wait for my OK."* Coding tools have a mode built
+> for this. In Claude Code it's *plan mode* (press Shift+Tab until it says
+> "plan mode"): the AI can read your files but not change them, it often
+> asks its questions by itself, and it comes back with a plan you can edit
+> or simply accept. This is chain-of-thought for a whole task: the
+> reasoning is written out where you can see it, before anything happens.
+> Before you accept, check three things. Did it understand the goal? Which
+> files or data will it touch? And how will you know it worked? For a
+> bigger job, you can even build in a fresh session, with only the plan to
+> go on: see *plan in one session, build in another* in part 4.
 
 #### Self-consistency: ask several times, take the majority
 
@@ -638,6 +703,7 @@ prompt chain: locate and quote, then answer from the quote.
 
 > **In short**
 > - A good prompt is a briefing with five parts: role, context, instruction, inputs, constraints. Context and constraints carry correctness.
+> - For bigger tasks, let the AI ask its questions first and make a plan before it acts (plan mode in coding tools), so it doesn't silently fill the gaps.
 > - Start zero-shot; add examples for format, step-by-step reasoning for logic, repeated runs or a debate to measure agreement, and chains for big jobs.
 > - Delimit and ground your inputs, keep the context focused, and put key instructions at the start and end.
 
@@ -756,9 +822,10 @@ the problems, and it took three attempts to get a run that passed them.
 
 ### How do I keep it honest?
 
-Two things can still go wrong with a well-built prompt: the model can
-invent things, and the text you feed it can contain instructions of its own.
-Neither can be fully prevented, but both can be made rare and visible.
+Three things can still go wrong with a well-built prompt: the model can
+invent things, it can agree with you when it shouldn't, and the text you
+feed it can contain instructions of its own. None of them can be fully
+prevented, but all three can be made rare and visible.
 
 #### Error 404: hallucination not found
 
@@ -781,6 +848,33 @@ answer always feels more helpful than "I don't know". If your schema has no
 place to put "I couldn't assign this gene", the model will assign it
 *somewhere*. Giving it an honest exit (`unassigned_genes`) is one of the
 cheapest improvements there is.
+
+#### The yes-man reflex
+
+Module 1 explained where this comes from: assistants are trained on
+answers that people rate highly, and people tend to rate agreement highly.
+The result is **sycophancy**, a model that tells you what you seem to want
+to hear. In the study that put the name on the map, assistants regularly
+changed a correct answer once the user pushed back, and praised arguments
+more when the user said they had written them themselves
+([Sharma et al. 2023](https://arxiv.org/abs/2310.13548)). For research
+that's exactly the wrong way round. You go to a colleague to have your
+idea tested, not confirmed.
+
+Most of the remedy lies in how you ask. Leave your own opinion out of the
+question: "Evaluate this analysis plan" gets a more honest answer than
+"I think this plan is solid, right?", because the second one tells the
+model which answer you're hoping for. Ask for the weak points first and
+the praise later, or not at all: "What are the three most serious problems
+with this design, most important first?" When the model changes its mind
+the moment you object, don't take that as a win. Ask it to argue for its
+first answer before it gives it up, and see which version holds. And for a
+decision that matters, do the flip test. Open a fresh chat and present the
+same plan as if you doubted it. If the verdict turns around with your
+tone, the model wasn't judging the plan; it was reading you. The
+*research review* skill in Module 3's Examples builds these habits into a
+standing instruction, and the *panel of readers* in part 4 turns them into
+something useful for your drafts.
 
 #### Prompt injection: it's not a bug, it's a feature
 
@@ -814,6 +908,7 @@ schema, because injected instructions rarely survive strict validation.
 > - Treat prompt changes like protocol changes: a test set, a definition of "better", one change at a time, a version in git.
 > - Enforce structure in layers: ask, constrain at the API, validate in code, and look yourself. Valid JSON can still be wrong.
 > - Give the model an honest way to say "I don't know", and treat any text you didn't write as untrusted.
+> - Ask neutrally and for weak points first: a model that agrees with you isn't testing your idea.
 
 ---
 
@@ -884,6 +979,89 @@ CONSTRAINTS: Use only facts from the notes. Mark anything you had to assume with
 [CHECK]. Keep all software versions exactly as given.
 ```
 
+#### Ask a panel of readers
+
+Say your abstract, poster or figure legend is finished, at least in your
+eyes. The trouble is that you can't read it like someone who wasn't there
+for the experiments. So let the AI read it as three different people, and
+pick the readers you'll really have: the grant committee with one
+specialist among generalists, the journal's reviewers, the students at the
+journal club.
+
+```text
+Read this abstract three times: as a statistician, as an immunologist from
+outside our field, and as a first-year PhD student. For each reader, tell me
+what they'd find unclear, the first question they'd ask, and the one thing
+they'd remember. Be critical; don't summarise the abstract.
+```
+
+This is the role from part 2 put to its best use. A role doesn't make the
+model more *accurate*, but accuracy isn't what you're after here. You want
+different *perspectives*, and that's exactly what a role changes.
+Researchers use the same trick for feedback on their writing
+([The Transmitter](https://www.thetransmitter.org/from-bench-to-bot/boost-your-writing-with-ai-personas/)).
+
+Before you act on the feedback, check whether the readers actually
+differed, or whether you got the same remarks three times in different
+words. Ask yourself if a point that sounds critical is really about your
+text, or generic advice that would fit any abstract. And mind the yes-man
+reflex from part 3: if all three love it, ask again for the weakest
+sentence. A persona is still a guess about people, so use it to find your
+blind spots, not as a verdict. An unpublished manuscript is confidential,
+so use a tool your organisation approved (Module 1).
+
+#### Think out loud, then let the AI sort it
+
+Some thinking doesn't happen at a desk. Say you're planning the next
+experiment, or trying to decide how to tell the story of a paper, and the
+blank document isn't helping. Put your headphones on, go for a walk, open
+the AI app on your phone and tap the microphone, then just talk for ten
+minutes. Don't organise anything: say the half-ideas, the doubts and the
+"oh, and also…" as they come. Most people speak several times faster than
+they type, and they edit themselves far less while they do it, so more of
+what's in your head ends up on the page.
+
+Plain dictation, which only transcribes, works better for this than a
+voice conversation where the AI answers back and interrupts your train of
+thought. The microphone built into the AI app is a fine place to start; a
+dedicated dictation tool hears the structure of what you say better (see
+the note below). Back at your desk, give the transcript one instruction:
+
+```text
+Below is a transcript of me thinking out loud. Organise it by topic and keep
+my wording where it matters. Then list separately: the decisions I seem to
+have made, the open questions, the to-dos, and anything I contradicted myself
+on. Don't add ideas of your own.
+```
+
+What comes back is often clearer than what you'd have typed, and it can go
+straight on: as the start of a plan, as a briefing for another AI (next
+section), or through the *prompt builder* skill in Module 3's Examples,
+which turns a voice note into a clean prompt.
+
+Before you build on it, check that the transcription got the technical
+words right. Gene names and lipid species are where it slips, and "CCR7"
+can come out as something no one has ever cloned. Make sure everything you
+said is still there, especially the asides, and that nothing was added you
+never said. And mind the data rules from Module 1: a recording goes to the
+provider just like typed text, so keep patient details and unpublished
+numbers out of a consumer app, and out of earshot on a busy street.
+
+> **AI-researched · current information (checked 13 October 2026)**
+> Which tool to talk to? The apps of Claude, ChatGPT and Copilot all have a
+> microphone button that turns speech into text, and it's good. The apps
+> themselves are free, though some voice features need a subscription. The
+> dictation built into your phone's keyboard or into Windows (Windows key +
+> H) costs nothing, but it writes down your words and little else. A
+> dedicated dictation tool such as **Wispr Flow** goes a step further: it
+> works in any app, removes the "uhm"s, and is notably good at hearing
+> structure, so that "first… second…" becomes a numbered list and a pause
+> becomes a new paragraph. It's a paid service with a limited free tier
+> (about 2,000 words a week on a computer) and a free trial of the full
+> version. Like the AI apps, it sends your audio to its servers to process
+> it, so the same data rules apply. Prices and limits change often; check
+> the current ones on the [References](../course/references.md) page.
+
 #### Let one AI write the prompt for another
 
 Thinking out loud and building work best in separate places. Brainstorm in
@@ -905,6 +1083,27 @@ separately at the end. Describe the data (columns, types, size), never paste it.
 
 Read the prompt before you pass it on: it's your briefing now, and the data
 rules from Module 1 apply to both chats.
+
+> **In practice: plan in one session, build in another.** Say you want a
+> script that merges the lipidomics exports of three batches into one
+> table. Start in plan mode, or in a chat with the line from *plan before
+> you build*, and let the AI ask its questions: which columns identify a
+> lipid, what happens to a species that's missing in one batch, where the
+> output goes. That conversation gets long and full of ideas you dropped
+> along the way, and none of that should steer the code. So when the plan
+> is right, end with *"Write the final plan to PLAN.md: the goal, the
+> decisions we made, the steps, and how to test the result. Leave out
+> everything we rejected."* Then open a fresh session, in the same tool or
+> a different one, and give it a single line: *"Read PLAN.md and
+> implement step 1. Stop after that step and show me the result."* The
+> builder starts with a clean context and only your decisions in it. And
+> because the plan is a file, you can read it, edit it, keep it with the
+> code, or hand it to a colleague. Before you start the build, check that
+> `PLAN.md` makes sense to someone who wasn't in the first chat, and that
+> each step says how you'll know it worked. If the builder starts asking
+> questions the plan should have answered, the plan isn't finished yet.
+> Module 5 takes this one step further, with one AI to plan and a coding
+> agent to review the plan and build it.
 
 Notice what they have in common: a clear task, data inside tags, an honest
 exit ("say so", "none", `[CHECK]`), and a format that makes the answer easy

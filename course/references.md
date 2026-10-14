@@ -238,6 +238,31 @@ you read only a few.
   [promptingguide.ai](https://www.promptingguide.ai/)
   Practical reference for techniques.
 
+- **White J, et al. (2023).** A prompt pattern catalog to enhance prompt
+  engineering with ChatGPT. *PLoP 2023.*
+  [arXiv:2302.11382](https://arxiv.org/abs/2302.11382)
+  Reusable prompting patterns, including the flipped interaction, where
+  the model interviews you.
+- **Yin Z, et al. (2024).** Should we respect LLMs? A cross-lingual study
+  on the influence of prompt politeness on LLM performance.
+  [arXiv:2402.14531](https://arxiv.org/abs/2402.14531)
+  Rude prompts made answers worse; extra politeness didn't make them
+  better.
+- **Dobariya O, Kumar A (2025).** Mind your tone: investigating how prompt
+  politeness affects LLM accuracy.
+  [arXiv:2510.04950](https://arxiv.org/abs/2510.04950)
+  On ChatGPT-4o, blunt prompts scored slightly higher than polite ones;
+  one model and 50 questions.
+- **The Transmitter.** Boost your writing with AI personas.
+  [thetransmitter.org](https://www.thetransmitter.org/from-bench-to-bot/boost-your-writing-with-ai-personas/)
+  Practical guide for scientists to getting feedback from AI readers.
+
+### Current sources: dictation tools (checked 13 October 2026)
+
+- Wispr Flow: [pricing and plans](https://wisprflow.ai/pricing) (official)
+- [Zack Proser: Wispr Flow pricing guide 2026](https://zackproser.com/blog/wisprflow-pricing-guide-2026) (secondary)
+- [Voibe: Wispr Flow pricing 2026](https://www.getvoibe.com/resources/wispr-flow-pricing/) (secondary; written by a competitor)
+
 ## Modules 3 and 5 · Reproducibility and research software
 
 - ★ **van Kampen AHC, et al. (2024).** ENCORE: a practical implementation

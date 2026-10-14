@@ -81,6 +81,7 @@ the bold label shown here and it is styled automatically.
 | Coffee note | `> **Coffee note:** …` | A light aside, an anecdote, a bit of honesty |
 | It's okay | `> **It's okay:** …` | Reassurance: "it's okay if this feels like a lot" |
 | Watch out | `> **Watch out:** …` | A common mistake or a risk |
+| In practice | `> **In practice: <title>.** …` | A use case: a real situation, what to do, and what to check before you accept the result |
 | In short | `> **In short**` followed by bullets | The end of each section |
 | AI-researched | `> **AI-researched · current information (checked <date>)**` | Facts that change quickly and were found by an AI search |
 

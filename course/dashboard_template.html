@@ -68,9 +68,11 @@ __MARKED__</script>
 
   /* ---------- App shell ---------- */
   .app { display: grid; grid-template-columns: 360px minmax(0, 1fr); min-height: 100%; }
+  :root { --zoom: 1; }
+  @media (min-width: 881px) { :root { --zoom: var(--zoom-pref, .75); zoom: var(--zoom); } }
   .side {
     background: var(--side); border-right: 1px solid var(--line);
-    position: sticky; top: env(safe-area-inset-top, 0px); height: 100vh; overflow-y: auto;
+    position: sticky; top: env(safe-area-inset-top, 0px); height: calc(100vh / var(--zoom)); overflow-y: auto;
     padding-inline: 16px; padding-block: 20px 28px;
     display: flex; flex-direction: column; gap: 18px;
   }
@@ -143,6 +145,7 @@ __MARKED__</script>
   .side .navitem { padding-block: 5px; gap: 8px; }
   .side .substep { font-size: 12.5px; }
   .side .secnav .substep, .side .secitem { font-size: 12px; }
+  @media (min-width: 881px) { .side .secnav { margin-block: 1px 4px; gap: 0; } .side .secnav .substep { padding-block: 2px; line-height: 1.25; } }
   .side .brand-link h1 { font-size: 17px; }
   .side .navsearch input { font-size: 13px; }
   .fun { justify-self: start; font-size: 14px; font-style: italic; line-height: 1.35; color: var(--fun); border-left: 3px solid var(--fun); padding-left: 9px; }
@@ -160,16 +163,12 @@ __MARKED__</script>
   .tokstrip { position: absolute; left: 0; right: 0; bottom: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--teal); opacity: .28; white-space: nowrap; overflow: hidden; pointer-events: none; mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
   .welcome.netted { position: relative; padding-bottom: 34px; }
   .finish-hero { padding-bottom: 38px; }
-  /* Certificate (7) */
-  .cert-card { display: grid; gap: 12px; }
-  .cert-card .certsvg { width: 100%; max-width: 640px; height: auto; display: block; border-radius: 14px; box-shadow: 0 6px 22px rgba(15, 40, 48, .12); }
-  .cert-card .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-  .cert-card input { min-width: 0; flex: 1 1 220px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
-  @media print { body * { visibility: hidden; } .cert-card .certsvg, .cert-card .certsvg * { visibility: visible; } .cert-card .certsvg { position: fixed; left: 0; top: 0; width: 100%; box-shadow: none; } }
   .finish-hero { position: relative; overflow: hidden; display: grid; padding: 28px 26px; border: 1px solid var(--line); border-radius: 18px; background: radial-gradient(ellipse 60% 100% at 100% 0%, var(--teal-soft), var(--surface) 100%); }
   .finish-hero > svg { position: absolute; right: -40px; top: -20px; width: 420px; height: auto; opacity: .35; pointer-events: none; }
   .finish-hero .text { position: relative; display: grid; gap: 10px; max-width: 640px; }
   .finish-hero h2 { font-size: 30px; color: var(--teal); margin: 0; }
+  #confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; }
+  @media print { #confetti { display: none; } }
   .finish-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
   .finish-stats > div { display: grid; gap: 2px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
   .finish-stats strong { font-size: 24px; color: var(--teal); font-variant-numeric: tabular-nums; }
@@ -421,7 +420,7 @@ __MARKED__</script>
   .prose :is(h1, h2, h3, h4, .tablewrap, pre, blockquote, details, hr, figure) { clear: both; }
   .prose::after { content: ""; display: block; clear: both; }
   .lightbox { position: fixed; inset: 0; z-index: 50; background: rgba(7, 17, 20, 0.82); display: grid; place-items: center; padding: 3vh 3vw; cursor: zoom-out; }
-  .lightbox img { width: min(96vw, 1500px); max-height: 90vh; object-fit: contain; border-radius: 12px; background: #fbfcfc; }
+  .lightbox img { width: min(calc(96vw / var(--zoom)), 1500px); max-height: calc(90vh / var(--zoom)); object-fit: contain; border-radius: 12px; background: #fbfcfc; }
   .lightbox p { position: absolute; bottom: 2vh; left: 0; right: 0; text-align: center; color: #e2eced; font-size: 13px; margin: 0; }
   .prose img + em, .prose p > img:only-child + em { display: block; }
   .slide-inner img { display: block; width: auto; max-width: 100%; max-height: 26cqw; margin: 0.4cqw auto 0.8cqw; border-radius: 1cqw; }
@@ -440,6 +439,9 @@ __MARKED__</script>
   .prose blockquote.aside { border-left: 4px dotted var(--amber); background: var(--amber-soft); border-radius: 0 12px 12px 0; }
   .prose blockquote.aside > p:first-child > strong:first-child { color: var(--amber); }
   .prose blockquote.aside.coffee > p:first-child > strong:first-child::before { content: "\2615  "; letter-spacing: 0; }
+  .prose blockquote.practice { border-left: 4px solid var(--teal); background: var(--teal-soft); border-radius: 0 12px 12px 0; }
+  .prose blockquote.practice > p:first-child > strong:first-child { color: var(--teal); }
+  .prose blockquote.practice > p:first-child > strong:first-child::before { content: "\2192\00a0\00a0"; letter-spacing: 0; }
   .prose blockquote.watch { border-left: 4px solid #c0392b; background: var(--surface-2); }
   .prose blockquote.watch > p:first-child > strong:first-child { color: #c0392b; }
   .prose details.think { border: 1px dashed var(--well-on); background: var(--surface); border-radius: 10px; padding: 6px 16px 6px 54px; margin: 16px 0 20px; position: relative; }
@@ -485,7 +487,7 @@ __MARKED__</script>
   .counter { font-family: var(--font-mono); font-size: 13px; color: var(--muted); min-width: 64px; text-align: center; font-variant-numeric: tabular-nums; }
   .notes { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--teal); border-radius: 8px; padding: 12px 16px; white-space: pre-wrap; font-size: 14px; }
   .stagewrap:fullscreen { background: #071114; display: grid; place-items: center; padding: 2vh; }
-  .stagewrap:fullscreen .slide { width: min(96vw, 170vh); border: 0; }
+  .stagewrap:fullscreen .slide { width: min(calc(96vw / var(--zoom)), calc(170vh / var(--zoom))); border: 0; }
   .stagewrap:fullscreen .slidectl, .stagewrap:fullscreen .notes, .stagewrap:fullscreen .hint { display: none; }
   .hint { font-size: 12.5px; color: var(--muted); }
 
@@ -530,15 +532,16 @@ __MARKED__</script>
   .hero h2 { margin: 0; font-size: clamp(28px, 4vw, 38px); color: var(--teal); }
   .hero p { margin: 0; }
   .side { isolation: isolate; }
-  .side-net { flex: none; margin: auto -16px -28px; height: 120px; pointer-events: none; opacity: .5; -webkit-mask-image: linear-gradient(to bottom, transparent, #000 55%); mask-image: linear-gradient(to bottom, transparent, #000 55%); }
-  .side-net svg.net { width: 100%; height: 100%; display: block; }
+  /* the network sits behind the menu: it takes no space and stays at the bottom while the menu scrolls */
+  .side-net { position: sticky; bottom: 0; flex: none; height: 0; margin: auto -16px 0; z-index: -1; pointer-events: none; }
+  .side-net svg.net { position: absolute; left: 0; bottom: -28px; width: 100%; height: 360px; display: block; opacity: .4; -webkit-mask-image: linear-gradient(to bottom, transparent, #000 65%); mask-image: linear-gradient(to bottom, transparent, #000 65%); }
   @media (max-width: 880px) { .side-net { display: none; } }
   /* ---------- Sidebar tools, problem reports ---------- */
   .navtools { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: 4px; padding: 10px 8px 0; border-top: 1px solid var(--line); }
   .navtools .sep { color: var(--muted); font-size: 12px; }
   .toolbtn { font: inherit; font-size: 12.5px; color: var(--muted); border: 0; background: none; padding: 2px 0; cursor: pointer; }
   .toolbtn:hover, .toolbtn:focus-visible { color: var(--ink); text-decoration: underline; }
-  dialog#bugdlg { width: min(560px, calc(100vw - 32px)); max-height: calc(100vh - 48px); overflow: auto; border: 1px solid var(--line); border-radius: 14px; padding: 20px; background: var(--surface); color: var(--ink); box-shadow: 0 20px 60px rgba(0,0,0,.25); }
+  dialog#bugdlg { width: min(560px, calc(100vw / var(--zoom) - 32px)); max-height: calc(100vh / var(--zoom) - 48px); overflow: auto; border: 1px solid var(--line); border-radius: 14px; padding: 20px; background: var(--surface); color: var(--ink); box-shadow: 0 20px 60px rgba(0,0,0,.25); }
   dialog#bugdlg::backdrop { background: rgba(7, 17, 20, 0.45); }
   #bugdlg h2 { margin: 0 0 4px; font-size: 20px; color: var(--teal); }
   #bugdlg p { margin: 0 0 10px; font-size: 14px; }
@@ -818,7 +821,7 @@ __MARKED__</script>
   /* ---------- Dictionary terms in text ---------- */
   a.term { color: inherit; text-decoration: underline dotted var(--teal); text-decoration-thickness: 1.5px; text-underline-offset: 3px; cursor: help; }
   a.term:hover, a.term:focus-visible { color: var(--teal); }
-  .termtip { position: fixed; z-index: 40; max-width: min(380px, calc(100vw - 24px)); background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; box-shadow: 0 10px 30px rgba(15, 40, 48, 0.18); display: grid; gap: 6px; pointer-events: none; font-size: 14px; line-height: 1.5; }
+  .termtip { position: fixed; z-index: 40; max-width: min(380px, calc(100vw / var(--zoom) - 24px)); background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; box-shadow: 0 10px 30px rgba(15, 40, 48, 0.18); display: grid; gap: 6px; pointer-events: none; font-size: 14px; line-height: 1.5; }
   .termtip .tt-term { font-weight: 600; font-size: 15px; color: var(--teal); }
   .termtip .tt-def code { font-family: var(--font-mono); font-size: 0.86em; background: var(--code-bg); padding: 1px 5px; border-radius: 4px; }
   .termtip .tt-foot { font-size: 12px; color: var(--muted); display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
@@ -1031,6 +1034,10 @@ __MARKED__</script>
   }
   if (!state.readParts) state.readParts = {};
   if (!state.fs) state.fs = "m";
+  if (!state.zoom) state.zoom = 0.75;
+  function pageZoom() { return parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--zoom")) || 1; }
+  function applyZoom() { document.documentElement.style.setProperty("--zoom-pref", state.zoom); }
+  applyZoom();
   if (!state.prefs) state.prefs = { readbar: true, ticks: true, mins: true };
   function applyPrefs() {
     var h = document.documentElement;
@@ -1225,11 +1232,11 @@ __MARKED__</script>
       el("div", { class: "tt-foot" }, [el("span", { text: e.cat }), el("span", { text: touchOnly ? "Tap again to open it in a new tab" : "Click to open it in a new tab" })])
     ]);
     document.body.appendChild(tip);
-    var r = a.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight;
+    var z = pageZoom(), r = a.getBoundingClientRect(), w = tip.offsetWidth * z, h = tip.offsetHeight * z;
     var left = Math.max(12, Math.min(r.left, window.innerWidth - w - 12));
     var top = r.bottom + 8;
     if (top + h > window.innerHeight - 8) top = Math.max(8, r.top - h - 8);
-    tip.style.left = left + "px"; tip.style.top = top + "px";
+    tip.style.left = left / z + "px"; tip.style.top = top / z + "px";
   }
   function hideTip() { if (tip && tip.parentNode) tip.parentNode.removeChild(tip); tip = null; }
   var touchOnly = window.matchMedia && window.matchMedia("(hover: none)").matches;
@@ -1319,7 +1326,7 @@ __MARKED__</script>
       var lab = first ? first.textContent.trim() : "";
       var kind = /^In this chapter/i.test(lab) ? "opener" : /^In short/i.test(lab) ? "recap" :
                  /^Coffee/i.test(lab) ? "aside coffee" : /^(Tip|It.s okay|Side note|Good to know)/i.test(lab) ? "aside" :
-                 /^Watch out/i.test(lab) ? "watch" : "";
+                 /^Watch out/i.test(lab) ? "watch" : /^In practice/i.test(lab) ? "practice" : "";
       if (kind) { bq.classList.add("box"); kind.split(" ").forEach(function (k) { bq.classList.add(k); }); }
     });
     box.querySelectorAll("details.think > summary").forEach(function (sm) {
@@ -1605,7 +1612,7 @@ __MARKED__</script>
     var armed = false;
     reset.addEventListener("click", function () {
       if (!armed) { armed = true; reset.textContent = "Click again to erase ticks, ratings and notes"; setTimeout(function () { armed = false; reset.textContent = "Reset progress"; }, 4000); return; }
-      state = { done: {}, conf: {}, visited: {}, notes: {}, exp: {}, slide: {}, sub: {}, last: null, lastTitle: "", readParts: {}, fs: state.fs, prefs: state.prefs, tts: state.tts };
+      state = { done: {}, conf: {}, visited: {}, notes: {}, exp: {}, slide: {}, sub: {}, last: null, lastTitle: "", readParts: {}, fs: state.fs, zoom: state.zoom, prefs: state.prefs, tts: state.tts };
       save(); render();
     });
     page.appendChild(el("div", { class: "home-foot" }, [
@@ -2355,6 +2362,13 @@ __MARKED__</script>
         state.fs = v; document.documentElement.classList.add("fs-" + v); save();
       }, "Text size"), preview]));
 
+    /* page size */
+    page.appendChild(el("section", { class: "card" }, [el("h3", { text: "Page size" }),
+      el("p", { class: "hint", text: "Everything a little smaller fits more on the screen. On a phone the page always shows at full size. If the page looks too small, also check your browser’s own zoom (Ctrl+0 resets it)." }),
+      segmented([[0.75, "75% (default)"], [0.9, "90%"], [1, "100%"]], state.zoom, function (v) {
+        state.zoom = v; applyZoom(); save();
+      }, "Page size")]));
+
     /* colours */
     var saved = null; try { saved = localStorage.getItem(THEME_KEY); } catch (e) {}
     page.appendChild(el("section", { class: "card" }, [el("h3", { text: "Colours" }),
@@ -2420,7 +2434,7 @@ __MARKED__</script>
     var armed = false;
     reset.addEventListener("click", function () {
       if (!armed) { armed = true; reset.textContent = "Click again to erase ticks, ratings and notes"; setTimeout(function () { armed = false; reset.textContent = "Reset progress"; }, 4000); return; }
-      state = { done: {}, conf: {}, visited: {}, notes: {}, exp: {}, slide: {}, sub: {}, last: null, lastTitle: "", readParts: {}, fs: state.fs, prefs: state.prefs, tts: state.tts };
+      state = { done: {}, conf: {}, visited: {}, notes: {}, exp: {}, slide: {}, sub: {}, last: null, lastTitle: "", readParts: {}, fs: state.fs, zoom: state.zoom, prefs: state.prefs, tts: state.tts };
       save(); render();
     });
     page.appendChild(el("section", { class: "card" }, [el("h3", { text: "Your progress" }),
@@ -2667,58 +2681,48 @@ __MARKED__</script>
     document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
   }
 
-  /* ---------------- "decoding" motif and the certificate ---------------- */
+  /* ---------------- "decoding" motif ---------------- */
   function tokenStrip() {
     var t = "\u2581the \u2581model \u2581predicts \u2581the \u2581next \u2581token \u00B7 \u2581CCR7 \u2581dendritic \u2581cell \u00B7 p\u2009=\u20090.92 \u00B7 \u2581attention \u00B7 \u2581PC \u258134:1 \u00B7 \u2581LPS \u25816h \u00B7 \u2581temperature \u25810.2 \u00B7 \u2581<genes> \u00B7 \u2581read-only \u00B7 \u2581CLAUDE.md \u00B7 ";
     return el("div", { class: "tokstrip", "aria-hidden": "true", text: t + t + t });
   }
-  var CERT_KEY = "ai-omics-cert-name";
-  function certSvg(name, s) {
-    var esc2 = function (x) { return String(x).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
-    var d = new Date(), month = d.toLocaleString("en-GB", { month: "long", year: "numeric" });
-    return '<svg class="certsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Certificate: Certified AI whisperer">' +
-      '<defs><linearGradient id="cg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d5e7ea"/><stop offset="1" stop-color="#fbfcfc"/></linearGradient></defs>' +
-      '<rect width="800" height="520" rx="22" fill="url(#cg)"/><rect x="18" y="18" width="764" height="484" rx="16" fill="none" stroke="#0f5b6b" stroke-width="2.5"/>' +
-      '<rect x="28" y="28" width="744" height="464" rx="12" fill="none" stroke="#6b5394" stroke-width="1" stroke-dasharray="3 5"/>' +
-      '<g transform="translate(376 52)">' + LOGO_SVG.replace('class="logo"', 'width="48" height="48"').replace(/var\(--teal\)/g, "#0f5b6b").replace(/var\(--logo-ink\)/g, "#f4f8f8").replace(/var\(--amber\)/g, "#b8641d") + '</g>' +
-      '<text x="400" y="132" text-anchor="middle" font-family="IBM Plex Mono, Consolas, monospace" font-size="15" letter-spacing="3" fill="#55676d">DECODING AI</text>' +
-      '<text x="400" y="196" text-anchor="middle" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="44" font-weight="700" fill="#0f5b6b">Certified AI whisperer</text>' +
-      '<text x="400" y="236" text-anchor="middle" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="16" font-style="italic" fill="#6b5394">the AI whisperer\u2019s guide to intelligence</text>' +
-      '<text x="400" y="296" text-anchor="middle" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="17" fill="#1d2b36">This certifies that</text>' +
-      '<text x="400" y="348" text-anchor="middle" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="34" font-weight="600" fill="#1d2b36">' + esc2(name || "Your name") + '</text>' +
-      '<line x1="220" y1="364" x2="580" y2="364" stroke="#9fb3b8"/>' +
-      '<text x="400" y="400" text-anchor="middle" font-family="IBM Plex Sans, Segoe UI, sans-serif" font-size="16" fill="#1d2b36">knows how to prompt it, check it, and keep the data safe.</text>' +
-      '<text x="400" y="452" text-anchor="middle" font-family="IBM Plex Mono, Consolas, monospace" font-size="13" fill="#55676d">' + s.mods + ' of ' + MODULES.length + ' modules complete \u00B7 ' + esc2(month) + '</text>' +
-      '</svg>';
-  }
-  function certificateCard(s) {
-    var name = ""; try { name = localStorage.getItem(CERT_KEY) || ""; } catch (e) {}
-    var holder = el("div");
-    var paint = function () { holder.innerHTML = certSvg(name, s); };
-    paint();
-    var input = el("input", { type: "text", placeholder: "Type your name for the certificate", "aria-label": "Your name", value: name, maxlength: "60" });
-    input.addEventListener("input", function () { name = input.value; try { localStorage.setItem(CERT_KEY, name); } catch (e) {} paint(); });
-    var dl = el("button", { class: "btn primary", type: "button", text: "Save as image" });
-    dl.addEventListener("click", function () {
-      var svg = holder.querySelector("svg").outerHTML, img = new Image();
-      img.onload = function () {
-        var c = document.createElement("canvas"); c.width = 1600; c.height = 1040;
-        c.getContext("2d").drawImage(img, 0, 0, 1600, 1040);
-        c.toBlob(function (b) { if (b) saveFile("certified-ai-whisperer.png", b); }, "image/png");
-      };
-      img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
-    });
-    var pr = el("button", { class: "btn", type: "button", text: "Print" });
-    pr.addEventListener("click", function () { window.print(); });
-    return el("div", { class: "card block cert-card" }, [
-      el("h3", { text: "Your certificate", style: "margin:0" }),
-      el("p", { class: "muted", style: "margin:0", text: "A bit of fun for the lab wall. Your name stays in this browser; nothing is sent anywhere." }),
-      holder,
-      el("div", { class: "row" }, [input, dl, pr])
-    ]);
-  }
 
   /* ---------------- the end of the course ---------------- */
+  /* two confetti cannons, bottom left and bottom right, drawn on a canvas over the page */
+  function confetti() {
+    try { if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return; } catch (e) {}
+    var old = document.getElementById("confetti"); if (old) old.remove();
+    var c = el("canvas", { id: "confetti", "aria-hidden": "true" }), ctx = c.getContext("2d");
+    if (!ctx) return;
+    document.body.appendChild(c);
+    var W = c.width = window.innerWidth, H = c.height = window.innerHeight;
+    var colours = ["#0f5b6b", "#2a9d8f", "#8bb89a", "#e9c46a", "#f4a261", "#e76f51", "#b9a7cc"];
+    var bits = [];
+    [[0, 1], [W, -1]].forEach(function (cannon) {
+      for (var i = 0; i < 110; i++) {
+        var angle = (60 + Math.random() * 25) * Math.PI / 180, speed = 11 + Math.random() * 9;
+        bits.push({ x: cannon[0], y: H, vx: cannon[1] * Math.cos(angle) * speed, vy: -Math.sin(angle) * speed * (H / 700 + 0.6),
+          w: 6 + Math.random() * 6, h: 8 + Math.random() * 8, r: Math.random() * 6, vr: (Math.random() - 0.5) * 0.4,
+          colour: colours[i % colours.length], delay: Math.floor(Math.random() * 18) });
+      }
+    });
+    var frame = 0;
+    (function tick() {
+      frame++;
+      ctx.clearRect(0, 0, W, H);
+      ctx.globalAlpha = frame < 150 ? 1 : Math.max(0, 1 - (frame - 150) / 60);
+      bits.forEach(function (b) {
+        if (frame < b.delay) return;
+        b.vy += 0.32; b.vx *= 0.985; b.vy *= 0.985; b.x += b.vx; b.y += b.vy; b.r += b.vr;
+        ctx.save(); ctx.translate(b.x, b.y); ctx.rotate(b.r);
+        ctx.scale(1, Math.abs(Math.cos(b.r * 2)) + 0.15);
+        ctx.fillStyle = b.colour; ctx.fillRect(-b.w / 2, -b.h / 2, b.w, b.h);
+        ctx.restore();
+      });
+      if (frame < 210) requestAnimationFrame(tick); else c.remove();
+    })();
+  }
+
   function renderFinish(main) {
     var s = stats(), open = MODULES.filter(function (m) { return m.done.length && doneCount(m) < m.done.length; });
     var nNotes = Object.keys(state.notes || {}).filter(function (k) { return (state.notes[k] || "").trim(); }).length;
@@ -2730,6 +2734,9 @@ __MARKED__</script>
       el("h2", { text: open.length ? "You made it to the end!" : "You finished the course!" }),
       el("p", { class: "lead", text: "From \u201cwhat is a token?\u201d to a team hackathon: you now know roughly how these models work, where your data may go, how to prompt them, how to make them follow your rules, how to let them look things up and do small jobs, and, most of all, how to check what they give back." })
     ]));
+    var again = el("button", { class: "btn", type: "button", text: "🎉 Fire the confetti again", style: "justify-self:start" });
+    again.addEventListener("click", confetti);
+    hero.querySelector(".text").appendChild(again);
     hero.appendChild(tokenStrip());
     page.appendChild(hero);
     var tiles = el("div", { class: "finish-stats" }, [
@@ -2746,7 +2753,18 @@ __MARKED__</script>
       });
       page.appendChild(el("div", { class: "card block" }, [list]));
     }
-    page.appendChild(certificateCard(s));
+    var advice = el("div", { class: "card block prose" });
+    advice.innerHTML = "<h3>One last piece of advice: use the smallest tool that does the job</h3>" +
+      "<p>You can now use AI for almost anything, and that is exactly the risk. Once a chatbot is open in a tab, every problem starts to look like a prompt. But many of the jobs in our lab don't need a language model at all, and some get worse with one: slower, more expensive, harder to check, and a little different every time you run them. So before you reach for AI, ask yourself three questions. They take ten seconds, and they will save you hours.</p>" +
+      "<h4>Do I want help, or do I want automation?</h4>" +
+      "<p>Help means you stay in the loop. You're drafting a methods paragraph, trying to understand an error message, or looking for the gaps in an experimental plan, and you read and judge every answer. That's where a chat AI shines, and where its occasional mistakes are caught, because you are right there. Automation means something runs without you, every time, often while you're not looking. Then the AI part should be as small as possible, because nobody is there to catch it when it's wrong. And a lot of automation doesn't need AI at all. A new file from the mass spectrometer landing in a folder is an event, not a question: a few lines of code that watch the folder (a <em>file watcher</em>) or a scheduled task can notice it and start the pipeline. That code never gets tired, costs nothing to run and does the same thing every time.</p>" +
+      "<h4>Is this a one-time job, or will it come back?</h4>" +
+      "<p>A question you ask once is perfect for a chat. A question you ask every week deserves a script. Let the AI help you write that Python or R script once, check it and put it in git, and from then on just run it. If most cases look the same and a few are odd, split the work: let the script handle the ninety-five percent that follow the pattern, and only send the exceptions (the file with an unexpected column, the free-text comment nobody can parse) to a generative model, with a person looking at what it did. That's the <em>script with one AI step</em> from Module 5: predictable where it can be, flexible only where it has to be.</p>" +
+      "<h4>Do I need something new, or a label on something that exists?</h4>" +
+      "<p>Remember the two flavours from Module 1. Generative AI makes something new: a summary, a draft, a piece of code. Predictive AI puts a label or a number on something: is this sample an outlier, which cell type is this, will this run fail. For labels and numbers, a predictive model, or even a plain rule like a threshold, is usually the better choice. It's faster and cheaper, it gives the same answer tomorrow, and you can measure how often it's right. A generative model can do it too, but you'd be paying for creativity in a task where you want none.</p>" +
+      "<p>Put together, it's a ladder: a rule, then a script, then a predictive model, then generative AI. Start at the bottom and only climb when the rung you're on can't do the job. Each step up buys flexibility and costs reproducibility, money and the ease of checking the result. The best setups often use several rungs at once. A new lipidomics batch arrives, a file watcher starts the QC script, a trained model flags the odd samples, and a generative AI drafts a short note about just those samples, which you read before anything goes further. Every tool does the part it's best at, and the clever one is saved for the cases that need it.</p>" +
+      "<p>So the habit to take home isn't “use AI more”. It's “choose on purpose”: help or automation, once or always, new or a label. Ask those three questions, and you'll use AI where it helps and leave it out where it doesn't.</p>";
+    page.appendChild(advice);
     var nextCard = el("div", { class: "card block prose" });
     nextCard.innerHTML = "<h3>What now?</h3>" +
       "<p>The course ends here, but the habits don't. Keep your one-line AI log going, and keep checking before you trust: that one habit is worth more than any prompt trick. Pick one task you do every week and keep using AI for it, so your skills grow with the tools.</p>" +
@@ -2761,6 +2779,7 @@ __MARKED__</script>
       el("div", { class: "finish-actions" }, [copy, el("a", { class: "btn", href: "#notes", text: "My notes" }), el("a", { class: "btn primary", href: "#start", text: "Dashboard" }), status])
     ]));
     main.appendChild(page);
+    setTimeout(confetti, 250);
   }
 
   function renderResource(main, id) {
@@ -3362,7 +3381,7 @@ __MARKED__</script>
     var holder = document.createElement("div");
     holder.className = "side-net";
     holder.setAttribute("aria-hidden", "true");
-    holder.innerHTML = networkSvg(300, 150, 16, 4242, 0, [6]);
+    holder.innerHTML = networkSvg(300, 360, 30, 4242, 0, [6, 19]);
     document.getElementById("side").appendChild(holder);
   })();
   document.getElementById("built").textContent = "Version " + DATA.version + ", content built " + DATA.built + ". Progress is stored in this browser only.";

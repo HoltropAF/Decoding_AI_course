@@ -230,8 +230,8 @@ description: Generate the lab's standard differential expression report from a D
 Skills don't always activate reliably just because they exist. Name them
 clearly, write a specific description that says *when* to use them, and
 invoke them explicitly (`/deg-report`) when it matters. The *Examples* step of
-this module has four complete skills to copy and adapt: omics analysis,
-research review, clean commits and a prompt builder.
+this module has five complete skills to copy and adapt: omics analysis,
+research review, clean commits, a prompt builder and a session wrap-up.
 
 <details class="think"><summary>Pause and think: "always use our lab's colour palette for figures". CLAUDE.md, skill or hook?</summary>
 
@@ -242,6 +242,24 @@ R/theme_lab.R"), CLAUDE.md is fine. A hook would be overkill: nothing breaks
 badly if one exploratory plot uses default colours.
 
 </details>
+
+> **In practice: give every new chat a running start.** Say you work on a
+> project for weeks, a few sessions at a time. Each new chat starts from
+> zero, so you spend the first ten minutes explaining where you were, and
+> you forget half of it yourself. Keep that knowledge in a few short files
+> instead. A `ROADMAP.md` holds the plan in three parts: *Now* (your to-do
+> list), *Next* and *Later*. A `DECISIONS.md` records what you chose and
+> why, and a changelog what you finished; in an ENCORE project,
+> `0_PROJECT.md` is already that log. Then let `CLAUDE.md` read them in at
+> the start of every session, with an `@` in front of each file name
+> (`@ROADMAP.md`), so a new chat begins informed. Keeping the files up to
+> date is the part that slips, so make it a routine: end each session with
+> the *wrap-up* skill from this module's Examples (type `/wrap-up`), which
+> ticks off what's done, records the decisions and proposes a commit. In a
+> chat app, keep the same files in a Project and ask for the update at the
+> end. Before you trust the files, check two things: is the *Now* list
+> still true, and does each decision say *why*? A stale roadmap misleads a
+> new chat more than no roadmap at all.
 
 ### What makes a good rule?
 
@@ -313,6 +331,7 @@ same with people: a rule with a reason gets applied with judgment.
 > **In short**
 > - Five layers: system prompt, `CLAUDE.md`, skills, subagents and hooks. `CLAUDE.md` for project rules, skills for recurring workflows, hooks and permissions for anything that must never fail.
 > - Instructions are requests; enforcement needs permissions or hooks.
+> - For longer projects, keep a roadmap and a decisions log, let `CLAUDE.md` read them in, and end each session with a wrap-up that updates them.
 > - Good rules are short, specific, checkable and explained in one clause: could a colleague check in thirty seconds whether a rule was followed?
 
 ---
@@ -467,6 +486,10 @@ handful of rules you actually care about is the goal.
    testing and documentation rules.
 6. **Stretch:** turn one recurring task into a skill in
    `.claude/skills/<name>/SKILL.md` and invoke it.
+7. **Stretch:** add a `ROADMAP.md` with two or three tasks, import it in
+   your `CLAUDE.md` with `@ROADMAP.md`, and start a fresh session with
+   *"What's next on the roadmap?"*. End the session with the *wrap-up*
+   skill from the Examples and check what it proposes.
 
 ### No-code version
 

@@ -107,6 +107,45 @@ you read only a few.
   Why assistants tend to agree with you, even when you're wrong: a side
   effect of training on human preferences.
 
+## Extra reading · Inside the model
+
+- ★ **Lindsey J, et al. (2025).** On the biology of a large language
+  model. *Transformer Circuits Thread.*
+  [transformer-circuits.pub](https://transformer-circuits.pub/2025/attribution-graphs/biology.html) ·
+  [short summary](https://www.anthropic.com/research/tracing-thoughts-language-model)
+  Circuits inside Claude 3.5 Haiku: two-step reasoning, rhymes planned
+  ahead, and the "known entity" switch behind hallucinations.
+- **Templeton A, et al. (2024).** Scaling monosemanticity: extracting
+  interpretable features from Claude 3 Sonnet. *Transformer Circuits
+  Thread.* [transformer-circuits.pub](https://transformer-circuits.pub/2024/scaling-monosemanticity/)
+  Millions of interpretable features, and the basis of Golden Gate Claude.
+- **Elhage N, et al. (2022).** Toy models of superposition.
+  [arXiv:2209.10652](https://arxiv.org/abs/2209.10652)
+  Why single neurons mean many things at once.
+- **Bricken T, et al. (2023).** Towards monosemanticity: decomposing
+  language models with dictionary learning. *Transformer Circuits Thread.*
+  [transformer-circuits.pub](https://transformer-circuits.pub/2023/monosemantic-features/)
+  The first sparse-autoencoder features, in a one-layer model.
+- **Ameisen E, et al. (2025).** Circuit tracing: revealing computational
+  graphs in language models. *Transformer Circuits Thread.*
+  [transformer-circuits.pub](https://transformer-circuits.pub/2025/attribution-graphs/methods.html)
+  The method behind the "biology" paper, with its limitations.
+- **Turpin M, et al. (2023).** Language models don't always say what they
+  think: unfaithful explanations in chain-of-thought prompting. *NeurIPS.*
+  [arXiv:2305.04388](https://arxiv.org/abs/2305.04388)
+- **Peng K, et al. (2025).** Position: use sparse autoencoders to discover
+  unknowns. [arXiv:2506.23845](https://arxiv.org/abs/2506.23845)
+- **Lanham T, et al. (2023).** Measuring faithfulness in chain-of-thought
+  reasoning. [arXiv:2307.13702](https://arxiv.org/abs/2307.13702)
+  Truncating and corrupting the reasoning to see whether the answer depends
+  on it.
+- ★ **Chen Y, et al. (2025).** Reasoning models don't always say what they
+  think. [arXiv:2505.05410](https://arxiv.org/abs/2505.05410)
+  Reasoning models used hints they mentioned only 25–39% of the time.
+- **Korbak T, et al. (2025).** Chain of thought monitorability: a new and
+  fragile opportunity for AI safety.
+  [arXiv:2507.11473](https://arxiv.org/abs/2507.11473)
+
 ## Module 1 · Watermarks and detecting AI output
 
 - ★ **Dathathri S, et al. (2024).** Scalable watermarking for identifying
@@ -343,6 +382,50 @@ you read only a few.
   An example of evaluating LLM annotation against expert labels; read the
   evaluation design as much as the results.
 
+- **Lin Z, et al. (2023).** Evolutionary-scale prediction of atomic-level
+  protein structure with a language model. *Science* 379:1123–1130.
+  [doi:10.1126/science.ade2574](https://doi.org/10.1126/science.ade2574)
+  ESM-2 and ESMFold (Extra reading, *AI built for biology*).
+- **Hayes T, et al. (2025).** Simulating 500 million years of evolution
+  with a language model. *Science.*
+  [doi:10.1126/science.ads0018](https://doi.org/10.1126/science.ads0018)
+  ESM3 and the designed fluorescent protein esmGFP.
+- **Theodoris CV, et al. (2023).** Transfer learning enables predictions in
+  network biology. *Nature* 618:616–624.
+  [doi:10.1038/s41586-023-06139-9](https://doi.org/10.1038/s41586-023-06139-9)
+  Geneformer, a single-cell foundation model.
+- **Cui H, et al. (2024).** scGPT: toward building a foundation model for
+  single-cell multi-omics using generative AI. *Nature Methods.*
+  [doi:10.1038/s41592-024-02201-0](https://doi.org/10.1038/s41592-024-02201-0)
+- ★ **Kedzierska KZ, et al. (2025).** Zero-shot evaluation reveals
+  limitations of single-cell foundation models. *Genome Biology* 26:101.
+  [doi:10.1186/s13059-025-03574-x](https://doi.org/10.1186/s13059-025-03574-x)
+  Used without extra training, Geneformer and scGPT often lose to simple
+  methods.
+- ★ **Ahlmann-Eltze C, Huber W, Anders S (2025).** Deep-learning-based gene
+  perturbation effect prediction does not yet outperform simple linear
+  baselines. *Nature Methods* 22:1657–1661.
+  [doi:10.1038/s41592-025-02772-6](https://doi.org/10.1038/s41592-025-02772-6)
+  Seven deep-learning models, none better than deliberately simple
+  baselines. A model for honest benchmarking.
+- **Huber F, et al. (2021).** Spec2Vec: improved mass spectral similarity
+  scoring through learning of structural relationships. *PLOS Comput Biol.*
+  [doi:10.1371/journal.pcbi.1008724](https://doi.org/10.1371/journal.pcbi.1008724)
+- **Huber F, et al. (2021).** MS2DeepScore: a novel deep learning similarity
+  measure to compare tandem mass spectra. *J Cheminform.*
+  [doi:10.1186/s13321-021-00558-4](https://doi.org/10.1186/s13321-021-00558-4)
+- **Dührkop K, et al. (2019).** SIRIUS 4: a rapid tool for turning tandem
+  mass spectra into metabolite structure information. *Nature Methods.*
+  [doi:10.1038/s41592-019-0344-8](https://doi.org/10.1038/s41592-019-0344-8)
+- **Li Y, et al. (2021).** Spectral entropy outperforms MS/MS dot product
+  similarity for small-molecule compound identification. *Nature Methods.*
+  [doi:10.1038/s41592-021-01331-z](https://doi.org/10.1038/s41592-021-01331-z)
+  A simple, well-chosen measure beating the standard score.
+- **Reynisson B, et al. (2020).** NetMHCpan-4.1 and NetMHCIIpan-4.0:
+  improved predictions of MHC antigen presentation. *Nucleic Acids
+  Research.* [doi:10.1093/nar/gkaa379](https://doi.org/10.1093/nar/gkaa379)
+  Long-established AI for peptide–MHC presentation.
+
 ## Policy, ethics and law
 
 - **ICMJE.** Recommendations for the Conduct, Reporting, Editing, and
@@ -363,5 +446,22 @@ you read only a few.
 - **Regulation (EU) 2016/679 (GDPR)**, in particular Art. 9 (special
   categories, including health and genetic data).
   [EUR-Lex](https://eur-lex.europa.eu/eli/reg/2016/679/oj)
+- **Nature (2023).** Tools such as ChatGPT threaten transparent science;
+  here are our ground rules for their use.
+  [doi:10.1038/d41586-023-00191-1](https://doi.org/10.1038/d41586-023-00191-1)
+- **Elsevier.** [Generative AI policies for journals](https://www.elsevier.com/about/policies-and-standards/generative-ai-policies-for-journals).
+  Disclosure for authors; no uploading manuscripts or review reports for
+  reviewers.
+- **NWO.** [Policy on the use of generative artificial intelligence](https://www.nwo.nl/en/nwo-policy-on-the-use-of-generative-artificial-intelligence-gai).
+  AI allowed for applicants, forbidden for referees; no hidden prompts.
+- **European Research Council (2026).** [ERC clarifies limits on AI use in
+  grant evaluation](https://erc.europa.eu/news-events/news/erc-clarifies-limits-ai-use-grant-evaluation).
+- **European Commission (2026).** [Living guidelines on the responsible use
+  of generative AI in research](https://research-and-innovation.ec.europa.eu/document/download/2b6cf7e5-36ac-41cb-aab5-0d32050143dc_en?filename=ec_rtd_ai-guidelines.pdf)
+  (updated May 2026).
+- **NIH.** [NOT-OD-25-132](https://grants.nih.gov/grants/guide/notice-files/NOT-OD-25-132.html)
+  (AI-developed applications, six applications per year) and
+  [NOT-OD-23-149](https://grants.nih.gov/grants/guide/notice-files/NOT-OD-23-149.html)
+  (no AI in NIH peer review).
 - Your institution's research data management and AI-use policy (ask your
   data steward or DPO for the current version).

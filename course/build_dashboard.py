@@ -157,6 +157,10 @@ RESOURCES = [
     ("about", "About this course", "course/about.md", "What the course is and who made it, how to use it, and where its limits are."),
     ("references", "References", "course/references.md", "All papers, policies and sources behind the course, searchable."),
     ("cookbook", "Prompt cookbook", "course/templates/prompt_cookbook.md", "The prompts from the course you'll use again and again, ready to copy into your own file."),
+    ("inside", "Inside the model", "course/inside_the_model.md", "What researchers find when they look inside a model, and why its explanations of its own reasoning aren't a readout."),
+    ("biology", "AI built for biology", "course/ai_built_for_biology.md", "Protein and single-cell language models, AI for spectra and antigens, and how to read the next \"foundation model\" paper."),
+    ("local", "Local models, one step further", "course/local_models_further.md", "Choosing a quantisation, why long texts get silently cut off, licences, and testing a model on your own task."),
+    ("publishing", "AI in papers, grants and review", "course/ai_in_papers_and_grants.md", "What journals and funders allow when you write, apply or review with AI, and the habits that keep you on the right side."),
     ("timeline", "Timeline", "course/timeline.md", "The history behind the course in one line, from 1948 to today, with a source for every event."),
 ]
 

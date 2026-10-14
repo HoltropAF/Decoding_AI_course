@@ -250,9 +250,18 @@ __MARKED__</script>
   .modtop + .banner .step .n { width: 20px; height: 20px; font-size: 11px; }
   /* steps and read-aloud on one row, no divider lines */
   .modtop + .banner { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
-  .modtop + .banner > .stepper { flex: 1 1 0; width: auto; min-width: 0; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
-  .modtop + .banner > .stepper::-webkit-scrollbar { display: none; }
-  .modtop + .banner > .stepper.overflowing { -webkit-mask-image: linear-gradient(to right, #000 88%, transparent); mask-image: linear-gradient(to right, #000 88%, transparent); }
+  .modtop + .banner > .stepwrap { flex: 1 1 0; min-width: 0; }
+  .modtop + .banner .stepper { flex: 1 1 0; width: auto; min-width: 0; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+  .modtop + .banner .stepper::-webkit-scrollbar { display: none; }
+  /* a row of steps wider than the banner scrolls sideways: arrows, mouse wheel or swipe */
+  .stepwrap { display: flex; align-items: center; gap: 4px; min-width: 0; }
+  .stepscroll { display: none; flex: none; width: 26px; height: 26px; padding: 0; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--teal); font-size: 16px; line-height: 1; cursor: pointer; place-items: center; }
+  .stepwrap.over .stepscroll { display: grid; }
+  .stepscroll:hover:not(:disabled) { border-color: var(--well-on); background: var(--surface-2); }
+  .stepscroll:disabled { opacity: 0.3; cursor: default; }
+  .stepper.more-right { -webkit-mask-image: linear-gradient(to right, #000 88%, transparent); mask-image: linear-gradient(to right, #000 88%, transparent); }
+  .stepper.more-left { -webkit-mask-image: linear-gradient(to left, #000 88%, transparent); mask-image: linear-gradient(to left, #000 88%, transparent); }
+  .stepper.more-left.more-right { -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); }
   .modtop + .banner .step { flex: none; }
   .modtop + .banner > .brow { flex: 0 1 auto; min-width: 0; max-width: 100%; }
   @media (max-width: 880px) {
@@ -2690,16 +2699,11 @@ __MARKED__</script>
         el("span", { class: "n", text: String(i + 1) }), s.label
       ]));
     });
-    var banner = el("div", { class: "banner" }, [stepper]);
+    var banner = el("div", { class: "banner" }, [scrollableStepper(stepper)]);
     var row = el("div", { class: "brow" });
     slots = { banner: banner, docs: el("div", { class: "brow" }), secs: row, tools: row };
     banner.appendChild(slots.docs); banner.appendChild(row);
     page.appendChild(banner);
-    setTimeout(function () {
-      stepper.classList.toggle("overflowing", stepper.scrollWidth > stepper.clientWidth + 2);
-      var act = stepper.querySelector(".step.active");
-      if (act && stepper.scrollWidth > stepper.clientWidth) stepper.scrollLeft = Math.max(0, act.getBoundingClientRect().left - stepper.getBoundingClientRect().left + stepper.scrollLeft - 12);
-    }, 0);
 
     var body = el("div", { class: "block" });
     if (step.kind === "slides") renderSlides(body, m, step);
@@ -2841,8 +2845,41 @@ __MARKED__</script>
     setTimeout(confetti, 250);
   }
 
+  /* Wrap a step bar so it can scroll sideways when it is wider than the banner:
+     arrow buttons at both ends, the mouse wheel scrolls it, and the current step is scrolled into view. */
+  function scrollableStepper(stepper) {
+    var left = el("button", { type: "button", class: "stepscroll", "aria-label": "Show earlier steps", text: "‹" });
+    var right = el("button", { type: "button", class: "stepscroll", "aria-label": "Show later steps", text: "›" });
+    var wrap = el("div", { class: "stepwrap" }, [left, stepper, right]);
+    function update() {
+      var max = stepper.scrollWidth - stepper.clientWidth, over = max > 2;
+      wrap.classList.toggle("over", over);
+      left.disabled = !over || stepper.scrollLeft <= 2;
+      right.disabled = !over || stepper.scrollLeft >= max - 2;
+      stepper.classList.toggle("more-left", !left.disabled);
+      stepper.classList.toggle("more-right", !right.disabled);
+    }
+    function by(dir) { stepper.scrollBy({ left: dir * Math.max(120, stepper.clientWidth * 0.7), behavior: "smooth" }); }
+    left.addEventListener("click", function () { by(-1); });
+    right.addEventListener("click", function () { by(1); });
+    stepper.addEventListener("scroll", update, { passive: true });
+    stepper.addEventListener("wheel", function (e) {
+      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+      var max = stepper.scrollWidth - stepper.clientWidth;
+      if (max <= 2 || (e.deltaY < 0 && stepper.scrollLeft <= 0) || (e.deltaY > 0 && stepper.scrollLeft >= max - 1)) return;
+      stepper.scrollLeft += e.deltaY; e.preventDefault();
+    }, { passive: false });
+    if (window.ResizeObserver) new ResizeObserver(update).observe(stepper);
+    setTimeout(function () {
+      var act = stepper.querySelector(".step.active");
+      if (act && stepper.scrollWidth > stepper.clientWidth) stepper.scrollLeft = Math.max(0, act.getBoundingClientRect().left - stepper.getBoundingClientRect().left + stepper.scrollLeft - 12);
+      update();
+    }, 0);
+    return wrap;
+  }
+
   /* ---------------- extra reading: one menu item, its pages as numbered steps like a module ---------------- */
-  var EXTRA = ["cookbook", "limits", "timeline"];
+  var EXTRA = ["cookbook", "limits", "inside", "biology", "local", "publishing", "timeline"];
   function extraRes(id) { return RESOURCES.filter(function (x) { return x.id === id; })[0]; }
   /* the prompt cookbook gets its own layout: filter chips, a search box and one card per prompt */
   function parseCookbook(md) {
@@ -3003,7 +3040,7 @@ __MARKED__</script>
         el("span", { class: "n", text: String(j + 1) }), extraRes(x).title
       ]));
     });
-    var banner = el("div", { class: "banner" }, [stepper]);
+    var banner = el("div", { class: "banner" }, [scrollableStepper(stepper)]);
     var row = el("div", { class: "brow" });
     slots = { banner: banner, docs: el("div", { class: "brow" }), secs: row, tools: row };
     banner.appendChild(slots.docs); banner.appendChild(row);

@@ -89,7 +89,8 @@ an answer that may use only those passages.
 4,096 tokens) and longer prompts are truncated silently. Eight passages of
 ~800 tokens plus instructions won't fit: set `num_ctx` (e.g. 16384) in
 every request and check with `ollama ps`, or retrieve fewer, shorter
-passages.
+passages. Why, and what it costs in memory:
+[Local models, one step further](../../course/local_models_further.md).
 
 ## 6. Stack
 

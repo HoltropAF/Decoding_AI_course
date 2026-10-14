@@ -59,6 +59,21 @@ Versions follow `MAJOR.MINOR.PATCH` as described in
 - "Extra reading" under "General" in the menu, laid out like a module:
   numbered steps for the Prompt cookbook, Limits & workarounds and the
   Timeline, with Next buttons. The pages no longer have their own menu items.
+- Four new Extra reading pages on more advanced topics: "Inside the
+  model" (interpretability and whether a reasoning model's thinking is
+  faithful), "AI built for biology" (protein and single-cell language
+  models, AI for spectra and antigens, how to read the next foundation
+  model paper), "Local models, one step further" (quantisation levels,
+  context length and the KV cache, licences, testing on your own task)
+  and "AI in papers, grants and review" (journal and funder rules).
+  Modules 1, 2, 5 and 6 and hackathon track B link to them where the
+  topic comes up. Their sources are in the References.
+- "Inside the model" and "AI built for biology" end with an optional
+  deep-dive part that reads the key papers closely: methods, data, the
+  numbers and the limitations (sparse autoencoders, circuit tracing,
+  faithfulness tests; ESM-2, ESM3, and the two single-cell benchmarks).
+- Step bars that are wider than the screen get arrow buttons at both
+  ends, scroll with the mouse wheel, and fade on the side with more steps.
 
 ### Changed
 - Version numbers now use three parts: `1.0` became `1.0.0`.

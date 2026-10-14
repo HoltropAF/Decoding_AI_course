@@ -476,7 +476,9 @@ Agents can run on a local model too. Several coding agents work with
 Ollama, and some Claude-Code-style tools can be pointed at a local model,
 but then the reasoning is done by that model, not by Claude, even if the
 window looks the same, and it is noticeably weaker on long, multi-step
-jobs such as a full project audit. A common middle way is to develop and
+jobs such as a full project audit. Agents also fill the context window
+fast, so a local model's short default window needs raising first
+([Local models, one step further](../course/local_models_further.md)). A common middle way is to develop and
 debug with a cloud agent on synthetic data, then run the finished code on
 the real data locally. Which projects move to a local setup is best decided
 together, as a lab, not by each person alone.

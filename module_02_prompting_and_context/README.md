@@ -180,7 +180,8 @@ so quality slowly drops as a chat grows, which is sometimes called context
 rot. Local models have an extra catch: Ollama, by default, gives a model only
 a small working memory (often 4,096 tokens on a normal laptop) and quietly
 drops whatever doesn't fit, without an error; the course scripts raise that
-limit for you. And the "memory" features in chat apps are simply the app
+limit for you (how to do it yourself, and what it costs in memory, is in
+[Local models, one step further](../course/local_models_further.md)). And the "memory" features in chat apps are simply the app
 saving notes about you and quietly adding them to future prompts. In
 practice this shows up in a very familiar way: two hours and forty messages
 into debugging an R script, the answers get vaguer, the model "forgets" a
@@ -512,7 +513,9 @@ its final structured output.
 > **Watch out:** a step-by-step explanation is not proof that the model
 > actually reasoned that way. The written reasoning can be a plausible story
 > that doesn't reflect what drove the answer. Treat it as something to
-> check, not as evidence.
+> check, not as evidence. In one study, reasoning models used a planted
+> hint and mentioned it in only a quarter to a third of their reasoning;
+> see [Inside the model](../course/inside_the_model.md).
 
 > **In practice: plan before you build.** Say you want to set up
 > something you haven't done before, like a script that reads a data

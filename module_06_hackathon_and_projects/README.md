@@ -304,7 +304,8 @@ small hand-checked sample: ten outputs that you verified in Reactome or the
 literature, with the error count. A baseline: what does a classical method
 (enrichment analysis, a keyword search) give for the same input? And an
 honest limitations paragraph. "We checked 10, 8 were right, here are the 2
-that weren't" is a strong result.
+that weren't" is a strong result. For why baselines matter so much, see the
+single-cell story in [AI built for biology](../course/ai_built_for_biology.md).
 
 </details>
 

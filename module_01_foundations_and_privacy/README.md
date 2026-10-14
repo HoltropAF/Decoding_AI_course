@@ -368,6 +368,11 @@ That's why, with LLMs, the checking is up to us.
 
 </details>
 
+AlphaFold isn't the only model built for biology. Language models trained
+on protein sequences or on single cells, AI that helps annotate mass spectra,
+and the sobering finding that some of them lose to a simple PCA are on the
+Extra reading page [AI built for biology](../course/ai_built_for_biology.md).
+
 > **In short**
 > - AI is a family: rule-based AI and machine learning, and within machine learning, classic methods and deep learning.
 > - Some AI *predicts* a label or a number; some *generates* new content. LLMs are the generative models for text.
@@ -597,7 +602,9 @@ feedback guided by written principles is known as Constitutional AI
 ([Bai et al. 2022](https://arxiv.org/abs/2212.08073)). Some models are
 additionally trained to **reason**: to write out a long internal chain of
 thought before answering, which helps on maths, code and multi-step
-problems. These are often called **reasoning models**. The same idea of training an existing model a bit further on your own
+problems. These are often called **reasoning models**. (Whether the
+reasoning they show is what really drove the answer is a separate question;
+see [Inside the model](../course/inside_the_model.md).) The same idea of training an existing model a bit further on your own
 examples is called **fine-tuning**. It's possible for open-weight models,
 but rarely needed for our kind of work: a good prompt, or giving the model
 the right documents, usually gets you most of the way.
@@ -681,6 +688,12 @@ the more you should check.
 
 </details>
 
+Researchers have since looked inside a model to see what happens when it
+makes something up. It seems to have a default "I can't answer that", which
+a feeling of "I know this" switches off; hallucinations happen when that
+switch fires for a name that is only half familiar. More on the Extra
+reading page [Inside the model](../course/inside_the_model.md).
+
 ### What's inside? (optional)
 
 This section goes one level deeper. You don't need it to use AI well, so
@@ -743,6 +756,13 @@ layer, the model outputs a probability for every token in its vocabulary:
 the prediction for what comes next. Much of what the model "knows" is
 stored in these weights: not in one place, but spread across all those
 layers. That is where the knowledge from *How did it learn?* lives.
+
+Can you look inside and see what those layers are doing? Researchers have
+started to, with techniques borrowed in spirit from biology: find the
+parts, then switch them on and off. What they found, from a model that
+plans its rhymes ahead to the switch that seems to misfire when it
+hallucinates, is on the Extra reading page
+[Inside the model](../course/inside_the_model.md).
 
 ### What is it good and bad at?
 
@@ -976,6 +996,12 @@ exposes the model, and whatever you send it, to the whole network. And chat
 windows or editor plugins that sit on top of Ollama may add telemetry or
 quietly fall back to a cloud model, so check their settings.
 
+Once you use local models for real work, a few more choices come up: which
+quantisation to download (`q4_K_M` or `q8_0`?), why a long document can be
+cut off without warning, and which licence a model comes with. They're on
+the Extra reading page
+[Local models, one step further](../course/local_models_further.md).
+
 ---
 
 ### Which data may go where?
@@ -1118,7 +1144,9 @@ rules. Real values go to a local model, unless the institution has approved
 a specific cloud contract for confidential research data. Never upload a
 collaborator's unpublished manuscript without their consent, and never
 upload a manuscript or grant proposal you are reviewing for a journal or
-funder: most publishers and funders explicitly forbid it. When AI
+funder: most publishers and funders explicitly forbid it (what they allow
+and forbid is on the Extra reading page
+[AI in papers, grants and review](../course/ai_in_papers_and_grants.md)). When AI
 contributes to a result, record it in the project log: the model and
 version (for example `llama3.1:8b-instruct-q4_K_M`, or the cloud model's
 name), where it ran, which data class was involved, and the prompt you
@@ -1723,7 +1751,9 @@ responsibility for the work. You must say how you used AI. And you remain
 responsible for every word, number and figure
 ([ICMJE recommendations](https://www.icmje.org/recommendations/); see also
 the References page). Some uses, like AI-generated images in figures, are
-not allowed at all by some journals.
+not allowed at all by some journals. What the main journals and funders,
+including NWO and the ERC, say in detail is on the Extra reading page
+[AI in papers, grants and review](../course/ai_in_papers_and_grants.md).
 
 There's also the question of *skills and over-reliance*. If AI writes all
 our code and summarises all our papers, do we still learn to do it

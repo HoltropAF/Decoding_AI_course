@@ -1426,6 +1426,7 @@ __MARKED__</script>
     if (p[0] === "prefs") return { kind: "prefs" };
     if (p[0] === "notes") return { kind: "notes" };
     if (p[0] === "extra") return { kind: "extra" };
+    if (p[0] === "deep") return { kind: "deep" };
     if (p[0] === "finish") return { kind: "finish" };
     if (p[0] === "find") return { kind: "find", q: decodeURIComponent(h.slice(5)) };
     var m = modById(p[0]);
@@ -1470,11 +1471,14 @@ __MARKED__</script>
       el("span", { class: "navtitle", text: "Dictionary" }),
       el("span", { class: "navcount", text: DATA.dictionary.length + " terms" })
     ]));
-    var inExtra = route.kind === "extra" || (route.kind === "res" && EXTRA.indexOf(route.id) >= 0);
-    g0.appendChild(el("a", { class: "navitem" + (inExtra ? " active" : ""), href: "#extra", style: "grid-template-columns: minmax(0,1fr) auto" }, [
-      el("span", { class: "navtitle", text: "Extra reading" }),
-      el("span", { class: "navcount", text: EXTRA.length + " pages" })
-    ]));
+    Object.keys(SHELVES).forEach(function (key) {
+      var sh = SHELVES[key];
+      var on = route.kind === key || (route.kind === "res" && shelfOf(route.id) === key);
+      g0.appendChild(el("a", { class: "navitem" + (on ? " active" : ""), href: "#" + key, style: "grid-template-columns: minmax(0,1fr) auto" }, [
+        el("span", { class: "navtitle", text: sh.title }),
+        el("span", { class: "navcount", text: sh.pages.length + (sh.pages.length === 1 ? " page" : " pages") })
+      ]));
+    });
     var nNotes = Object.keys(state.notes || {}).filter(function (k) { return (state.notes[k] || "").trim(); }).length;
     g0.appendChild(el("a", { class: "navitem" + (route.kind === "notes" ? " active" : ""), href: "#notes", style: "grid-template-columns: minmax(0,1fr) auto" }, [
       el("span", { class: "navtitle", text: "My notes" }),
@@ -2879,7 +2883,15 @@ __MARKED__</script>
   }
 
   /* ---------------- extra reading: one menu item, its pages as numbered steps like a module ---------------- */
-  var EXTRA = ["cookbook", "limits", "inside", "biology", "local", "publishing", "timeline"];
+  /* Two shelves of pages outside the modules, each laid out like a module with numbered steps:
+     Extra reading (nice to have) and Deep dives (optional, more technical). */
+  var SHELVES = {
+    extra: { title: "Extra reading", lead: "Pages to keep coming back to, during the course and long after it.",
+             pages: ["cookbook", "limits", "biology", "publishing", "timeline"] },
+    deep: { title: "Deep dives", lead: "Optional and more technical: how things really work, and the research behind them.",
+            pages: ["inside", "local"] }
+  };
+  function shelfOf(id) { return Object.keys(SHELVES).filter(function (k) { return SHELVES[k].pages.indexOf(id) >= 0; })[0]; }
   function extraRes(id) { return RESOURCES.filter(function (x) { return x.id === id; })[0]; }
   /* the prompt cookbook gets its own layout: filter chips, a search box and one card per prompt */
   function parseCookbook(md) {
@@ -3027,14 +3039,16 @@ __MARKED__</script>
     body.appendChild(wrap);
   }
 
-  function renderExtra(main, id) {
+  function renderExtra(main, id, key) {
+    key = key || shelfOf(id) || "extra";
+    var sh = SHELVES[key], EXTRA = sh.pages;
     if (EXTRA.indexOf(id) < 0) id = EXTRA[0];
     var r = extraRes(id), i = EXTRA.indexOf(id);
     var page = el("div", { class: "page" }, [
-      el("div", { class: "modtop" }, [el("span", { class: "label", text: "General" }), el("h2", { text: "Extra reading" }),
-        el("p", { text: "Pages to keep coming back to, during the course and long after it." })])
+      el("div", { class: "modtop" }, [el("span", { class: "label", text: "General" }), el("h2", { text: sh.title }),
+        el("p", { text: sh.lead })])
     ]);
-    var stepper = el("div", { class: "stepper", role: "navigation", "aria-label": "Pages in extra reading" });
+    var stepper = el("div", { class: "stepper", role: "navigation", "aria-label": "Pages in " + sh.title.toLowerCase() });
     EXTRA.forEach(function (x, j) {
       stepper.appendChild(el("a", { class: "step" + (x === id ? " active visited" : ""), href: "#res." + x, "aria-current": x === id ? "page" : null }, [
         el("span", { class: "n", text: String(j + 1) }), extraRes(x).title
@@ -3058,7 +3072,7 @@ __MARKED__</script>
   }
 
   function renderResource(main, id) {
-    if (EXTRA.indexOf(id) >= 0) { renderExtra(main, id); return; }
+    if (shelfOf(id)) { renderExtra(main, id); return; }
     var r = RESOURCES.filter(function (x) { return x.id === id; })[0];
     if (!r) { renderStart(main); return; }
     var page = el("div", { class: "page" }, [
@@ -3385,7 +3399,7 @@ __MARKED__</script>
     else if (route.kind === "find") renderFind(main, route.q);
     else if (route.kind === "prefs") renderPrefs(main);
     else if (route.kind === "notes") renderNotes(main);
-    else if (route.kind === "extra") renderExtra(main, EXTRA[0]);
+    else if (route.kind === "extra" || route.kind === "deep") renderExtra(main, null, route.kind);
     else if (route.kind === "finish") renderFinish(main);
     else { renderStart(main); main.appendChild(aiBanner()); }
     decorateHeader(main, route);

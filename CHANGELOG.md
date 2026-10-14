@@ -72,6 +72,11 @@ Versions follow `MAJOR.MINOR.PATCH` as described in
   deep-dive part that reads the key papers closely: methods, data, the
   numbers and the limitations (sparse autoencoders, circuit tracing,
   faithfulness tests; ESM-2, ESM3, and the two single-cell benchmarks).
+- A second menu item next to Extra reading, "Deep dives", for optional,
+  more technical pages: "Inside the model" and "Local models, one step
+  further" moved there. Extra reading keeps the nice-to-haves: Prompt
+  cookbook, Limits & workarounds, AI built for biology, AI in papers,
+  grants and review, and the Timeline.
 - Step bars that are wider than the screen get arrow buttons at both
   ends, scroll with the mouse wheel, and fade on the side with more steps.
 

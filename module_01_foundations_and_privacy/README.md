@@ -691,8 +691,8 @@ the more you should check.
 Researchers have since looked inside a model to see what happens when it
 makes something up. It seems to have a default "I can't answer that", which
 a feeling of "I know this" switches off; hallucinations happen when that
-switch fires for a name that is only half familiar. More on the Extra
-reading page [Inside the model](../course/inside_the_model.md).
+switch fires for a name that is only half familiar. More in the deep
+dive [Inside the model](../course/inside_the_model.md).
 
 ### What's inside? (optional)
 
@@ -761,7 +761,7 @@ Can you look inside and see what those layers are doing? Researchers have
 started to, with techniques borrowed in spirit from biology: find the
 parts, then switch them on and off. What they found, from a model that
 plans its rhymes ahead to the switch that seems to misfire when it
-hallucinates, is on the Extra reading page
+hallucinates, is in the deep dive
 [Inside the model](../course/inside_the_model.md).
 
 ### What is it good and bad at?
@@ -998,8 +998,8 @@ quietly fall back to a cloud model, so check their settings.
 
 Once you use local models for real work, a few more choices come up: which
 quantisation to download (`q4_K_M` or `q8_0`?), why a long document can be
-cut off without warning, and which licence a model comes with. They're on
-the Extra reading page
+cut off without warning, and which licence a model comes with. They're in
+the deep dive
 [Local models, one step further](../course/local_models_further.md).
 
 ---

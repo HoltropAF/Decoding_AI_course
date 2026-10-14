@@ -156,8 +156,29 @@ MODULES = [
 RESOURCES = [
     ("about", "About this course", "course/about.md", "What the course is and who made it, how to use it, and where its limits are."),
     ("references", "References", "course/references.md", "All papers, policies and sources behind the course, searchable."),
+    ("cookbook", "Prompt cookbook", "course/templates/prompt_cookbook.md", "The prompts from the course you'll use again and again, ready to copy into your own file."),
     ("timeline", "Timeline", "course/timeline.md", "The history behind the course in one line, from 1948 to today, with a source for every event."),
 ]
+
+# The "Limits & workarounds" page is the table from Module 2, part 4, so it's maintained in one place.
+LIMITS_SOURCE = "module_02_prompting_and_context/README.md"
+LIMITS_INTRO = """# Limits & workarounds
+
+Every AI tool has the same handful of weak spots, and almost every one has a simple way around it. This is the cheat sheet; the story behind it is in Module 2, part 4 (*Working around the limits*), where the three that need a full prompt are worked out: thirty papers without losing the middle, calculating in code, and code for an older package version.
+
+"""
+
+
+def limits_page() -> dict:
+    """The limitations table from Module 2, as its own page."""
+    lines = read(LIMITS_SOURCE).splitlines()
+    start = lines.index("#### Working around the limits")
+    table = [l for l in lines[start + 1:next(i for i in range(start + 1, len(lines)) if lines[i].startswith("#### "))]
+             if l.startswith("|")]
+    return {"id": "limits", "title": "Limits & workarounds",
+            "summary": "The weak spots every AI tool shares, how you notice them, and what to do instead.",
+            "doc": doc("course/limits.md", "Limits & workarounds", text=LIMITS_INTRO + "\n".join(table) + "\n")}
+
 
 # Where exported problem reports should go. Leave empty to only offer copy/download.
 CONTACT_EMAIL = ""
@@ -471,6 +492,7 @@ def add_course_links(modules: list[dict], dictionary: list[dict]) -> None:
 def main() -> None:
     modules = [build_module(m) for m in MODULES]
     resources = [{"id": r[0], "title": r[1], "summary": r[3], "doc": doc(r[2], r[1])} for r in RESOURCES]
+    resources.append(limits_page())
     dictionary = parse_glossary()
     add_course_links(modules, dictionary)
     # dictionary figures: embedded once, shared by every word that uses them

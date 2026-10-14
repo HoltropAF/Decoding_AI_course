@@ -744,7 +744,10 @@ model version produced it. Module 3 builds on this.
 
 > **Coffee note:** the most useful habit in this whole chapter is probably
 > the most boring one: keeping a text file of prompts that worked, with a
-> line about what each one is for. Future-you will be grateful.
+> line about what each one is for. Future-you will be grateful. To give
+> you a head start, the *Prompt cookbook* in the menu collects the prompts
+> from this course you'll reach for again and again, from a session
+> starter to a wrap-up. Copy it into your own file and keep adding to it.
 
 ### How do I get answers my code can read?
 
@@ -1113,8 +1116,121 @@ to check. That combination works for almost anything.
 > published paper can go into any tool; unpublished results or patient data
 > go to a local model or nowhere.
 
+#### Working around the limits
+
+Module 1 ended its tour of how a language model works with a list of where
+it trips: it can't really calculate, it knows nothing after its cutoff, it
+invents references, it agrees too easily. That list isn't a reason to stop
+using it. Almost every limitation has a simple way around it, and most of
+those come down to the same few moves: give it less at a time, let code do
+the exact work, hand it your own sources, and start fresh when a chat goes
+stale. Here they are in one table, with where the course explains the why.
+The three that need a full prompt follow below it.
+
+| Limitation | How you notice it | What to do | More in |
+|---|---|---|---|
+| Long chats get worse | After forty messages the answers turn vague and rules from the start slip | One topic per chat; start fresh with a three-line summary; think in one chat, build in another | Module 1, myth 7; Module 2, parts 1 and 4 |
+| It reads the middle of a long input poorly | A summary of thirty papers mostly covers the first and the last few | One document at a time with the same template, then compare the summaries | Module 1, myth 6; *Thirty papers without losing the middle* |
+| It can't calculate or count | A dilution, molarity or fold change with plausible but wrong digits | Let it write code that does the sum, and run that | Module 1, *What is it good and bad at?*; *Let it calculate, in code* |
+| It invents references | A tidy DOI that leads nowhere | Give it the papers yourself, or use a search mode, and check every DOI. Demanding more references doesn't help: in one study, stricter citation demands gave more invalid ones ([Davis & Mahmoud 2026](https://proceedings.mlr.press/v318/davis26a.html)) | Module 1, *Why does it make things up?* |
+| It knows an older world | Code that uses functions your package version no longer has | Give it your versions and the current documentation | *When it knows an older version* |
+| It answers differently each time | The same question gives a different list tomorrow | For analyses, let it write code and keep that; keep the prompt in git; use a low temperature in scripts | Module 2, parts 1 and 3 |
+| It can't take in big data, and shouldn't | A pasted table is cut off or quietly "summarised" | Give it the column names, a few rows and summary statistics, and run its code on the full data yourself | Module 1, data rules |
+| It gets lazy on long output | "…the rest of the code stays the same…" | Ask for one section at a time, or only for the changes | |
+| It reads figures poorly | Values read off a plot or a gel are confidently wrong | Give it the numbers behind the figure; ask how the figure comes across, not what it shows | |
+| It sounds sure either way | "Certainly!" whether it's right or not | Ask how sure it is of each claim, and which three claims you should check first | Module 2, part 3 |
+| It agrees too easily | Your plan is excellent until you sound doubtful | Ask neutrally, ask for weak points first, and do the flip test | Module 2, part 3, *The yes-man reflex* |
+| It forgets rules in long sessions | The thresholds you set this morning are gone by the afternoon | Put standing rules in a file, not in the chat | Module 3 |
+| Your typing is the bottleneck | A three-line prompt for a three-page plan | Talk instead of type | Module 2, part 4 |
+
+<!-- speak: A table of thirteen limitations and what to do about each. Long chats get worse: one topic per chat, and start fresh with a short summary. It reads the middle of a long input poorly: one document at a time, then compare the summaries. It can't calculate: let it write code and run that. It invents references: give it the papers yourself or use a search mode, and check every DOI. It knows an older world: give it your package versions and the current documentation. It answers differently each time: keep code rather than answers, and keep the prompt in git. It can't take in big data: give it column names, a few rows and summary statistics, and run its code yourself. It gets lazy on long output: ask for one section at a time. It reads figures poorly: give it the numbers behind the figure. It sounds sure either way: ask how sure it is and what to check first. It agrees too easily: ask neutrally and for weak points first. It forgets rules in long sessions: put standing rules in a file. And when typing is the bottleneck: talk instead. -->
+
+#### Thirty papers without losing the middle
+
+Say you're writing the background of a review and you have thirty papers on
+dendritic cell migration and lipid remodelling. The obvious move is to load
+them all and ask for a synthesis. What you get back will read well, but it
+will lean on the first and the last papers, because models pick up the
+start and the end of a long input best (part 1, *The model has no memory of
+you*). And in a 2025 test of eighteen current models, performance dropped
+as the input grew even on deliberately simple tasks: the context rot from
+part 1, measured ([Chroma 2025](https://research.trychroma.com/context-rot)).
+
+So split the job in two, the way you'd do it yourself with a stack of
+printouts. First summarise every paper on its own, with exactly the same
+template each time, one paper per prompt:
+
+```text
+INSTRUCTION: Summarise the paper inside <paper> using exactly these fields:
+question, model system, key methods, main finding, main limitation, and one
+quote from the paper that supports the main finding.
+CONSTRAINTS: Use only the paper. If a field isn't in the paper, write
+"not reported". Keep each field to two sentences at most.
+```
+
+Collect the summaries in one document, and only then, in a fresh chat, ask
+the question you actually had: *"Compare the summaries inside <summaries>.
+Where do the papers agree, where do they disagree, and which disagreements
+could come from differences in the model system?"* Computer scientists call
+this pattern map and reduce: the same small job many times, then one job
+over the results. It costs a little more effort, but each summary is short
+enough to check, the quote lets you find the claim in the paper in seconds,
+and the comparison sees every paper with the same weight.
+
+#### Let it calculate, in code
+
+Module 1 explained why a language model can't be trusted with a sum: it
+predicts digits as text, so the answer looks right whether or not it is.
+That matters in the lab more than anywhere. "Make 6 mL of 2 µM from a 10 mM
+stock, then a 1:3 dilution series over eight wells" is exactly the kind of
+question where a plausible wrong number ruins an experiment. The fix is
+one sentence: ask for code instead of an answer.
+
+```text
+INSTRUCTION: Write a short Python script that calculates the volumes for the
+dilution below and prints them as a table, then run it.
+INPUTS: Stock 10 mM. First well: 6 mL at 2 µM. Then a 1:3 serial dilution over
+8 wells, 6 mL final volume per well.
+CONSTRAINTS: Show the formula you use, and keep the units in every column name.
+```
+
+Many chat apps can run the code they write and show you both, and
+otherwise you can run it yourself. Either way you get something you can
+check: read the formula (is it really C1V1 = C2V2?), work out one row by
+hand, and keep the script for next time. The same goes for every number in
+an analysis. A fold change, a p-value or a mean the model worked out "in its
+head" is a guess; the same number from code it wrote and you ran is a
+result.
+
+#### When it knows an older version
+
+A model knows the world up to its training cutoff, and in bioinformatics
+the world moves fast. Packages get new versions, functions are renamed,
+arguments disappear. Seurat 5, for example, reorganised how data is stored
+inside an object, so code written the Seurat 4 way can fail with an error
+or, worse, run but read the wrong thing. The model doesn't know which version
+you have unless you tell it, and its training data are full of code for the
+older one.
+
+So tell it, and give it the current documentation to work from:
+
+```text
+CONTEXT: My R session is below (output of sessionInfo()). The relevant part
+of the current package documentation is inside <docs>.
+INSTRUCTION: Write the code for these exact versions.
+CONSTRAINTS: Use only functions and arguments that appear in <docs> or that you
+are sure exist in these versions. If you're unsure, say so instead of guessing.
+```
+
+When code fails with an "unused argument" or "could not find function"
+error, that's usually this problem. Paste the error back together with the
+relevant page of the documentation or the package's changelog (the `NEWS`
+file), rather than just "it doesn't work". And for anything that will end up
+in an analysis, check it on a small example first.
+
 > **In short**
 > - The same pattern works everywhere: a clear task, tagged data, an honest exit and a checkable format.
+> - Most limits have a simple workaround: give it less at a time, let code do the exact work, hand it your own sources and versions, and start fresh when a chat goes stale.
 > - Keep your own cookbook of prompts that worked.
 
 ---

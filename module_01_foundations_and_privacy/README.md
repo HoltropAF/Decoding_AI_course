@@ -764,7 +764,7 @@ whether or not they exist. And it rarely says "I don't know" unless you
 ask it to. The rest of this chapter turns this into practical advice for
 everyday work.
 
-#### Five myths, quickly busted
+#### Seven myths, quickly busted
 
 These come up in almost every conversation about AI, including at the coffee
 machine. Each one is understandable, and each one can lead you to trust a
@@ -793,6 +793,20 @@ tool more (or less) than you should.
 5. **"Bigger is always better."** For simple tasks (reformatting,
    extracting), a small local model is often good enough and keeps your
    data at home.
+6. **"It reads everything you give it."** A big context window means the
+   model can *take in* thirty papers, not that it reads them all equally
+   well. Models pick up what's at the start and the end of a long input
+   best and miss more in the middle, and in a 2025 test of eighteen
+   models, performance dropped as the input grew, even on very simple
+   tasks ([Chroma 2025](https://research.trychroma.com/context-rot)). Give
+   it less and more focused material: one paper at a time works better
+   than all of them at once (Module 2, part 4).
+7. **"The longer the chat, the better it knows me."** It's the other way
+   round. A long chat fills up with old attempts, dropped ideas and
+   corrections, and all of that keeps steering the answers; at some point
+   the app also starts summarising quietly, and details from the start get
+   lost. For a new topic, start a new chat with a three-line summary, and
+   keep what it should always know in standing instructions (Module 3).
 
 > **In short**
 > - Text is cut into tokens, and the model writes one token at a time, picking each from a probability distribution.

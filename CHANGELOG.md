@@ -36,6 +36,29 @@ Versions follow `MAJOR.MINOR.PATCH` as described in
 - Finish page: a confetti celebration (with a button to fire it again) and
   "One last piece of advice": help or automation, once or always,
   generative or predictive, and the ladder from rule to generative AI.
+- Module 1: myths 6 and 7 ("It reads everything you give it", "The longer
+  the chat, the better it knows me"); the myths are now seven.
+- Module 2: "Working around the limits", a table of thirteen limitations
+  with how you notice them and what to do, plus three worked sections:
+  thirty papers without losing the middle, calculating in code, and code
+  for an older package version.
+- A "Limits & workarounds" cheat-sheet page in the menu, built from the
+  same table.
+- A "Prompt cookbook" (`course/templates/prompt_cookbook.md`), also in the
+  menu: about twenty reusable prompts from the course, from a session
+  starter to a wrap-up, to copy into your own file. Module 2's coffee note
+  points to it.
+  It starts from situations ("I have a pile of papers to get through"):
+  in the dashboard you pick a situation on the left and get a short sketch
+  and the suggested prompt on the right, with a copy button, the parts to
+  fill in highlighted, and a button to save it as your own file.
+- A "Copy" button on every code block in the dashboard.
+- Arrow up and down move through the situations in the Prompt cookbook
+  and through the words in the Dictionary's look-up view, also while the
+  cursor is in the search box.
+- "Extra reading" under "General" in the menu, laid out like a module:
+  numbered steps for the Prompt cookbook, Limits & workarounds and the
+  Timeline, with Next buttons. The pages no longer have their own menu items.
 
 ### Changed
 - Version numbers now use three parts: `1.0` became `1.0.0`.

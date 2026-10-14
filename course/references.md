@@ -253,6 +253,16 @@ you read only a few.
   [arXiv:2510.04950](https://arxiv.org/abs/2510.04950)
   On ChatGPT-4o, blunt prompts scored slightly higher than polite ones;
   one model and 50 questions.
+- **Hong K, Troynikov A, Huber J (2025).** Context rot: how increasing input
+  tokens impacts LLM performance. *Chroma technical report.*
+  [research.trychroma.com/context-rot](https://research.trychroma.com/context-rot)
+  Eighteen models get worse as the input grows, even on simple tasks.
+  Written by a company that sells retrieval tools, so read it with that in
+  mind.
+- **Davis K, Mahmoud Q (2026).** Citation constraints and reference
+  hallucinations in large language models. *PMLR* 318:464–475.
+  [proceedings.mlr.press](https://proceedings.mlr.press/v318/davis26a.html)
+  Stricter citation demands went with more invalid references.
 - **The Transmitter.** Boost your writing with AI personas.
   [thetransmitter.org](https://www.thetransmitter.org/from-bench-to-bot/boost-your-writing-with-ai-personas/)
   Practical guide for scientists to getting feedback from AI readers.

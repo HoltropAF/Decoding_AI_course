@@ -198,6 +198,39 @@ __MARKED__</script>
   .btn.danger { color: var(--amber); }
   .btn[disabled] { opacity: 0.45; cursor: default; }
   .card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px; }
+  /* prompt cookbook: situations on the left, the suggested prompt on the right */
+  .cb { display: grid; gap: 18px; }
+  .sit { display: grid; grid-template-columns: minmax(240px, 330px) minmax(0, 1fr); gap: 22px; align-items: start; }
+  .sit-side { position: sticky; top: 70px; display: grid; grid-template-rows: auto minmax(0, 1fr); border: 1px solid var(--line); border-radius: 16px; background: var(--surface); overflow: hidden; max-height: calc((100vh / var(--zoom) - 100px) * 2 / 3); }
+  .sit-search { padding: 10px; border-bottom: 1px solid var(--line); }
+  .sit-search .dict-search { font-size: 14px; padding: 9px 12px; }
+  .sit-list { overflow-y: auto; padding: 6px; min-height: 0; display: grid; align-content: start; gap: 1px; }
+  .sit-cat { font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: 12px 10px 4px; }
+  .sit-cat:first-child { padding-top: 6px; }
+  .sit-item { font: inherit; font-size: 14px; line-height: 1.35; text-align: left; padding: 8px 10px; border-radius: 9px; border: 0; background: none; color: var(--ink); cursor: pointer; }
+  .sit-item:hover { background: var(--surface-2); }
+  .sit-item.active { background: var(--teal-soft); color: var(--teal); font-weight: 600; }
+  .sit-detail { position: sticky; top: 70px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: clamp(20px, 3vw, 34px); display: grid; gap: 16px; align-content: start; min-height: 360px; }
+  .sit-catlabel { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+  .sit-title { margin: -8px 0 0; font-size: clamp(22px, 2.4vw, 30px); line-height: 1.2; color: var(--teal); }
+  .sit-sketch { margin: 0; font-size: 17px; line-height: 1.65; max-width: 65ch; }
+  .sit-between { margin: 4px 0 0; color: var(--muted); }
+  .sit-label { margin: 6px 0 0; font-family: var(--font-mono); font-size: 11.5px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .sit-try { display: grid; gap: 10px; }
+  .sit-prompt { margin: 0; background: var(--code-bg); border: 1px solid var(--line); border-left: 4px solid var(--well-on); border-radius: 10px; padding: 14px 16px; font: 13px/1.65 var(--font-mono); white-space: pre-wrap; overflow-wrap: anywhere; color: var(--ink); }
+  .sit-prompt .ph, .sit-hint .ph { background: var(--amber-soft); color: var(--amber); border-radius: 4px; padding: 0 3px; }
+  .sit-actions { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; }
+  .sit-actions .btn.ok { background: var(--good); border-color: var(--good); }
+  .sit-hint { font-size: 13px; color: var(--muted); }
+  .sit-nav { display: flex; justify-content: space-between; gap: 10px; border-top: 1px solid var(--line); padding-top: 14px; margin-top: 4px; }
+  .sit-nav .btn { font-size: 13px; max-width: 48%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sit-nav .btn[disabled] { visibility: hidden; }
+  .cb-mine { border: 1.5px dashed var(--well-on); border-radius: 14px; padding: 14px 20px; display: grid; gap: 4px; }
+  .cb-mine { margin-top: 6px; }
+  .sit-howto { color: var(--teal); font-weight: 600; border-bottom: 1px solid var(--line) !important; border-radius: 9px 9px 0 0 !important; margin-bottom: 2px; }
+  .cb-mine p { margin: 0; color: var(--muted); font-size: 14px; }
+  @media (max-width: 880px) { .sit { grid-template-columns: 1fr; } .sit-side, .sit-detail { position: static; max-height: none; } .sit-list { max-height: 50vh; } }
+  @media print { .sit-side, .sit-actions, .sit-nav { display: none; } .sit { grid-template-columns: 1fr; } }
   .pill { display: inline-block; font-family: var(--font-mono); font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--amber-soft); color: var(--amber); }
   .pill.done { background: var(--teal-soft); color: var(--teal); }
 
@@ -377,6 +410,10 @@ __MARKED__</script>
   .prose code { font-family: var(--font-mono); font-size: 0.86em; background: var(--code-bg); padding: 1px 5px; border-radius: 4px; }
   .prose pre { background: var(--code-bg); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; overflow-x: auto; font-size: 13px; line-height: 1.5; }
   .prose pre code { background: none; padding: 0; font-size: inherit; overflow-wrap: normal; }
+  .prose .codewrap { position: relative; }
+  .prose .codewrap .copybtn { position: absolute; top: 6px; right: 6px; font: 11.5px var(--font-mono); padding: 2px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); color: var(--muted); cursor: pointer; opacity: .9; }
+  .prose .codewrap .copybtn:hover, .prose .codewrap .copybtn:focus-visible { color: var(--teal); opacity: 1; }
+  @media print { .prose .codewrap .copybtn { display: none; } }
   .prose blockquote { margin: 14px 0; padding: 4px 16px; border-left: 4px solid var(--amber); background: var(--amber-soft); border-radius: 0 8px 8px 0; }
   .tablewrap { overflow-x: auto; margin: 12px 0; }
   .prose table { border-collapse: collapse; font-size: 14px; width: 100%; }
@@ -1329,6 +1366,25 @@ __MARKED__</script>
                  /^Watch out/i.test(lab) ? "watch" : /^In practice/i.test(lab) ? "practice" : "";
       if (kind) { bq.classList.add("box"); kind.split(" ").forEach(function (k) { bq.classList.add(k); }); }
     });
+    /* a copy button on every code block, so prompts and code can be reused in one click */
+    box.querySelectorAll("pre").forEach(function (pre) {
+      var wrap = el("div", { class: "codewrap" });
+      pre.parentNode.insertBefore(wrap, pre); wrap.appendChild(pre);
+      var btn = el("button", { class: "copybtn", type: "button", text: "Copy", "aria-label": "Copy this block" });
+      btn.addEventListener("click", function () {
+        var txt = pre.innerText.replace(/\n$/, "");
+        var done = function (ok) { btn.textContent = ok ? "Copied" : "Select and copy"; setTimeout(function () { btn.textContent = "Copy"; }, 1600); };
+        var old = function () {   /* older route for browsers that block the clipboard API */
+          var ta = el("textarea", { style: "position:fixed;top:0;left:0;opacity:0" }); ta.value = txt;
+          document.body.appendChild(ta); ta.select();
+          var ok = false; try { ok = document.execCommand("copy"); } catch (e) {}
+          ta.remove(); done(ok);
+          if (!ok) { var r = document.createRange(); r.selectNodeContents(pre); var sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); }
+        };
+        try { navigator.clipboard.writeText(txt).then(function () { done(true); }, old); } catch (e) { old(); }
+      });
+      wrap.appendChild(btn);
+    });
     box.querySelectorAll("details.think > summary").forEach(function (sm) {
       if (sm.firstChild && sm.firstChild.nodeType === 3) sm.firstChild.nodeValue = sm.firstChild.nodeValue.replace(/^\s*Pause and think:\s*/i, "").replace(/^./, function (c) { return c.toUpperCase(); });
     });
@@ -1360,6 +1416,7 @@ __MARKED__</script>
     if (p[0] === "dict") return { kind: "dict", term: p[1] || null };
     if (p[0] === "prefs") return { kind: "prefs" };
     if (p[0] === "notes") return { kind: "notes" };
+    if (p[0] === "extra") return { kind: "extra" };
     if (p[0] === "finish") return { kind: "finish" };
     if (p[0] === "find") return { kind: "find", q: decodeURIComponent(h.slice(5)) };
     var m = modById(p[0]);
@@ -1404,13 +1461,15 @@ __MARKED__</script>
       el("span", { class: "navtitle", text: "Dictionary" }),
       el("span", { class: "navcount", text: DATA.dictionary.length + " terms" })
     ]));
+    var inExtra = route.kind === "extra" || (route.kind === "res" && EXTRA.indexOf(route.id) >= 0);
+    g0.appendChild(el("a", { class: "navitem" + (inExtra ? " active" : ""), href: "#extra", style: "grid-template-columns: minmax(0,1fr) auto" }, [
+      el("span", { class: "navtitle", text: "Extra reading" }),
+      el("span", { class: "navcount", text: EXTRA.length + " pages" })
+    ]));
     var nNotes = Object.keys(state.notes || {}).filter(function (k) { return (state.notes[k] || "").trim(); }).length;
     g0.appendChild(el("a", { class: "navitem" + (route.kind === "notes" ? " active" : ""), href: "#notes", style: "grid-template-columns: minmax(0,1fr) auto" }, [
       el("span", { class: "navtitle", text: "My notes" }),
       el("span", { class: "navcount", text: nNotes ? nNotes + (nNotes === 1 ? " note" : " notes") : "" })
-    ]));
-    g0.appendChild(el("a", { class: "navitem" + (route.kind === "res" && route.id === "timeline" ? " active" : ""), href: "#res.timeline", style: "grid-template-columns: minmax(0,1fr)" }, [
-      el("span", { class: "navtitle", text: "Timeline" })
     ]));
     g0.appendChild(el("a", { class: "navitem" + (route.kind === "res" && route.id === "about" ? " active" : ""), href: "#res.about", style: "grid-template-columns: minmax(0,1fr)" }, [
       el("span", { class: "navtitle", text: "About this course" })
@@ -2782,7 +2841,187 @@ __MARKED__</script>
     setTimeout(confetti, 250);
   }
 
+  /* ---------------- extra reading: one menu item, its pages as numbered steps like a module ---------------- */
+  var EXTRA = ["cookbook", "limits", "timeline"];
+  function extraRes(id) { return RESOURCES.filter(function (x) { return x.id === id; })[0]; }
+  /* the prompt cookbook gets its own layout: filter chips, a search box and one card per prompt */
+  function parseCookbook(md) {
+    var out = { intro: [], cats: [] }, cat = null, pr = null, para = [], code = null;
+    function flush() {
+      if (!para.length) return;
+      var t = para.join(" ");
+      if (pr) pr.blocks.push({ text: t }); else if (cat) cat.intro = t; else out.intro.push(t);
+      para = [];
+    }
+    md.split(/\r?\n/).forEach(function (l) {
+      if (code) { if (/^```/.test(l)) { pr.blocks.push({ code: unwrapPrompt(code) }); code = null; } else code.push(l); return; }
+      if (/^```/.test(l)) { flush(); code = []; return; }
+      if (/^# /.test(l)) return;
+      if (/^## /.test(l)) { flush(); cat = { title: l.slice(3).trim(), items: [] }; out.cats.push(cat); pr = null; return; }
+      if (/^### /.test(l)) { flush(); pr = { title: l.slice(4).trim(), blocks: [], cat: cat.title }; cat.items.push(pr); return; }
+      if (l.trim()) para.push(l.trim()); else flush();
+    });
+    flush();
+    return out;
+  }
+  function unwrapPrompt(lines) {
+    /* the file is wrapped at 80 characters; join a line onto the previous one unless that ended a sentence or a label */
+    var out = [];
+    lines.forEach(function (l) {
+      var prev = out.length ? out[out.length - 1] : "";
+      if (prev && l.trim() && !/[.?!:>"]$/.test(prev) && !/^[A-Z]+:/.test(l)) out[out.length - 1] = prev + " " + l.trim();
+      else out.push(l);
+    });
+    return out.join("\n");
+  }
+  function promptHtml(code) {
+    /* <angle brackets> with a space in them are the parts to fill in; one-word tags like <paper> are delimiters */
+    return esc(code).replace(/&lt;((?:[^&]|&quot;|&amp;)*?\s(?:[^&]|&quot;|&amp;)*?)&gt;/g, '<span class="ph">&lt;$1&gt;</span>');
+  }
+  var cbSel = -1;   /* the situation that was open last (-1: the introduction), kept while the page is open */
+  function copyText(txt, btn, label) {
+    var done = function (ok) { btn.textContent = ok ? "Copied" : "Select the text and copy"; btn.classList.toggle("ok", ok); setTimeout(function () { btn.textContent = label; btn.classList.remove("ok"); }, 1800); };
+    var old = function () {
+      var ta = el("textarea", { style: "position:fixed;top:0;left:0;opacity:0" }); ta.value = txt;
+      document.body.appendChild(ta); ta.select();
+      var ok = false; try { ok = document.execCommand("copy"); } catch (e) {}
+      ta.remove(); done(ok);
+    };
+    try { navigator.clipboard.writeText(txt).then(function () { done(true); }, old); } catch (e) { old(); }
+  }
+  function renderCookbook(body, r) {
+    var cb = parseCookbook(r.doc.md), wrap = el("div", { class: "cb" });
+
+    var mine = cb.cats.filter(function (c) { return /own/i.test(c.title); })[0];
+    var items = [];
+    cb.cats.forEach(function (c) { if (c !== mine) c.items.forEach(function (p) { items.push(p); }); });
+    if (cbSel >= items.length) cbSel = -1;
+
+    var search = el("input", { class: "dict-search", type: "search", placeholder: "Find a situation, e.g. papers, error…", "aria-label": "Find a situation", autocomplete: "off" });
+    var list = el("div", { class: "sit-list", role: "listbox", "aria-label": "Situations" });
+    var side = el("div", { class: "sit-side" }, [el("div", { class: "sit-search" }, [search]), list]);
+    var detail = el("article", { class: "sit-detail", "aria-live": "polite" });
+    var buttons = [], lastCat = null;
+    var howto = el("button", { type: "button", class: "sit-item sit-howto", role: "option", text: "How to use the cookbook" });
+    howto.addEventListener("click", function () { show(-1, true); });
+    list.appendChild(howto);
+    items.forEach(function (p, i) {
+      if (p.cat !== lastCat) { list.appendChild(el("div", { class: "sit-cat", text: p.cat })); lastCat = p.cat; }
+      var b = el("button", { type: "button", class: "sit-item", role: "option", text: p.title });
+      b.addEventListener("click", function () { show(i, true); });
+      b._text = (p.title + " " + p.blocks.map(function (x) { return x.text || x.code; }).join(" ")).toLowerCase();
+      buttons.push(b); list.appendChild(b);
+    });
+
+    function promptBox(code) {
+      var copy = el("button", { class: "btn primary", type: "button", text: "Copy prompt" });
+      copy.addEventListener("click", function () { copyText(code, copy, "Copy prompt"); });
+      var hasPh = /<[^<>]*\s[^<>]*>/.test(code);
+      return el("div", { class: "sit-try" }, [
+        el("pre", { class: "sit-prompt", html: promptHtml(code) }),
+        el("div", { class: "sit-actions" }, [copy, hasPh ? el("span", { class: "sit-hint", html: 'Fill in the <span class="ph">orange parts</span> before you send it.' }) : el("span")])
+      ]);
+    }
+    function welcome() {
+      /* nothing picked yet: the right-hand side explains the cookbook */
+      detail.appendChild(el("span", { class: "sit-catlabel", text: "Prompt cookbook" }));
+      detail.appendChild(el("h3", { class: "sit-title", text: "Recognise the situation, copy the prompt" }));
+      cb.intro.forEach(function (t, j) { detail.appendChild(el("p", { class: j ? "sit-between" : "sit-sketch", html: inlineMd(t) })); });
+      var start = el("button", { class: "btn primary", type: "button", text: "Start with: " + items[0].title + " →" });
+      start.addEventListener("click", function () { show(0, true); });
+      var save = el("button", { class: "btn", type: "button", text: "Save as my own file" });
+      save.addEventListener("click", function () { saveFile("prompt_cookbook.md", new Blob([r.doc.md], { type: "text/markdown" })); });
+      detail.appendChild(el("div", { class: "sit-actions" }, [start, save]));
+      if (mine) detail.appendChild(el("div", { class: "cb-mine" }, [
+        el("h4", { class: "sit-label", text: mine.title }),
+        el("p", { text: "The best prompts in your cookbook will be the ones you write yourself. Save the cookbook as your own file and add every prompt that worked: the situation in one line, the prompt, the date and the tool it worked with." })
+      ]));
+    }
+    function show(i, fromClick) {
+      cbSel = i;
+      howto.classList.toggle("active", i < 0); howto.setAttribute("aria-selected", i < 0 ? "true" : "false");
+      buttons.forEach(function (b, j) { b.classList.toggle("active", j === i); b.setAttribute("aria-selected", j === i ? "true" : "false"); });
+      var act = i < 0 ? howto : buttons[i];
+      if (act && !act.hidden) act.scrollIntoView({ block: "nearest" });
+      detail.textContent = "";
+      if (i < 0) { welcome(); return; }
+      var p = items[i];
+      detail.appendChild(el("span", { class: "sit-catlabel", text: p.cat }));
+      detail.appendChild(el("h3", { class: "sit-title", text: p.title }));
+      var seenCode = false;
+      p.blocks.forEach(function (b) {
+        if (b.code) {
+          if (!seenCode) detail.appendChild(el("h4", { class: "sit-label", text: "Try this prompt" }));
+          detail.appendChild(promptBox(b.code)); seenCode = true;
+        } else detail.appendChild(el("p", { class: seenCode ? "sit-between" : "sit-sketch", html: inlineMd(b.text) }));
+      });
+      var prev = el("button", { class: "btn", type: "button", text: "← " + (items[i - 1] ? items[i - 1].title : "") });
+      var next = el("button", { class: "btn", type: "button", text: (items[i + 1] ? items[i + 1].title : "") + " →" });
+      if (!items[i - 1]) prev.disabled = true; else prev.addEventListener("click", function () { show(i - 1, true); });
+      if (!items[i + 1]) next.disabled = true; else next.addEventListener("click", function () { show(i + 1, true); });
+      detail.appendChild(el("div", { class: "sit-nav" }, [prev, next]));
+      if (fromClick && window.matchMedia("(max-width: 880px)").matches) detail.scrollIntoView({ block: "start", behavior: "smooth" });
+    }
+    search.addEventListener("input", function () {
+      var q = search.value.trim().toLowerCase(), first = -1;
+      buttons.forEach(function (b, j) { var on = !q || b._text.indexOf(q) >= 0; b.hidden = !on; if (on && first < 0) first = j; });
+      list.querySelectorAll(".sit-cat").forEach(function (h) {
+        var n = h.nextElementSibling, any = false;
+        while (n && !n.classList.contains("sit-cat")) { if (!n.hidden) any = true; n = n.nextElementSibling; }
+        h.hidden = !any;
+      });
+      howto.hidden = !!q;
+      if (first >= 0 && cbSel >= 0 && buttons[cbSel].hidden) show(first);
+    });
+    /* arrow up and down step through the situations, also while typing in the search box */
+    keyHandler = function (e) {
+      if ((e.key !== "ArrowDown" && e.key !== "ArrowUp") || e.altKey || e.ctrlKey || e.metaKey) return;
+      var ae = document.activeElement;
+      if (ae && (/^(TEXTAREA|SELECT)$/.test(ae.tagName) || (ae.tagName === "INPUT" && ae !== search))) return;
+      var order = (howto.hidden ? [] : [-1]).concat(buttons.map(function (b, j) { return b.hidden ? null : j; }).filter(function (j) { return j !== null; }));
+      if (!order.length) return;
+      var k = order.indexOf(cbSel);
+      var to = e.key === "ArrowDown" ? order[Math.min(order.length - 1, k + 1)] : order[Math.max(0, k - 1)];
+      e.preventDefault();
+      if (to !== cbSel) show(to);
+    };
+    wrap.appendChild(el("div", { class: "sit" }, [side, detail]));
+    show(cbSel);
+    body.appendChild(wrap);
+  }
+
+  function renderExtra(main, id) {
+    if (EXTRA.indexOf(id) < 0) id = EXTRA[0];
+    var r = extraRes(id), i = EXTRA.indexOf(id);
+    var page = el("div", { class: "page" }, [
+      el("div", { class: "modtop" }, [el("span", { class: "label", text: "General" }), el("h2", { text: "Extra reading" }),
+        el("p", { text: "Pages to keep coming back to, during the course and long after it." })])
+    ]);
+    var stepper = el("div", { class: "stepper", role: "navigation", "aria-label": "Pages in extra reading" });
+    EXTRA.forEach(function (x, j) {
+      stepper.appendChild(el("a", { class: "step" + (x === id ? " active visited" : ""), href: "#res." + x, "aria-current": x === id ? "page" : null }, [
+        el("span", { class: "n", text: String(j + 1) }), extraRes(x).title
+      ]));
+    });
+    var banner = el("div", { class: "banner" }, [stepper]);
+    var row = el("div", { class: "brow" });
+    slots = { banner: banner, docs: el("div", { class: "brow" }), secs: row, tools: row };
+    banner.appendChild(slots.docs); banner.appendChild(row);
+    page.appendChild(banner);
+    var body = el("div", { class: "block" });
+    if (id === "cookbook") renderCookbook(body, r); else docBlock(body, r.doc);
+    slots = null;
+    page.appendChild(body);
+    var prev = EXTRA[i - 1], next = EXTRA[i + 1];
+    page.appendChild(el("div", { class: "pager" }, [
+      prev ? el("a", { class: "btn", href: "#res." + prev, text: "← " + extraRes(prev).title }) : el("span"),
+      next ? el("a", { class: "btn primary", href: "#res." + next, text: "Next: " + extraRes(next).title + " →" }) : el("span")
+    ]));
+    main.appendChild(page);
+  }
+
   function renderResource(main, id) {
+    if (EXTRA.indexOf(id) >= 0) { renderExtra(main, id); return; }
     var r = RESOURCES.filter(function (x) { return x.id === id; })[0];
     if (!r) { renderStart(main); return; }
     var page = el("div", { class: "page" }, [
@@ -3071,6 +3310,18 @@ __MARKED__</script>
       update();
     }
     input.addEventListener("input", function () { dictState.q = input.value; update(); });
+    /* arrow up and down step through the words in the look-up view, also while typing in the search box */
+    keyHandler = function (e) {
+      if (view.mode !== "lookup" || (e.key !== "ArrowDown" && e.key !== "ArrowUp") || e.altKey || e.ctrlKey || e.metaKey) return;
+      var ae = document.activeElement;
+      if (ae && (/^(TEXTAREA|SELECT)$/.test(ae.tagName) || (ae.tagName === "INPUT" && ae !== input))) return;
+      if (!hits.length) return;
+      var i = -1;
+      hits.forEach(function (h, j) { if (termSlug(h.term) === dictState.sel) i = j; });
+      var j = e.key === "ArrowDown" ? Math.min(hits.length - 1, i + 1) : Math.max(0, i - 1);
+      e.preventDefault();
+      if (j !== i) select(termSlug(hits[j].term));
+    };
     catSel.addEventListener("change", function () { dictState.cat = catSel.value; drawTopics(); update(); });
     modeSel.addEventListener("change", function () { view.mode = modeSel.value; applyView(); });
     colSel.addEventListener("change", function () { view.cols = colSel.value; applyView(); });
@@ -3097,6 +3348,7 @@ __MARKED__</script>
     else if (route.kind === "find") renderFind(main, route.q);
     else if (route.kind === "prefs") renderPrefs(main);
     else if (route.kind === "notes") renderNotes(main);
+    else if (route.kind === "extra") renderExtra(main, EXTRA[0]);
     else if (route.kind === "finish") renderFinish(main);
     else { renderStart(main); main.appendChild(aiBanner()); }
     decorateHeader(main, route);

@@ -210,7 +210,7 @@ Module 1 opens with **the foundations, in plain language**:
 - What AI, machine learning, generative AI and LLMs are (and aren't)
 - How an LLM is made, and why it sometimes makes things up
 - Cloud vs local, and which data may go where
-- Five myths, quickly busted
+- Seven myths, quickly busted
 
 No background needed. If you can explain a western blot to your family, you're fine.
 

@@ -115,3 +115,12 @@ An actual Edge progress download produced valid JSON and displayed a request mes
 Observed alignment is **19/24 (79.2%)** with **12/12 checks scored**. E07 previously gained one point after the missing-figure checks were verified. E08 now gains one point because the dashboard exposes a SHA-256 for its effective inputs and the builder compares the generated and tracked bytes. See the [build instructions](../CONTRIBUTING.md#under-the-hood).
 
 A relocated checkout reproduced identical bytes with mixed LF and CRLF source inputs. Changing a synthetic course paragraph changed the fingerprint; check mode rejected stale or missing HTML without writing it. The fingerprint also appeared in the offline dashboard in Edge. Git still provides the checkout identity. The fingerprint does not pin hosted source links to a commit. The wider runtime, optional tool, and handoff findings remain open.
+
+
+### Environment, handoff and source identity
+
+The ENCORE follow-up scores **23/24 (95.8%)** with **12/12 checks scored**. E04 now records the full Ollama manifest digest and client version for a tested synthetic prompt. E06 records the tested core build and browser, and pins Marp. E10 corrects the branch-hook decision to match the roadmap. E11 maps the published bundle's fingerprint to a Git commit, and the hosted source link uses that commit. [Tested environment](reproducibility.md) · [Source pin workflow](../CONTRIBUTING.md#under-the-hood) · [Branch decision](../DECISIONS.md)
+
+The optional checks produced a short local greeting using Ollama and valid PDF and PPTX exports of the Module 1 slides using the official, checksum-verified Marp CLI. The hosted source link was verified in Edge. A relocated copy reproduced the pinned HTML, and an edited source file made the check fail and the next build drop the old pin.
+
+E12 remains 1/2. The README requests attribution to the course and its author. The owner chose informal attribution guidance, with no formal course license added. [Course attribution](../README.md#learn-more)

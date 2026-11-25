@@ -17,11 +17,12 @@ so the dashboard works offline and contacts no other websites.
 
 from __future__ import annotations
 
+import argparse
 import base64
+import hashlib
 import json
 import posixpath
 import re
-from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -298,7 +299,7 @@ def embed_figures(md: str, rel: str) -> str:
         if not path.is_file():
             raise SystemExit(f"Figure not found: {src} (in {rel})")
         alt = re.sub(r"\s*\b(?:w|h|width|height):\S+", "", alt).strip()
-        data = base64.b64encode(path.read_bytes()).decode("ascii")
+        data = base64.b64encode(path.read_text(encoding="utf-8").encode("utf-8")).decode("ascii")
         title = m.group(3) or ""
         return f"![{alt}](data:image/svg+xml;base64,{data}{title})"
     return re.sub(r"!\[([^\]]*)\]\(([^)\s]+\.svg)(\s+\"[^\"]*\")?\)", repl, md)
@@ -492,25 +493,39 @@ def add_course_links(modules: list[dict], dictionary: list[dict]) -> None:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--check", action="store_true", help="check the existing dashboard without writing it")
+    args = parser.parse_args()
+
     modules = [build_module(m) for m in MODULES]
     resources = [{"id": r[0], "title": r[1], "summary": r[3], "doc": doc(r[2], r[1])} for r in RESOURCES]
     resources.append(limits_page())
     dictionary = parse_glossary()
     add_course_links(modules, dictionary)
     # dictionary figures: embedded once, shared by every word that uses them
-    dict_figs = {e["fig"]: "data:image/svg+xml;base64," + base64.b64encode((ROOT / e["fig"]).read_bytes()).decode("ascii")
+    dict_figs = {e["fig"]: "data:image/svg+xml;base64," + base64.b64encode(read(e["fig"]).encode("utf-8")).decode("ascii")
                  for e in dictionary if e.get("fig")}
-    data = {"version": VERSION, "built": date.today().isoformat(), "modules": modules, "resources": resources,
+    data = {"version": VERSION, "modules": modules, "resources": resources,
             "dictionary": dictionary, "dictionary_path": "course/glossary.md", "dict_figs": dict_figs,
             "contact": CONTACT_EMAIL}
 
-    payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
     template = TEMPLATE.read_text(encoding="utf-8")
     if PLACEHOLDER not in template:
         raise SystemExit(f"Placeholder {PLACEHOLDER} not found in {TEMPLATE}")
     marked = (ROOT / "course" / "vendor" / "marked.min.js").read_text(encoding="utf-8").replace("</script", r"<\/script")
+    # Fingerprint the effective inputs, before adding the fingerprint to the bundle.
+    builder = Path(__file__).read_text(encoding="utf-8")
+    inputs = json.dumps([builder, template, marked, data], ensure_ascii=False, separators=(",", ":"))
+    data["build_fingerprint"] = hashlib.sha256(inputs.encode("utf-8")).hexdigest()
+    payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
     html = template.replace(PLACEHOLDER, payload).replace("__MARKED__", marked).replace("__VERSION__", VERSION)
-    OUTPUT.write_text(html, encoding="utf-8")
+    output = html.encode("utf-8")
+    if args.check:
+        if not OUTPUT.is_file() or OUTPUT.read_bytes() != output:
+            raise SystemExit("course/dashboard.html is missing or stale. Run python course/build_dashboard.py.")
+        print(f"Dashboard is current (SHA-256 {data['build_fingerprint']}).")
+        return
+    OUTPUT.write_bytes(output)
 
     n_docs = sum(len(s.get("docs", [])) + ("doc" in s) + (s["kind"] == "slides") for m in modules for s in m["steps"])
     print(f"Wrote {OUTPUT.relative_to(ROOT)} (v{VERSION}): {len(modules)} modules, {n_docs} module documents, "

@@ -65,6 +65,17 @@ slides and SVG figures into `course/dashboard.html` with the template,
 bundled Markdown renderer and version number. Open the file locally to
 check the result. The browser stores progress in localStorage.
 
+Run `python course/build_dashboard.py --check` before committing. It compares
+the expected UTF-8/LF bundle with the checked-in file and exits nonzero
+if the dashboard is missing or stale. It leaves the file untouched.
+
+The dashboard menu shows a short build fingerprint. Hover over it or
+export a problem report for the full SHA-256. It covers the builder,
+template, bundled renderer, and the effective course payload, including
+the version and embedded figures. Identical inputs produce identical
+bytes across dates. The fingerprint identifies the bundle even when
+built from local edits, while Git identifies the checkout.
+
 ## Releasing
 
 1. On `development`, set the new number in `VERSION` and in the title line

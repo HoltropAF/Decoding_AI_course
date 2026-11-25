@@ -108,3 +108,10 @@ The dashboard was rebuilt and tested in isolated Edge profiles using synthetic n
 The sampled Apple usability score is **32/32 (100%)**, with **16/16 checks scored**. Feedback and recovery moved from 3/4 to 4/4. The other rubric checks and scope limits above still apply.
 
 An actual Edge progress download produced valid JSON and displayed a request message that directed the reader to browser downloads. A simulated browser failure gave a retry message. A simulated viewer showed separate success and failure feedback. With browser storage blocked, text size and theme still applied to the current session, a persistent retry control stayed visible after a failed retry, and the next retry persisted both settings after storage recovered. The native viewer and assistive technology were outside this follow-up.
+
+
+## ENCORE build provenance follow-up
+
+Observed alignment is **19/24 (79.2%)** with **12/12 checks scored**. E07 previously gained one point after the missing-figure checks were verified. E08 now gains one point because the dashboard exposes a SHA-256 for its effective inputs and the builder compares the generated and tracked bytes. See the [build instructions](../CONTRIBUTING.md#under-the-hood).
+
+A relocated checkout reproduced identical bytes with mixed LF and CRLF source inputs. Changing a synthetic course paragraph changed the fingerprint; check mode rejected stale or missing HTML without writing it. The fingerprint also appeared in the offline dashboard in Edge. Git still provides the checkout identity. The fingerprint does not pin hosted source links to a commit. The wider runtime, optional tool, and handoff findings remain open.

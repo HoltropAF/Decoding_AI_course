@@ -3755,7 +3755,7 @@ __MARKED__</script>
     return (h ? h.textContent.trim() : "Dashboard") + " (" + (location.hash || "#start") + ")";
   }
   function bugsAsText(list) {
-    var lines = ["Decoding AI: problem reports (" + list.length + "), exported " + new Date().toISOString().slice(0, 10), "Content version: v" + DATA.version + " (built " + DATA.built + ")", ""];
+    var lines = ["Decoding AI: problem reports (" + list.length + "), exported " + new Date().toISOString().slice(0, 10), "Content version: v" + DATA.version, "Build SHA-256: " + DATA.build_fingerprint, ""];
     list.forEach(function (b, i) {
       lines.push((i + 1) + ". [" + b.type + "] " + b.when);
       lines.push("   Page: " + b.page);
@@ -3856,7 +3856,9 @@ __MARKED__</script>
     holder.innerHTML = networkSvg(300, 360, 30, 4242, 0, [6, 19]);
     document.getElementById("side").appendChild(holder);
   })();
-  document.getElementById("built").textContent = "Version " + DATA.version + ", content built " + DATA.built + ". Progress is stored in this browser only.";
+  var buildStamp = document.getElementById("built");
+  buildStamp.textContent = "Version " + DATA.version + ", build " + DATA.build_fingerprint.slice(0, 12) + ". Progress is stored in this browser only.";
+  buildStamp.title = "Build SHA-256: " + DATA.build_fingerprint;
 
   load();
   render();

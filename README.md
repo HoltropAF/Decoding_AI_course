@@ -1,89 +1,44 @@
 # Decoding AI · v1.0.0
 
-Decoding AI is a hands-on course for colleagues in a lipidomics and
-immunology lab. It covers where AI can help in daily research, how to ask
-for useful answers, and how to check the results before relying on them.
-The exercises include no-code routes.
+<p align="center">
+  <img src="docs/img/readme-banner.png" alt="A practical course for researchers. Ask better questions. Check the answers." width="760">
+</p>
 
-> **Privacy first.** Treat pre-publication omics data, patient-derived
-> material and unpublished manuscripts as confidential. Read Part 3 of
-> [Module 1](module_01_foundations_and_privacy/README.md) before using cloud
-> models with lab data, and Part 3 of
-> [Module 5](module_05_agents_and_subagents/README.md) before deploying
-> autonomous agents.
+<p align="center">
+  <a href="#start-the-course"><img src="https://img.shields.io/badge/start_the-course-0f5b6b?style=for-the-badge&amp;labelColor=123b46" alt="Start the course"></a>
+  <a href="https://github.com/HoltropAF/Decoding_AI_course/wiki"><img src="https://img.shields.io/badge/read_the-wiki-0f5b6b?style=for-the-badge&amp;labelColor=123b46" alt="Read the wiki"></a>
+</p>
 
-*AI assisted in writing this course, drawing on online sources and practical
-experience. The material was reviewed and may still contain errors. Please
-flag anything that looks wrong.*
+<p align="center">
+  Practise using AI in a lipidomics and immunology lab.<br>
+  Try it on everyday research tasks, compare results, and bring what works to a team hackathon.
+</p>
 
-## Open the dashboard
+<p align="center">
+  <a href="https://github.com/HoltropAF/Decoding_AI_course/wiki/Using-the-course"><img src="docs/img/readme-preview.png" alt="Four dashboard views showing the course home, a chapter, the Dictionary and a self-check" width="760"></a>
+</p>
 
-<img src="docs/img/a_home.png" alt="Orientation and the six module cards on the dashboard home page" align="right" hspace="14" width="380">
+## What you'll do
 
-Download and extract the ZIP from GitHub under **Code**, or clone the
-repository. Open the local copy of [course/dashboard.html](course/dashboard.html)
-in your browser. The dashboard works offline and keeps your progress in
-that browser.
+- **Learn the basics.** See where AI can help in research and where it tends to get things wrong.
+- **Give it a better brief.** Add context, ask for clarifying questions, and try planning before building.
+- **Check the answers.** Use the self-checks and mini-experiments to spot problems like invented citations.
+- **Build with your team.** Try skills, data tools and agents, then put them to work in the hackathon.
 
-Start with **Orientation**. Work through **Foundations**, **Prompting &
-Context**, **Skills & Standards**, **MCP & Data**, and **Agents & Subagents**
-in order. Finish with the **Team Hackathon** in Module 6.
+## Start the course
 
-<br clear="all">
+1. Choose **Code → Download ZIP** on GitHub and extract the archive, or clone the repository.
+2. Double-click `course/dashboard.html` to open it in your browser.
+3. Choose **Begin with the orientation**, then work through Modules 1–5. Module 6 is the team hackathon.
 
-## Work through a module
+The dashboard works offline and saves progress in your browser. Each exercise has a no-code route. The [Setup guide](https://github.com/HoltropAF/Decoding_AI_course/wiki/Setup-guide) covers Ollama, Claude Code and Marp if you want to try them.
 
-<img src="docs/img/b_chapter.png" alt="Module 2 tabs for Chapter, Extra reading, Exercise, Self-check and Wrap-up" align="left" hspace="14" width="365">
+> **Privacy first.** Treat pre-publication omics data, patient-derived material and unpublished manuscripts as confidential. Read Part 3 of [Module 1](module_01_foundations_and_privacy/README.md) before using cloud models with lab data and Part 3 of [Module 5](module_05_agents_and_subagents/README.md) before deploying autonomous agents.
 
-Open the **Chapter** and select a section title to expand it. The tabs
-take you to the exercise, the self-check and the wrap-up. Some modules
-also have **Extra reading** or slides you can come back to at any time.
+## Learn more
 
-Look for **In practice** boxes as you read. In Module 2, expand
-**How do I write a good prompt?** to find **Plan before you build**.
-It shows how to get the AI to ask questions and propose a plan before
-it writes anything.
+The [wiki](https://github.com/HoltropAF/Decoding_AI_course/wiki) has a [dashboard walkthrough and troubleshooting](https://github.com/HoltropAF/Decoding_AI_course/wiki/Using-the-course), an [optional setup guide](https://github.com/HoltropAF/Decoding_AI_course/wiki/Setup-guide), and a [developer guide](https://github.com/HoltropAF/Decoding_AI_course/wiki/Developer-guide) for rebuilding the dashboard. Running a group? Start with the [facilitator guide](course/facilitator_guide.md).
 
-<img src="docs/img/e_in_practice.png" alt="The expanded Plan before you build box in the Module 2 chapter" width="690">
+Found a mistake or a broken example? [Open an issue](https://github.com/HoltropAF/Decoding_AI_course/issues) with the module, section and what you saw. Use synthetic data in anything you share.
 
-<img src="docs/img/c_dictionary.png" alt="Dictionary search and the illustrated entry for attention" align="right" hspace="14" width="295">
-
-Open **Dictionary** from the sidebar when a term is unfamiliar. You
-can search all 145 terms or select a word from the list. The entry
-for **Attention** shows how a diagram can help explain a concept.
-
-<br clear="all">
-
-## Check your understanding
-
-<img src="docs/img/d_selfcheck.png" alt="Module 1 self-check with the Knowledge check and mini-experiment sections" align="left" hspace="14" width="350">
-
-Use **Self-check** to test what you remember and try the mini-experiments.
-Start with **Knowledge check** in Module 1, then try the citation exercise
-to see how easily a plausible-looking reference can turn out to be wrong.
-
-<br clear="all">
-
-## Optional setup
-
-The dashboard and no-code routes are enough to start. For the local
-model exercises, install [Ollama](https://ollama.com) and Python, then
-follow the [Module 1 exercise](module_01_foundations_and_privacy/README.md#exercise-run-a-model-locally).
-For Claude Code examples or slide exports, follow the instructions in
-the [course guide](course/README.md) and the relevant module.
-
-To verify a local Ollama installation, run these commands from the
-repository root after starting Ollama.
-
-```bash
-python -m pip install requests
-ollama pull llama3.1:8b
-python module_01_foundations_and_privacy/exercises/test_ollama_local.py
-```
-
-## Help improve the course
-
-If you find a broken example or something that needs explaining, include
-the module, section and what you saw when you report it. Use synthetic
-data in examples you share. See the [contributing guide](CONTRIBUTING.md)
-for how to propose and check changes.
+*AI assisted in writing the course, drawing on online sources and practical experience. The material was reviewed and may still contain errors.*

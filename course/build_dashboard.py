@@ -274,10 +274,9 @@ def add_glossary_details(entries: list[dict], rel: str = "course/glossary_detail
             current["more"] = line[len("More:"):].strip()
         elif current is not None and line.startswith("Figure:"):
             path, _, cap = line[len("Figure:"):].partition("|")
-            if not (ROOT / path.strip()).exists():
-                print(f"  warning: dictionary figure not found: {path.strip()} (under {current['term']})")
-            else:
-                current["fig"], current["figcap"] = path.strip(), cap.strip()
+            if not (ROOT / path.strip()).is_file():
+                raise SystemExit(f"Dictionary figure not found: {path.strip()} (under {current['term']})")
+            current["fig"], current["figcap"] = path.strip(), cap.strip()
         elif current is not None and line.startswith("Example:"):
             current["ex"] = line[len("Example:"):].strip()
         elif current is not None and line.startswith("See also:"):
@@ -296,9 +295,8 @@ def embed_figures(md: str, rel: str) -> str:
     def repl(m: re.Match) -> str:
         alt, src = m.group(1), m.group(2)
         path = ((ROOT / rel).parent / src).resolve()
-        if not path.exists():
-            print(f"  warning: figure not found: {src} (in {rel})")
-            return m.group(0)
+        if not path.is_file():
+            raise SystemExit(f"Figure not found: {src} (in {rel})")
         alt = re.sub(r"\s*\b(?:w|h|width|height):\S+", "", alt).strip()
         data = base64.b64encode(path.read_bytes()).decode("ascii")
         title = m.group(3) or ""

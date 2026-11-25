@@ -87,6 +87,11 @@ Versions follow `MAJOR.MINOR.PATCH` as described in
   ends, scroll with the mouse wheel, and fade on the side with more steps.
 
 ### Changed
+- Improved dashboard keyboard focus, reduced-motion scrolling and the
+  contrast of destructive actions. Failed report saves keep the draft.
+- The offline build now stops on missing SVG figures and the Windows
+  launcher reports build failures.
+- Chapter checklist ticks now persist across reloads.
 - Version numbers now use three parts: `1.0` became `1.0.0`.
 - The dashboard shows at 75% on computer screens by default; Preferences
   has a "Page size" setting (75%, 90%, 100%). Phones stay at full size.

@@ -24,6 +24,7 @@
     --teal: #0f5b6b;
     --teal-soft: #d5e7ea;
     --well-on: #1d7a8c;
+    --danger: #9d302c;
     --amber: #b8641d;
     --amber-soft: #f6e4d2;
     --good: #2f7d4f;
@@ -45,7 +46,7 @@
       --bg: #0d181b; --surface: #142328; --surface-2: #1a2e34; --side: #10201f;
       --ink: #e2eced; --muted: #9db1b5; --line: #2a434a;
       --teal: #7cc4d1; --teal-soft: #1d3c44; --well-on: #5fb3c2; --logo-ink: #0d181b;
-      --amber: #f0a464; --amber-soft: #3b2a1b; --good: #7cc79a; --focus: #f0a464;
+      --danger: #ffaaa0; --amber: #f0a464; --amber-soft: #3b2a1b; --good: #7cc79a; --focus: #f0a464;
       --code-bg: #10252b; --slide-bg: #182b31; --slide-ink: #e2eced; --lead-bg: #0f4c5c; --lead-ink: #f4f8f8;
       --fun: #b9a2e0;
       --mt-m0: #1d3c44; --mt-m1: #1f2f45; --mt-m2: #2b2540; --mt-m3: #1f3a2a; --mt-m4: #3a3220; --mt-m5: #3d2629; --mt-m6: #3b2a1b;
@@ -56,7 +57,7 @@
     --bg: #0d181b; --surface: #142328; --surface-2: #1a2e34; --side: #10201f;
     --ink: #e2eced; --muted: #9db1b5; --line: #2a434a;
     --teal: #7cc4d1; --teal-soft: #1d3c44; --well-on: #5fb3c2; --logo-ink: #0d181b;
-    --amber: #f0a464; --amber-soft: #3b2a1b; --good: #7cc79a; --focus: #f0a464;
+    --danger: #ffaaa0; --amber: #f0a464; --amber-soft: #3b2a1b; --good: #7cc79a; --focus: #f0a464;
     --code-bg: #10252b; --slide-bg: #182b31; --slide-ink: #e2eced; --lead-bg: #0f4c5c; --lead-ink: #f4f8f8;
     --fun: #b9a2e0;
     --mt-m0: #1d3c44; --mt-m1: #1f2f45; --mt-m2: #2b2540; --mt-m3: #1f3a2a; --mt-m4: #3a3220; --mt-m5: #3d2629; --mt-m6: #3b2a1b;
@@ -201,7 +202,7 @@
   .btn { padding: 7px 14px; border-radius: 7px; cursor: pointer; border: 1px solid var(--line); background: var(--surface); text-decoration: none; color: var(--ink); display: inline-flex; align-items: center; gap: 6px; font-size: 14px; }
   .btn:hover { border-color: var(--teal); }
   .btn.primary { background: var(--teal); border-color: var(--teal); color: var(--surface); }
-  .btn.danger { color: var(--amber); }
+  .btn.danger { color: var(--danger); }
   .btn[disabled] { opacity: 0.45; cursor: default; }
   .card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px; }
   /* prompt cookbook: situations on the left, the suggested prompt on the right */
@@ -628,7 +629,7 @@
   @media (max-width: 700px) { .welcome svg.net { width: 100%; right: 0; opacity: .35; } }
   .home-foot { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; font-size: 13px; color: var(--muted); }
   .home-foot button { font: inherit; background: none; border: 0; padding: 0; color: var(--teal); text-decoration: underline; cursor: pointer; }
-  .home-foot button.danger { color: var(--amber); }
+  .home-foot button.danger { color: var(--danger); }
   /* ---------- Dashboard home ---------- */
   .welcome .dash-hero { gap: 28px; align-items: center; }
   .welcome .dash-hero .logo { width: clamp(96px, 12vw, 150px); height: auto; aspect-ratio: 1; filter: drop-shadow(0 8px 18px rgba(15, 91, 107, .25)); }
@@ -1074,7 +1075,7 @@
   if (window.marked && marked.use) marked.use({ gfm: true });
 
   /* ---------------- state ---------------- */
-  var state = { done: {}, conf: {}, visited: {}, notes: {}, exp: {}, slide: {}, sub: {}, last: null, lastTitle: "", readParts: {}, fs: "m", tts: { rate: 1, voice: "", auto: false } };
+  var state = { done: {}, ticks: {}, conf: {}, visited: {}, notes: {}, exp: {}, slide: {}, sub: {}, last: null, lastTitle: "", readParts: {}, fs: "m", tts: { rate: 1, voice: "", auto: false } };
   function load() {
     try {
       var raw = localStorage.getItem(KEY);
@@ -1102,6 +1103,7 @@
   function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* ignore */ } }
 
   /* ---------------- helpers ---------------- */
+  function scrollBehavior() { return window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"; }
   function el(tag, attrs, children) {
     var n = document.createElement(tag);
     if (attrs) Object.keys(attrs).forEach(function (k) {
@@ -1690,7 +1692,7 @@
     var armed = false;
     reset.addEventListener("click", function () {
       if (!armed) { armed = true; reset.textContent = "Click again to erase ticks, ratings and notes"; setTimeout(function () { armed = false; reset.textContent = "Reset progress"; }, 4000); return; }
-      state = { done: {}, conf: {}, visited: {}, notes: {}, exp: {}, slide: {}, sub: {}, last: null, lastTitle: "", readParts: {}, fs: state.fs, zoom: state.zoom, prefs: state.prefs, tts: state.tts };
+      state = { done: {}, ticks: {}, conf: {}, visited: {}, notes: {}, exp: {}, slide: {}, sub: {}, last: null, lastTitle: "", readParts: {}, fs: state.fs, zoom: state.zoom, prefs: state.prefs, tts: state.tts };
       save(); render();
     });
     page.appendChild(el("div", { class: "home-foot" }, [
@@ -1954,7 +1956,7 @@
       lit = e;
       if (e) {
         e.classList.add("speaking");
-        if (!opts.noScroll) { try { e.scrollIntoView({ block: "center", behavior: "smooth" }); } catch (x) { e.scrollIntoView(); } }
+        if (!opts.noScroll) { try { e.scrollIntoView({ block: "center", behavior: scrollBehavior() }); } catch (x) { e.scrollIntoView(); } }
       }
     }
     function setMode(m) {
@@ -2196,7 +2198,7 @@
         var bannerEl = document.querySelector(".banner");
         var off = bannerEl && getComputedStyle(bannerEl).position === "sticky" ? bannerEl.getBoundingClientRect().height + 16 : 16;
         var y = target.head.getBoundingClientRect().top + window.scrollY - off;
-        try { window.scrollTo({ top: Math.max(0, y), behavior: "smooth" }); } catch (e) { window.scrollTo(0, Math.max(0, y)); }
+        try { window.scrollTo({ top: Math.max(0, y), behavior: scrollBehavior() }); } catch (e) { window.scrollTo(0, Math.max(0, y)); }
       }
     }
     var secbar = el("div", { class: "secbar" }, [
@@ -2512,7 +2514,7 @@
     var armed = false;
     reset.addEventListener("click", function () {
       if (!armed) { armed = true; reset.textContent = "Click again to erase ticks, ratings and notes"; setTimeout(function () { armed = false; reset.textContent = "Reset progress"; }, 4000); return; }
-      state = { done: {}, conf: {}, visited: {}, notes: {}, exp: {}, slide: {}, sub: {}, last: null, lastTitle: "", readParts: {}, fs: state.fs, zoom: state.zoom, prefs: state.prefs, tts: state.tts };
+      state = { done: {}, ticks: {}, conf: {}, visited: {}, notes: {}, exp: {}, slide: {}, sub: {}, last: null, lastTitle: "", readParts: {}, fs: state.fs, zoom: state.zoom, prefs: state.prefs, tts: state.tts };
       save(); render();
     });
     page.appendChild(el("section", { class: "card" }, [el("h3", { text: "Your progress" }),
@@ -2869,7 +2871,7 @@
       stepper.classList.toggle("more-left", !left.disabled);
       stepper.classList.toggle("more-right", !right.disabled);
     }
-    function by(dir) { stepper.scrollBy({ left: dir * Math.max(120, stepper.clientWidth * 0.7), behavior: "smooth" }); }
+    function by(dir) { stepper.scrollBy({ left: dir * Math.max(120, stepper.clientWidth * 0.7), behavior: scrollBehavior() }); }
     left.addEventListener("click", function () { by(-1); });
     right.addEventListener("click", function () { by(1); });
     stepper.addEventListener("scroll", update, { passive: true });
@@ -3015,7 +3017,7 @@
       if (!items[i - 1]) prev.disabled = true; else prev.addEventListener("click", function () { show(i - 1, true); });
       if (!items[i + 1]) next.disabled = true; else next.addEventListener("click", function () { show(i + 1, true); });
       detail.appendChild(el("div", { class: "sit-nav" }, [prev, next]));
-      if (fromClick && window.matchMedia("(max-width: 880px)").matches) detail.scrollIntoView({ block: "start", behavior: "smooth" });
+      if (fromClick && window.matchMedia("(max-width: 880px)").matches) detail.scrollIntoView({ block: "start", behavior: scrollBehavior() });
     }
     search.addEventListener("input", function () {
       var q = search.value.trim().toLowerCase(), first = -1;
@@ -3479,7 +3481,7 @@
   });
 
   var totop = el("button", { id: "totop", type: "button", "aria-label": "Back to top", title: "Back to top", text: "\u2191" });
-  totop.addEventListener("click", function () { try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch (e) { window.scrollTo(0, 0); } });
+  totop.addEventListener("click", function () { try { window.scrollTo({ top: 0, behavior: scrollBehavior() }); } catch (e) { window.scrollTo(0, 0); } });
   document.body.appendChild(totop);
   window.addEventListener("scroll", function () {
     document.body.classList.toggle("scrolled", window.scrollY > 900);
@@ -3490,6 +3492,7 @@
     document.getElementById("side").classList.remove("open");
     document.getElementById("menu").setAttribute("aria-expanded", "false");
     render(); window.scrollTo(0, 0);
+    if (document.activeElement === document.body) document.getElementById("main").focus({ preventScroll: true });
   });
   document.getElementById("side").addEventListener("click", function (e) {
     if (e.target === this && this.classList.contains("open")) { this.classList.remove("open"); document.getElementById("menu").setAttribute("aria-expanded", "false"); }
@@ -3498,6 +3501,13 @@
     var side = document.getElementById("side");
     var open = side.classList.toggle("open");
     this.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  document.addEventListener("keydown", function (e) {
+    var menu = document.getElementById("menu");
+    if (e.defaultPrevented || e.key !== "Escape" || menu.getAttribute("aria-expanded") !== "true") return;
+    document.getElementById("side").classList.remove("open");
+    menu.setAttribute("aria-expanded", "false");
+    menu.focus();
   });
   /* ---------------- light / dark ---------------- */
   /* Figures are drawn in the light palette; in dark mode each colour is swapped for its dark partner. */
@@ -3640,7 +3650,12 @@
       if (!text.value.trim()) { status.textContent = "Write a few words first."; text.focus(); return; }
       var all = loadBugs();
       all.push({ when: new Date().toISOString().slice(0, 16).replace("T", " "), page: where, type: type.value, text: text.value.trim() });
-      status.textContent = saveBugs(all) ? "Saved. Thank you!" : "Couldn't save in this browser; copy your text instead.";
+      if (!saveBugs(all)) {
+        status.textContent = "Couldn't save in this browser. Retry or copy your draft.";
+        text.focus();
+        return;
+      }
+      status.textContent = "Saved. Thank you!";
       text.value = ""; paint();
     });
     var close = el("button", { class: "btn", type: "button", text: "Close" });

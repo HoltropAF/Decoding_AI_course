@@ -101,3 +101,10 @@ The focused follow-up scored **31/32 (96.9%)**, with **16/16 rubric checks score
 | Charts and analytical views | 4/4 | Figure launchers work by keyboard, and Dictionary figures can expose the description from their source SVG. The Attention alternative identifies the relative strength of the three arcs. |
 
 The dashboard was rebuilt and tested in isolated Edge profiles using synthetic notes and backup files. The 320-pixel test used the course’s text size setting. Native browser zoom, Safari, VoiceOver, live speech output and an exhaustive contrast audit remain outside this sample.
+
+
+### Feedback and recovery follow-up
+
+The sampled Apple usability score is **32/32 (100%)**, with **16/16 checks scored**. Feedback and recovery moved from 3/4 to 4/4. The other rubric checks and scope limits above still apply.
+
+An actual Edge progress download produced valid JSON and displayed a request message that directed the reader to browser downloads. A simulated browser failure gave a retry message. A simulated viewer showed separate success and failure feedback. With browser storage blocked, text size and theme still applied to the current session, a persistent retry control stayed visible after a failed retry, and the next retry persisted both settings after storage recovered. The native viewer and assistive technology were outside this follow-up.

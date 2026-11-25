@@ -96,6 +96,8 @@ Versions follow `MAJOR.MINOR.PATCH` as described in
   reflow, Dictionary focus and the contrast of instructional accents.
 - Failed note saves keep the draft, and invalid or failed progress
   imports preserve the progress already saved in the browser.
+- Download feedback distinguishes a request from an available file, and
+  failed preference saves offer a retry.
 - Version numbers now use three parts: `1.0` became `1.0.0`.
 - The dashboard shows at 75% on computer screens by default; Preferences
   has a "Page size" setting (75%, 90%, 100%). Phones stay at full size.

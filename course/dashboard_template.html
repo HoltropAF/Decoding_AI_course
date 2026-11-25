@@ -400,6 +400,8 @@ __MARKED__</script>
   #selsave::after { content: ""; position: absolute; left: 50%; bottom: -5px; margin-left: -5px; border: 5px solid transparent; border-bottom: 0; border-top-color: var(--teal); }
   #toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px); z-index: 60; background: var(--ink); color: var(--surface); padding: 9px 16px; border-radius: 10px; font-size: 13.5px; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; }
   #toast.show { opacity: 1; transform: translateX(-50%); }
+  .preference-retry { position: fixed; inset: auto 12px 60px; width: fit-content; max-width: calc(100% - 24px); margin-inline: auto; z-index: 45; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--ink); box-shadow: 0 4px 18px #0003; }
+  .preference-retry button { margin-inline-start: 8px; }
   .prose h3.tl-event { position: relative; margin-left: 22px; padding-top: 4px; }
   .prose h3.tl-event::before { content: ""; position: absolute; left: -22px; top: 9px; width: 11px; height: 11px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 4px var(--teal-soft); }
   .prose .secbody:has(> h3.tl-event) { border-left: 2px solid var(--teal-soft); margin-left: 5px; padding-left: 4px; }
@@ -1820,7 +1822,7 @@ __MARKED__</script>
     var fs = el("button", { class: "btn", type: "button", text: "Full screen" });
     var auto = el("input", { type: "checkbox", id: "tts-auto-" + m.id });
     auto.checked = !!(state.tts && state.tts.auto);
-    auto.addEventListener("change", function () { state.tts = state.tts || { rate: 1, voice: "" }; state.tts.auto = auto.checked; save(); });
+    auto.addEventListener("change", function () { state.tts = state.tts || { rate: 1, voice: "" }; state.tts.auto = auto.checked; saveReaderPreferences(); });
     var readerBar = makeReader(function () {
       var b = readableBlocks(slide.querySelector(".slide-inner"));
       if (showNotes && deck.slides[idx].notes) b.push({ el: notes, text: cleanText(deck.slides[idx].notes) });
@@ -2065,11 +2067,11 @@ __MARKED__</script>
     });
     stop.addEventListener("click", function () { api.stop(); });
     rate.addEventListener("change", function () {
-      state.tts.rate = parseFloat(rate.value); save();
+      state.tts.rate = parseFloat(rate.value); saveReaderPreferences();
       if (mode !== "idle") { var at = i; run++; resetSpeech(); speakBlock(at, run); }
     });
     voice.addEventListener("change", function () {
-      state.tts.voice = voice.value; save();
+      state.tts.voice = voice.value; saveReaderPreferences();
       if (mode !== "idle") { var at = i; run++; resetSpeech(); speakBlock(at, run); }
     });
     setMode("idle");
@@ -2394,7 +2396,7 @@ __MARKED__</script>
     var dl = el("button", { class: "btn", type: "button", text: "Download as text" });
     dl.addEventListener("click", function () {
       var blob = new Blob([notesAsText()], { type: "text/plain" });
-      saveFile("my-ai-course-notes-" + new Date().toISOString().slice(0, 10) + ".txt", blob);
+      saveFile("my-ai-course-notes-" + new Date().toISOString().slice(0, 10) + ".txt", blob, status);
     });
     page.appendChild(el("div", { class: "tools" }, [copy, dl, status]));
     /* each card reads like a page; "Edit" switches it to text boxes */
@@ -2452,10 +2454,27 @@ __MARKED__</script>
   }
 
   /* ---------------- preferences ---------------- */
+  var pendingPreferences = new Map();
+  function persistPreference(key, write) {
+    try { write(); pendingPreferences.delete(key); }
+    catch (e) { pendingPreferences.set(key, write); }
+    preferenceNotice.hidden = pendingPreferences.size === 0;
+    preferenceStatus.textContent = pendingPreferences.size
+      ? "Your changes apply for this session. This browser couldn't save them." : "";
+  }
+  function saveReaderPreferences() {
+    persistPreference(KEY, function () {
+      if (!save()) throw new Error("Preference storage unavailable");
+    });
+  }
   function setTheme(mode) {
-    if (mode === "system") { document.documentElement.removeAttribute("data-theme"); try { localStorage.removeItem(THEME_KEY); } catch (e) {} }
-    else { document.documentElement.setAttribute("data-theme", mode); try { localStorage.setItem(THEME_KEY, mode); } catch (e) {} }
-    applyModTheme(curMod); themeFigures();
+    if (mode === "system") document.documentElement.removeAttribute("data-theme");
+    else document.documentElement.setAttribute("data-theme", mode);
+    persistPreference(THEME_KEY, function () {
+      if (mode === "system") localStorage.removeItem(THEME_KEY);
+      else localStorage.setItem(THEME_KEY, mode);
+    });
+    paintThemeBtn(); applyModTheme(curMod); themeFigures();
   }
   function segmented(options, current, onPick, label) {
     var box = el("div", { class: "seg", role: "group", "aria-label": label });
@@ -2479,28 +2498,28 @@ __MARKED__</script>
     page.appendChild(el("section", { class: "card" }, [el("h3", { text: "Text size" }),
       segmented([["s", "Smaller"], ["m", "Normal"], ["l", "Larger"]], state.fs, function (v) {
         document.documentElement.classList.remove("fs-s", "fs-m", "fs-l");
-        state.fs = v; document.documentElement.classList.add("fs-" + v); save();
+        state.fs = v; document.documentElement.classList.add("fs-" + v); saveReaderPreferences();
       }, "Text size"), preview]));
 
     /* page size */
     page.appendChild(el("section", { class: "card" }, [el("h3", { text: "Page size" }),
       el("p", { class: "hint", text: "Everything a little smaller fits more on the screen. On a phone the page always shows at full size. If the page looks too small, also check your browser’s own zoom (Ctrl+0 resets it)." }),
       segmented([[0.75, "75% (default)"], [0.9, "90%"], [1, "100%"]], state.zoom, function (v) {
-        state.zoom = v; applyZoom(); save();
+        state.zoom = v; applyZoom(); saveReaderPreferences();
       }, "Page size")]));
 
     /* colours */
-    var saved = null; try { saved = localStorage.getItem(THEME_KEY); } catch (e) {}
+    var saved = document.documentElement.getAttribute("data-theme");
     page.appendChild(el("section", { class: "card" }, [el("h3", { text: "Colours" }),
       el("p", { class: "hint", text: "\u201cLike my computer\u201d follows the light or dark setting of your device." }),
       segmented([["light", "Light"], ["dark", "Dark"], ["system", "Like my computer"]], saved || "system", setTheme, "Colour scheme")]));
 
     /* read aloud */
     var voiceSel = el("select", { "aria-label": "Voice" }); fillVoices(voiceSel); voiceSelects.push(voiceSel);
-    voiceSel.addEventListener("change", function () { state.tts.voice = voiceSel.value; save(); });
+    voiceSel.addEventListener("change", function () { state.tts.voice = voiceSel.value; saveReaderPreferences(); });
     var rateSel = el("select", { "aria-label": "Reading speed" });
     [0.8, 0.9, 1, 1.15, 1.3, 1.5, 1.75, 2, 2.25, 2.5].forEach(function (r) { rateSel.appendChild(el("option", { value: String(r), text: r + "\u00d7", selected: r === state.tts.rate ? "selected" : null })); });
-    rateSel.addEventListener("change", function () { state.tts.rate = parseFloat(rateSel.value); save(); });
+    rateSel.addEventListener("change", function () { state.tts.rate = parseFloat(rateSel.value); saveReaderPreferences(); });
     var test = el("button", { class: "btn", type: "button", text: "\u25b6 Test this voice" });
     test.addEventListener("click", function () {
       if (!TTS) return;
@@ -2519,7 +2538,7 @@ __MARKED__</script>
     /* reading extras */
     function sw(key, title, sub) {
       var cb = el("input", { type: "checkbox", checked: state.prefs[key] ? "checked" : null });
-      cb.addEventListener("change", function () { state.prefs[key] = cb.checked; save(); applyPrefs(); });
+      cb.addEventListener("change", function () { state.prefs[key] = cb.checked; saveReaderPreferences(); applyPrefs(); });
       return el("label", { class: "switch" }, [cb, el("span", {}, [title, el("small", { text: sub })])]);
     }
     page.appendChild(el("section", { class: "card" }, [el("h3", { text: "While reading" }),
@@ -2532,8 +2551,7 @@ __MARKED__</script>
     var exp = el("button", { class: "btn", type: "button", text: "Download my progress" });
     exp.addEventListener("click", function () {
       var blob = new Blob([JSON.stringify(state, null, 1)], { type: "application/json" });
-      saveFile("ai-omics-progress-" + new Date().toISOString().slice(0, 10) + ".json", blob);
-      status.textContent = "Saved. Open it on another computer or phone with \u201cLoad progress\u201d.";
+      saveFile("ai-omics-progress-" + new Date().toISOString().slice(0, 10) + ".json", blob, status);
     });
     var file = el("input", { type: "file", accept: "application/json,.json", style: "display:none" });
     var imp = el("button", { class: "btn", type: "button", text: "Load progress" });
@@ -2594,7 +2612,7 @@ __MARKED__</script>
       var b = el("button", { type: "button", class: o[0], title: o[1], "aria-label": o[1], "aria-pressed": state.fs === o[0] ? "true" : "false", text: "A" });
       b.addEventListener("click", function () {
         document.documentElement.classList.remove("fs-s", "fs-m", "fs-l");
-        state.fs = o[0]; document.documentElement.classList.add("fs-" + o[0]); save();
+        state.fs = o[0]; document.documentElement.classList.add("fs-" + o[0]); saveReaderPreferences();
         box.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
       });
       box.appendChild(b);
@@ -2825,14 +2843,24 @@ __MARKED__</script>
   if (window.claude && typeof window.claude.use === "function") {
     try { window.claude.use("downloads").then(function (ns) { dlNs = ns; }, function () {}); } catch (e) {}
   }
-  function saveFile(name, blob) {
-    if (dlNs) {
-      dlNs.save({ filename: name, data: blob }).catch(function (e) {
-        if (e && (e.code === "unavailable" || e.code === "not_granted" || e.code === "capability_disabled" || e.code === "capability_removed")) plainDownload(name, blob);
-      });
-      return;
+  async function saveFile(name, blob, status) {
+    function say(message) { if (status) status.textContent = message; else showToast(message); }
+    say("Preparing the download...");
+    try {
+      if (dlNs) {
+        try {
+          await dlNs.save({ filename: name, data: blob });
+          say("Download ready: " + name);
+          return;
+        } catch (error) {
+          if (!error || !["unavailable", "not_granted", "capability_disabled", "capability_removed"].includes(error.code)) throw error;
+        }
+      }
+      plainDownload(name, blob);
+      say("Download requested. Check your browser's downloads. If it isn't there, try again.");
+    } catch (error) {
+      say("Couldn't start the download. Use the download button to try again.");
     }
-    plainDownload(name, blob);
   }
   function plainDownload(name, blob) {
     var a = el("a", { href: URL.createObjectURL(blob), download: name });
@@ -3217,6 +3245,7 @@ __MARKED__</script>
 
   /* ---------------- dictionary ---------------- */
   var dictState = { q: "", cat: "", sel: null };
+  var VIEW_KEY = "ai-omics-dict-view-2", dictView;
   var TRACKS = { A: 0, B: 1, C: 2, D: 3 };
   function whereLinks(where) {
     var out = [];
@@ -3264,10 +3293,14 @@ __MARKED__</script>
     function opt(v, label, cur) { return el("option", { value: v, text: label, selected: v === cur ? "selected" : null }); }
     var catSel = el("select", { "aria-label": "Topic" }, [opt("", "All topics", dictState.cat)].concat(cats.map(function (c) { return opt(c, c, dictState.cat); })));
 
-    var VIEW_KEY = "ai-omics-dict-view-2";
-    var view = { mode: "lookup", cols: "auto" };
-    try { var sv = JSON.parse(localStorage.getItem(VIEW_KEY) || "null"); if (sv && sv.mode) view = sv; } catch (e) { /* ignore */ }
-    if (focusTerm) view.mode = view.mode === "lookup" ? "lookup" : view.mode;
+    if (!dictView) {
+      dictView = { mode: "lookup", cols: "auto" };
+      try {
+        var savedView = JSON.parse(localStorage.getItem(VIEW_KEY) || "null");
+        if (savedView && savedView.mode) dictView = savedView;
+      } catch (e) { /* use the default view */ }
+    }
+    var view = dictView;
     var modeSel = el("select", { "aria-label": "Dictionary view" }, [opt("lookup", "Look up one word", view.mode), opt("cards", "Browse as cards", view.mode), opt("list", "Browse as list", view.mode)]);
     var colSel = el("select", { "aria-label": "Number of columns" }, [opt("auto", "Fit to screen", view.cols), opt("1", "1 column", view.cols), opt("2", "2 columns", view.cols), opt("3", "3 columns", view.cols), opt("4", "4 columns", view.cols)]);
     var colWrap = el("label", { class: "viewopt" }, [el("span", { text: "Columns" }), colSel]);
@@ -3434,7 +3467,7 @@ __MARKED__</script>
         var g = el("section", { class: "dict-group" }, [el("div", { class: "dict-letter", text: L })]);
         groups[L].forEach(function (e) {
           var open = el("button", { type: "button", class: "term", html: highlight(e.term, q), title: "Open this word" });
-          open.addEventListener("click", function () { view.mode = "lookup"; modeSel.value = "lookup"; applyView(); select(termSlug(e.term)); });
+          open.addEventListener("click", function () { view.mode = "lookup"; modeSel.value = "lookup"; applyView(true); select(termSlug(e.term)); });
           g.appendChild(el("article", { class: "entry", id: "term-" + termSlug(e.term) }, [
             open,
             el("div", { class: "def", html: inlineMd(e.def) }),
@@ -3450,11 +3483,11 @@ __MARKED__</script>
       count.textContent = hits.length === D.length ? D.length + " words" : hits.length + " of " + D.length + " words";
       if (view.mode === "lookup") { drawList(); showDetail(); } else drawBrowse();
     }
-    function applyView() {
+    function applyView(remember) {
       page.classList.toggle("mode-lookup", view.mode === "lookup");
       browse.className = "dict-list view-" + (view.mode === "list" ? "list" : "cards") + " cols-" + view.cols;
       colWrap.hidden = view.mode === "lookup";
-      try { localStorage.setItem(VIEW_KEY, JSON.stringify(view)); } catch (e) { /* ignore */ }
+      if (remember) persistPreference(VIEW_KEY, function () { localStorage.setItem(VIEW_KEY, JSON.stringify(view)); });
       update();
     }
     input.addEventListener("input", function () { dictState.q = input.value; update(); });
@@ -3471,8 +3504,8 @@ __MARKED__</script>
       if (j !== i) select(termSlug(hits[j].term));
     };
     catSel.addEventListener("change", function () { dictState.cat = catSel.value; drawTopics(); update(); });
-    modeSel.addEventListener("change", function () { view.mode = modeSel.value; applyView(); });
-    colSel.addEventListener("change", function () { view.cols = colSel.value; applyView(); });
+    modeSel.addEventListener("change", function () { view.mode = modeSel.value; applyView(true); });
+    colSel.addEventListener("change", function () { view.cols = colSel.value; applyView(true); });
     applyView();
     if (dictState.sel) setTimeout(function () { select(dictState.sel); }, 0);
   }
@@ -3529,6 +3562,18 @@ __MARKED__</script>
   /* select text in a chapter -> "Save to my notes" */
   var toast = el("div", { id: "toast", role: "status", "aria-live": "polite" });
   document.body.appendChild(toast);
+  var preferenceStatus = el("span", { role: "status" });
+  var retryPreferences = el("button", { class: "btn", type: "button", text: "Retry saving preferences" });
+  var preferenceNotice = el("div", { class: "preference-retry", hidden: "" }, [preferenceStatus, retryPreferences]);
+  document.body.appendChild(preferenceNotice);
+  retryPreferences.addEventListener("click", function () {
+    Array.from(pendingPreferences).forEach(function (entry) { persistPreference(entry[0], entry[1]); });
+    if (!pendingPreferences.size) {
+      document.getElementById("main").focus({ preventScroll: true });
+      showToast("Preferences saved.");
+    }
+  });
+
   var toastTimer;
   function showToast(msg) { toast.textContent = msg; toast.classList.add("show"); clearTimeout(toastTimer); toastTimer = setTimeout(function () { toast.classList.remove("show"); }, 2200); }
   var selBtn = el("button", { id: "selsave", type: "button", text: "\u270e Save to my notes" });
@@ -3697,9 +3742,7 @@ __MARKED__</script>
   paintThemeBtn();
   function toggleTheme() {
     var next = currentTheme() === "dark" ? "light" : "dark";
-    document.documentElement.setAttribute("data-theme", next);
-    try { localStorage.setItem(THEME_KEY, next); } catch (e) { /* ignore */ }
-    paintThemeBtn(); applyModTheme(curMod); themeFigures();
+    setTheme(next);
   }
 
   /* ---------------- problem reports (kept in this browser, exported by hand) ---------------- */
@@ -3735,7 +3778,13 @@ __MARKED__</script>
       countLine.textContent = bugs.length ? "Your reports so far (" + bugs.length + "):" : "No reports saved yet.";
       bugs.forEach(function (b, i) {
         var del = el("button", { type: "button", title: "Delete this report", "aria-label": "Delete report " + (i + 1), text: "\u00D7" });
-        del.addEventListener("click", function () { var all = loadBugs(); all.splice(i, 1); saveBugs(all); paint(); });
+        del.addEventListener("click", function () {
+          var all = loadBugs();
+          all.splice(i, 1);
+          if (!saveBugs(all)) { status.textContent = "Couldn't delete this report. It's still saved; try again."; return; }
+          paint();
+          status.textContent = "Report deleted.";
+        });
         list.appendChild(el("li", null, [el("div", null, [el("small", { text: b.type + " \u00B7 " + b.when + " \u00B7 " + b.page }), el("span", { text: b.text })]), del]));
       });
       exportRow.hidden = !bugs.length;
@@ -3764,7 +3813,7 @@ __MARKED__</script>
     var download = el("button", { class: "btn", type: "button", text: "Download (.txt)" });
     download.addEventListener("click", function () {
       var blob = new Blob([bugsAsText(loadBugs())], { type: "text/plain" });
-      saveFile("course-problem-reports-" + new Date().toISOString().slice(0, 10) + ".txt", blob);
+      saveFile("course-problem-reports-" + new Date().toISOString().slice(0, 10) + ".txt", blob, status);
     });
     var mail = DATA.contact ? el("a", { class: "btn", href: "#", text: "Email" }) : null;
     if (mail) mail.addEventListener("click", function (ev) {
@@ -3775,7 +3824,11 @@ __MARKED__</script>
     var armed = false;
     clear.addEventListener("click", function () {
       if (!armed) { armed = true; clear.textContent = "Click again: sent them already?"; setTimeout(function () { armed = false; clear.textContent = "Clear all"; }, 4000); return; }
-      saveBugs([]); paint(); status.textContent = "All reports cleared.";
+      if (!saveBugs([])) {
+        status.textContent = "Couldn't clear the reports. They're still saved; try again.";
+        return;
+      }
+      paint(); status.textContent = "All reports cleared.";
     });
     var countLine = el("p", { style: "margin:0", text: "" });
     var exportRow = el("div", null, [

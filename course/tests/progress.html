@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Dashboard progress store checks</title>
+<h1>Dashboard progress store checks</h1>
+<pre id="results"></pre>
+<script src="../dashboard_progress.js"></script>
+<script>
+"use strict";
+const cases = [];
+function check(label, condition) {
+  if (!condition) throw new Error(label);
+  cases.push(label);
+}
+const result = document.getElementById("results");
+
+try {
+  let raw = null;
+  let blocked = false;
+  const storage = {
+    getItem: () => raw,
+    setItem: (_, value) => {
+      if (blocked) throw new Error("fixture: storage unavailable");
+      raw = value;
+    }
+  };
+  const store = createProgressStore(() => storage, "fixture");
+  const legacy = { done: { "m1-0": true }, conf: {}, visited: {}, notes: { m1: "Example note" }, exp: {}, slide: {}, sub: {} };
+
+  check("Fresh state includes defaults", store.load().prefs.readbar && store.load().zoom === 0.75);
+  raw = JSON.stringify({ ...legacy, notes: { m1: 42, m2: "Keep this note" }, prefs: { ticks: false } });
+  let state = store.load();
+  check("Startup salvages valid fields and fills preference defaults", state.done["m1-0"] && state.notes.m1 === undefined &&
+    state.notes.m2 === "Keep this note" && state.prefs.ticks === false && state.prefs.readbar);
+  raw = "{";
+  check("Unreadable saved JSON yields defaults", Object.keys(store.load().done).length === 0);
+  check("Legacy backups restore with defaults", store.restore(JSON.stringify(legacy)).state.notes.m1 === "Example note");
+  const saved = raw;
+  check("Incomplete backups cannot replace progress", store.restore('{"done":{}}').error === "invalid" && raw === saved);
+  check("Invalid field values cannot replace progress", store.restore(JSON.stringify({ ...legacy, notes: { m1: 42 } })).error === "invalid" && raw === saved);
+
+  blocked = true;
+  check("Failed import leaves saved progress intact", store.restore(JSON.stringify({ ...legacy, notes: {} })).error === "storage" && raw === saved);
+  check("Failed reset leaves saved progress intact", store.reset(store.load()) === null && raw === saved);
+  blocked = false;
+
+  state = store.load();
+  state.ticks["chapter#0"] = true;
+  state.fs = "l";
+  state.prefs.ticks = false;
+  check("Current progress and preferences round trip", store.save(state) && store.load().ticks["chapter#0"] &&
+    store.load().fs === "l" && store.load().prefs.ticks === false);
+  state = store.reset(state);
+  check("Successful reset clears work and retains preferences", Object.keys(state.notes).length === 0 &&
+    Object.keys(state.ticks).length === 0 && state.fs === "l" && state.prefs.ticks === false);
+  result.textContent = cases.map(label => "PASS  " + label).join("\n");
+  result.dataset.passed = String(cases.length);
+} catch (error) {
+  result.textContent = "FAIL  " + error.message;
+  throw error;
+}
+</script>
+</html>

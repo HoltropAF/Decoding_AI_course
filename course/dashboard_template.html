@@ -1083,23 +1083,12 @@ __MARKED__</script>
   if (window.marked && marked.use) marked.use({ gfm: true });
 
   /* ---------------- state ---------------- */
-  var state = { done: {}, ticks: {}, conf: {}, visited: {}, notes: {}, exp: {}, slide: {}, sub: {}, last: null, lastTitle: "", readParts: {}, fs: "m", tts: { rate: 1, voice: "", auto: false } };
-  function load() {
-    try {
-      var raw = localStorage.getItem(KEY);
-      if (raw) {
-        var p = JSON.parse(raw);
-        Object.keys(state).forEach(function (k) { if (p[k] !== undefined) state[k] = p[k]; });
-      }
-    } catch (e) { /* storage unavailable */ }
-  }
-  if (!state.readParts) state.readParts = {};
-  if (!state.fs) state.fs = "m";
-  if (!state.zoom) state.zoom = 0.75;
+__PROGRESS_STORE__
+  var progress = createProgressStore(function () { return window.localStorage; }, KEY);
+  var state = progress.load();
   function pageZoom() { return parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--zoom")) || 1; }
   function applyZoom() { document.documentElement.style.setProperty("--zoom-pref", state.zoom); }
   applyZoom();
-  if (!state.prefs) state.prefs = { readbar: true, ticks: true, mins: true };
   function applyPrefs() {
     var h = document.documentElement;
     h.classList.toggle("no-readbar", !state.prefs.readbar);
@@ -1108,10 +1097,7 @@ __MARKED__</script>
   }
   applyPrefs();
   document.documentElement.classList.add("fs-" + state.fs);
-  function save(candidate) {
-    try { localStorage.setItem(KEY, JSON.stringify(candidate || state)); return true; }
-    catch (e) { return false; }
-  }
+  function save() { return progress.save(state); }
   function appendNote(key, text) {
     var previous = state.notes[key];
     state.notes[key] = (previous ? previous.replace(/\s+$/, "") + "\n\n" : "") + text;
@@ -1734,8 +1720,14 @@ __MARKED__</script>
     var armed = false;
     reset.addEventListener("click", function () {
       if (!armed) { armed = true; reset.textContent = "Click again to erase ticks, ratings and notes"; setTimeout(function () { armed = false; reset.textContent = "Reset progress"; }, 4000); return; }
-      state = { done: {}, ticks: {}, conf: {}, visited: {}, notes: {}, exp: {}, slide: {}, sub: {}, last: null, lastTitle: "", readParts: {}, fs: state.fs, zoom: state.zoom, prefs: state.prefs, tts: state.tts };
-      save(); render();
+      var resetState = progress.reset(state);
+      if (!resetState) {
+        status.textContent = "Couldn't reset your progress. It is still saved; try again.";
+        return;
+      }
+      state = resetState;
+      render();
+      showToast("Progress reset. Your preferences were kept.");
     });
     page.appendChild(el("div", { class: "home-foot" }, [
       el("span", { text: s.done + " of " + s.total + " items done \u00B7 saved in this browser only" }), copy, reset, status
@@ -2554,40 +2546,30 @@ __MARKED__</script>
       saveFile("ai-omics-progress-" + new Date().toISOString().slice(0, 10) + ".json", blob, status);
     });
     var file = el("input", { type: "file", accept: "application/json,.json", style: "display:none" });
-    var imp = el("button", { class: "btn", type: "button", text: "Load progress" });
+    var imp = el("button", { id: "load-progress", class: "btn", type: "button", text: "Load progress" });
     imp.addEventListener("click", function () { file.click(); });
     file.addEventListener("change", function () {
       var f = file.files && file.files[0]; if (!f) return;
       var r = new FileReader();
       r.onload = function () {
-        try {
-          var s = JSON.parse(r.result);
-          var required = ["done", "conf", "visited", "notes", "exp", "slide", "sub"];
-          var optional = ["ticks", "prefs", "readParts", "tts"];
-          function record(value) { return value && typeof value === "object" && !Array.isArray(value); }
-          if (!record(s) || required.some(function (key) { return !record(s[key]); }) ||
-              optional.some(function (key) { return s[key] !== undefined && !record(s[key]); }) ||
-              Object.values(s.notes).some(function (note) { return typeof note !== "string"; })) throw new Error("not a progress file");
-          var restored = {};
-          Object.keys(state).forEach(function (key) { restored[key] = s[key] === undefined ? state[key] : s[key]; });
-          if (["s", "m", "l"].indexOf(restored.fs) < 0) restored.fs = "m";
-          if ([0.75, 0.9, 1].indexOf(restored.zoom) < 0) restored.zoom = 0.75;
-          restored.ticks = s.ticks || {};
-          restored.readParts = s.readParts || {};
-          if (!save(restored)) {
-            status.textContent = "Couldn't save this backup in your browser. Your current progress is still available.";
-            return;
-          }
-          state = restored;
-          applyPrefs();
-          applyZoom();
-          document.documentElement.classList.remove("fs-s", "fs-m", "fs-l");
-          document.documentElement.classList.add("fs-" + state.fs);
-          render();
-          var restoreButton = Array.from(document.querySelectorAll("main button")).find(function (b) { return b.textContent === "Load progress"; });
-          if (restoreButton) restoreButton.focus({ preventScroll: true });
-          showToast("Progress loaded.");
-        } catch (e) { status.textContent = "That file doesn't look like a progress file from this course."; }
+        var result = progress.restore(r.result);
+        if (result.error === "invalid") {
+          status.textContent = "That file doesn't look like a progress file from this course.";
+          return;
+        }
+        if (result.error === "storage") {
+          status.textContent = "Couldn't save this backup in your browser. Your current progress is still available.";
+          return;
+        }
+        state = result.state;
+        applyPrefs();
+        applyZoom();
+        document.documentElement.classList.remove("fs-s", "fs-m", "fs-l");
+        document.documentElement.classList.add("fs-" + state.fs);
+        render();
+        var restoreButton = document.getElementById("load-progress");
+        if (restoreButton) restoreButton.focus({ preventScroll: true });
+        showToast("Progress loaded.");
       };
       r.onerror = function () { status.textContent = "Couldn\u0027t read that file. Choose it again to retry."; };
       r.readAsText(f);
@@ -2597,8 +2579,14 @@ __MARKED__</script>
     var armed = false;
     reset.addEventListener("click", function () {
       if (!armed) { armed = true; reset.textContent = "Click again to erase ticks, ratings and notes"; setTimeout(function () { armed = false; reset.textContent = "Reset progress"; }, 4000); return; }
-      state = { done: {}, ticks: {}, conf: {}, visited: {}, notes: {}, exp: {}, slide: {}, sub: {}, last: null, lastTitle: "", readParts: {}, fs: state.fs, zoom: state.zoom, prefs: state.prefs, tts: state.tts };
-      save(); render();
+      var resetState = progress.reset(state);
+      if (!resetState) {
+        status.textContent = "Couldn't reset your progress. It is still saved; try again.";
+        return;
+      }
+      state = resetState;
+      render();
+      showToast("Progress reset. Your preferences were kept.");
     });
     page.appendChild(el("section", { class: "card" }, [el("h3", { text: "Your progress" }),
       el("p", { class: "hint", text: "Ticks, ratings, notes and read parts live in this browser only. Download them to move to another device, or start over. Resetting keeps your preferences." }),
@@ -3860,7 +3848,6 @@ __MARKED__</script>
   buildStamp.textContent = "Version " + DATA.version + ", build " + DATA.build_fingerprint.slice(0, 12) + ". Progress is stored in this browser only.";
   buildStamp.title = "Build SHA-256: " + DATA.build_fingerprint + "\nSource revision: " + (DATA.source_revision || "unpinned");
 
-  load();
   render();
 })();
 </script>

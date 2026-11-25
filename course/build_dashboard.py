@@ -31,6 +31,7 @@ TEMPLATE = ROOT / "course" / "dashboard_template.html"
 OUTPUT = ROOT / "course" / "dashboard.html"
 SOURCE_PIN = ROOT / "course" / "dashboard_source.json"
 PLACEHOLDER = "__COURSE_DATA__"
+PROGRESS_PLACEHOLDER = "__PROGRESS_STORE__"
 VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 
 # --------------------------------------------------------------------------- #
@@ -537,16 +538,18 @@ def main() -> None:
             "contact": CONTACT_EMAIL}
 
     template = TEMPLATE.read_text(encoding="utf-8")
-    if PLACEHOLDER not in template:
-        raise SystemExit(f"Placeholder {PLACEHOLDER} not found in {TEMPLATE}")
+    for placeholder in (PLACEHOLDER, PROGRESS_PLACEHOLDER):
+        if template.count(placeholder) != 1:
+            raise SystemExit(f"Expected one {placeholder} placeholder in {TEMPLATE}")
+    progress_store = read("course/dashboard_progress.js").rstrip()
     marked = (ROOT / "course" / "vendor" / "marked.min.js").read_text(encoding="utf-8").replace("</script", r"<\/script")
     # Fingerprint the effective inputs, before adding the fingerprint to the bundle.
     builder = Path(__file__).read_text(encoding="utf-8")
-    inputs = json.dumps([builder, template, marked, data], ensure_ascii=False, separators=(",", ":"))
+    inputs = json.dumps([builder, template, marked, progress_store, data], ensure_ascii=False, separators=(",", ":"))
     data["build_fingerprint"] = hashlib.sha256(inputs.encode("utf-8")).hexdigest()
     data["source_revision"] = dashboard_source(data["build_fingerprint"], args.pin_source)
     payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
-    html = template.replace(PLACEHOLDER, payload).replace("__MARKED__", marked).replace("__VERSION__", VERSION)
+    html = template.replace(PROGRESS_PLACEHOLDER, progress_store).replace(PLACEHOLDER, payload).replace("__MARKED__", marked).replace("__VERSION__", VERSION)
     output = html.encode("utf-8")
     if args.check:
         if not OUTPUT.is_file() or OUTPUT.read_bytes() != output:

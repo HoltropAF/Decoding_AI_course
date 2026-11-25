@@ -103,6 +103,8 @@ Versions follow `MAJOR.MINOR.PATCH` as described in
 - Published dashboards can link to their exact source commit. Recorded
   a tested build environment and optional tool versions, and added
   a course attribution note.
+- The dashboard uses one progress store for startup, saves, backups and
+  reset. A failed reset keeps the existing progress and offers a retry.
 - Version numbers now use three parts: `1.0` became `1.0.0`.
 - The dashboard shows at 75% on computer screens by default; Preferences
   has a "Page size" setting (75%, 90%, 100%). Phones stay at full size.

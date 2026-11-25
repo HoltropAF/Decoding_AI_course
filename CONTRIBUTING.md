@@ -87,6 +87,11 @@ effective inputs change, a normal rebuild drops the old pin.
 The [reproducibility guide](docs/reproducibility.md) records the tested
 runtime, slide export and local-model setup.
 
+Dashboard progress storage lives in `course/dashboard_progress.js` and is
+inlined by the builder. After changing the progress contract, open
+[the browser checks](course/tests/progress.html) locally. Then rebuild
+the dashboard and exercise Preferences → Load progress from the HTML.
+
 ## Releasing
 
 1. On `development`, set the new number in `VERSION` and in the title line

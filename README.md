@@ -32,10 +32,10 @@ The dashboard works offline and saves progress in your browser. Each exercise ha
 > **Privacy first.** Treat pre-publication omics data, patient-derived material and unpublished manuscripts as confidential. Read Part 3 of [Module 1](module_01_foundations_and_privacy/README.md) before using cloud models with lab data and Part 3 of [Module 5](module_05_agents_and_subagents/README.md) before deploying autonomous agents.
 
 <p align="center">
-  <img src="docs/img/readme-mobile-home.png" alt="The course welcome page on mobile, with the button to begin Orientation" width="165">
-  <img src="docs/img/readme-mobile-chapter.png" alt="Module 2 on mobile, showing the chapter tab and opening story" width="165">
-  <img src="docs/img/readme-mobile-dictionary.png" alt="The mobile Dictionary search and Attention entry" width="165">
-  <img src="docs/img/readme-mobile-selfcheck.png" alt="Module 1 Self-check on mobile, showing the Knowledge check" width="165">
+  <img src="docs/img/readme-mobile-home.png" alt="The mobile dashboard’s module cards, starting with Orientation and Foundations" width="165">
+  <img src="docs/img/readme-mobile-chapter.png" alt="A diagram in Module 1 showing how a model scores and appends the next token" width="165">
+  <img src="docs/img/readme-mobile-dictionary.png" alt="The Dictionary’s Attention entry, with arcs showing which words the model attends to" width="165">
+  <img src="docs/img/readme-mobile-practice.png" alt="The expanded Plan before you build example in Module 2" width="165">
 </p>
 
 ## Learn more

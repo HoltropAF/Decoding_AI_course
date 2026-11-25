@@ -36,7 +36,7 @@ characters. The diff already shows what changed.>
 | `chore` | housekeeping, version bumps | `chore(release): v1.1.0` |
 
 The scope is optional: use a module (`module_03`), `course`, `dashboard`,
-`figures` or `reference`.
+`figures` or `background`.
 
 - Keep one logical change per commit, and leave the course working after
   each one.
@@ -54,6 +54,16 @@ Versions follow `MAJOR.MINOR.PATCH`:
 
 The `VERSION` file in the repository root is the single source. The build
 puts it in the dashboard title, menu, footer and every export.
+
+## Under the hood
+
+![System map showing the offline dashboard build and the optional course workflows](docs/img/system_map.svg)
+
+Run `python course/build_dashboard.py` from the repository root when you
+change content that goes into the dashboard. The build packs the Markdown,
+slides and SVG figures into `course/dashboard.html` with the template,
+bundled Markdown renderer and version number. Open the file locally to
+check the result. The browser stores progress in localStorage.
 
 ## Releasing
 

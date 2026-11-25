@@ -6,6 +6,12 @@ Versions follow `MAJOR.MINOR.PATCH` as described in
 
 ## [Unreleased]
 
+- Rewrote the participant README with offline setup, a route through the
+  modules, and five annotated dashboard screenshots.
+- Added a system map and dashboard build overview to the contributing guide.
+- Moved the course review and unverified background notes into `docs/`
+  and removed the old dashboard mockups and repository generation prompt.
+
 ### Added
 - `CHANGELOG.md` and `CONTRIBUTING.md` with the commit convention and
   release steps.

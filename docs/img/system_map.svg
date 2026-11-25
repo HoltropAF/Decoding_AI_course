@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 352" role="img" aria-labelledby="title desc">
+  <title id="title">How the Decoding AI course works</title>
+  <desc id="desc">The Python build bundles Markdown, slides, and SVG figures with the HTML template, marked, and VERSION. The resulting dashboard opens offline in a browser and saves progress in localStorage. Separate workflows export slides with Marp, run exercises with local Ollama, install examples in Claude Code, and release through a pull request.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0l10 5-10 5z" fill="#0f5b6b"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="758" height="350" rx="14" fill="#f4f7f8" stroke="#cddadd"/>
+  <g font-family="system-ui, sans-serif" fill="#20343c">
+    <text x="20" y="34" font-size="21" font-weight="700">How the dashboard works</text>
+    <g fill="#e3f0f1" stroke="#9ebdc3">
+      <rect x="20" y="53" width="138" height="115" rx="8"/>
+      <rect x="184" y="53" width="207" height="115" rx="8"/>
+      <rect x="417" y="53" width="145" height="115" rx="8"/>
+      <rect x="588" y="53" width="152" height="115" rx="8"/>
+    </g>
+    <g stroke="#0f5b6b" stroke-width="2" marker-end="url(#arrow)">
+      <path d="M160 110h20"/><path d="M393 110h20"/><path d="M564 110h20"/>
+    </g>
+    <g font-size="15" font-weight="700" fill="#0f5b6b">
+      <text x="31" y="80">Course files</text>
+      <text x="195" y="80" font-family="monospace">build_dashboard.py</text>
+      <text x="428" y="80" font-family="monospace">dashboard.html</text>
+      <text x="599" y="80">Browser</text>
+    </g>
+    <g font-size="14">
+      <text x="31" y="104">Markdown<tspan x="31" dy="20">Marp slides</tspan><tspan x="31" dy="20">SVG figures</tspan></text>
+      <text x="195" y="104" font-family="monospace">dashboard_template.html<tspan x="195" dy="20">marked.min.js</tspan><tspan x="195" dy="20">VERSION</tspan></text>
+      <text x="428" y="104">Single HTML file</text>
+      <text x="599" y="104">Read offline<tspan x="599" dy="20">Progress saved in</tspan><tspan x="599" dy="20" font-family="monospace">localStorage</tspan></text>
+    </g>
+    <rect x="20" y="185" width="720" height="147" rx="8" fill="#fff" stroke="#cddadd"/>
+    <text x="34" y="211" font-size="16" font-weight="700">Slides, exercises, examples and releases</text>
+    <g font-size="15">
+      <text x="34" y="239">Slide Markdown → Marp → PDF or PowerPoint</text>
+      <text x="34" y="263">Python exercises → local Ollama model</text>
+      <text x="34" y="287">Skills, agents and the sample MCP config → Claude Code</text>
+      <text x="34" y="311">development → release pull request → main</text>
+    </g>
+  </g>
+</svg>

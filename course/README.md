@@ -118,6 +118,6 @@ live in git next to the content they summarise.
 
 ## Background notes
 
-The `reference/` folder at the repository root holds the original course
+The [background notes](../docs/background/) folder holds the original course
 planning notes and a summary of practitioner sources on context engineering.
 They are optional reading; nothing in the modules depends on them.

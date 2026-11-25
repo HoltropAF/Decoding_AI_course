@@ -146,7 +146,7 @@ remains the human step ("layer 4"), and the course should keep saying so.
 meant as feedback, and the hackathon guide says so, but it's worth being
 explicit about this when introducing the hackathon.
 
-**The background notes are unverified.** The `reference/` folder holds the
+**The background notes are unverified.** The [background notes](background/) folder holds the
 original planning notes, including links to social media posts that were
 never checked. Nothing in the course depends on them; consider removing
 them before sharing.

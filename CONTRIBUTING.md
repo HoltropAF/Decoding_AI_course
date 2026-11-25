@@ -104,6 +104,11 @@ The Wrap-up view lives in `course/dashboard_wrapup.js`. Its callers supply
 checklist and note operations. Open the [Wrap-up checks](course/tests/wrapup.html)
 locally after editing the view.
 
+The chapter view lives in `course/dashboard_chapter.js`. The dashboard
+supplies Markdown rendering, read-aloud, and saved-note and navigation
+operations. Open the [chapter checks](course/tests/chapter.html) locally
+after changing that interface.
+
 ## Releasing
 
 1. On `development`, set the new number in `VERSION` and in the title line

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Chapter view checks</title>
+<main></main>
+<pre id="results"></pre>
+<script src="../dashboard_chapter.js"></script>
+<script>
+"use strict";
+(async function () {
+  const main = document.querySelector("main"), output = document.querySelector("#results");
+  const passed = [];
+  function check(label, condition) {
+    if (!condition) throw new Error(label);
+    passed.push(label);
+  }
+  function el(tag, attrs, children = []) {
+    const node = document.createElement(tag);
+    for (const [key, value] of Object.entries(attrs || {})) {
+      if (value == null) continue;
+      if (key === "text") node.textContent = value;
+      else if (key === "html") node.innerHTML = value;
+      else node.setAttribute(key, value);
+    }
+    node.append(...children.filter(Boolean));
+    return node;
+  }
+  const banner = el("div"), sections = el("div"), tools = el("div"), opened = [];
+  const content = el("div");
+  banner.append(sections, tools);
+  main.append(banner, content);
+  let reader, terms = 0;
+  const services = {
+    el,
+    renderMd: md => el("div", { html: md, class: "prose" }),
+    linkTerms: () => { terms++; },
+    makeReader: (getBlocks, options) => { reader = { getBlocks, ...options }; return el("div", { class: "fixture-reader" }); },
+    readableBlocks: root => [...root.querySelectorAll("p")],
+    docHeader: doc => el("footer", { text: doc.path }),
+    partIcon: () => "",
+    scrollBehavior: () => "auto"
+  };
+  try {
+    const doc = { path: "fixture.md", parts: true, md: "<h1>Chapter</h1><p>Intro</p><h2>First</h2><p>One</p><h2>Second</h2><p>Two</p>" };
+    const parts = renderChapter(content, doc, {
+      slots: { banner, secs: sections, tools }, linkable: true, openIndex: 1,
+      onOpen: (index, title) => opened.push([index, title]), makeNoteEditor: () => el("textarea")
+    }, services);
+    await new Promise(resolve => setTimeout(resolve, 150));
+    check("Indexed links open the requested section", parts.length === 2 && parts[0].body.hidden && !parts[1].body.hidden &&
+      opened[0][0] === 1 && opened[0][1] === "Second");
+    parts[0].head.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", cancelable: true }));
+    check("Enter opens one section and closes the other", !parts[0].body.hidden && parts[1].body.hidden &&
+      parts[0].head.getAttribute("aria-expanded") === "true" && sections.textContent.includes("Reading: First"));
+    check("Read-aloud starts from the open section and receives the supplied blocks",
+      reader.startAt().textContent === "First" && reader.getBlocks().length === 3);
+    reader.onBlock(parts[1].body.querySelector("p"));
+    check("Reading a block opens its section", parts[0].body.hidden && !parts[1].body.hidden);
+    tools.querySelector(".notebtn").click();
+    check("Notes use the supplied editor and focus it", document.activeElement === banner.querySelector("textarea") &&
+      tools.querySelector(".notebtn").getAttribute("aria-expanded") === "true");
+    check("Term links and source metadata come from supplied services",
+      terms === 3 && content.querySelector("footer").textContent === "fixture.md");
+    const short = el("div");
+    main.append(short);
+    check("Short resources retain the reader without an accordion",
+      renderChapter(short, {path: "short.md", md: "<p>Brief text</p>"}, { linkable: false }, services).length === 0 &&
+      !!short.querySelector(".fixture-reader") && short.querySelector("footer").textContent === "short.md");
+    output.textContent = passed.map(label => "PASS  " + label).join("\n");
+  } catch (error) {
+    output.textContent = "FAIL  " + error.message;
+    throw error;
+  }
+})();
+</script>
+</html>

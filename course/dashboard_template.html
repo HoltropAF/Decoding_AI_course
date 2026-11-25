@@ -2103,183 +2103,39 @@ __PROGRESS_STORE__
     return el("div", { class: "filepath" }, parts);
   }
 
-  /* Split a rendered document into sections at each H2. Returns null for short documents. */
-  function makeSections(prose, force) {
-    var kids = Array.prototype.slice.call(prose.children);
-    var h2s = kids.filter(function (k) { return k.tagName === "H2"; }).length;
-    var words = prose.textContent.split(/\s+/).length;
-    if (h2s < 2 || (!force && (h2s < 4 || words < 700))) return null;
-    var secs = [], cur = { title: "Introduction", nodes: [] }, part = null;
-    kids.forEach(function (k) {
-      if (k.classList && k.classList.contains("partmark")) { part = k.textContent; return; }
-      if (k.tagName === "H2") { if (cur.nodes.length) secs.push(cur); cur = { title: k.textContent.trim(), nodes: [k], part: part }; part = null; }
-      else cur.nodes.push(k);
-    });
-    secs.push(cur);
-    secs.forEach(function (sct) {
-      while (sct.nodes.length && sct.nodes[sct.nodes.length - 1].tagName === "HR") sct.nodes.pop();
-    });
-    if (secs.length > 1 && secs[0].title === "Introduction") {
-      var meaningful = secs[0].nodes.filter(function (n) { return !/^(H1|HR)$/.test(n.tagName); }).length;
-      if (!meaningful) secs[0].nodes = secs[0].nodes.filter(function (n) { return n.tagName !== "HR"; });
-    }
-    prose.textContent = "";
-    prose.classList.add("paged");
-    secs.forEach(function (sct) {
-      sct.el = el("section", { class: "docsec" });
-      sct.nodes.forEach(function (n) { sct.el.appendChild(n); });
-      sct.words = sct.el.textContent.split(/\s+/).length;
-      sct.short = sct.title.replace(/^\d+\.\s*/, "");
-      prose.appendChild(sct.el);
-    });
-    return secs;
-  }
-
-  /* Banner slots: set by renderModule/renderResource so documents can put their controls in the top banner. */
+  /* Banner slots are supplied by the route when chapter controls share the stepper. */
   var slots = null;
-
-  var sideParts = null;     /* sections of the document that is open now, for the sidebar */
-  var nowPart = null;       /* "Reading: …" label in the module banner */
-  var wantSection = null;   /* a link like #m2.guide.3 opens section 3 of that chapter */
-  function docBlock(container, d) {
-    var openIndex = wantSection;
-    var prose = renderMd(d.md, d.path, true);
-    var secs = makeSections(prose, d.parts);
-    var linkable = d.path !== DATA.dictionary_path;
-    var toolsTo = slots ? slots.tools : container;
-
-    if (!secs) {
-      if (linkable) linkTerms(prose);
-      toolsTo.appendChild(makeReader(function () { return readableBlocks(prose); }, { root: prose, compact: !!slots }));
-      container.appendChild(prose);
-      container.appendChild(docHeader(d));
-      return;
-    }
-    if (linkable) secs.forEach(function (sct) { linkTerms(sct.el); });
-
-    /* One page, every H2 section folds open and closed. */
-    delete state.secOpen;   /* old setting: sections no longer remember being open */
-    var key = d.path;
-    var NUM = /^(\d+)\./;
-    var parts = [];
-    prose.classList.remove("paged");
-    prose.classList.add("collapsible");
-    secs.forEach(function (sct, j) {
-      var h2 = sct.el.querySelector(":scope > h2");
-      if (!h2) { sct.el.classList.add("intro"); return; }        // introduction: always visible
-      var body = el("div", { class: "secbody" });
-      var nodes = Array.prototype.slice.call(sct.el.childNodes).filter(function (nd) { return nd !== h2; });
-      nodes.forEach(function (nd) { body.appendChild(nd); });
-      var mins = el("span", { class: "mins", text: "~" + Math.max(1, Math.round(sct.words / 200)) + " min" });
-      var icon = el("span", { class: "secicon", "aria-hidden": "true" }); icon.innerHTML = partIcon(parts.length);
-      var head = el("div", { class: "sechead", role: "button", tabindex: "0" }, [el("span", { class: "chev", "aria-hidden": "true", text: "\u203a" }), icon, h2, mins]);
-      sct.el.textContent = "";
-      sct.el.appendChild(head);
-      sct.el.appendChild(body);
-      var id = key + "#" + j;
-      var part = { el: sct.el, head: head, body: body, id: id, title: h2.textContent.trim(), partLabel: sct.part || null, mins: Math.max(1, Math.round(sct.words / 200)) };
-      if (sct.part) prose.insertBefore(el("div", { class: "partlabel", text: sct.part }), sct.el);
-      part.set = function (open) {
-        sct.el.classList.toggle("open", open);
-        if (open && nowPart) { nowPart.innerHTML = "Reading: <b></b>"; nowPart.querySelector("b").textContent = part.title; }
-        if (open && /^#m\d/.test(location.hash)) {
-          state.last = location.hash.slice(1).split(".").slice(0, 2).join(".") + "." + parts.indexOf(part);
-          try { history.replaceState(null, "", "#" + state.last); } catch (e) {}
-          state.lastTitle = part.title; save();
-        }
-        if (part.sideLink) part.sideLink.classList.toggle("active", open);
-        body.hidden = !open;
-        head.setAttribute("aria-expanded", open ? "true" : "false");
-      };
-      part.set(false);   /* every section starts closed whenever the page is opened */
-      function toggle() { if (body.hidden) openOnly(part, true); else part.set(false); }
-      head.addEventListener("click", toggle);
-      head.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); e.stopPropagation(); toggle(); } });
-      part.open = function () { openOnly(part, true); };
-      parts.push(part);
+  var sideParts = null;
+__CHAPTER_VIEW__
+  function docBlock(container, doc, openIndex) {
+    var route = parseRoute();
+    var module = route.kind === "mod" ? route.mod : null;
+    var parts = renderChapter(container, doc, {
+      slots: slots,
+      openIndex: openIndex,
+      touchOnly: touchOnly,
+      linkable: doc.path !== DATA.dictionary_path,
+      onOpen: module ? function (index, title) {
+        state.last = module.id + "." + route.step.key + "." + index;
+        try { history.replaceState(null, "", "#" + state.last); } catch (error) {}
+        state.lastTitle = title;
+        save();
+      } : null,
+      makeNoteEditor: module ? function () {
+        return textField("My notes for this module", state.notes[module.id], function (value) { state.notes[module.id] = value; },
+          "Questions, ideas, things to try or bring to the group session. No unpublished results or patient information, please.");
+      } : null
+    }, {
+      el: el,
+      renderMd: renderMd,
+      linkTerms: linkTerms,
+      makeReader: makeReader,
+      readableBlocks: readableBlocks,
+      docHeader: docHeader,
+      partIcon: partIcon,
+      scrollBehavior: scrollBehavior
     });
-    if (touchOnly) {
-      var sx = null, sy = null;
-      prose.addEventListener("touchstart", function (e) {
-        if (e.touches.length !== 1 || e.target.closest("table, pre, .tablewrap, figure, input, textarea")) { sx = null; return; }
-        sx = e.touches[0].clientX; sy = e.touches[0].clientY;
-      }, { passive: true });
-      prose.addEventListener("touchend", function (e) {
-        if (sx === null) return;
-        var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy; sx = null;
-        if (Math.abs(dx) < 90 || Math.abs(dy) > 45) return;
-        var cur = parts.filter(function (pt) { return !pt.body.hidden; })[0];
-        var k = cur ? parts.indexOf(cur) : -1;
-        var to = dx < 0 ? parts[k + 1] : parts[k - 1];
-        if (to) openOnly(to, true);
-      }, { passive: true });
-    }
-    parts.forEach(function (pt, k) {
-      var nx = parts[k + 1];
-      if (!nx) return;
-      var b = el("button", { class: "btn primary", type: "button", text: "Next: " + nx.title + " \u2192" });
-      b.addEventListener("click", function () { openOnly(nx, true); });
-      pt.body.appendChild(el("div", { class: "nextpart" }, [b]));
-    });
-    if (slots) sideParts = parts;   /* the sidebar lists these sections under the open module */
-
-    if (openIndex !== null && openIndex !== undefined && !isNaN(openIndex) && parts[openIndex]) {
-      setTimeout(function () {
-        var target = parts[openIndex];
-        openOnly(target, false);
-        var bannerEl = document.querySelector(".banner");
-        var off = bannerEl && getComputedStyle(bannerEl).position === "sticky" ? bannerEl.getBoundingClientRect().height + 16 : 16;
-        window.scrollTo(0, Math.max(0, target.head.getBoundingClientRect().top + window.scrollY - off));
-      }, 120);
-    }
-    var total = secs.reduce(function (acc, sct) { return acc + sct.words; }, 0);
-    /* accordion: opening one section closes the others */
-    function openOnly(target, scroll) {
-      parts.forEach(function (pt) { if (pt !== target) pt.set(false); });
-      target.set(true);
-      if (scroll) {
-        var bannerEl = document.querySelector(".banner");
-        var off = bannerEl && getComputedStyle(bannerEl).position === "sticky" ? bannerEl.getBoundingClientRect().height + 16 : 16;
-        var y = target.head.getBoundingClientRect().top + window.scrollY - off;
-        try { window.scrollTo({ top: Math.max(0, y), behavior: scrollBehavior() }); } catch (e) { window.scrollTo(0, Math.max(0, y)); }
-      }
-    }
-    var secbar = el("div", { class: "secbar" }, [
-      el("span", { class: "where", text: parts.length + " sections \u00b7 ~" + Math.max(1, Math.round(total / 200)) + " min \u00b7 click a title to open it" })
-    ]);
-
-    var reader = makeReader(function () { return readableBlocks(prose); }, {
-      root: prose, compact: !!slots,
-      startAt: function () {
-        var open = parts.filter(function (pt) { return !pt.body.hidden; })[0];
-        return open ? open.head.querySelector("h2") : null;
-      },
-      onBlock: function (blockEl) {
-        parts.forEach(function (pt) { if (pt.el.contains(blockEl) && pt.body.hidden) openOnly(pt, false); });
-      }
-    });
-
-    (slots ? slots.secs : container).appendChild(secbar);
-    if (slots) { nowPart = el("span", { class: "nowpart" }); slots.secs.appendChild(nowPart); }
-    if (slots && /^#m\d/.test(location.hash)) {
-      var mid = location.hash.slice(1).split(".")[0];
-      var npanel = el("div", { class: "notepanel", hidden: "hidden" }, [
-        textField("My notes for this module", state.notes[mid], function (v) { state.notes[mid] = v; }, "Questions, ideas, things to try or bring to the group session. No unpublished results or patient information, please."),
-        el("a", { class: "allnotes", href: "#notes", text: "All my notes \u2192" })
-      ]);
-      var nbtn = el("button", { class: "btn notebtn", type: "button", "aria-expanded": "false", text: "\u270e Notes" });
-      nbtn.addEventListener("click", function () {
-        var open = npanel.hidden;
-        npanel.hidden = !open; nbtn.setAttribute("aria-expanded", open ? "true" : "false");
-        if (open) { var ta = npanel.querySelector("textarea"); if (ta) ta.focus(); }
-      });
-      toolsTo.appendChild(nbtn);
-      slots.banner.appendChild(npanel);
-    }
-    toolsTo.appendChild(reader);
-
-    container.appendChild(prose);
-    container.appendChild(docHeader(d));
+    if (slots) sideParts = parts;
   }
 
   /* ---------------- search across the whole course ---------------- */
@@ -2719,7 +2575,6 @@ __WRAP_UP_VIEW__
 
   /* ---------------- module page ---------------- */
   var keyHandler = null;
-  var curSecs = null;   /* sections of the document on screen, shown in the sidebar */
   document.addEventListener("keydown", function (e) { if (keyHandler) keyHandler(e); });
 
   function renderModule(main, route) {
@@ -2756,7 +2611,7 @@ __WRAP_UP_VIEW__
 
     var body = el("div", { class: "block" });
     if (step.kind === "slides") renderSlides(body, m, step);
-    else if (step.kind === "doc") { wantSection = route.sub; docBlock(body, step.doc); wantSection = null; }
+    else if (step.kind === "doc") docBlock(body, step.doc, route.sub);
     else if (step.kind === "docs") renderDocs(body, m, step, route.sub);
     else if (step.kind === "progress") renderProgress(body, m);
     slots = null;
@@ -3227,9 +3082,7 @@ __DICTIONARY_VIEW__
     if (!keepScroll) stopReading();
     hideTip();
     keyHandler = null;
-    curSecs = null;
     sideParts = null;
-    nowPart = null;
     main.textContent = "";
     if (route.kind === "mod") renderModule(main, route);
     else if (route.kind === "res") renderResource(main, route.id);
@@ -3262,7 +3115,7 @@ __DICTIONARY_VIEW__
     sideParts.forEach(function (pt) {
       if (pt.body.hidden || state.readParts[pt.id]) return;
       if (pt.el.getBoundingClientRect().bottom <= window.innerHeight + 40) {
-        state.readParts[pt.id] = true; save();
+        if (!progress.setTick(state, "readParts", pt.id, true)) return;
         if (pt.sideLink) pt.sideLink.classList.add("read");
       }
     });

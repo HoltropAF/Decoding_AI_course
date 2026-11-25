@@ -36,6 +36,7 @@ INLINE_SCRIPTS = {
     "__DOWNLOAD_ADAPTER__": "course/dashboard_downloads.js",
     "__DICTIONARY_VIEW__": "course/dashboard_dictionary.js",
     "__WRAP_UP_VIEW__": "course/dashboard_wrapup.js",
+    "__CHAPTER_VIEW__": "course/dashboard_chapter.js",
 }
 VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 

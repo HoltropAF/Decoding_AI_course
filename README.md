@@ -1,7 +1,7 @@
 # Decoding AI · v1.0.0
 
 <p align="center">
-  <img src="docs/img/readme-banner.png" alt="A practical course for researchers. Ask better questions. Check the answers." width="760">
+  <img src="docs/img/readme-banner.png" alt="Decoding AI. The AI whisperer’s guide to intelligence." width="760">
 </p>
 
 <p align="center">
@@ -10,12 +10,8 @@
 </p>
 
 <p align="center">
-  Practise using AI in a lipidomics and immunology lab.<br>
-  Try it on everyday research tasks, compare results, and bring what works to a team hackathon.
-</p>
-
-<p align="center">
-  <a href="https://github.com/HoltropAF/Decoding_AI_course/wiki/Using-the-course"><img src="docs/img/readme-preview.png" alt="Four dashboard views showing the course home, a chapter, the Dictionary and a self-check" width="760"></a>
+  A course we do together about using AI well in research.<br>
+  From what a token is to what an agent can do, with a team hackathon at the end.
 </p>
 
 ## What you'll do
@@ -34,6 +30,13 @@
 The dashboard works offline and saves progress in your browser. Each exercise has a no-code route. The [Setup guide](https://github.com/HoltropAF/Decoding_AI_course/wiki/Setup-guide) covers Ollama, Claude Code and Marp if you want to try them.
 
 > **Privacy first.** Treat pre-publication omics data, patient-derived material and unpublished manuscripts as confidential. Read Part 3 of [Module 1](module_01_foundations_and_privacy/README.md) before using cloud models with lab data and Part 3 of [Module 5](module_05_agents_and_subagents/README.md) before deploying autonomous agents.
+
+<p align="center">
+  <img src="docs/img/readme-mobile-home.png" alt="The course welcome page on mobile, with the button to begin Orientation" width="165">
+  <img src="docs/img/readme-mobile-chapter.png" alt="Module 2 on mobile, showing the chapter tab and opening story" width="165">
+  <img src="docs/img/readme-mobile-dictionary.png" alt="The mobile Dictionary search and Attention entry" width="165">
+  <img src="docs/img/readme-mobile-selfcheck.png" alt="Module 1 Self-check on mobile, showing the Knowledge check" width="165">
+</p>
 
 ## Learn more
 

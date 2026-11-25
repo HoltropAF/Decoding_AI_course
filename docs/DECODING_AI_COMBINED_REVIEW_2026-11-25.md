@@ -156,3 +156,10 @@ Six isolated browser checks passed. They covered deep links while a card view is
 Observed SOLID alignment is **24/30 (80.0%)**, with **15/15 checks scored**. S3 gains one point because the Wrap-up view owns local rendering and interaction, while dashboard composition supplies next links and delegates persistence to the progress store. A checklist write updates the local completion state and refreshes navigation. It no longer has to redraw the route or reach into the dashboard's global state. [Wrap-up view](../course/dashboard_wrapup.js) · [Wrap-up checks](../course/tests/wrapup.html)
 
 Seven isolated browser checks passed for failed checklist writes, completion, focus and draft preservation, note retry, and note editing. The offline dashboard also passed the shared checklist and note retry checks in Edge. The dashboard still ships as one HTML file, and its fingerprint includes the new source module.
+
+
+### Chapter reader follow-up
+
+Observed SOLID alignment is **25/30 (83.3%)**, with **15/15 checks scored**. D1 gains a point because the chapter view receives Markdown, speech, notes, and navigation services. The dashboard owns the storage and browser history wiring, and the view returns its section handles for sidebar and read-state tracking. The source remains embedded in one offline HTML artifact. [Chapter view](../course/dashboard_chapter.js) · [Chapter checks](../course/tests/chapter.html)
+
+Seven isolated browser checks and six offline integration checks passed. They covered section deep links, the accordion and Next action, reading progress, note entry, source metadata and short resource rendering. The read-aloud check intercepted the Edge speech request and confirmed it started at the selected heading and stopped cleanly. Audible output was outside the check.

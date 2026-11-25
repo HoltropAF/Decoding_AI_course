@@ -100,6 +100,10 @@ supplies course links, figure rendering, and preference storage. Open the
 [Dictionary checks](course/tests/dictionary.html) locally after changing
 that interface.
 
+The Wrap-up view lives in `course/dashboard_wrapup.js`. Its callers supply
+checklist and note operations. Open the [Wrap-up checks](course/tests/wrapup.html)
+locally after editing the view.
+
 ## Releasing
 
 1. On `development`, set the new number in `VERSION` and in the title line

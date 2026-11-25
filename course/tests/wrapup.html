@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Wrap-up view checks</title>
+<main></main>
+<pre id="results"></pre>
+<script src="../dashboard_wrapup.js"></script>
+<script>
+"use strict";
+(function () {
+  const main = document.querySelector("main"), output = document.querySelector("#results");
+  const passed = [];
+  function check(label, condition) {
+    if (!condition) throw new Error(label);
+    passed.push(label);
+  }
+  function el(tag, attrs, children = []) {
+    const node = document.createElement(tag);
+    for (const [key, value] of Object.entries(attrs || {})) {
+      if (value == null) continue;
+      if (key === "text") node.textContent = value;
+      else if (key === "html") node.innerHTML = value;
+      else node.setAttribute(key, value);
+    }
+    node.append(...children.filter(Boolean));
+    return node;
+  }
+  let checked = false, note = "", blocked = true, refreshes = 0, message = "";
+  renderWrapUp(main, {
+    label: "Module 1", items: [{ id: "fixture-0", text: "Try a step" }],
+    question: "What did you see?", notesHref: "#notes", next: { href: "#m2.guide", text: "Next module" }
+  }, {
+    el, isChecked: () => checked,
+    setChecked: (_id, value) => { if (blocked) return false; checked = value; return true; },
+    readNote: () => note, editNote: value => { note = value; },
+    addNote: value => { if (blocked) return false; note = value; return true; },
+    refreshNavigation: () => { refreshes++; }, showMessage: text => { message = text; },
+    noteEditor: (_label, value, onInput) => {
+      const field = el("textarea");
+      field.value = value;
+      field.addEventListener("input", () => onInput(field.value));
+      return field;
+    },
+    noteBody: value => el("p", { text: value })
+  });
+  try {
+    const tick = main.querySelector("#chk-fixture-0"), draft = main.querySelector(".wu-new");
+    draft.value = "synthetic draft";
+    tick.focus();
+    tick.click();
+    check("A failed checklist save restores the control", !tick.checked && message.includes("Try again") && !refreshes);
+    blocked = false;
+    tick.click();
+    check("Completion appears and the navigation refreshes", tick.checked && refreshes === 1 && main.querySelector(".donecard a").hash === "#m2.guide");
+    check("Checklist changes preserve focus and note drafts", document.activeElement === tick && draft.value === "synthetic draft");
+    tick.click();
+    check("Clearing the final tick removes completion", !main.querySelector(".donecard") && main.querySelector(".wu-count").textContent === "0 of 1 done");
+    const add = draft.nextElementSibling.querySelector("button");
+    blocked = true;
+    add.click();
+    check("A failed note save keeps the draft ready to retry", draft.value === "synthetic draft" && document.activeElement === draft && note === "");
+    blocked = false;
+    add.click();
+    check("A successful retry shows the saved note", !draft.value && main.querySelector(".wu-notes").textContent === "synthetic draft");
+    const edit = [...main.querySelectorAll("button")].find(b => b.textContent.includes("Edit these notes"));
+    edit.click();
+    const editor = main.querySelector(".wu-edit textarea");
+    editor.value = "changed note";
+    editor.dispatchEvent(new Event("input"));
+    edit.click();
+    check("Note editing delegates updates and refreshes the note view", main.querySelector(".wu-notes").textContent === "changed note");
+    output.textContent = passed.map(label => "PASS  " + label).join("\n");
+  } catch (error) {
+    output.textContent = "FAIL  " + error.message;
+    throw error;
+  }
+})();
+</script>
+</html>

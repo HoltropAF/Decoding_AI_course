@@ -111,6 +111,8 @@ Versions follow `MAJOR.MINOR.PATCH` as described in
   parser. Browser and viewer downloads use a tested adapter.
 - Separated the Dictionary view from the dashboard. Direct term links open
   the requested entry even with a saved card or list layout.
+- Separated the Wrap-up view from the dashboard. Checklist changes keep
+  the current focus and any note draft in place.
 - Version numbers now use three parts: `1.0` became `1.0.0`.
 - The dashboard shows at 75% on computer screens by default; Preferences
   has a "Page size" setting (75%, 90%, 100%). Phones stay at full size.

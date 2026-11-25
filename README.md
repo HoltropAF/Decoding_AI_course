@@ -44,6 +44,8 @@ The [wiki](https://github.com/HoltropAF/Decoding_AI_course/wiki) has a [dashboar
 
 Found a mistake or a broken example? [Open an issue](https://github.com/HoltropAF/Decoding_AI_course/issues) with the module, section and what you saw. Use synthetic data in anything you share.
 
-If you use the course in your teaching or share material from it, please credit **Decoding AI** by [HoltropAF](https://github.com/HoltropAF) and link to the [course repository](https://github.com/HoltropAF/Decoding_AI_course). Include the version if it matters to your readers.
+## Credit and sources
 
-*AI assisted in writing the course, drawing on online sources and practical experience. The material was reviewed and may still contain errors.*
+I put Decoding AI together with AI assistance, drawing on published sources and practical experience. Feel free to work through the course, share the link, or use it to guide a group session. If you do, please credit **Decoding AI, compiled by HoltropAF** and link back to the [course repository](https://github.com/HoltropAF/Decoding_AI_course).
+
+When you use material from a [cited source](course/references.md), credit the source directly and follow its reuse terms. The course was reviewed and may still contain errors.

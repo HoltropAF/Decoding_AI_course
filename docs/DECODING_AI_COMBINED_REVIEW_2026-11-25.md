@@ -149,3 +149,10 @@ The original prioritized SOLID workstreams are now covered. The remaining archit
 Observed SOLID alignment is **23/30 (76.7%)**, with **15/15 checks scored**. I1 gains one point for a view that can run with only its Dictionary data and explicit services for navigation, preferences, Markdown and figures. The template wires those services without passing the course-wide state or the browser's storage object. The Dictionary returns a scoped keyboard handler to the dashboard. Other renderers still share broader dashboard state, so the other boundary checks retain their scores. [Dictionary view](../course/dashboard_dictionary.js) · [Dictionary checks](../course/tests/dictionary.html)
 
 Six isolated browser checks passed. They covered deep links while a card view is saved, figure rendering delegation, selection and focus, empty-search recovery, keyboard selection, and preference saving. The built offline dashboard also passed the Attention figure test with Enter, Escape and launcher focus return. The builder inlines the new code and includes it in the fingerprint.
+
+
+### Wrap-up view follow-up
+
+Observed SOLID alignment is **24/30 (80.0%)**, with **15/15 checks scored**. S3 gains one point because the Wrap-up view owns local rendering and interaction, while dashboard composition supplies next links and delegates persistence to the progress store. A checklist write updates the local completion state and refreshes navigation. It no longer has to redraw the route or reach into the dashboard's global state. [Wrap-up view](../course/dashboard_wrapup.js) · [Wrap-up checks](../course/tests/wrapup.html)
+
+Seven isolated browser checks passed for failed checklist writes, completion, focus and draft preservation, note retry, and note editing. The offline dashboard also passed the shared checklist and note retry checks in Edge. The dashboard still ships as one HTML file, and its fingerprint includes the new source module.

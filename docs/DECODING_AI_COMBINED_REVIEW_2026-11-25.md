@@ -124,3 +124,12 @@ The ENCORE follow-up scores **23/24 (95.8%)** with **12/12 checks scored**. E04 
 The optional checks produced a short local greeting using Ollama and valid PDF and PPTX exports of the Module 1 slides using the official, checksum-verified Marp CLI. The hosted source link was verified in Edge. A relocated copy reproduced the pinned HTML, and an edited source file made the check fail and the next build drop the old pin.
 
 E12 remains 1/2. The README requests attribution to the course and its author. The owner chose informal attribution guidance, with no formal course license added. [Course attribution](../README.md#learn-more)
+
+
+## SOLID progress-state follow-up
+
+Observed alignment is **17/30 (56.7%)** with **15/15 checks scored**. S2 gains one point because startup, saving, backup import and reset now share a state contract, while checklist identity and writes are still spread across some actions. D2 gains one point because the progress store has an injected storage boundary and a single wiring point. L3 gains one point because the store now has executable contract checks. Other adapters remain outside those checks. [Progress store](../course/dashboard_progress.js) · [Progress contract checks](../course/tests/progress.html)
+
+Ten contract checks passed in Edge, covering defaults, recovery from malformed stored values, legacy backups, write failures and reset behavior. The rebuilt dashboard also passed the browser checks for invalid backups, failed writes, successful import, focus restoration and note retry. The JavaScript is embedded in the single-file dashboard and included in its build fingerprint.
+
+Next, move checklist identity and updates behind the shared contract. Preserve existing ticks through a migration before changing positional keys. The fenced-heading parser and download adapter contract remain separate work.

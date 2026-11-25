@@ -91,6 +91,9 @@ Dashboard progress storage lives in `course/dashboard_progress.js` and is
 inlined by the builder. After changing the progress contract, open
 [the browser checks](course/tests/progress.html) locally. Then rebuild
 the dashboard and exercise Preferences → Load progress from the HTML.
+Open the [download checks](course/tests/downloads.html) after changing
+the download adapter, or run `python -m unittest discover -s course/tests` for Markdown section and
+checklist ID tests.
 
 ## Releasing
 

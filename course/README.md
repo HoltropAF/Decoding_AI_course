@@ -85,8 +85,12 @@ python course/build_dashboard.py
 
 The script uses only the Python standard library. Objectives, "done when"
 items, the experiment question and the first critical question are read
-from each module's `self_check.md`. Keep the order of "done when" items
-stable, or participants' ticks will shift to different items.
+from each module's `self_check.md`. Keep the `<!-- checklist:mN-id -->`
+marker with its item when moving or editing it. For a new item, add a
+unique ID prefixed by the module ID, for example `m1-check-settings`.
+Ordinary Markdown checklist entries keep their ticks when reordered
+within a document. Changing an ordinary item's wording makes it a new
+item for progress tracking.
 
 The version number lives in the `VERSION` file in the repository root.
 The build puts it in the dashboard title, the menu, the footer and every

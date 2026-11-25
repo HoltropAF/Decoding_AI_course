@@ -31,7 +31,10 @@ TEMPLATE = ROOT / "course" / "dashboard_template.html"
 OUTPUT = ROOT / "course" / "dashboard.html"
 SOURCE_PIN = ROOT / "course" / "dashboard_source.json"
 PLACEHOLDER = "__COURSE_DATA__"
-PROGRESS_PLACEHOLDER = "__PROGRESS_STORE__"
+INLINE_SCRIPTS = {
+    "__PROGRESS_STORE__": "course/dashboard_progress.js",
+    "__DOWNLOAD_ADAPTER__": "course/dashboard_downloads.js",
+}
 VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 
 # --------------------------------------------------------------------------- #
@@ -70,10 +73,10 @@ MODULES = [
         "summary": "What the course is for, how it works, the one ground rule, and what you need to get started.",
         "objectives": [],
         "done": [
-            "Welcome page read (or the orientation session attended)",
-            "Privacy settings of my AI accounts checked",
-            "I know which chat assistant I may use for work",
-            "Optional: Ollama installed and llama3.1:8b downloaded",
+            {"id": "m0-0", "text": "Welcome page read (or the orientation session attended)"},
+            {"id": "m0-1", "text": "Privacy settings of my AI accounts checked"},
+            {"id": "m0-2", "text": "I know which chat assistant I may use for work"},
+            {"id": "m0-3", "text": "Optional: Ollama installed and llama3.1:8b downloaded"},
         ],
         "steps": [
             {"key": "guide", "label": "Welcome", "kind": "doc", "phase": "learn", "path": "course/orientation.md"},
@@ -149,7 +152,7 @@ MODULES = [
             ("Track D · DC hypothesis engine", "track_d_dendritic_cell_hypothesis/README.md"),
             ("Track E · Lab AI playbook (no coding)", "track_e_lab_ai_playbook/README.md"),
         ],
-        "materials_label": "Tracks",
+        "materials_label": "Tracks", "hackathon": True,
         "materials_intro": M6_INTRO,
         "experiment": "Your project is the experiment: what are your primary outcome, ground truth, baseline and success threshold?",
         "selfcheck_label": "Evaluation plan",
@@ -208,11 +211,11 @@ def as_code(rel: str, text: str) -> str:
 def section(text: str, pattern: str) -> str:
     """Return a '## ' section whose heading matches pattern, without trailing rule."""
     lines = text.splitlines()
-    start = next((i for i, l in enumerate(lines)
-                  if l.startswith("## ") and re.search(pattern, l, re.I)), None)
-    if start is None:
+    span = next(((start, end) for start, end in h2_spans(lines)
+                 if re.search(pattern, lines[start], re.I)), None)
+    if span is None:
         return ""
-    end = next((i for i in range(start + 1, len(lines)) if lines[i].startswith("## ")), len(lines))
+    start, end = span
     body = "\n".join(lines[start:end]).rstrip()
     return re.sub(r"\n-{3,}\s*$", "", body).rstrip() + "\n"
 
@@ -221,7 +224,7 @@ def strip_md(s: str) -> str:
     return re.sub(r"\*+|`", "", s).strip()
 
 
-def parse_self_check(text: str) -> dict:
+def parse_self_check(text: str, module_id: str) -> dict:
     objectives = []
     obj = section(text, r"^## Learning objectives")
     for block in re.split(r"\n(?=\d+\. )", obj):
@@ -229,8 +232,15 @@ def parse_self_check(text: str) -> dict:
         if m:
             objectives.append(strip_md(" ".join(m.group(1).split())))
 
-    done = [strip_md(m.group(1)) for m in re.finditer(r"^- \[ \] (.+(?:\n {6}.+)*)", section(text, r"^## Done when"), re.M)]
-    done = [" ".join(d.split()) for d in done]
+    items = [strip_md(m.group(1)) for m in re.finditer(r"^- \[ \] (.+(?:\n {6}.+)*)", section(text, r"^## Done when"), re.M)]
+    done, used_ids = [], set()
+    for i, item in enumerate(items):
+        marker = re.search(r" <!-- checklist:([a-z0-9-]+) -->", item)
+        if not marker or not marker[1].startswith(module_id + "-") or marker[1] in used_ids:
+            raise SystemExit(f"{module_id}: add a unique checklist ID to Done when item {i + 1}")
+        used_ids.add(marker[1])
+        label = " ".join((item[:marker.start()] + item[marker.end():]).split())
+        done.append({"id": marker[1], "text": label})
 
     experiment = ""
     exp = section(text, r"^## Mini-experiment")
@@ -375,8 +385,8 @@ def build_module(cfg: dict) -> dict:
 
     d = cfg["dir"]
     readme = read(f"{d}/README.md")
-    sc = parse_self_check(read(f"{d}/self_check.md"))
-    hackathon = cfg.get("materials_label") == "Tracks"
+    sc = parse_self_check(read(f"{d}/self_check.md"), cfg["id"])
+    hackathon = cfg.get("hackathon", False)
     # Learn first (information), then practise (optional exercises/trials), then reflect.
     steps = []
     if cfg.get("intro"):
@@ -407,29 +417,37 @@ def build_module(cfg: dict) -> dict:
     steps.append({"key": "progress", "label": "Wrap-up", "kind": "progress", "phase": "reflect"})
 
     out = {k: v for k, v in cfg.items() if k not in ("materials", "exercise_files", "materials_label", "materials_intro", "materials_toggles", "intro",
-                                                     "selfcheck_label", "no_exercise", "guide_label")}
+                                                     "selfcheck_label", "no_exercise", "guide_label", "hackathon")}
     merged = out | sc | {"steps": steps}
     if not merged["experiment"] and cfg.get("experiment"):
         merged["experiment"] = cfg["experiment"]
     return merged
 
 
-def h2_sections(md: str) -> list[tuple[str, str]]:
-    """(heading, text) for every '## ' section, ignoring headings inside code fences."""
-    out, cur_h, cur, fence = [], None, [], False
-    for line in md.splitlines():
-        if line.lstrip().startswith(("```", "~~~")):
-            fence = not fence
+def h2_spans(lines: list[str]) -> list[tuple[int, int]]:
+    """Find level-two headings outside a backtick or tilde fence."""
+    starts = []
+    fence = None
+    for i, line in enumerate(lines):
+        marker = re.match(r"^ {0,3}(`{3,}|~{3,})(.*)$", line)
+        if marker:
+            token, rest = marker.groups()
+            if fence:
+                if token[0] == fence[0] and len(token) >= len(fence) and not rest.strip():
+                    fence = None
+            elif token[0] == "~" or "`" not in rest:
+                fence = token
+            continue
         if not fence and line.startswith("## "):
-            if cur_h is not None:
-                out.append((cur_h, "\n".join(cur)))
-            cur_h, cur = line[3:].strip(), []
-        elif cur_h is not None:
-            cur.append(line)
-    if cur_h is not None:
-        out.append((cur_h, "\n".join(cur)))
-    return out
+            starts.append(i)
+    return list(zip(starts, starts[1:] + [len(lines)]))
 
+
+def h2_sections(md: str) -> list[tuple[str, str]]:
+    """(heading, text) for every level-two section outside code fences."""
+    lines = md.splitlines()
+    return [(lines[start][3:].strip(), "\n".join(lines[start + 1:end]))
+            for start, end in h2_spans(lines)]
 
 def term_keys(term: str) -> list[str]:
     """Search keys for a term: the full name, the part before brackets, the abbreviation, each '/' alternative."""
@@ -535,21 +553,23 @@ def main() -> None:
                  for e in dictionary if e.get("fig")}
     data = {"version": VERSION, "modules": modules, "resources": resources,
             "dictionary": dictionary, "dictionary_path": "course/glossary.md", "dict_figs": dict_figs,
-            "contact": CONTACT_EMAIL}
+            "contact": CONTACT_EMAIL, "legacy_ticks": json.loads(read("course/legacy_checklist_ticks.json"))}
 
     template = TEMPLATE.read_text(encoding="utf-8")
-    for placeholder in (PLACEHOLDER, PROGRESS_PLACEHOLDER):
+    for placeholder in (PLACEHOLDER, *INLINE_SCRIPTS):
         if template.count(placeholder) != 1:
             raise SystemExit(f"Expected one {placeholder} placeholder in {TEMPLATE}")
-    progress_store = read("course/dashboard_progress.js").rstrip()
+    scripts = {marker: read(path).rstrip() for marker, path in INLINE_SCRIPTS.items()}
     marked = (ROOT / "course" / "vendor" / "marked.min.js").read_text(encoding="utf-8").replace("</script", r"<\/script")
     # Fingerprint the effective inputs, before adding the fingerprint to the bundle.
     builder = Path(__file__).read_text(encoding="utf-8")
-    inputs = json.dumps([builder, template, marked, progress_store, data], ensure_ascii=False, separators=(",", ":"))
+    inputs = json.dumps([builder, template, marked, scripts, data], ensure_ascii=False, separators=(",", ":"))
     data["build_fingerprint"] = hashlib.sha256(inputs.encode("utf-8")).hexdigest()
     data["source_revision"] = dashboard_source(data["build_fingerprint"], args.pin_source)
     payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
-    html = template.replace(PROGRESS_PLACEHOLDER, progress_store).replace(PLACEHOLDER, payload).replace("__MARKED__", marked).replace("__VERSION__", VERSION)
+    for marker, script in scripts.items():
+        template = template.replace(marker, script)
+    html = template.replace(PLACEHOLDER, payload).replace("__MARKED__", marked).replace("__VERSION__", VERSION)
     output = html.encode("utf-8")
     if args.check:
         if not OUTPUT.is_file() or OUTPUT.read_bytes() != output:

@@ -145,8 +145,8 @@ through with a colleague over coffee.
 
 ## Done when
 
-- [ ] A filled-in `CLAUDE.md` in one of your projects
-- [ ] A fresh session demonstrably follows at least three rules
-- [ ] Mini-experiment rubric scored for at least one task per condition
-- [ ] One rule deleted or moved because the experiment showed it was not
+- [ ] A filled-in `CLAUDE.md` in one of your projects <!-- checklist:m3-0 -->
+- [ ] A fresh session demonstrably follows at least three rules <!-- checklist:m3-1 -->
+- [ ] Mini-experiment rubric scored for at least one task per condition <!-- checklist:m3-2 -->
+- [ ] One rule deleted or moved because the experiment showed it was not <!-- checklist:m3-3 -->
       needed or not followed

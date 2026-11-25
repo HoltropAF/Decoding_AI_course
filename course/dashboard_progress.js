@@ -1,4 +1,4 @@
-  function createProgressStore(storage, key) {
+  function createProgressStore(storage, key, legacyTicks) {
     var core = ["done", "conf", "visited", "notes", "exp", "slide", "sub"];
     var flags = ["done", "ticks", "visited", "readParts"];
     var readingDefaults = { readbar: true, ticks: true, mins: true };
@@ -47,6 +47,12 @@
         if (typeof raw.tts.voice === "string") state.tts.voice = raw.tts.voice;
         if (typeof raw.tts.auto === "boolean") state.tts.auto = raw.tts.auto;
       }
+      Object.entries(legacyTicks || {}).forEach(function (entry) {
+        var old = entry[0], current = entry[1];
+        if (state.ticks[old] === undefined) return;
+        if (state.ticks[current] === undefined) state.ticks[current] = state.ticks[old];
+        delete state.ticks[old];
+      });
       return state;
     }
 
@@ -61,6 +67,13 @@
         catch (error) { return normalize({}, false); }
       },
       save: save,
+      setTick: function (state, field, id, checked) {
+        var values = state[field], previous = values[id];
+        if (checked) values[id] = true; else delete values[id];
+        if (save(state)) return true;
+        if (previous === undefined) delete values[id]; else values[id] = previous;
+        return false;
+      },
       restore: function (text) {
         var candidate;
         try { candidate = normalize(JSON.parse(text), true); }

@@ -109,9 +109,9 @@ through with a colleague over coffee.
 
 ## Done when
 
-- [ ] Evaluation plan written before building and committed in `plan.md`
-- [ ] Primary outcome measured on a held-out set and compared with a
+- [ ] Evaluation plan written before building and committed in `plan.md` <!-- checklist:m6-0 -->
+- [ ] Primary outcome measured on a held-out set and compared with a <!-- checklist:m6-1 -->
       baseline
-- [ ] Limitations section in the README
-- [ ] Themis summary line in the README
-- [ ] Retrospective notes written
+- [ ] Limitations section in the README <!-- checklist:m6-2 -->
+- [ ] Themis summary line in the README <!-- checklist:m6-3 -->
+- [ ] Retrospective notes written <!-- checklist:m6-4 -->

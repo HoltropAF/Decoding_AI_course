@@ -146,7 +146,7 @@ through with a colleague over coffee.
 
 ## Done when
 
-- [ ] A working read-only MCP configuration in a scratch project
-- [ ] A documented failed write attempt
-- [ ] Mini-experiment scored for at least four genes
-- [ ] You can list three MCP risks and their mitigations
+- [ ] A working read-only MCP configuration in a scratch project <!-- checklist:m4-0 -->
+- [ ] A documented failed write attempt <!-- checklist:m4-1 -->
+- [ ] Mini-experiment scored for at least four genes <!-- checklist:m4-2 -->
+- [ ] You can list three MCP risks and their mitigations <!-- checklist:m4-3 -->

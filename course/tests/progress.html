@@ -53,6 +53,19 @@ try {
   state = store.reset(state);
   check("Successful reset clears work and retains preferences", Object.keys(state.notes).length === 0 &&
     Object.keys(state.ticks).length === 0 && state.fs === "l" && state.prefs.ticks === false);
+  const migrated = createProgressStore(() => storage, "fixture", { "old#0": "new-first", "old#1": "new-second" });
+  raw = JSON.stringify({ ...legacy, ticks: { "old#0": true, "old#1": true, "new-second": false, "unknown#0": true } });
+  const migratedTicks = migrated.load().ticks;
+  check("Legacy ticks transfer by identity and preserve existing stable values", migratedTicks["new-first"] === true &&
+    migratedTicks["new-second"] === false && migratedTicks["old#0"] === undefined && migratedTicks["unknown#0"] === true);
+  check("A failed checklist write rolls back in memory and storage", (() => {
+    const ready = migrated.load();
+    const original = raw;
+    blocked = true;
+    const saved = migrated.setTick(ready, "ticks", "new-first", false);
+    blocked = false;
+    return !saved && ready.ticks["new-first"] === true && raw === original;
+  })());
   result.textContent = cases.map(label => "PASS  " + label).join("\n");
   result.dataset.passed = String(cases.length);
 } catch (error) {

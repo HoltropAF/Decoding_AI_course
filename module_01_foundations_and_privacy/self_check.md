@@ -242,7 +242,7 @@ through with a colleague over coffee.
 
 ## Done when
 
-- [ ] `test_ollama_local.py` runs and reports throughput on your machine
-- [ ] Mini-experiment table filled for at least one model
-- [ ] You can explain the four data classes without looking
-- [ ] Your account privacy settings are checked and the date noted
+- [ ] `test_ollama_local.py` runs and reports throughput on your machine <!-- checklist:m1-0 -->
+- [ ] Mini-experiment table filled for at least one model <!-- checklist:m1-1 -->
+- [ ] You can explain the four data classes without looking <!-- checklist:m1-2 -->
+- [ ] Your account privacy settings are checked and the date noted <!-- checklist:m1-3 -->

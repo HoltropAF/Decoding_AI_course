@@ -227,8 +227,8 @@ through with a colleague over coffee.
 
 ## Done when
 
-- [ ] `pathways.json` produced and validated
-- [ ] Mini-experiment table filled for at least two conditions
-- [ ] Three pathway assignments checked by hand in Reactome or KEGG
-- [ ] You can name the three enforcement layers and what each does *not*
+- [ ] `pathways.json` produced and validated <!-- checklist:m2-0 -->
+- [ ] Mini-experiment table filled for at least two conditions <!-- checklist:m2-1 -->
+- [ ] Three pathway assignments checked by hand in Reactome or KEGG <!-- checklist:m2-2 -->
+- [ ] You can name the three enforcement layers and what each does *not* <!-- checklist:m2-3 -->
       guarantee

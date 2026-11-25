@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Dashboard download adapter checks</title>
+<h1>Dashboard download adapter checks</h1>
+<pre id="results"></pre>
+<script src="../dashboard_downloads.js"></script>
+<script>
+"use strict";
+(async function () {
+  const output = document.getElementById("results");
+  const passed = [];
+  const blob = new Blob(["synthetic download"], { type: "text/plain" });
+  const name = "sample.txt";
+
+  async function check(label, viewer, browser, expected, expectedAttempts) {
+    let browserAttempts = 0;
+    const request = createDownloadAdapter(() => viewer, (receivedName, receivedBlob) => {
+      if (receivedName !== name || receivedBlob !== blob) throw new Error("Browser adapter received the wrong file");
+      browserAttempts++;
+      return browser();
+    });
+    if (await request(name, blob) !== expected || browserAttempts !== expectedAttempts) throw new Error(label);
+    passed.push(label);
+  }
+
+  try {
+    await check("Browser returns requested", null, () => {}, "requested", 1);
+    await check("Viewer returns ready and receives the same file", { save: async file => {
+      if (file.filename !== name || file.data !== blob) throw new Error("Viewer adapter received the wrong file");
+    } }, () => {}, "ready", 0);
+    await check("Unavailable viewer falls back once", { save: async () => { throw { code: "unavailable" }; } }, () => {}, "requested", 1);
+    await check("Viewer failure is reported without duplicate download", { save: async () => { throw new Error("fixture"); } }, () => {}, "failed", 0);
+    await check("Browser failure is reported", null, () => { throw new Error("fixture"); }, "failed", 1);
+    output.textContent = passed.map(label => "PASS  " + label).join("\n");
+    output.dataset.passed = String(passed.length);
+  } catch (error) {
+    output.textContent = "FAIL  " + error.message;
+    throw error;
+  }
+})();
+</script>
+</html>

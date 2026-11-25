@@ -152,7 +152,7 @@ through with a colleague over coffee.
 
 ## Done when
 
-- [ ] Themis installed and visible in `/agents`
-- [ ] Themis run on a project; three findings verified by hand
-- [ ] Mini-experiment scored for at least one run
-- [ ] Your own read-only subagent committed (see `exercises/build_custom_subagent.md`)
+- [ ] Themis installed and visible in `/agents` <!-- checklist:m5-0 -->
+- [ ] Themis run on a project; three findings verified by hand <!-- checklist:m5-1 -->
+- [ ] Mini-experiment scored for at least one run <!-- checklist:m5-2 -->
+- [ ] Your own read-only subagent committed (see `exercises/build_custom_subagent.md`) <!-- checklist:m5-3 -->

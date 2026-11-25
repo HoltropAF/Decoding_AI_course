@@ -76,14 +76,27 @@ the version and embedded figures. Identical inputs produce identical
 bytes across dates. The fingerprint identifies the bundle even when
 built from local edits, while Git identifies the checkout.
 
+For a published bundle, first commit the source changes and their rebuilt
+dashboard. Then run `python course/build_dashboard.py --pin-source`.
+It verifies that the committed dashboard at `HEAD` matches the current
+fingerprint, records the source commit in `course/dashboard_source.json`
+and rebuilds the HTML with commit-specific hosted source links. Commit
+those two generated files together and run the check again. If the
+effective inputs change, a normal rebuild drops the old pin.
+
+The [reproducibility guide](docs/reproducibility.md) records the tested
+runtime, slide export and local-model setup.
+
 ## Releasing
 
 1. On `development`, set the new number in `VERSION` and in the title line
    of `README.md`.
 2. In `CHANGELOG.md`, rename `[Unreleased]` to `[X.Y.Z] - YYYY-MM-DD` and
    start a new empty `[Unreleased]` section above it.
-3. Rebuild the dashboard: `python course/build_dashboard.py`.
-4. Commit as `chore(release): vX.Y.Z` and push `development`.
+3. Rebuild the dashboard with `python course/build_dashboard.py` and commit
+   the release inputs as `chore(release): vX.Y.Z`.
+4. Pin the source as described above, commit the generated files, and push
+   `development`.
 5. Open a pull request from `development` to `main` and merge it with a
    **merge commit**, not a squash. Squashing would break the shared history
    between the two branches and cause conflicts at the next release.

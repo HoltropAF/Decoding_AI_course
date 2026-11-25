@@ -11,10 +11,11 @@ changelog, read in by `CLAUDE.md` and updated with the `wrap-up` skill.
 session needs to know where things stand and why, not every message that
 led there. To-do and roadmap are one file so they can't drift apart.
 
-## 2026-10-13 · One hard rule as a hook, the rest as instructions
+## 2026-10-13 · Protect the release branch
 
-"Never commit on `main`" is enforced by a hook; everything else lives in
-`CLAUDE.md`, `CONTRIBUTING.md` and `course/chapter_recipe.md`.
+Contributors work on `development` and use the release workflow in
+`CONTRIBUTING.md` for `main`. The project-local hook is planned and is
+not included in a fresh checkout. See [ROADMAP.md](ROADMAP.md).
 **Why:** instructions are requests, and this rule must never fail. The
 writing style needs judgment, and the recipe already holds it, so there's
 no separate writing skill.

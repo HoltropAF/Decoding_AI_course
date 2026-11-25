@@ -2,3 +2,4 @@
 * text=auto
 *.bat text eol=crlf
 course/dashboard.html text eol=lf
+course/dashboard_source.json text eol=lf

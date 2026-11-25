@@ -1076,7 +1076,7 @@ __MARKED__</script>
   var DATA = JSON.parse(document.getElementById("course-data").textContent);
   var MODULES = DATA.modules;
   var RESOURCES = DATA.resources;
-  var REPO = "https://github.com/HoltropAF/Decoding_AI_course/blob/main/";
+  var REPO = "https://github.com/HoltropAF/Decoding_AI_course/blob/" + (DATA.source_revision || "development") + "/";
   var KEY = "ai-omics-course-v1";
   var PHASES = { learn: "Learn", practice: "Practice · optional", apply: "Apply", extra: "Extra", reflect: "Reflect" };
 
@@ -2098,7 +2098,7 @@ __MARKED__</script>
     var parts = [el("span", { text: "Source: " + d.path })];
     var root = repoRoot();
     if (root) parts.push(el("a", { href: "vscode://file/" + root + "/" + d.path, text: "edit in VS Code" }));
-    parts.push(el("a", { href: fileHref(d.path), target: "_blank", rel: "noopener", text: root ? "view file" : "view on GitHub" }));
+    parts.push(el("a", { href: fileHref(d.path), target: "_blank", rel: "noopener", text: root ? "view file" : DATA.source_revision ? "view source on GitHub" : "view latest on GitHub" }));
     return el("div", { class: "filepath" }, parts);
   }
 
@@ -3755,7 +3755,7 @@ __MARKED__</script>
     return (h ? h.textContent.trim() : "Dashboard") + " (" + (location.hash || "#start") + ")";
   }
   function bugsAsText(list) {
-    var lines = ["Decoding AI: problem reports (" + list.length + "), exported " + new Date().toISOString().slice(0, 10), "Content version: v" + DATA.version, "Build SHA-256: " + DATA.build_fingerprint, ""];
+    var lines = ["Decoding AI: problem reports (" + list.length + "), exported " + new Date().toISOString().slice(0, 10), "Content version: v" + DATA.version, "Build SHA-256: " + DATA.build_fingerprint, "Source revision: " + (DATA.source_revision || "unpinned"), ""];
     list.forEach(function (b, i) {
       lines.push((i + 1) + ". [" + b.type + "] " + b.when);
       lines.push("   Page: " + b.page);
@@ -3858,7 +3858,7 @@ __MARKED__</script>
   })();
   var buildStamp = document.getElementById("built");
   buildStamp.textContent = "Version " + DATA.version + ", build " + DATA.build_fingerprint.slice(0, 12) + ". Progress is stored in this browser only.";
-  buildStamp.title = "Build SHA-256: " + DATA.build_fingerprint;
+  buildStamp.title = "Build SHA-256: " + DATA.build_fingerprint + "\nSource revision: " + (DATA.source_revision || "unpinned");
 
   load();
   render();

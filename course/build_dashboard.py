@@ -23,11 +23,13 @@ import hashlib
 import json
 import posixpath
 import re
+import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 TEMPLATE = ROOT / "course" / "dashboard_template.html"
 OUTPUT = ROOT / "course" / "dashboard.html"
+SOURCE_PIN = ROOT / "course" / "dashboard_source.json"
 PLACEHOLDER = "__COURSE_DATA__"
 VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 
@@ -492,9 +494,34 @@ def add_course_links(modules: list[dict], dictionary: list[dict]) -> None:
                       for sc, _, i, m, st, label, h in scored[:3]]
 
 
+def dashboard_source(fingerprint: str, pin_source: bool) -> str:
+    """Use a recorded revision only when it matches the effective build inputs."""
+    if pin_source:
+        try:
+            revision = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT).decode("ascii").strip()
+            committed = subprocess.check_output(["git", "show", "HEAD:course/dashboard.html"], cwd=ROOT).decode("utf-8")
+            payload = committed.split('id="course-data">', 1)[1].split("</script>", 1)[0]
+            matches = json.loads(payload).get("build_fingerprint") == fingerprint
+        except (OSError, subprocess.CalledProcessError, IndexError, ValueError):
+            matches = False
+        if not matches:
+            raise SystemExit("Commit a dashboard built from these inputs before running --pin-source.")
+        pin = {"fingerprint": fingerprint, "revision": revision}
+        SOURCE_PIN.write_bytes((json.dumps(pin, indent=2) + "\n").encode("utf-8"))
+
+    if not SOURCE_PIN.is_file():
+        return ""
+    pin = json.loads(SOURCE_PIN.read_text(encoding="utf-8"))
+    if not re.fullmatch(r"[a-f0-9]{64}", pin["fingerprint"]) or not re.fullmatch(r"[a-f0-9]{40}", pin["revision"]):
+        raise SystemExit("Invalid dashboard source pin.")
+    return pin["revision"] if pin["fingerprint"] == fingerprint else ""
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--check", action="store_true", help="check the existing dashboard without writing it")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--check", action="store_true", help="check the existing dashboard without writing it")
+    mode.add_argument("--pin-source", action="store_true", help="pin hosted source links to the matching committed build at HEAD")
     args = parser.parse_args()
 
     modules = [build_module(m) for m in MODULES]
@@ -517,6 +544,7 @@ def main() -> None:
     builder = Path(__file__).read_text(encoding="utf-8")
     inputs = json.dumps([builder, template, marked, data], ensure_ascii=False, separators=(",", ":"))
     data["build_fingerprint"] = hashlib.sha256(inputs.encode("utf-8")).hexdigest()
+    data["source_revision"] = dashboard_source(data["build_fingerprint"], args.pin_source)
     payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
     html = template.replace(PLACEHOLDER, payload).replace("__MARKED__", marked).replace("__VERSION__", VERSION)
     output = html.encode("utf-8")

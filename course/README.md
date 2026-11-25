@@ -107,14 +107,17 @@ live in git next to the content they summarise.
 - **Export to PowerPoint or PDF:**
 
   ```bash
-  npx @marp-team/marp-cli@latest module_01_foundations_and_privacy/slides.md --pptx
-  npx @marp-team/marp-cli@latest module_01_foundations_and_privacy/slides.md --pdf
+  npx @marp-team/marp-cli@4.5.1 --allow-local-files module_01_foundations_and_privacy/slides.md --pptx
+  npx @marp-team/marp-cli@4.5.1 --allow-local-files module_01_foundations_and_privacy/slides.md --pdf
   ```
 
   By default the PowerPoint export renders slides as images (not editable
   text). Edit the Markdown and re-export instead of editing the `.pptx`.
 - Speaker notes are the HTML comments (`<!-- ... -->`) under each slide and
   appear as presenter notes in the export.
+
+See the [reproducibility guide](../docs/reproducibility.md) for the tested
+browser, runtime and optional tool versions.
 
 ## Background notes
 

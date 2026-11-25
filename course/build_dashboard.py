@@ -39,6 +39,7 @@ INLINE_SCRIPTS = {
     "__CHAPTER_VIEW__": "course/dashboard_chapter.js",
 }
 VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+STEP_CONTRACT = json.loads((ROOT / "course" / "dashboard_step_kinds.json").read_text(encoding="utf-8"))
 
 # --------------------------------------------------------------------------- #
 # Introductions shown at the top of each module's Extra reading step.
@@ -83,7 +84,7 @@ MODULES = [
         ],
         "steps": [
             {"key": "guide", "label": "Welcome", "kind": "doc", "phase": "learn", "path": "course/orientation.md"},
-            {"key": "slides", "label": "Slides", "kind": "slides", "phase": "extra", "path": "course/slides_00_orientation.md"},
+            {"key": "slides", "label": "Slides", "kind": "slides", "phase": "extra", "path": "course/slides_00_orientation.md", "recap": True},
             {"key": "progress", "label": "Wrap-up", "kind": "progress", "phase": "reflect"},
         ],
     },
@@ -375,9 +376,11 @@ def build_module(cfg: dict) -> dict:
     if "steps" in cfg:  # orientation: fully configured
         steps = []
         for s in cfg["steps"]:
-            if s["kind"] == "slides":
+            renderer = STEP_CONTRACT["kinds"].get(s["kind"])
+            fields = STEP_CONTRACT["renderers"].get(renderer, {}).get("required", {})
+            if "md" in fields and "path" in fields:
                 steps.append({**s, "md": embed_figures(read(s["path"]), s["path"])})
-            elif s["kind"] == "doc":
+            elif fields.get("doc") == "document":
                 text = read(s["path"])
                 if "section" in s:
                     text = section(text, s["section"])
@@ -416,7 +419,7 @@ def build_module(cfg: dict) -> dict:
                   "doc": doc(f"{d}/self_check.md", cfg.get("selfcheck_label", "Self-check"))})
     # Slides come last, as an optional recap of the chapter.
     steps.append({"key": "slides", "label": "Kick-off slides" if hackathon else "Slides", "kind": "slides",
-                  "phase": "extra", "path": f"{d}/slides.md", "md": embed_figures(read(f"{d}/slides.md"), f"{d}/slides.md")})
+                  "phase": "extra", "recap": not hackathon, "path": f"{d}/slides.md", "md": embed_figures(read(f"{d}/slides.md"), f"{d}/slides.md")})
     steps.append({"key": "progress", "label": "Wrap-up", "kind": "progress", "phase": "reflect"})
 
     out = {k: v for k, v in cfg.items() if k not in ("materials", "exercise_files", "materials_label", "materials_intro", "materials_toggles", "intro",
@@ -425,6 +428,42 @@ def build_module(cfg: dict) -> dict:
     if not merged["experiment"] and cfg.get("experiment"):
         merged["experiment"] = cfg["experiment"]
     return merged
+
+
+def validate_steps(modules: list[dict], contract: dict) -> None:
+    def document(value):
+        return isinstance(value, dict) and all(isinstance(value.get(field), str) for field in ("title", "path", "md"))
+
+    valid = {
+        "string": lambda value: isinstance(value, str),
+        "boolean": lambda value: isinstance(value, bool),
+        "document": document,
+        "documents": lambda value: isinstance(value, list) and bool(value) and all(map(document, value)),
+    }
+    for module in modules:
+        keys = set()
+        for index, step in enumerate(module["steps"]):
+            key = step.get("key")
+            label = f"{module['id']} step {index + 1} ({key})"
+            if not isinstance(key, str) or not re.fullmatch(r"[a-z][a-z0-9-]*", key) or key in keys:
+                raise SystemExit(f"{label}: step key must be unique and URL-safe")
+            keys.add(key)
+            kind = step.get("kind")
+            renderer = contract["kinds"].get(kind) if isinstance(kind, str) else None
+            if renderer is None:
+                raise SystemExit(f"{label}: unknown step kind {kind!r}")
+            spec = contract["renderers"].get(renderer)
+            if spec is None:
+                raise SystemExit(f"{label}: unknown renderer {renderer!r} for step kind {kind!r}")
+            if not isinstance(step.get("label"), str) or not step["label"].strip():
+                raise SystemExit(f"{label}: step needs a label")
+            phase = step.get("phase")
+            if not isinstance(phase, str) or phase not in contract["phases"]:
+                raise SystemExit(f"{label}: unknown step phase {phase!r}")
+            fields = spec["required"] | {field: value for field, value in spec.get("optional", {}).items() if field in step}
+            for field, value in fields.items():
+                if not valid[value](step.get(field)):
+                    raise SystemExit(f"{label}: {field} must be {value}")
 
 
 def h2_spans(lines: list[str]) -> list[tuple[int, int]]:
@@ -477,7 +516,7 @@ def add_course_links(modules: list[dict], dictionary: list[dict]) -> None:
         if m["id"] == "m0":
             continue
         for st in m["steps"]:
-            if st["kind"] == "doc" and st["key"] in ("guide", "basics"):
+            if "doc" in st and st["key"] in ("guide", "basics"):
                 label = st["label"]
                 for i, (h, body) in enumerate(h2_sections(st["doc"]["md"])):
                     if re.match(r"^(Chapter summary|Summary|Looking ahead|After the hackathon|Key takeaways|\d+\. Quick check)", h):
@@ -547,6 +586,7 @@ def main() -> None:
     args = parser.parse_args()
 
     modules = [build_module(m) for m in MODULES]
+    validate_steps(modules, STEP_CONTRACT)
     resources = [{"id": r[0], "title": r[1], "summary": r[3], "doc": doc(r[2], r[1])} for r in RESOURCES]
     resources.append(limits_page())
     dictionary = parse_glossary()
@@ -554,7 +594,7 @@ def main() -> None:
     # dictionary figures: embedded once, shared by every word that uses them
     dict_figs = {e["fig"]: "data:image/svg+xml;base64," + base64.b64encode(read(e["fig"]).encode("utf-8")).decode("ascii")
                  for e in dictionary if e.get("fig")}
-    data = {"version": VERSION, "modules": modules, "resources": resources,
+    data = {"version": VERSION, "modules": modules, "resources": resources, "step_contract": STEP_CONTRACT,
             "dictionary": dictionary, "dictionary_path": "course/glossary.md", "dict_figs": dict_figs,
             "contact": CONTACT_EMAIL, "legacy_ticks": json.loads(read("course/legacy_checklist_ticks.json"))}
 
@@ -581,7 +621,7 @@ def main() -> None:
         return
     OUTPUT.write_bytes(output)
 
-    n_docs = sum(len(s.get("docs", [])) + ("doc" in s) + (s["kind"] == "slides") for m in modules for s in m["steps"])
+    n_docs = sum(len(s.get("docs", [])) + ("doc" in s) + ("md" in s) for m in modules for s in m["steps"])
     print(f"Wrote {OUTPUT.relative_to(ROOT)} (v{VERSION}): {len(modules)} modules, {n_docs} module documents, "
           f"{len(resources)} resources, {len(dictionary)} dictionary terms, {OUTPUT.stat().st_size / 1024:.0f} KB")
     for m in modules:

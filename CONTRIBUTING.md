@@ -109,6 +109,12 @@ supplies Markdown rendering, read-aloud, and saved-note and navigation
 operations. Open the [chapter checks](course/tests/chapter.html) locally
 after changing that interface.
 
+The [step contract](course/dashboard_step_kinds.json) defines lesson kinds,
+the renderer each kind uses, and its payload fields. To add a kind with
+an existing renderer, add its mapping there and use it in the module
+configuration. A genuinely new renderer also needs an implementation in
+the dashboard. The build rejects invalid steps before writing the HTML.
+
 ## Releasing
 
 1. On `development`, set the new number in `VERSION` and in the title line

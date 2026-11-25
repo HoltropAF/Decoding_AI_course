@@ -1,0 +1,43 @@
+{
+  "phases": {
+    "learn": "Learn",
+    "practice": "Practice · optional",
+    "apply": "Apply",
+    "extra": "Extra",
+    "reflect": "Reflect"
+  },
+  "kinds": {
+    "doc": "chapter",
+    "docs": "materials",
+    "slides": "slides",
+    "progress": "wrapup"
+  },
+  "renderers": {
+    "chapter": {
+      "required": {
+        "doc": "document"
+      }
+    },
+    "materials": {
+      "required": {
+        "docs": "documents"
+      },
+      "optional": {
+        "intro": "string",
+        "toggles": "boolean"
+      }
+    },
+    "slides": {
+      "required": {
+        "path": "string",
+        "md": "string"
+      },
+      "optional": {
+        "recap": "boolean"
+      }
+    },
+    "wrapup": {
+      "required": {}
+    }
+  }
+}

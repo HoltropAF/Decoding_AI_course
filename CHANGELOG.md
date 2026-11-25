@@ -115,6 +115,8 @@ Versions follow `MAJOR.MINOR.PATCH` as described in
   the current focus and any note draft in place.
 - Separated chapter rendering and section controls from the dashboard
   routing, reading-progress, and notes state.
+- Added a shared lesson-step contract. Invalid routes, phases, kinds, and
+  document payloads now fail the dashboard build.
 - Version numbers now use three parts: `1.0` became `1.0.0`.
 - The dashboard shows at 75% on computer screens by default; Preferences
   has a "Page size" setting (75%, 90%, 100%). Phones stay at full size.

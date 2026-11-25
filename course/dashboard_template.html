@@ -1078,7 +1078,10 @@ __MARKED__</script>
   var RESOURCES = DATA.resources;
   var REPO = "https://github.com/HoltropAF/Decoding_AI_course/blob/" + (DATA.source_revision || "development") + "/";
   var KEY = "ai-omics-course-v1";
-  var PHASES = { learn: "Learn", practice: "Practice · optional", apply: "Apply", extra: "Extra", reflect: "Reflect" };
+  var PHASES = DATA.step_contract.phases;
+  var STEP_KINDS = DATA.step_contract.kinds;
+
+  function rendererFor(step) { return STEP_KINDS[step.kind]; }
 
   if (window.marked && marked.use) marked.use({ gfm: true });
 
@@ -1140,7 +1143,7 @@ __PROGRESS_STORE__
   MODULES.forEach(function (m) {
     m.steps.forEach(function (s) {
       var r = m.id + "." + s.key;
-      if (s.kind === "slides" && !PATHS[s.path]) PATHS[s.path] = r;
+      if (rendererFor(s) === "slides" && !PATHS[s.path]) PATHS[s.path] = r;
       if (s.doc && !s.doc.text && !PATHS[s.doc.path] && s.key !== "setup") PATHS[s.doc.path] = r;
       if (s.docs) s.docs.forEach(function (d, i) { if (!PATHS[d.path]) PATHS[d.path] = r + "." + i; });
     });
@@ -2158,7 +2161,7 @@ __CHAPTER_VIEW__
     MODULES.forEach(function (m) {
       var mname = m.id === "m0" ? m.title : "Module " + parseInt(m.num, 10) + " · " + m.title;
       m.steps.forEach(function (s) {
-        if (s.kind === "doc" && s.doc && s.doc.md) addDoc(s.doc.md, m.id + "." + s.key, mname + (s.key === "guide" ? "" : " · " + s.label), s.key === "guide");
+        if (s.doc && s.doc.md) addDoc(s.doc.md, m.id + "." + s.key, mname + (s.key === "guide" ? "" : " · " + s.label), s.key === "guide");
         if (s.docs) s.docs.forEach(function (d, i) { if (d.md) addDoc(d.md, m.id + "." + s.key + "." + i, mname + " · " + d.title, false); });
       });
     });
@@ -2577,6 +2580,13 @@ __WRAP_UP_VIEW__
   var keyHandler = null;
   document.addEventListener("keydown", function (e) { if (keyHandler) keyHandler(e); });
 
+  var stepRenderers = {
+    slides: function (container, m, step) { renderSlides(container, m, step); },
+    chapter: function (container, m, step, sub) { docBlock(container, step.doc, sub); },
+    materials: renderDocs,
+    wrapup: renderProgress
+  };
+
   function renderModule(main, route) {
     var m = route.mod, step = route.step;
     var r = m.id + "." + step.key;
@@ -2595,7 +2605,7 @@ __WRAP_UP_VIEW__
     var stepper = el("div", { class: "stepper", role: "navigation", "aria-label": "Steps in this module" });
     var lastPhase = null;
     /* the recap slides are optional: reachable from "Looking ahead", not a step in the bar */
-    var shown = m.steps.filter(function (s) { return !(s.kind === "slides" && s.label === "Slides") || s === step; });
+    var shown = m.steps.filter(function (s) { return !s.recap || s === step; });
     shown.forEach(function (s, i) {
       var k = m.id + "." + s.key;
       if (s.phase !== lastPhase) { stepper.appendChild(el("span", { class: "phase label", text: PHASES[s.phase] || "" })); lastPhase = s.phase; }
@@ -2610,10 +2620,9 @@ __WRAP_UP_VIEW__
     page.appendChild(banner);
 
     var body = el("div", { class: "block" });
-    if (step.kind === "slides") renderSlides(body, m, step);
-    else if (step.kind === "doc") docBlock(body, step.doc, route.sub);
-    else if (step.kind === "docs") renderDocs(body, m, step, route.sub);
-    else if (step.kind === "progress") renderProgress(body, m);
+    var renderStep = stepRenderers[rendererFor(step)];
+    if (typeof renderStep === "function") renderStep(body, m, step, route.sub);
+    else body.appendChild(el("p", { role: "status", text: "This lesson step is unavailable in this dashboard build." }));
     slots = null;
     page.appendChild(body);
 
@@ -3096,7 +3105,7 @@ __DICTIONARY_VIEW__
     decorateHeader(main, route);
     renderSide(route);
     themeFigures();
-    document.body.classList.toggle("reading", route.kind === "mod" && route.step && route.step.kind === "doc");
+    document.body.classList.toggle("reading", route.kind === "mod" && route.step && rendererFor(route.step) === "chapter");
     onReadScroll();
     if (keepScroll) window.scrollTo(0, y);
   }

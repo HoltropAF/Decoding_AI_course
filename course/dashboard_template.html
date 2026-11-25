@@ -19,6 +19,7 @@ __MARKED__</script>
     --teal-soft: #d5e7ea;
     --well-on: #1d7a8c;
     --danger: #9d302c;
+    --accent-text: #854014;
     --amber: #b8641d;
     --amber-soft: #f6e4d2;
     --good: #2f7d4f;
@@ -40,7 +41,7 @@ __MARKED__</script>
       --bg: #0d181b; --surface: #142328; --surface-2: #1a2e34; --side: #10201f;
       --ink: #e2eced; --muted: #9db1b5; --line: #2a434a;
       --teal: #7cc4d1; --teal-soft: #1d3c44; --well-on: #5fb3c2; --logo-ink: #0d181b;
-      --danger: #ffaaa0; --amber: #f0a464; --amber-soft: #3b2a1b; --good: #7cc79a; --focus: #f0a464;
+      --danger: #ffaaa0; --accent-text: #ffbd86; --amber: #f0a464; --amber-soft: #3b2a1b; --good: #7cc79a; --focus: #f0a464;
       --code-bg: #10252b; --slide-bg: #182b31; --slide-ink: #e2eced; --lead-bg: #0f4c5c; --lead-ink: #f4f8f8;
       --fun: #b9a2e0;
       --mt-m0: #1d3c44; --mt-m1: #1f2f45; --mt-m2: #2b2540; --mt-m3: #1f3a2a; --mt-m4: #3a3220; --mt-m5: #3d2629; --mt-m6: #3b2a1b;
@@ -51,7 +52,7 @@ __MARKED__</script>
     --bg: #0d181b; --surface: #142328; --surface-2: #1a2e34; --side: #10201f;
     --ink: #e2eced; --muted: #9db1b5; --line: #2a434a;
     --teal: #7cc4d1; --teal-soft: #1d3c44; --well-on: #5fb3c2; --logo-ink: #0d181b;
-    --danger: #ffaaa0; --amber: #f0a464; --amber-soft: #3b2a1b; --good: #7cc79a; --focus: #f0a464;
+    --danger: #ffaaa0; --accent-text: #ffbd86; --amber: #f0a464; --amber-soft: #3b2a1b; --good: #7cc79a; --focus: #f0a464;
     --code-bg: #10252b; --slide-bg: #182b31; --slide-ink: #e2eced; --lead-bg: #0f4c5c; --lead-ink: #f4f8f8;
     --fun: #b9a2e0;
     --mt-m0: #1d3c44; --mt-m1: #1f2f45; --mt-m2: #2b2540; --mt-m3: #1f3a2a; --mt-m4: #3a3220; --mt-m5: #3d2629; --mt-m6: #3b2a1b;
@@ -63,7 +64,7 @@ __MARKED__</script>
   h1, h2, h3, h4 { font-family: var(--font-head); text-wrap: balance; letter-spacing: 0.005em; line-height: 1.2; }
   a { color: var(--teal); text-underline-offset: 2px; }
   button, input, textarea { font: inherit; color: inherit; }
-  :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
   .label { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
   .muted { color: var(--muted); }
 
@@ -183,7 +184,7 @@ __MARKED__</script>
   .page > *, .block > * { min-width: 0; }
 
   @media (max-width: 880px) {
-    .app { grid-template-columns: 1fr; }
+    .app { grid-template-columns: minmax(0, 1fr); }
     .side { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--line); padding-block: 14px; gap: 12px; }
     .brand-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
     .btn.menu-btn { display: inline-flex; }
@@ -219,7 +220,7 @@ __MARKED__</script>
   .sit-label { margin: 6px 0 0; font-family: var(--font-mono); font-size: 11.5px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
   .sit-try { display: grid; gap: 10px; }
   .sit-prompt { margin: 0; background: var(--code-bg); border: 1px solid var(--line); border-left: 4px solid var(--well-on); border-radius: 10px; padding: 14px 16px; font: 13px/1.65 var(--font-mono); white-space: pre-wrap; overflow-wrap: anywhere; color: var(--ink); }
-  .sit-prompt .ph, .sit-hint .ph { background: var(--amber-soft); color: var(--amber); border-radius: 4px; padding: 0 3px; }
+  .sit-prompt .ph, .sit-hint .ph { background: var(--amber-soft); color: var(--accent-text); border-radius: 4px; padding: 0 3px; }
   .sit-actions { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; }
   .sit-actions .btn.ok { background: var(--good); border-color: var(--good); }
   .sit-hint { font-size: 13px; color: var(--muted); }
@@ -232,7 +233,7 @@ __MARKED__</script>
   .cb-mine p { margin: 0; color: var(--muted); font-size: 14px; }
   @media (max-width: 880px) { .sit { grid-template-columns: 1fr; } .sit-side, .sit-detail { position: static; max-height: none; } .sit-list { max-height: 50vh; } }
   @media print { .sit-side, .sit-actions, .sit-nav { display: none; } .sit { grid-template-columns: 1fr; } }
-  .pill { display: inline-block; font-family: var(--font-mono); font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--amber-soft); color: var(--amber); }
+  .pill { display: inline-block; font-family: var(--font-mono); font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--amber-soft); color: var(--accent-text); }
   .pill.done { background: var(--teal-soft); color: var(--teal); }
 
   /* ---------- Module header & stepper ---------- */
@@ -359,7 +360,7 @@ __MARKED__</script>
   .reader .prefslink { color: var(--muted); text-decoration: none; font-size: 12.5px; white-space: nowrap; }
   .reader .prefslink:hover { color: var(--teal); text-decoration: underline; }
   .prefs { display: grid; gap: 18px; }
-  .prefs .card { display: grid; gap: 12px; }
+  .prefs .card { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
   .prefs h3 { margin: 0; }
   .prefs .hint { margin: 0; color: var(--muted); font-size: 13.5px; }
   .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; width: fit-content; }
@@ -368,7 +369,8 @@ __MARKED__</script>
   .seg button[aria-pressed="true"] { background: var(--teal-soft); color: var(--teal); font-weight: 600; }
   .prefs .preview { border: 1px dashed var(--line); border-radius: 10px; padding: 12px 16px; margin: 0; }
   .prefs .row { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; }
-  .prefs .row label { display: inline-flex; gap: 8px; align-items: center; font-size: 14px; }
+  .prefs .row label { display: inline-flex; gap: 8px; align-items: center; font-size: 14px; max-width: 100%; }
+  .prefs .row select { min-width: 0; }
   .prefs select { border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; background: var(--surface); color: var(--ink); font-size: 14px; max-width: 100%; }
   .prefs .switch { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; }
   .prefs .switch input { margin-top: 3px; width: 18px; height: 18px; accent-color: var(--teal); }
@@ -466,9 +468,15 @@ __MARKED__</script>
   /* Nothing structural ever sits beside a floated figure */
   .prose :is(h1, h2, h3, h4, .tablewrap, pre, blockquote, details, hr, figure) { clear: both; }
   .prose::after { content: ""; display: block; clear: both; }
-  .lightbox { position: fixed; inset: 0; z-index: 50; background: rgba(7, 17, 20, 0.82); display: grid; place-items: center; padding: 3vh 3vw; cursor: zoom-out; }
-  .lightbox img { width: min(calc(96vw / var(--zoom)), 1500px); max-height: calc(90vh / var(--zoom)); object-fit: contain; border-radius: 12px; background: #fbfcfc; }
-  .lightbox p { position: absolute; bottom: 2vh; left: 0; right: 0; text-align: center; color: #e2eced; font-size: 13px; margin: 0; }
+  .figure-open { display: block; width: 100%; padding: 0; border: 0; border-radius: 12px; background: none; cursor: zoom-in; }
+  .figure-open .figure-action { display: block; margin: 4px 1px 0; text-align: right; font-size: 12px; color: var(--teal); }
+  .figure-open:focus-visible, .skip-link:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+  .lightbox { box-sizing: border-box; width: min(calc(94vw / var(--zoom)), 1500px); max-height: calc(94dvh / var(--zoom)); padding: 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); color: var(--ink); }
+  .lightbox::backdrop { background: rgba(7, 17, 20, 0.82); }
+  .lightbox form { display: flex; justify-content: flex-end; margin: 0 0 12px; }
+  .lightbox img { display: block; width: 100%; max-height: calc(76dvh / var(--zoom)); object-fit: contain; border-radius: 10px; background: #fbfcfc; }
+  .skip-link { position: fixed; z-index: 100; inset: 8px auto auto 8px; padding: 8px 12px; border-radius: 6px; background: var(--surface); color: var(--ink); }
+  .skip-link:not(:focus) { clip-path: inset(100%); }
   .prose img + em, .prose p > img:only-child + em { display: block; }
   .slide-inner img { display: block; width: auto; max-width: 100%; max-height: 26cqw; margin: 0.4cqw auto 0.8cqw; border-radius: 1cqw; }
   .prose blockquote.explainer { border-left: 4px solid var(--well-on); background: var(--surface-2); padding: 10px 16px 12px; position: relative; }
@@ -484,7 +492,7 @@ __MARKED__</script>
   .prose blockquote.recap > p:first-child > strong:first-child { color: var(--good); }
   .prose blockquote.recap > p:first-child > strong:first-child::before { content: "\2713\00a0\00a0"; letter-spacing: 0; }
   .prose blockquote.aside { border-left: 4px dotted var(--amber); background: var(--amber-soft); border-radius: 0 12px 12px 0; }
-  .prose blockquote.aside > p:first-child > strong:first-child { color: var(--amber); }
+  .prose blockquote.aside > p:first-child > strong:first-child { color: var(--accent-text); }
   .prose blockquote.aside.coffee > p:first-child > strong:first-child::before { content: "\2615  "; letter-spacing: 0; }
   .prose blockquote.practice { border-left: 4px solid var(--teal); background: var(--teal-soft); border-radius: 0 12px 12px 0; }
   .prose blockquote.practice > p:first-child > strong:first-child { color: var(--teal); }
@@ -499,7 +507,7 @@ __MARKED__</script>
   .prose details.think > summary::after { content: "Show my answer \25BE"; display: block; font-size: 12.5px; font-weight: 500; color: var(--teal); margin-top: 6px; }
   .prose details.think[open] > summary::after { content: "Hide the answer \25B4"; }
   .prose details.think[open] { padding-bottom: 12px; }
-  .offline { background: var(--amber-soft); color: var(--amber); padding: 10px 14px; border-radius: 8px; }
+  .offline { background: var(--amber-soft); color: var(--accent-text); padding: 10px 14px; border-radius: 8px; }
 
   /* ---------- Slides ---------- */
   .stagewrap { display: grid; gap: 10px; }
@@ -637,7 +645,7 @@ __MARKED__</script>
   .mods7 .num { font-family: var(--font-mono); font-size: 12px; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: var(--teal-soft); color: var(--teal); }
   .mods7 .done .num { background: var(--well-on); color: var(--surface); }
   .mods7 .meta { font-family: var(--font-mono); font-size: 10.5px; color: var(--muted); white-space: nowrap; }
-  .mods7 .here .meta { color: var(--amber); text-transform: uppercase; letter-spacing: .04em; }
+  .mods7 .here .meta { color: var(--accent-text); text-transform: uppercase; letter-spacing: .04em; }
   .mods7 .here a { border-color: var(--amber); }
   .mods7 strong { font-size: 13.5px; line-height: 1.25; }
   .mods7 .tag { font-size: 12px; line-height: 1.4; color: var(--muted); }
@@ -688,7 +696,7 @@ __MARKED__</script>
   main { padding-block-end: 40px; }
   main:has(> .aibar) { padding-block-end: 64px; }
   .aibar { position: fixed; bottom: 0; left: 360px; right: 0; z-index: 15; margin: 0; padding: 8px 32px; display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: center; justify-content: center; text-align: center; font-size: 13px; background: var(--amber-soft); border-top: 1px solid var(--line); box-shadow: 0 -4px 14px rgba(15, 40, 48, 0.06); }
-  .aibar a { color: var(--amber); font-weight: 600; }
+  .aibar a { color: var(--accent-text); font-weight: 600; }
   .aibar .short { display: none; }
   @media (max-width: 880px) { .aibar { left: 0; } }
   @media (max-width: 700px) { .aibar { padding: 6px 12px; font-size: 12px; flex-wrap: nowrap; } .aibar .long { display: none; } .aibar .short { display: inline; } }
@@ -707,7 +715,7 @@ __MARKED__</script>
   .mods .num { font-family: var(--font-mono); font-size: 12px; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: var(--teal-soft); color: var(--teal); }
   .mods .done .num { background: var(--well-on); color: var(--surface); }
   .mods .meta { font-family: var(--font-mono); font-size: 10.5px; color: var(--muted); }
-  .mods .here .meta { color: var(--amber); text-transform: uppercase; letter-spacing: .05em; }
+  .mods .here .meta { color: var(--accent-text); text-transform: uppercase; letter-spacing: .05em; }
   .mods strong { font-size: 14px; line-height: 1.25; }
   .mods .tag { font-size: 12.5px; color: var(--muted); line-height: 1.35; }
   .mods .bar { height: 4px; border-radius: 2px; background: var(--surface-2); overflow: hidden; }
@@ -767,7 +775,7 @@ __MARKED__</script>
   .journey .tag { color: var(--muted); font-size: 14px; line-height: 1.45; }
   .journey .bar { height: 5px; border-radius: 3px; background: var(--surface-2); overflow: hidden; margin-top: auto; }
   .journey .bar span { display: block; height: 100%; background: var(--well-on); }
-  .journey .here { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--amber); }
+  .journey .here { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--accent-text); }
   .journey .team a { background: var(--amber-soft); }
   .promises { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
   .promise { padding: 16px; border-radius: 12px; background: var(--surface-2); display: grid; gap: 6px; align-content: start; }
@@ -816,7 +824,7 @@ __MARKED__</script>
   .sechead .secicon svg { width: 100%; height: 100%; display: block; overflow: visible; }
   .sechead { display: grid; grid-template-columns: auto auto minmax(0, 1fr) auto; gap: 12px; align-items: center; cursor: pointer; padding: 14px 4px; margin: 0 -4px; border-radius: 8px; user-select: none; }
   .sechead:hover { background: var(--surface-2); }
-  .sechead:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .sechead:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
   .sechead .chev { font-family: var(--font-mono); color: var(--teal); width: 18px; text-align: center; transition: transform 160ms ease; }
   .docsec.open .sechead .chev { transform: rotate(90deg); }
   .prose .sechead h2 { margin: 0; padding: 0; border: 0; font-size: 20px; }
@@ -981,8 +989,9 @@ __MARKED__</script>
   .dict-list .entry button.term { font: inherit; font-weight: 600; font-size: 16px; text-align: left; background: none; border: 0; padding: 0; color: var(--teal); cursor: pointer; }
   .dict-list .entry button.term:hover { text-decoration: underline; }
   @media (max-width: 700px) {
+    .dict-search { min-width: 0; }
     .dict-toolbar .viewonly, .dict-toolbar .viewopt:last-child { display: none; }
-    .dlook { grid-template-columns: 1fr; }
+    .dlook, .dlook-detail, .dict-tools { grid-template-columns: minmax(0, 1fr); }
     .dlook-side, .dlook-detail { position: static; }
     .dlook-side { max-height: none; }
     .dlook-list { max-height: none; overflow: visible; }
@@ -1002,6 +1011,8 @@ __MARKED__</script>
     .side.open { max-height: calc(100vh - env(safe-area-inset-top, 0px)); overflow-y: auto; }
     main { padding-inline: 12px; padding-block: 16px 60px; }
     .page { gap: 16px; }
+    .prefs .seg { max-width: 100%; }
+    .prefs .seg button { min-width: 0; padding-inline: 8px; overflow-wrap: anywhere; }
     .modtop h2 { font-size: 24px; }
     .modtop p { font-size: 14px; }
     /* banner: one swipeable row of steps, compact controls */
@@ -1034,6 +1045,7 @@ __MARKED__</script>
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 
+<a class="skip-link" href="#main">Skip to course content</a>
 <div class="app">
   <aside class="side" id="side">
     <div class="brand-row">
@@ -1094,7 +1106,17 @@ __MARKED__</script>
   }
   applyPrefs();
   document.documentElement.classList.add("fs-" + state.fs);
-  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* ignore */ } }
+  function save(candidate) {
+    try { localStorage.setItem(KEY, JSON.stringify(candidate || state)); return true; }
+    catch (e) { return false; }
+  }
+  function appendNote(key, text) {
+    var previous = state.notes[key];
+    state.notes[key] = (previous ? previous.replace(/\s+$/, "") + "\n\n" : "") + text;
+    if (save()) return true;
+    if (previous === undefined) delete state.notes[key]; else state.notes[key] = previous;
+    return false;
+  }
 
   /* ---------------- helpers ---------------- */
   function scrollBehavior() { return window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"; }
@@ -1146,17 +1168,34 @@ __MARKED__</script>
       return vb ? parseFloat(vb[1]) / parseFloat(vb[2]) : 0;
     } catch (e) { return 0; }
   }
-  function openLightbox(img) {
-    var box = el("div", { class: "lightbox", role: "dialog", "aria-label": "Enlarged figure", tabindex: "-1" }, [
-      el("img", { src: img.getAttribute("src"), alt: img.getAttribute("alt") || "" }),
-      el("p", { text: "Click anywhere or press Escape to close" })
-    ]);
-    function close() { document.removeEventListener("keydown", onKey, true); if (box.parentNode) box.parentNode.removeChild(box); }
-    function onKey(e) { if (e.key === "Escape") { e.stopPropagation(); close(); } }
-    box.addEventListener("click", close);
-    document.addEventListener("keydown", onKey, true);
-    document.body.appendChild(box);
-    box.focus();
+  function figureLauncher(img) {
+    var button = el("button", { type: "button", class: "figure-open", "aria-haspopup": "dialog",
+      "aria-label": "Enlarge figure" + (img.alt ? ": " + img.alt : ""), title: "Enlarge figure" }, [img, el("span", { class: "figure-action", "aria-hidden": "true", text: "Enlarge" })]);
+    button.addEventListener("click", function () {
+      var close = el("button", { type: "submit", class: "btn", text: "Close figure" });
+      var box = el("dialog", { class: "lightbox", "aria-label": "Enlarged figure" }, [
+        el("form", { method: "dialog" }, [close]),
+        el("img", { src: img.src, alt: img.alt })
+      ]);
+      box.addEventListener("close", function () {
+        box.remove();
+        if (button.isConnected) button.focus({ preventScroll: true });
+      }, { once: true });
+      document.body.appendChild(box);
+      box.showModal();
+      close.focus();
+    });
+    return button;
+  }
+
+  function svgDescription(src, fallback) {
+    var match = src.match(/^data:image\/svg\+xml;base64,(.*)$/);
+    if (!match) return fallback;
+    try {
+      var bytes = Uint8Array.from(atob(match[1]), function (c) { return c.charCodeAt(0); });
+      var svg = new DOMParser().parseFromString(new TextDecoder().decode(bytes), "image/svg+xml").documentElement;
+      return svg.getAttribute("aria-label") || (svg.querySelector("desc") || {}).textContent || fallback;
+    } catch (err) { return fallback; }
   }
 
   /* ---------------- dictionary terms in text ---------------- */
@@ -1328,7 +1367,15 @@ __MARKED__</script>
       if (!key) key = basePath + "#" + (tickIdx++);
       var store = function () { return isDone ? state.done : (state.ticks = state.ticks || {}); };
       c.disabled = false; c.checked = !!store()[key];
-      c.addEventListener("change", function () { var s = store(); if (c.checked) s[key] = true; else delete s[key]; save(); });
+      if (txt) c.setAttribute("aria-label", txt);
+      c.addEventListener("change", function () {
+        var s = store(), previous = s[key];
+        if (c.checked) s[key] = true; else delete s[key];
+        if (save()) return;
+        if (previous === undefined) delete s[key]; else s[key] = previous;
+        c.checked = !!previous;
+        showToast("Couldn't save this checklist change. Try again.");
+      });
       if (li) {
         li.classList.add("tick");
         li.addEventListener("click", function (ev) {
@@ -1348,7 +1395,7 @@ __MARKED__</script>
       var ratio = figureRatio(img.getAttribute("src"));
       if (ratio > 3.6) fig.classList.add("wide");
       p.parentNode.insertBefore(fig, p);
-      fig.appendChild(img);
+      fig.appendChild(figureLauncher(img));
       p.parentNode.removeChild(p);
       var next = fig.nextElementSibling;
       if (next && next.tagName === "P" && next.children.length === 1 && next.firstElementChild.tagName === "EM" &&
@@ -1357,7 +1404,6 @@ __MARKED__</script>
         fig.appendChild(el("figcaption", { text: "Figure " + figNo + ". " + next.textContent.trim().replace(/^Figure\s+\d+\.\s*/, "") }));
         next.parentNode.removeChild(next);
       }
-      img.addEventListener("click", function () { openLightbox(img); });
       /* float beside the text only if enough plain running text follows before the next block element */
       var chars = 0, sib = fig.nextElementSibling;
       while (sib && /^(P|UL|OL)$/.test(sib.tagName)) { chars += sib.textContent.length; sib = sib.nextElementSibling; }
@@ -2498,11 +2544,36 @@ __MARKED__</script>
       r.onload = function () {
         try {
           var s = JSON.parse(r.result);
-          if (!s || typeof s !== "object" || !s.done) throw new Error("not a progress file");
-          state = s; if (!state.prefs) state.prefs = { readbar: true, ticks: true, mins: true }; if (!state.readParts) state.readParts = {}; if (!state.tts) state.tts = { rate: 1, voice: "" }; applyPrefs(); save(); render(); status.textContent = "Progress loaded.";
+          var required = ["done", "conf", "visited", "notes", "exp", "slide", "sub"];
+          var optional = ["ticks", "prefs", "readParts", "tts"];
+          function record(value) { return value && typeof value === "object" && !Array.isArray(value); }
+          if (!record(s) || required.some(function (key) { return !record(s[key]); }) ||
+              optional.some(function (key) { return s[key] !== undefined && !record(s[key]); }) ||
+              Object.values(s.notes).some(function (note) { return typeof note !== "string"; })) throw new Error("not a progress file");
+          var restored = {};
+          Object.keys(state).forEach(function (key) { restored[key] = s[key] === undefined ? state[key] : s[key]; });
+          if (["s", "m", "l"].indexOf(restored.fs) < 0) restored.fs = "m";
+          if ([0.75, 0.9, 1].indexOf(restored.zoom) < 0) restored.zoom = 0.75;
+          restored.ticks = s.ticks || {};
+          restored.readParts = s.readParts || {};
+          if (!save(restored)) {
+            status.textContent = "Couldn't save this backup in your browser. Your current progress is still available.";
+            return;
+          }
+          state = restored;
+          applyPrefs();
+          applyZoom();
+          document.documentElement.classList.remove("fs-s", "fs-m", "fs-l");
+          document.documentElement.classList.add("fs-" + state.fs);
+          render();
+          var restoreButton = Array.from(document.querySelectorAll("main button")).find(function (b) { return b.textContent === "Load progress"; });
+          if (restoreButton) restoreButton.focus({ preventScroll: true });
+          showToast("Progress loaded.");
         } catch (e) { status.textContent = "That file doesn't look like a progress file from this course."; }
       };
+      r.onerror = function () { status.textContent = "Couldn\u0027t read that file. Choose it again to retry."; };
       r.readAsText(f);
+      file.value = "";
     });
     var reset = el("button", { class: "btn danger", type: "button", text: "Reset progress" });
     var armed = false;
@@ -2593,12 +2664,14 @@ __MARKED__</script>
     var id = "f-" + label.replace(/\W+/g, "-").toLowerCase() + "-" + Math.random().toString(36).slice(2, 7);
     var ta = el("textarea", { id: id, placeholder: hint || "" });
     ta.value = value || "";
-    var saved = el("span", { class: "saved" });
+    var saved = el("span", { class: "saved", role: "status" });
     var timer;
     ta.addEventListener("input", function () {
       onInput(ta.value);
       clearTimeout(timer);
-      timer = setTimeout(function () { save(); saved.textContent = "Saved"; setTimeout(function () { saved.textContent = ""; }, 1500); }, 400);
+      timer = setTimeout(function () {
+        saved.textContent = save() ? "Saved" : "Couldn't save in this browser. Copy your text or edit it to retry.";
+      }, 400);
     });
     return el("div", { class: "field" }, [el("label", { class: "label", for: id, text: label }), ta, saved]);
   }
@@ -2627,7 +2700,19 @@ __MARKED__</script>
       var key = m.id + "-" + i, id = "chk-" + key;
       var input = el("input", { type: "checkbox", id: id });
       input.checked = !!state.done[key];
-      input.addEventListener("change", function () { state.done[key] = input.checked; save(); render(true); });
+      input.addEventListener("change", function () {
+        var previous = state.done[key];
+        state.done[key] = input.checked;
+        if (!save()) {
+          if (previous === undefined) delete state.done[key]; else state.done[key] = previous;
+          input.checked = !!previous;
+          showToast("Couldn't save this checklist change. Try again.");
+          return;
+        }
+        render(true);
+        var updated = document.getElementById(id);
+        if (updated) updated.focus({ preventScroll: true });
+      });
       list.appendChild(el("label", { class: "check" + (input.checked ? " on" : ""), for: id }, [input, el("span", { text: d })]));
     });
     page.appendChild(list);
@@ -2659,13 +2744,17 @@ __MARKED__</script>
     /* 3. add a note */
     page.appendChild(el("h3", { text: "Anything to add?" }));
     if (m.question) page.appendChild(el("p", { class: "wu-question" }, [el("span", { class: "label", text: "Something to think about" }), el("span", { text: m.question })]));
-    var ta = el("textarea", { class: "wu-new", placeholder: "A question for the group, something to try in your own work, what you'd tell a colleague\u2026" });
+    var ta = el("textarea", { class: "wu-new", "aria-label": "Add a note", placeholder: "A question for the group, something to try in your own work, what you'd tell a colleague\u2026" });
     var add = el("button", { class: "btn primary", type: "button", text: "Add to my notes" });
     var status = el("span", { class: "muted", role: "status", "aria-live": "polite" });
     add.addEventListener("click", function () {
       var v = ta.value.trim(); if (!v) { ta.focus(); return; }
-      state.notes[m.id] = (state.notes[m.id] ? state.notes[m.id].replace(/\s+$/, "") + "\n\n" : "") + v;
-      save(); ta.value = ""; paint(); renderSide(parseRoute());
+      if (!appendNote(m.id, v)) {
+        status.textContent = "Couldn't save in this browser. Retry or copy your draft.";
+        ta.focus();
+        return;
+      }
+      ta.value = ""; paint(); renderSide(parseRoute());
       status.textContent = "Added."; setTimeout(function () { status.textContent = ""; }, 1800);
     });
     page.appendChild(ta);
@@ -3257,13 +3346,13 @@ __MARKED__</script>
       var where = whereLinks(e.where);
       detail.appendChild(back);
       detail.appendChild(el("div", { class: "dd-cat" }, [el("span", { text: e.cat })]));
-      detail.appendChild(el("h3", { class: "dd-term", html: esc(plain(e.term)) }));
+      detail.appendChild(el("h3", { class: "dd-term", tabindex: "-1", html: esc(plain(e.term)) }));
       detail.appendChild(el("section", { class: "dd-block" }, [el("h4", { text: "In short" }), el("p", { class: "dd-def", html: inlineMd(e.def) })]));
       if (e.more) detail.appendChild(el("section", { class: "dd-block" }, [el("h4", { text: "Explained" }), el("p", { class: "dd-more", html: inlineMd(e.more) })]));
       if (e.fig && DATA.dict_figs && DATA.dict_figs[e.fig]) {
-        var fimg = el("img", { src: DATA.dict_figs[e.fig], alt: e.figcap || plain(e.term) });
-        fimg.addEventListener("click", function () { openLightbox(fimg); });
-        detail.appendChild(el("figure", { class: "dd-fig" }, [fimg, e.figcap ? el("figcaption", { text: e.figcap }) : null]));
+        var src = DATA.dict_figs[e.fig];
+        var fimg = el("img", { src: src, alt: svgDescription(src, e.figcap || plain(e.term)) });
+        detail.appendChild(el("figure", { class: "dd-fig" }, [figureLauncher(fimg), e.figcap ? el("figcaption", { text: e.figcap }) : null]));
       }
       if (e.ex) detail.appendChild(el("section", { class: "dd-block dd-ex" }, [el("h4", { text: "Example" }), el("p", { html: inlineMd(e.ex) })]));
       if ((e.see || []).length) detail.appendChild(el("section", { class: "dd-block" }, [el("h4", { text: "Related words" }),
@@ -3287,6 +3376,7 @@ __MARKED__</script>
     }
 
     function select(slug) {
+      var previous = dictState.sel;
       dictState.sel = slug;
       try { history.replaceState(null, "", slug ? "#dict." + slug : "#dict"); } catch (err) { /* ignore */ }
       listPane.querySelectorAll("button.dl-item").forEach(function (b) {
@@ -3296,6 +3386,11 @@ __MARKED__</script>
         if (on) b.scrollIntoView({ block: "nearest" });
       });
       showDetail();
+      if (slug) detail.querySelector(".dd-term").focus({ preventScroll: true });
+      else {
+        var word = Array.from(listPane.querySelectorAll(".dl-item")).find(function (b) { return b.getAttribute("data-slug") === previous; });
+        (word || input).focus({ preventScroll: true });
+      }
       if (slug && window.matchMedia("(max-width: 700px)").matches) window.scrollTo(0, 0);
       else if (slug && detail.getBoundingClientRect().top < 0) detail.scrollIntoView({ block: "start" });
     }
@@ -3465,8 +3560,10 @@ __MARKED__</script>
     if (!selText) return;
     var r = parseRoute(), key = r.kind === "mod" ? r.mod.id : "_general";
     var entry = "\u201c" + selText + "\u201d\n(" + selWhere + ")";
-    state.notes[key] = (state.notes[key] ? state.notes[key].replace(/\s+$/, "") + "\n\n" : "") + entry;
-    save();
+    if (!appendNote(key, entry)) {
+      showToast("Couldn't save this selection. Retry or copy the text.");
+      return;
+    }
     document.querySelectorAll(".notepanel textarea").forEach(function (ta) { if (r.kind === "mod") ta.value = state.notes[key]; });
     try { window.getSelection().removeAllRanges(); } catch (e) {}
     hideSel();
@@ -3482,6 +3579,10 @@ __MARKED__</script>
     if (!scrollTick) { scrollTick = true; setTimeout(onReadScroll, 60); }
   }, { passive: true });
 
+  document.querySelector(".skip-link").addEventListener("click", function (e) {
+    e.preventDefault();
+    document.getElementById("main").focus();
+  });
   window.addEventListener("hashchange", function () {
     document.getElementById("side").classList.remove("open");
     document.getElementById("menu").setAttribute("aria-expanded", "false");

@@ -83,3 +83,21 @@ Effort is an estimate for one maintainer after agreeing on the behavior.
 | 7 | Make the handoff more explicit (ENCORE). Record the tested Python and browser versions and identify tested optional tool versions. Reconcile the hook documentation and ask the owner to settle course licensing and citation. | Small to medium. The reuse decision is the owner's. | A peer follows a clean build and optional exercise setup from the docs. Branch-protection guidance agrees with what is actually enforced. Reuse terms are discoverable once approved. |
 
 Preserve the browser-only, single-file learner experience. Apple usability evidence favors that low-friction entry point, and ENCORE execution shows that the standard-library workflow is already easy to move. SOLID gives a reason to extract small state, parsing and storage boundaries inside the source. Those boundaries can compile into the same offline artifact. None of the three reviews calls for a user-facing framework migration or wholesale directory reorganization.
+
+
+## Apple design follow-up
+
+The focused follow-up scored **31/32 (96.9%)**, with **16/16 rubric checks scored**, after the earlier quick-fix result of 24/30. This is a sampled internal rubric result. The SOLID and ENCORE scores were outside this follow-up.
+
+| Area | Updated score | Verification |
+| --- | ---: | --- |
+| Purpose and hierarchy | 4/4 | Orientation remains the first action and the course modules remain discoverable. |
+| Layout and density | 4/4 | At a 320 CSS-pixel viewport with the largest course text setting, Dashboard, Orientation, a Foundations section, Wrap-up, Dictionary, and Preferences showed their headings and controls with no page-level horizontal overflow. |
+| Familiarity and input | 4/4 | Earlier checks verified mobile menu Escape and focus on Orientation. Dictionary selection and its back action now move focus to useful destinations. |
+| Accessibility | 4/4 | Real Enter and Escape events in Edge opened and closed the Attention figure dialog. Focus entered the close button and returned to the launcher; a skip link provides a direct path past navigation. |
+| Typography and materials | 4/4 | Figure controls and alerts use semantic text colors. The sampled Clear all button measured 7.26:1 in light mode and 9.53:1 in dark mode. |
+| Feedback and recovery | 3/4 | A simulated failed note save retained the draft and retry wrote it once. An invalid progress backup and a simulated failed write left previous progress intact; a valid backup loaded and returned focus to Load progress. General preference autosaves and download status still have uneven failure feedback. |
+| Motion | 4/4 | The earlier check verified the shared scroll behavior with reduced motion enabled. |
+| Charts and analytical views | 4/4 | Figure launchers work by keyboard, and Dictionary figures can expose the description from their source SVG. The Attention alternative identifies the relative strength of the three arcs. |
+
+The dashboard was rebuilt and tested in isolated Edge profiles using synthetic notes and backup files. The 320-pixel test used the course’s text size setting. Native browser zoom, Safari, VoiceOver, live speech output and an exhaustive contrast audit remain outside this sample.

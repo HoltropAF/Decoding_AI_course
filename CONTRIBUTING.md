@@ -95,6 +95,11 @@ Open the [download checks](course/tests/downloads.html) after changing
 the download adapter, or run `python -m unittest discover -s course/tests` for Markdown section and
 checklist ID tests.
 
+The Dictionary view lives in `course/dashboard_dictionary.js`. The template
+supplies course links, figure rendering, and preference storage. Open the
+[Dictionary checks](course/tests/dictionary.html) locally after changing
+that interface.
+
 ## Releasing
 
 1. On `development`, set the new number in `VERSION` and in the title line

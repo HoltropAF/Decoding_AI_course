@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Dictionary view checks</title>
+<main></main>
+<pre id="results"></pre>
+<script src="../dashboard_dictionary.js"></script>
+<script>
+"use strict";
+(async function () {
+  const main = document.querySelector("main");
+  const output = document.querySelector("#results");
+  const passed = [];
+  function check(label, condition) {
+    if (!condition) throw new Error(label);
+    passed.push(label);
+  }
+  function el(tag, attrs, children = []) {
+    const node = document.createElement(tag);
+    for (const [key, value] of Object.entries(attrs || {})) {
+      if (value == null) continue;
+      if (key === "text") node.textContent = value;
+      else if (key === "html") node.innerHTML = value;
+      else node.setAttribute(key, value);
+    }
+    node.append(...children.filter(Boolean));
+    return node;
+  }
+  function escape(value) {
+    const span = document.createElement("span");
+    span.textContent = value;
+    return span.innerHTML;
+  }
+  let selection = null;
+  let storedView = null;
+  const entries = [
+    { term: "Attention", def: "A mechanism for relating tokens", cat: "AI concepts and techniques", fig: "attention", figcap: "Attention diagram", where: "1" },
+    { term: "Token", def: "A piece of text", cat: "AI concepts and techniques", where: "1" }
+  ];
+  const render = createDictionary({
+    entries, figures: { attention: "fixture" }, termSlug: term => term.toLowerCase(),
+    el, esc: escape, inlineMd: escape,
+    makeFigure: (_src, label) => el("button", { type: "button", text: label }),
+    whereLinks: () => [],
+    loadView: () => ({ mode: "cards", cols: "auto" }),
+    saveView: view => { storedView = { ...view }; },
+    replaceSelection: slug => { selection = slug; }
+  });
+  try {
+    const handleKey = render(main, "attention");
+    await new Promise(resolve => setTimeout(resolve, 0));
+    check("A deep link displays its term even with a saved card layout",
+      main.querySelector(".mode-lookup .dd-term").textContent === "Attention" && storedView === null);
+    check("Figure creation is delegated to the supplied service",
+      main.querySelector(".dd-fig button").textContent === "Attention diagram");
+    check("Selecting a word updates the supplied navigator and focus",
+      selection === "attention" && document.activeElement.classList.contains("dd-term"));
+    const input = main.querySelector("#dict-search");
+    input.value = "unmatched";
+    input.dispatchEvent(new Event("input"));
+    check("Empty searches provide recovery guidance", main.querySelector(".dict-empty").textContent.includes("Try a shorter word"));
+    input.value = "piece";
+    input.dispatchEvent(new Event("input"));
+    handleKey(new KeyboardEvent("keydown", { key: "ArrowDown", cancelable: true }));
+    check("Keyboard navigation selects the matching term", selection === "token");
+    const mode = main.querySelector('[aria-label="Dictionary view"]');
+    mode.value = "list";
+    mode.dispatchEvent(new Event("change"));
+    check("View changes use the supplied preference service", storedView.mode === "list");
+    output.textContent = passed.map(label => "PASS  " + label).join("\n");
+  } catch (error) {
+    output.textContent = "FAIL  " + error.message;
+    throw error;
+  }
+})();
+</script>
+</html>

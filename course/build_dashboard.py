@@ -34,6 +34,7 @@ PLACEHOLDER = "__COURSE_DATA__"
 INLINE_SCRIPTS = {
     "__PROGRESS_STORE__": "course/dashboard_progress.js",
     "__DOWNLOAD_ADAPTER__": "course/dashboard_downloads.js",
+    "__DICTIONARY_VIEW__": "course/dashboard_dictionary.js",
 }
 VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 

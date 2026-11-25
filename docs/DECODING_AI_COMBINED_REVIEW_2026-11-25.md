@@ -163,3 +163,10 @@ Seven isolated browser checks passed for failed checklist writes, completion, fo
 Observed SOLID alignment is **25/30 (83.3%)**, with **15/15 checks scored**. D1 gains a point because the chapter view receives Markdown, speech, notes, and navigation services. The dashboard owns the storage and browser history wiring, and the view returns its section handles for sidebar and read-state tracking. The source remains embedded in one offline HTML artifact. [Chapter view](../course/dashboard_chapter.js) · [Chapter checks](../course/tests/chapter.html)
 
 Seven isolated browser checks and six offline integration checks passed. They covered section deep links, the accordion and Next action, reading progress, note entry, source metadata and short resource rendering. The read-aloud check intercepted the Edge speech request and confirmed it started at the selected heading and stopped cleanly. Audible output was outside the check.
+
+
+### Lesson-step contract follow-up
+
+Observed SOLID alignment is **26/30 (86.7%)**, with **15/15 checks scored**. O2 gains one point because a single contract maps course step kinds to renderer capabilities and describes the data those renderers accept. A new name can reuse its renderer without changing the JavaScript dispatch or duplicating its payload rules. A genuinely different presentation still needs an implementation and a declaration. Slide recap visibility uses explicit metadata in place of a label comparison. [Step contract](../course/dashboard_step_kinds.json) · [Contract tests](../course/tests/test_step_contract.py)
+
+Six step contract tests and three existing Markdown tests passed. In an isolated build, an added kind reused the chapter renderer in Edge. The slides, materials, Wrap-up, optional recap navigation, and hackathon kickoff routes worked. An unregistered kind exited before replacing the last good HTML. The pinned course dashboard passed the freshness check.

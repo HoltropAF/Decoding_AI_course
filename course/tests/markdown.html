@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Course Markdown checks</title>
+<main></main>
+<pre id="results"></pre>
+<script src="../vendor/marked.min.js"></script>
+<script src="../dashboard_markdown.js"></script>
+<script>
+"use strict";
+(function () {
+  const main = document.querySelector("main"), output = document.querySelector("#results");
+  const passed = [];
+  function check(label, condition) {
+    if (!condition) throw new Error(label);
+    passed.push(label);
+  }
+  function el(tag, attrs, children = []) {
+    const node = document.createElement(tag);
+    for (const [key, value] of Object.entries(attrs || {})) {
+      if (value == null) continue;
+      if (key === "text") node.textContent = value;
+      else if (key === "html") node.innerHTML = value;
+      else node.setAttribute(key, value);
+    }
+    node.append(...children.filter(Boolean));
+    return node;
+  }
+  function escape(value) {
+    const span = document.createElement("span");
+    span.textContent = value;
+    return span.innerHTML;
+  }
+  try {
+    marked.use({ gfm: true });
+    const markdown = [
+      "[Lesson](../other/guide.md#topic) [File](notes.md) [Site](https://example.com/) [Anchor](#topic)",
+      "- [ ] Done item <!-- checklist:m1-0 -->",
+      "- [ ] Local item",
+      "", "| A |", "| --- |", "| B |", "", "<!-- speak: A spoken description -->",
+      "", "<!-- part: Next group -->", "", "> **In practice:** Try it.", "",
+      "![Test diagram](test.svg)", "", "*Figure 1. Caption text.*", "",
+      "    sample code"
+    ].join("\n");
+    const box = parseCourseMarkdown(markdown, el, text => marked.parse(text), escape);
+    main.append(box);
+    const fallback = parseCourseMarkdown("<em>plain text</em>", el, null, escape);
+    check("The formatting fallback shows literal source", fallback.querySelector("pre").textContent === "<em>plain text</em>");
+    rewriteMarkdownLinks(box, "module/chapter.md", path => path === "other/guide.md" ? "m2.guide" : null, path => "/repo/" + path);
+    const links = [...box.querySelectorAll("a")];
+    check("Course links and same-page anchors resolve correctly", links[0].getAttribute("href") === "#m2.guide" && links[3].getAttribute("href") === "#topic");
+    check("File and external links retain their destination and open separately",
+      links[1].getAttribute("href") === "/repo/module/notes.md" && links[1].target === "_blank" && links[2].rel === "noopener");
+
+    const localKey = JSON.stringify(["module/chapter.md", "Local item", 0]);
+    const checked = new Set(["done:m1-0"]);
+    let blocked = true, failures = 0;
+    bindMarkdownChecklist(box, "module/chapter.md", {
+      isChecked: (field, key) => checked.has(field + ":" + key),
+      setChecked: (field, key, value) => {
+        if (blocked) return false;
+        if (value) checked.add(field + ":" + key); else checked.delete(field + ":" + key);
+        return true;
+      },
+      showFailure: () => { failures++; }
+    });
+    const [done, local] = box.querySelectorAll('input[type="checkbox"]');
+    check("Explicit checklist IDs and ordinary keys each load through the supplied store", done.checked && !local.checked &&
+      done.getAttribute("aria-label") === "Done item");
+    local.click();
+    check("Rejected checklist writes restore the old state and notify the caller", !local.checked && failures === 1);
+    blocked = false;
+    local.click();
+    check("Successful checklist writes keep their stable key", local.checked && checked.has("ticks:" + localKey));
+
+    let copied;
+    formatCourseProse(box, {
+      el, figureRatio: () => 2,
+      figureLauncher: image => el("button", { type: "button" }, [image]),
+      copyBlock: pre => { copied = pre.textContent.trim(); }
+    });
+    check("Table speech text and section marker survive formatting",
+      box.querySelector(".tablewrap table").getAttribute("data-speak") === "A spoken description" &&
+      box.querySelector(".partmark").textContent === "Next group");
+    check("Figure captions and callouts survive formatting",
+      box.querySelector("figure.full button img").alt === "Test diagram" &&
+      box.querySelector("figcaption").textContent === "Figure 1. Caption text." && !!box.querySelector("blockquote.practice"));
+    box.querySelector(".copybtn").click();
+    check("Copy buttons use the supplied clipboard action", copied === "sample code");
+    output.textContent = passed.map(label => "PASS  " + label).join("\n");
+  } catch (error) {
+    output.textContent = "FAIL  " + error.message;
+    throw error;
+  }
+})();
+</script>
+</html>

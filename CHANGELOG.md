@@ -119,6 +119,8 @@ Versions follow `MAJOR.MINOR.PATCH` as described in
   document payloads now fail the dashboard build.
 - The optional Ollama HTTP and SDK adapters share completion handling
   and report interrupted streams as failures.
+- Separated course Markdown formatting, document links, and checklist
+  controls so each can be tested independently.
 - Version numbers now use three parts: `1.0` became `1.0.0`.
 - The dashboard shows at 75% on computer screens by default; Preferences
   has a "Page size" setting (75%, 90%, 100%). Phones stay at full size.

@@ -37,6 +37,7 @@ INLINE_SCRIPTS = {
     "__DICTIONARY_VIEW__": "course/dashboard_dictionary.js",
     "__WRAP_UP_VIEW__": "course/dashboard_wrapup.js",
     "__CHAPTER_VIEW__": "course/dashboard_chapter.js",
+    "__MARKDOWN_VIEW__": "course/dashboard_markdown.js",
 }
 VERSION = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 STEP_CONTRACT = json.loads((ROOT / "course" / "dashboard_step_kinds.json").read_text(encoding="utf-8"))

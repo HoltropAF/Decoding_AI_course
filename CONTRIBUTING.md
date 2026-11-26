@@ -115,6 +115,11 @@ an existing renderer, add its mapping there and use it in the module
 configuration. A genuinely new renderer also needs an implementation in
 the dashboard. The build rejects invalid steps before writing the HTML.
 
+Course Markdown logic lives in `course/dashboard_markdown.js`. The
+dashboard supplies route lookup, checklist persistence, and clipboard
+actions. Open the [Markdown browser checks](course/tests/markdown.html)
+after changing the parser, link rewriting, checklist behavior, or formatting.
+
 ## Releasing
 
 1. On `development`, set the new number in `VERSION` and in the title line

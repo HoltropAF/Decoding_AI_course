@@ -177,3 +177,10 @@ Six step contract tests and three existing Markdown tests passed. In an isolated
 Observed SOLID alignment is **27/30 (90.0%)**, with **15/15 checks scored**. L3 gains a point because the same contract suite now exercises both optional Ollama clients, in addition to the dashboard's progress and download tests. The exercise uses one request shape and one completion handler. Both paths report incomplete streams as failures and withhold the generation summary until completion data arrives. [Adapter tests](../course/tests/test_ollama_adapters.py) · [Pinned client versions](reproducibility.md#run-the-local-model-example)
 
 Six cases passed for both actual clients, using a synthetic loopback server. They covered complete and streaming responses, HTTP failure, an error mid-stream, missing completion data, and malformed JSON. The full Python suite passed 15 tests. Both CLI paths also streamed a synthetic greeting from the installed localhost model and printed generation statistics. No external Ollama service was used.
+
+
+### Course Markdown follow-up
+
+Observed SOLID alignment is **28/30 (93.3%)** with **15/15 checks scored**. S1 gains one point because parsing, document link rewriting, checklist binding, and course prose formatting now have separate functions. Formatting needs no progress or navigation state, and the checklist binder receives only read, write, and failure operations. The dashboard supplies the clipboard operation to code buttons. [Markdown functions](../course/dashboard_markdown.js) · [Browser checks](../course/tests/markdown.html)
+
+Nine independent checks passed using the vendored Markdown parser. In Edge, the offline dashboard also passed six chapter checks, four legacy checklist and shared-state checks, and a code-copy check with a synthetic clipboard. The latter confirmed both success feedback and text selection after a failed copy. The builder still produces one offline HTML file.

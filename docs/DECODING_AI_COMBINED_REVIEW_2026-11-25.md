@@ -170,3 +170,10 @@ Seven isolated browser checks and six offline integration checks passed. They co
 Observed SOLID alignment is **26/30 (86.7%)**, with **15/15 checks scored**. O2 gains one point because a single contract maps course step kinds to renderer capabilities and describes the data those renderers accept. A new name can reuse its renderer without changing the JavaScript dispatch or duplicating its payload rules. A genuinely different presentation still needs an implementation and a declaration. Slide recap visibility uses explicit metadata in place of a label comparison. [Step contract](../course/dashboard_step_kinds.json) · [Contract tests](../course/tests/test_step_contract.py)
 
 Six step contract tests and three existing Markdown tests passed. In an isolated build, an added kind reused the chapter renderer in Edge. The slides, materials, Wrap-up, optional recap navigation, and hackathon kickoff routes worked. An unregistered kind exited before replacing the last good HTML. The pinned course dashboard passed the freshness check.
+
+
+### Ollama adapter follow-up
+
+Observed SOLID alignment is **27/30 (90.0%)**, with **15/15 checks scored**. L3 gains a point because the same contract suite now exercises both optional Ollama clients, in addition to the dashboard's progress and download tests. The exercise uses one request shape and one completion handler. Both paths report incomplete streams as failures and withhold the generation summary until completion data arrives. [Adapter tests](../course/tests/test_ollama_adapters.py) · [Pinned client versions](reproducibility.md#run-the-local-model-example)
+
+Six cases passed for both actual clients, using a synthetic loopback server. They covered complete and streaming responses, HTTP failure, an error mid-stream, missing completion data, and malformed JSON. The full Python suite passed 15 tests. Both CLI paths also streamed a synthetic greeting from the installed localhost model and printed generation statistics. No external Ollama service was used.

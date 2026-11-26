@@ -24,6 +24,7 @@ import json
 import os
 import sys
 import time
+from collections.abc import Iterable
 from urllib.parse import urlparse
 
 import requests
@@ -92,10 +93,12 @@ def ensure_model(host: str, model: str) -> None:
     )
 
 
-def chat_requests(host: str, model: str, prompt: str, stream: bool,
-                  temperature: float) -> dict:
-    """Call /api/chat with plain HTTP. Returns the final response dict."""
-    payload = {
+class OllamaChatError(RuntimeError):
+    """Chat could not produce a complete response."""
+
+
+def chat_payload(model: str, prompt: str, stream: bool, temperature: float) -> dict:
+    return {
         "model": model,
         "messages": [
             {"role": "system", "content": SYSTEM_PROMPT},
@@ -104,56 +107,56 @@ def chat_requests(host: str, model: str, prompt: str, stream: bool,
         "stream": stream,
         "options": {"temperature": temperature},
     }
-    url = f"{host}/api/chat"
-    if not stream:
-        response = requests.post(url, json=payload, timeout=600)
-        response.raise_for_status()
-        data = response.json()
-        print(data["message"]["content"])
-        return data
 
-    final: dict = {}
-    with requests.post(url, json=payload, stream=True, timeout=600) as response:
-        response.raise_for_status()
-        for line in response.iter_lines():
-            if not line:
-                continue
-            chunk = json.loads(line)
-            print(chunk.get("message", {}).get("content", ""), end="", flush=True)
-            if chunk.get("done"):
-                final = chunk
-    print()
-    return final
+
+def consume_chat(chunks: Iterable[dict], stream: bool) -> dict:
+    """Print answer text and return the completed response with its timing fields."""
+    for chunk in chunks:
+        if not isinstance(chunk, dict):
+            raise OllamaChatError("Ollama returned an invalid chat response.")
+        if chunk.get("error"):
+            raise OllamaChatError(str(chunk["error"]))
+        message = chunk.get("message", {})
+        text = message.get("content", "") if isinstance(message, dict) else None
+        if not isinstance(text, str):
+            raise OllamaChatError("Ollama returned invalid message content.")
+        if stream:
+            print(text, end="", flush=True)
+        if chunk.get("done") is True:
+            print("" if stream else text)
+            return chunk
+    raise OllamaChatError("Ollama ended the response before sending completion data.")
+
+
+def chat_requests(host: str, model: str, prompt: str, stream: bool,
+                  temperature: float) -> dict:
+    """Call /api/chat with plain HTTP."""
+    payload = chat_payload(model, prompt, stream, temperature)
+    try:
+        with requests.post(f"{host}/api/chat", json=payload, stream=stream, timeout=600) as response:
+            response.raise_for_status()
+            chunks = (json.loads(line) for line in response.iter_lines() if line) if stream else [response.json()]
+            return consume_chat(chunks, stream)
+    except (requests.exceptions.RequestException, ValueError) as exc:
+        raise OllamaChatError(f"Ollama HTTP chat failed: {exc}") from exc
 
 
 def chat_sdk(host: str, model: str, prompt: str, stream: bool,
              temperature: float) -> dict:
-    """Call the same endpoint through the official `ollama` Python SDK."""
+    """Call /api/chat through the optional Ollama Python SDK."""
     try:
+        import httpx
         import ollama
-    except ImportError:
-        sys.exit("[error] The SDK backend needs `pip install ollama`.")
+    except ImportError as exc:
+        raise OllamaChatError("The SDK backend needs `pip install ollama`.") from exc
 
-    client = ollama.Client(host=host)
-    messages = [
-        {"role": "system", "content": SYSTEM_PROMPT},
-        {"role": "user", "content": prompt},
-    ]
-    options = {"temperature": temperature}
-    if not stream:
-        result = client.chat(model=model, messages=messages, options=options)
-        data = result.model_dump() if hasattr(result, "model_dump") else dict(result)
-        print(data["message"]["content"])
-        return data
-
-    final: dict = {}
-    for chunk in client.chat(model=model, messages=messages, options=options, stream=True):
-        data = chunk.model_dump() if hasattr(chunk, "model_dump") else dict(chunk)
-        print(data.get("message", {}).get("content", ""), end="", flush=True)
-        if data.get("done"):
-            final = data
-    print()
-    return final
+    try:
+        client = ollama.Client(host=host, timeout=600)
+        result = client.chat(**chat_payload(model, prompt, stream, temperature))
+        chunks = result if stream else [result]
+        return consume_chat((chunk.model_dump() if hasattr(chunk, "model_dump") else dict(chunk) for chunk in chunks), stream)
+    except (ollama.ResponseError, httpx.HTTPError, ConnectionError, ValueError) as exc:
+        raise OllamaChatError(f"Ollama SDK chat failed: {exc}") from exc
 
 
 def report_stats(result: dict, wall_seconds: float) -> None:
@@ -203,7 +206,10 @@ def main() -> None:
 
     start = time.perf_counter()
     chat = chat_sdk if args.backend == "sdk" else chat_requests
-    result = chat(host, args.model, args.prompt, args.stream, args.temperature)
+    try:
+        result = chat(host, args.model, args.prompt, args.stream, args.temperature)
+    except OllamaChatError as exc:
+        sys.exit(f"[error] {exc}")
     report_stats(result, time.perf_counter() - start)
 
     if is_local(host):

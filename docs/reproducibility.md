@@ -43,6 +43,16 @@ ollama pull llama3.1:8b
 python module_01_foundations_and_privacy/exercises/test_ollama_local.py --prompt "Reply with the word hello, then stop."
 ```
 
+The optional SDK contract check used **ollama 0.6.3**. To run the tests
+against both clients, install the two pinned packages and use the same
+test entry point. These tests start a local fixture server and require
+no model or running Ollama service.
+
+```bash
+python -m pip install requests==2.34.2 ollama==0.6.3
+python -m unittest discover -s course/tests
+```
+
 The model tag can move. To verify the reference model, open
 `http://127.0.0.1:11434/api/tags` locally and compare the full `digest` for
 `llama3.1:8b`. For the smoke check, expect a short greeting and a successful
